@@ -1,40 +1,62 @@
-<div class="drawer drawer-mobile">
+<div class="drawer drawer-mobile " >
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
     <div class="drawer-content flex flex-col" style="background-color:whitesmoke;">
-      <!-- Navbar -->
-        <div class="navbar w-full fixed top-0 z-50">
-            <div class="flex-none lg:hidden " >
-                <div class="flex navb">
-                    <div>
-                        <label for="my-drawer-3" class="btn btn-square btn-ghost">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        </label>
-                    </div>
-                    <div class="appName"> 
-                       
-                    </div>
+        
+        <!-- Navbar -->
+        <div class="navbar fixed top-0 z-50">
+            <div class="flex justify-start ">
+                <label for="my-drawer-3" class="btn btn-square btn-ghost">
+                    <i class="pi pi-align-left" style="font-size: 2rem"></i>
+                </label>
+            </div>
+
+            <div class="appName flex justify-end " > 
+                <p>Hi {{name}}</p>
+                <div class="bell">
+                    <i class="fa-regular fa-bell"></i>
                 </div>
-            </div> 
+            </div>
         </div>
 
         <!-- Page content here -->
         
-        
+
+        8. “The best way to find your own path in life is to share it with somebody else. I will never regret choosing you as my loyal companion, my love, and my hope. You make me want to continue my way no matter how hard it gets sometimes. When I look at you I see all the best things in my life. You are the reason I wake up in the morning and my last thought before I fall asleep. Thank you for being with me. I love you endlessly.”
+
+        9. “I’ve never met anyone before who treats me with such love, respect, and understanding. I hope I can someday learn to be as encouraging to you as you are to me. I love you so much!”
+
+        10. “Heaven is when your warm tiny hands are holding mine. When you get angry because of me laughing at you. When you tell me about how your day went. Heaven is a place where I can be with you for the end of time. I love you more than anything and anyone in the world.”
+
+        11. “I could say to you a thousand words on how much I really love you, and how absolutely wonderful you are, but still then it would not be enough. I love you more every day.”
+
+        12. “Just when I thought of giving up to the fate that true love doesn’t exist, you came and showed me the best of it. Thanks for being you for me.”
+
+        13. “I have never known anyone who actually believed that I was enough. Until I met you.”
+
+        14. “You deserve all of me. You deserve my morning, night, and noon. You deserve my present and future because you are my very best. I love you.”
+
+        15. “If I could be any part of you I would be your tears. Conceived in your heart, born in your eyes, live on your cheeks, and die on your lips.”
+
+        16. “In this life or hereafter, wherever your love goes is where my heart in love with you will ever be. We are more than inseparable. I love you.”
+
+        17. “Love is a miracle happening inside the heart; the miracle happened to me too, I have fallen in love with you at the moment when I saw you for the first time.”
+
+        18. “I wish you more than you wish me for the day. I wish you smiles and laughter birthed by sweet memories. Have the best of your day, dear.”
+
+        19. “When you feel alone, just look at the spaces between your fingers, and remember that’s where my fingers fit perfectly.”
+                
     </div> 
     <div class="drawer-side" >
         <label for="my-drawer-3" class="drawer-overlay"></label> 
         <ul  class="menu p-4 overflow-y-auto w-80">
             <!-- Sidebar content here  style="background-color: #053C5E" -->
-            <img id="logo" class="img" src="../../../assets/images/landlordLogo.png">
+            <img id="logo" src="../../../assets/images/landlordLogo.png">
             
-            <div class="user ml-4">
-            </div>
-            <div class="divider" ></div> 
             <li><i class="pi pi-home"><a >Dashboard</a></i></li>
             <li><i class="pi pi-users"><a >Tenants</a></i></li>
             <li><i class="pi pi-check" ><a >Add Property</a></i></li>
             <li><i class="pi pi-times"><a >Pending</a></i></li>
-            <li><i class="pi pi-sign-out"><a >Logout</a></i></li>
+            <li><i class="pi pi-power-off" routerLink="/"><a >Logout</a></i></li>
         </ul>    
     </div>
 </div>

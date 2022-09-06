@@ -25,6 +25,7 @@ ul a {
 
 #logo{
     margin-left: 15px;
+    width: 70%;
     text-align: left;
     left:0;
 }
@@ -40,7 +41,15 @@ ul a {
 }
 .appName{
     margin-top: 12px;
+    color: white;
 }
-.navb{
+.bell .fa-bell{
+    font-size: 2rem
+}
 
+.total{
+    
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
 }

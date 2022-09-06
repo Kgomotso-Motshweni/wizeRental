@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html, body { height: 100%; }
+html{
+    background-color: #F4F3EF;
+}
+html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

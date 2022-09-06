@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class LandlordComponent implements OnInit {
 
   constructor() { }
-
+  name: any
+  totalNumber:number = 0;
   ngOnInit(): void {
+    this.name = "James"
+    this.totalNumber = 4;
   }
 
 }
