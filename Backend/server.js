@@ -3,6 +3,8 @@ const cors = require('cors'); //import cors module
 const app = express(); //Initialize express
 const bodyParser = require('body-parser');
 
+require('./App/Config/dotenv.config')
+
 var corsOptions = {
     origin: ["*", "http://localhost:4200"],
     credentials: true
@@ -17,6 +19,19 @@ app.use(
         extended: true
     })
 );
+
+//call our database connections file for postgre
+
+const client = require('./App/Config/db.config')
+client.connect((err) =>{ // Connect to the Database
+    if (err) {
+       console.log(err) //Return an error if unable to connnect to the database
+      }
+   else {
+     console.log("Databased Connected"); //Database connection Successfuly
+    }
+});
+
 
 const port = process.env.PORT || 8080; //create a listerning port number
 
