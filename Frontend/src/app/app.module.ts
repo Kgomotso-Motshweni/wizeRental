@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
+import { LandlordComponent } from './Pages/landlord/landlord.component';
+import { TenantsComponent } from './Pages/tenants/tenants.component';
+import { LoginComponent } from './Pages/login/login.component';
+import { RegisterComponent } from './Pages/register/register.component';
 
 
 @NgModule({
@@ -15,7 +19,11 @@ import { HomeComponent } from './Pages/home/home.component';
     AppComponent,
     NavBarComponent,
     EditorComponent,
-    HomeComponent
+    HomeComponent,
+    LandlordComponent,
+    TenantsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
