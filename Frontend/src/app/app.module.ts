@@ -12,6 +12,7 @@ import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { TenantsComponent } from './Pages/tenants/tenants.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
+import { ApplyComponent } from './Components/apply/apply.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RegisterComponent } from './Pages/register/register.component';
     LandlordComponent,
     TenantsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ApplyComponent
   ],
   imports: [
     BrowserModule,
