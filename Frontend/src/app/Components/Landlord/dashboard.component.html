@@ -1,6 +1,6 @@
 <div class="drawer drawer-mobile">
-    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
-    <div class="drawer-content flex flex-col" style="background-color:rgb(255, 255, 255);">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle"/> 
+    <div class="drawer-content flex flex-col" style="background-color:whitesmoke;">
       <!-- Navbar -->
         <div class="navbar w-full fixed top-0 z-50">
             <div class="flex-none lg:hidden " >
@@ -18,7 +18,7 @@
         </div>
 
         <!-- Page content here -->
-        
+
         
     </div> 
     <div class="drawer-side" >
@@ -30,7 +30,7 @@
             <div class="user ml-4">
             </div>
             <div class="divider" ></div> 
-            <li><i class="pi pi-home"><a href="dash">Dashboard</a></i></li>
+            <li><i class="pi pi-home"><a href="/dash">Dashboard</a></i></li>
             <li><i class="pi pi-users"><a >Tenants</a></i></li>
             <li><i class="pi pi-check" ><a >Add Property</a></i></li>
             <li><i class="pi pi-times"><a >Pending</a></i></li>
@@ -39,3 +39,39 @@
     </div>
 </div>
 
+
+
+<div class="overflow-x-auto">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Tenant</th>
+          <th>Contact</th>
+          <th>Unit</th>
+          <th>Rent</th>
+          <th>MOA Start</th>
+          <th>MOA End</th>
+          <th>MOA</th>
+          <th>PAID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        <tr>
+          <th>1</th>
+          <td>Otto, M</td>
+          <td>082-145-6643</td>
+          <td>2A</td>
+          <td>R1800</td>
+          <td>01 SEP 2021</td>
+          <td>01 SEP 2022</td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-error">Delete</button></td>
+        </tr> 
+      </tbody>
+    </table>
+  </div>

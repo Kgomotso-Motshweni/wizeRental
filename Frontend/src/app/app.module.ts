@@ -14,6 +14,7 @@ import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,7 @@ import { RegisterComponent } from './Pages/register/register.component';
     LandlordComponent,
     TenantsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
