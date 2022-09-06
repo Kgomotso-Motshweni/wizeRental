@@ -1,0 +1,28 @@
+{
+  "name": "wizerenatalz",
+  "version": "1.0.0",
+  "description": "An app that is responsible for helping low-income people find accommodationnd landlords advertise their properties",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "dev": "start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.19",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "rand-token": "^1.0.1",
+    "sequelize": "^6.21.4"
+  }
+}
