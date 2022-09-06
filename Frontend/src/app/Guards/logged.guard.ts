@@ -10,17 +10,13 @@ export class LoggedGuard implements CanActivate {
   constructor(
     public authService: AuthenticationService,
     public router: Router) { }
-  
+    
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       //if user is logged in (true) prevent them from routing back to login and register
       if (this.authService.isLoggedIn == true) {
-        if(this.authService.user == 'Landlord'){
-          this.router.navigate(['/lanlord'])
-        }else{
-          this.router.navigate(['/tenant'])
-        } 
+        this.router.navigate(['/'])
       }
     
     return true;

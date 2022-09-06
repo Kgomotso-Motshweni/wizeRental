@@ -11,7 +11,6 @@ import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { LandlordComponent } from './Pages/landlord/landlord.component';
-import { TenantsComponent } from './Pages/tenants/tenants.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
 
@@ -26,7 +25,6 @@ import { ToastModule } from 'primeng/toast';
     EditorComponent,
     HomeComponent,
     LandlordComponent,
-    TenantsComponent,
     LoginComponent,
     RegisterComponent
   ],

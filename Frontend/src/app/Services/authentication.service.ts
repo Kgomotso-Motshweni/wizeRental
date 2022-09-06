@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
 import { environment } from 'src/environments/environment';
 import { Login } from '../Interfaces/login';
 import { Register } from '../Interfaces/register';
@@ -19,6 +18,7 @@ export class AuthenticationService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
   
+
   //create a login request using 
   login(users : Login) {
     return this.http.post(`${this.baseUrl}login`, users)
@@ -43,11 +43,10 @@ export class AuthenticationService {
     }
   }
 
-  get user(): string{
-    let loggedUser = 'landlord'
-    return loggedUser;
+  get user(){
+    return localStorage.getItem('access_token');;
   }
-  
+
   //create a get request for current logged in user
   //pass the token back to the backend to be decoded in order to receive current logged in user
   getUserProfile():Observable<any>{

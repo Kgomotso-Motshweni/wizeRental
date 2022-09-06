@@ -1,1 +1,32 @@
-<p>nav-bar works!</p>
+<div class="container">
+    <div class="navbar ">
+        <div class="flex-1">
+            <a class="btn btn-ghost normal-case text-xl"><img src="../../../assets/images/unknown.png" alt="logo" width="71.78vw" height="47vh"></a>
+        </div>
+
+        <div  class="flex-none">
+            <ul *ngIf="!this.auth.isLoggedIn" class="menu menu-horizontal p-0">
+              <li><a routerLink="/login" >Login</a></li>
+              <li><a routerLink="/register" >Register</a></li>
+            </ul>
+            <ul *ngIf="this.auth.isLoggedIn" class="menu menu-horizontal p-0">
+                <li><a routerLink="/login" >My Room</a></li>
+              </ul>
+          </div>
+
+        <div *ngIf="this.auth.isLoggedIn" class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                    <img src="https://placeimg.com/80/80/people" />
+                </div>
+            </label>
+
+            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                <li><a class="justify-between">Profile<span class="badge">New</span></a></li>
+                <li><a>Settings</a></li>
+                <li><a (click)="Logout()" >Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

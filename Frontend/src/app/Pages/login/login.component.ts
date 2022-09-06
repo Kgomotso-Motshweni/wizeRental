@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
     private router:Router,
+    private activeRoute:ActivatedRoute,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-    this.loading = false;
     this.Form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
@@ -54,31 +54,29 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return
     }
-    let user = {
-      //convert the email entered to lowercase even if it is written in uppercase
-      email: this.transform(this.Form.value.email),
-      password: this.Form.value.password
-    }
-    this.auth.login(user).subscribe({
-      next:data =>{
-        this.loading = true;
-        this.userToken = data
-        localStorage.setItem('access_token', this.userToken.token)
-        //route to dashboard if login was successful
-        this.loading = false;
-        this.router.navigate(['/dash'])
+    const email= this.Form.value.email
+    const userToken: any = ''
+    if(email == "mashengete@live.com"){
+      this.userToken= "landlord"
 
-        //call user the getprofile function pass the token as an argument
-      
-      },
-      error: err => {
-        this.loading = false;
-        this.messageService.add({
-          key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
-        });
+    }else if(email == "mabasa@live.com"){
+      this.userToken = "tenant"
+    }
+   
+
+    localStorage.setItem('access_token',  this.userToken)
         
-      }
-    })    
+    //route to dashboard if login was successful
+
+    if(this.userToken == 'landlord'){    
+      this.router.navigate(['/landlord'])
+    }else if(this.userToken == 'tenant'){ 
+      this.router.navigate(['/'])
+    }else{
+      this.messageService.add({
+        key: 'tc', severity:'error', summary: 'Error', detail: "Incorrecnt credentials", life: 3000
+      });  
+    }
   }
 
   transform(value:any): string {

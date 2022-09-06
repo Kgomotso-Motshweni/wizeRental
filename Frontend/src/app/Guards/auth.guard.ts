@@ -16,11 +16,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.authService.isLoggedIn !== true) {
         window.alert("Access not allowed!/ Please Login witt your superuser account");
-        if(this.authService.user == 'Landlord'){
-          this.router.navigate(['/lanlord'])
-        }else{
-          this.router.navigate(['/tenant'])
-        } 
+        this.router.navigate(['/'])
       }
     return true;
   }
