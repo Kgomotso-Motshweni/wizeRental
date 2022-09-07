@@ -13,6 +13,7 @@ const routes: Routes = [
     {path:'landlord', component:LandlordComponent, canActivate:[AuthGuard]},
     {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
     {path:'register', component:RegisterComponent, canActivate:[LoggedGuard]},
+
     {path:'apply', component:ApplyComponent},
     {path:'', redirectTo:"/", pathMatch:"full"},
 ];

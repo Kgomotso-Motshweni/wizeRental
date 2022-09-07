@@ -27,7 +27,12 @@ export class LoginComponent implements OnInit {
 
   
   submitted = false; //bpplean
-  userToken: any = {};
+  userToken: any;
+  role: any;
+  myData: any = {};
+  fullname: any;
+  errorMessage = '';
+
 
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
@@ -54,29 +59,54 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return
     }
-    const email= this.Form.value.email
-    const userToken: any = ''
-    if(email == "mashengete@live.com"){
-      this.userToken= "landlord"
 
-    }else if(email == "mabasa@live.com"){
-      this.userToken = "tenant"
+    let user = {
+      email: this.Form.value.email,
+      password: this.Form.value.password
     }
-   
+    this.auth.login(user);
+    
 
-    localStorage.setItem('access_token',  this.userToken)
+    //   this.email = data.arrData[0].email;
+    //   this.userType = data.arrData[0].usertype;
+    //   this.fullname = data.arrData[0].firstname;
+    //   this.id = data.arrData[0].userid;
+    //   console.log(this.email);
+    //   console.log(this.userType);
+
+
+    //    sessionStorage.setItem('user_details', data);
+    //    localStorage.setItem('user_id', this.id);
+    //    localStorage.setItem('username', this.fullname);
+    //    localStorage.setItem('email', this.email);
+
+    //    if(this.userType == 'coordinator'){
+    //       this.logedtype =  "Logged user: "+this.fullname+" "+this.email;
+    //       this.logeduser = "usertype as: "+this.userType 
+    //       this.router.navigate(['/coordinator'])
+    //    }else{
+    //       this.logedtype =  "Logged user: "+this.fullname+" "+this.email;
+    //       this.logeduser = "usertype as: "+this.userType;
+    //       this.router.navigate(['/responded'])
+    //    }
+    // },(err) => {
+    //     this.errorMessage = err.message;
+    //   }
+    // );
+
+    // localStorage.setItem('access_token',  this.userToken)
         
-    //route to dashboard if login was successful
+    // //route to dashboard if login was successful
 
-    if(this.userToken == 'landlord'){    
-      this.router.navigate(['/landlord'])
-    }else if(this.userToken == 'tenant'){ 
-      this.router.navigate(['/'])
-    }else{
-      this.messageService.add({
-        key: 'tc', severity:'error', summary: 'Error', detail: "Incorrecnt credentials", life: 3000
-      });  
-    }
+    // if(this.userToken == 'landlord'){    
+    //   this.router.navigate(['/landlord'])
+    // }else if(this.userToken == 'tenant'){ 
+    //   this.router.navigate(['/'])
+    // }else{
+    //   this.messageService.add({
+    //     key: 'tc', severity:'error', summary: 'Error', detail: "Incorrecnt credentials", life: 3000
+    //   });  
+    // }
   }
 
   transform(value:any): string {

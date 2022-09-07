@@ -11,8 +11,13 @@ export class NavBarComponent implements OnInit {
   constructor(
     public auth:AuthenticationService,   
   ) { }
+  
+  Full_Name:any ='';
 
   ngOnInit(): void {
+    this.Full_Name = this.auth.fullname;
+    console.log(this.Full_Name)
+
   }
 
   Logout(){

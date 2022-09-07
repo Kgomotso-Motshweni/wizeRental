@@ -18,6 +18,7 @@ import { ApplyComponent } from './Components/apply/apply.component';
 //Primeng Imports
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { LandlordModule } from './Pages/landlord/landlord.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ToastModule } from 'primeng/toast';
     ApplyComponent
   ],
   imports: [
+    LandlordModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -51,4 +53,5 @@ import { ToastModule } from 'primeng/toast';
   providers: [MessageService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

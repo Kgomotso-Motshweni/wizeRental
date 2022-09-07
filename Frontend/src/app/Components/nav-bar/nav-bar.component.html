@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid shadow-xl">
     <div class="navbar ">
         <div class="flex-1">
             <a class="btn btn-ghost normal-case text-xl"><img src="../../../assets/images/unknown.png" alt="logo" width="71.78vw" height="47vh"></a>
@@ -21,9 +21,10 @@
                 </div>
             </label>
 
-            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a class="justify-between">Profile<span class="badge">New</span></a></li>
-                <li><a>Settings</a></li>
+            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-base">
+                <div class=" flex justify-center mt-2">{{Full_Name}}</div>
+                <div class="divider"></div>
+                <li><a class="justify-between" routerLink="/profile">Profile</a></li>
                 <li><a (click)="Logout()" >Logout</a></li>
             </ul>
         </div>
