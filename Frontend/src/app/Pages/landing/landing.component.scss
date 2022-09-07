@@ -1,0 +1,40 @@
+
+
+.search{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    margin:5px;
+}
+.search> .button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.prop{
+    margin:5px;
+}
+
+.icons{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    margin:5px;
+}
+
+.space{
+    width: 25px;
+    height: auto;
+    display: inline-block;
+}
+
+.space1{
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}

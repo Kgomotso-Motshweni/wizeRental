@@ -13,6 +13,8 @@ import { TenantsComponent } from './Pages/tenants/tenants.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { ApplyComponent } from './Components/apply/apply.component';
+import { LandingComponent } from './Pages/landing/landing.component';
+import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ApplyComponent } from './Components/apply/apply.component';
     TenantsComponent,
     LoginComponent,
     RegisterComponent,
-    ApplyComponent
+    ApplyComponent,
+    LandingComponent,
+    ViewpropertyComponent
   ],
   imports: [
     BrowserModule,
