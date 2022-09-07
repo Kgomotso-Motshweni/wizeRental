@@ -1,0 +1,170 @@
+<section class=" gradient-custom">
+
+    <div class="container ">
+
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Application Form</h3>
+
+                        <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+
+                            <div class="row">
+                            </div>
+                           <div class="row">
+                                <div class="bord form-group col-md-6 mb-4">
+                                    <input type="text" formControlName="firstname" placeholder="First Name"  class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['firstname'].errors }"/>
+                                    <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['firstname'].errors['required']">First name is required</div>
+                                    </div>
+                                </div>   
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" formControlName="lastname" placeholder="Last Name" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
+                                    <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['lastname'].errors['required']">Last name is required</div>
+                                    </div>
+                                </div>   
+                            </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" formControlName="email" placeholder="Email" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"/>
+                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                        <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                                    </div>
+                                </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" formControlName="phonenumber" placeholder="012-345-6789" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['phonenumber'].errors }"/>
+                                    <div *ngIf="submitted && f['phonenumber'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['phonenumber'].errors['required']">Phone Number is required</div>
+                                        <div *ngIf="f['phonenumber'].errors['pattern']">Phone Number should follow the pattern 999-999-9999</div>
+                                        <div *ngIf="f['phonenumber'].errors['maxlength']">Phone Number must not exceed 13 character</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" formControlName="age" placeholder="Age" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['age'].errors }"/>
+                                    <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['age'].errors['required']">age is required</div>
+                                    </div>
+                                </div>
+                            
+
+                            <div class="form-group col-md-6 mb-4">
+                                <input type="text" formControlName="UploadID" placeholder="Upload Identity Document" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['UploadID'].errors }"/>
+                                <div *ngIf="submitted && f['UploadID'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['UploadID'].errors['required']">Upload ID is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4">
+                                <input type="text" formControlName="EmpStatus" placeholder="Employement Status" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['EmpStatus'].errors }"/>
+                                <div *ngIf="submitted && f['EmpStatus'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['EmpStatus'].errors['required']">Employement Status is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4">
+                                <input type="text" formControlName="Income" placeholder="Current Income" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['Income'].errors }"/>
+                                <div *ngIf="submitted && f['Income'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['Income'].errors['required']">Current Income is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4">
+                                <input type="text" formControlName="viewDate" placeholder="Schedule a view date" size="44" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['viewDate'].errors }"/>
+                                
+                                <div *ngIf="submitted && f['viewDate'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['viewDate'].errors['required']">View Date is required</div>
+                                </div>
+                                
+                            </div>
+
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Additional Information</h3>
+                            <tr>
+                         
+                                
+                            <div class="form-group col-md-6 mb-4">
+                                <tr>
+                                    <td>
+                                <label class="input-group">
+                                    Total Occupants</label></td>
+
+                                    <td>
+                                        <select ng-model="details.number">
+                                        <option value="number">0</option>
+                                        <option value="number">1</option>
+                                        <option value="number">2</option>
+                                        <option value="number">3</option>
+                                        <option value="number">4</option>
+                                        <option value="number">5</option>
+                                        </select>
+                                        </td>
+
+                                <input type="text" formControlName="totOcc" [ngClass]="{ 'is-invalid':submitted && f['totOcc'].errors }"/>
+                                <div *ngIf="submitted && f['totOcc'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['totOcc'].errors['required']">Total Occupants is required</div>
+                                </div>
+                            </tr>
+                            
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4">
+                                <label class="input-group">
+                                    Number of pets
+                                <input type="text" formControlName="petNum" placeholder="0" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
+                                <div *ngIf="submitted && f['petNum'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['petNum'].errors['required']">Number of pets is required</div>
+                                </div>
+                            </label>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4">
+                                <label class="input-group">
+                                    Pets Description
+                                <input type="text" formControlName="petDesc" placeholder="" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
+                                <div *ngIf="submitted && f['petDesc'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['petDesc'].errors['required']">Pets Description is required</div>
+                                </div>
+                            </label>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4">
+                                <tr>
+                                    <td>
+                                <label class="input-group">
+                                    Smokes</label></td>
+                                    <td>
+                                        <select ng-model="details.smoke">
+                                        <option value="options">Options</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                        </select>
+                                        </td>
+                               
+                            </tr>
+                            
+                            </div>
+                        </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="submit btn btn-primary ">Apply</button>
+                            </div>
+
+                            <div class="badge">neutral</div>
+<div class="badge badge-primary">primary</div>
+<div class="badge badge-secondary">secondary</div>
+<div class="badge badge-accent">accent</div>
+<div class="badge badge-ghost">ghost</div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
