@@ -2,15 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './Components/Landlord/dashboard.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
-import { TenantsComponent } from './Pages/tenants/tenants.component';
 
 const routes: Routes = [
     {path:'', component:HomeComponent},
-    {path:'landlord', component:LandlordComponent},
-    {path:'tenant', component:TenantsComponent},
+    {path:'landlord', redirectTo:'/landlord/dashboard', pathMatch:'full'},
     {path:'login', component:LoginComponent},
     {path:'register', component:RegisterComponent},
     {path:'dash',component:DashboardComponent},

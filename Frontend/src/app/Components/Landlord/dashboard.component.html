@@ -50,7 +50,7 @@
     </div>
   </div>
 </div>
-<br><br>
+<br>
 
 <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
@@ -60,7 +60,7 @@
     </div>
   </div>
 </div>
-<br><br>
+<br>
 
 <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
@@ -70,7 +70,7 @@
     </div>
   </div>
 </div>
-<br><br>
+<br>
 
 <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
@@ -80,7 +80,7 @@
     </div>
   </div>
 </div>
-<br><br>
+<br>
 
 <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
@@ -90,7 +90,7 @@
     </div>
   </div>
 </div>
-<br><br>
+<br>
 
 <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
@@ -121,14 +121,14 @@
       </thead>
       <tbody>
         <!-- row 1 -->
-        <tr>
-          <th>1</th>
-          <td>Otto, M</td>
+        <tr *ngFor="let rentee of rentees; let x=index" >
+          <th>{{x+1}}</th>
+          <td>{{rentee.full_name}}</td>
           <td>082-145-6643</td>
           <td>2A</td>
-          <td>R1800</td>
-          <td>01 SEP 2021</td>
-          <td>01 SEP 2022</td>
+          <td>{{rentee.rent_paid}}</td>
+          <td>{{rentee.created_time}}</td>
+          <td>{{rentee.r_update_time}}</td>
           <td></td>
           <td></td>
           <td><button class="btn btn-error">Delete</button></td>

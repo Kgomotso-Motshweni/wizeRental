@@ -7,16 +7,15 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  
+
+ 
   rentees : any
 
   constructor(private dash:DashboardService) { }
 
   
 
-
   ngOnInit(): void {
-
     this.dash.rentees().subscribe((rentee)=>{
       
       this.rentees = rentee;

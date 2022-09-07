@@ -18,9 +18,11 @@
         </div>
 
         <!-- Page content here -->
-        
-        
-    </div> 
+
+            <router-outlet></router-outlet>
+ 
+  
+    </div>
     <div class="drawer-side" >
         <label for="my-drawer-3" class="drawer-overlay"></label> 
         <ul  class="menu p-4 overflow-y-auto w-80">
@@ -30,12 +32,16 @@
             <div class="user ml-4">
             </div>
             <div class="divider" ></div> 
-            <li><i class="pi pi-home"><a href="dash">Dashboard</a></i></li>
-            <li><i class="pi pi-users"><a >Tenants</a></i></li>
-            <li><i class="pi pi-check" ><a >Add Property</a></i></li>
-            <li><i class="pi pi-times"><a >Pending</a></i></li>
+            <li><i class="pi pi-home"><a routerLink="/landlord/dashbord">Dashboard</a></i></li>
+            <li><i class="pi pi-users"><a routerLink="/landlord/tenants">Tenants</a></i></li>
+            <li><i class="pi pi-check" ><a routerLink="/landlord/addproperty">Add Property</a></i></li>
+            <li><i class="pi pi-times"><a routerLink="/landlord/pending" >Pending</a></i></li>
             <li><i class="pi pi-sign-out"><a >Logout</a></i></li>
         </ul>    
     </div>
 </div>
 
+
+
+
+  
