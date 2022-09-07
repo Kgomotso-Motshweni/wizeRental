@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardComponent } from 'src/app/Components/Landlord/dashboard.component';
+import { DashboardService } from 'src/app/Services/dashboard.service';
 
 @Component({
   selector: 'app-landlord',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandlordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dash:DashboardService) { }
+
 
   ngOnInit(): void {
+   
   }
 
 }

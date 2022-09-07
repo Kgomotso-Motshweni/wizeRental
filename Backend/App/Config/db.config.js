@@ -10,15 +10,22 @@
 
 
 //Using MSQL
-const mysql = require('mysql');
-const client = new mysql.createConnection({
-    host     : process.env.DB_Host, 
-    user     : process.env.DB_User, 
-    database : process.env.DB_Data, 
-    password : process.env.DB_Pass,
-    ssl:{
-        rejectUnauthorized: false //allows external access to database when using nodejs
-    }
-})
+// const mysql = require('mysql');
+// const client = new mysql.createConnection({
+//     host     : process.env.DB_Host, 
+//     user     : process.env.DB_User, 
+//     database : process.env.DB_Data, 
+//     password : process.env.DB_Pass,
+//     ssl:{
+//         rejectUnauthorized: false //allows external access to database when using nodejs
+//     }
+// })
+
+
+//local connection
+
+const {Client} = require("pg");
+const client= new Client(process.env.DB_URL)
+
 
 module.exports = client

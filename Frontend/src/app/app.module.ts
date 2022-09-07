@@ -12,6 +12,7 @@ import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { TenantsComponent } from './Pages/tenants/tenants.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -30,6 +31,8 @@ import { RegisterComponent } from './Pages/register/register.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

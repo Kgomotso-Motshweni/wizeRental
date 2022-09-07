@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 require('./App/Config/dotenv.config')
 
+const user =require('../Backend/App/Routes/rentees')
+
 var corsOptions = {
     origin: ["*", "http://localhost:4200"],
     credentials: true
@@ -33,7 +35,13 @@ client.connect((err) =>{ // Connect to the Database
 });
 
 
+
+
+
 const port = process.env.PORT || 8080; //create a listerning port number
+
+//API user endpoint
+app.use('/users',user)
 
 app.get("/", (req, res) =>{
     res.status(200).send("Welcome to WizeRentalz server");
@@ -43,3 +51,6 @@ app.get("/", (req, res) =>{
 app.listen(port, () =>{  
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })
+
+
+ 
