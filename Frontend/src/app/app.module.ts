@@ -13,6 +13,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
+import { ApplyComponent } from './Components/apply/apply.component';
 
 //Primeng Imports
 import { MessageService } from 'primeng/api';
@@ -26,7 +27,8 @@ import { ToastModule } from 'primeng/toast';
     HomeComponent,
     LandlordComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ApplyComponent
   ],
   imports: [
     BrowserModule,
