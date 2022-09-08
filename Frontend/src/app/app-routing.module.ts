@@ -10,7 +10,7 @@ import { TenantComponent } from './Pages/tenant/tenant.component';
 
 const routes: Routes = [
     {path:'', component:HomeComponent},
-    {path:'landlord', component:LandlordComponent, canActivate:[AuthGuard]},
+    {path:'landlord', component:LandlordComponent},
     {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
     {path:'register', component:RegisterComponent, canActivate:[LoggedGuard]},
     {path:'tenant', component:TenantComponent},

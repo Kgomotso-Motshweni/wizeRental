@@ -15,11 +15,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PendingComponent } from './pending/pending.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { AddPropertyComponent } from './add-property/add-property.component';
-
-
+import { HeaderComponent } from './header/header.component';
 
 //Guards
-
+import { AuthGuard } from 'src/app/Guards/auth.guard';
 //Primeng Imports
 //primeNG 
 import { TableModule } from 'primeng/table';
@@ -39,14 +38,15 @@ import { CardModule, } from 'primeng/card';
 import { PaginatorModule } from 'primeng/paginator';
 
 
+
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent,
+  {path:'landlord', component: LandlordComponent,  canActivate:[AuthGuard],
   children:[
-    {path:'dash', component: DashboardComponent},
+    {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
     {path:'addproperty', component: AddPropertyComponent},
     {path:'pending', component:PendingComponent},
-    {path:'', redirectTo:'/dash/home', pathMatch:'full'},
+    {path:'', redirectTo:'/landlord/', pathMatch:'full'},
 
   ]},
 ]
@@ -57,7 +57,8 @@ const routes: Routes = [
     AddPropertyComponent,
     TenantsComponent,
     LandlordComponent,
-    PendingComponent
+    PendingComponent,
+    HeaderComponent
   ],
   imports: [
     Ng2SearchPipeModule,

@@ -1,26 +1,14 @@
 <div class="drawer drawer-mobile " >
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
     <div class="drawer-content flex flex-col" style="background-color:whitesmoke;">
+        <!-- Navbar-->
+        <app-header></app-header>
         
-        <!-- Navbar -->
-        <div class="navbar fixed top-0 z-50">
-            <div class="flex justify-start ">
-                <label for="my-drawer-3" class="btn btn-square btn-ghost">
-                    <i class="pi pi-align-left" style="font-size: 2rem"></i>
-                </label>
-            </div>
-
-            <div class="appName flex justify-end " > 
-                <p>Hi {{name}}</p>
-                <div class="bell">
-                    <i class="fa-regular fa-bell"></i>
-                </div>
-            </div>
-        </div>
-
         <!-- Page content here -->
-        <router-outlet></router-outlet>
-
+        <div class="body">
+            <router-outlet></router-outlet>
+        </div>
+        
     </div> 
     <div class="drawer-side " >
         <label for="my-drawer-3" class="drawer-overlay"></label> 
@@ -28,7 +16,7 @@
             <!-- Sidebar content here  style="background-color: #053C5E" -->
             <img id="logo" src="../../../assets/images/landlordLogo.png">
             
-            <li><i class="pi pi-home"><a routerLink='/landlord/dash'>Dashboard</a></i></li>
+            <li><i class="pi pi-home"><a routerLink='/landlord/'>Dashboard</a></i></li>
             <li><i class="pi pi-users"><a routerLink='/landlord/tenant'>Tenants</a></i></li>
             <li><i class="pi pi-check" ><a routerLink='/landlord/addproperty'>Add Property</a></i></li>
             <li><i class="pi pi-times"><a routerLink='/landlord/pending'>Pending</a></i></li>

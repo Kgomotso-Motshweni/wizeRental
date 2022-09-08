@@ -2,28 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
-  selector: 'app-tenant',
-  templateUrl: './tenant.component.html',
-  styleUrls: ['./tenant.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class TenantComponent implements OnInit {
-  constructor(
-    public auth:AuthenticationService,   
-  ) { }
-  
+export class HeaderComponent implements OnInit {
   Full_Name:any = '';
   token:any = '';
+  constructor(private auth:AuthenticationService) { }
 
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    this.Full_Name = this.substring(this.token.regData[0].firstname) +'  '+ this.substring(this.token.regData[0].lastname);
+    //this.Full_Name = this.transform(this.token.regData[0].firstname );
+    this.Full_Name = this.substring(this.token.regData[0].firstname );
   }
 
-  Logout(){
-    this.auth.doLogout()
-  }
-
- //Receive an entire string, take the first letter and transform it into uppercase 
+  //Receive an entire string, take the first letter and transform it into uppercase 
   substring(value:any): string{
     let letter = this.transform(value.substring(0,1)) + value.substring(1); 
     return letter

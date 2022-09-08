@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-
+import { AuthGuard } from 'src/app/Guards/auth.guard';
 
 ///Components
 import { TenantComponent } from './tenant.component';
@@ -21,8 +21,9 @@ import { MyroomComponent } from './myroom/myroom.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { ToastModule } from 'primeng/toast';
+
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent,
+  {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
     {path:'profile', component: ProfileComponent},

@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
         this.role = this.decodedToken.regData[0].user_role;
 
         localStorage.setItem('access_token', this.userToken);
-
+        localStorage.setItem('role', this.role);
         if(this.role == 'Landlord'){
           this.router.navigate(['/landlord/dash'])
 
