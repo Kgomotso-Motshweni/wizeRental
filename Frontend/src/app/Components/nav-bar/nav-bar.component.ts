@@ -8,20 +8,8 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(
-    public auth:AuthenticationService,   
-  ) { }
-  
-  Full_Name:any ='';
+  constructor() { }
 
   ngOnInit(): void {
-    this.Full_Name = this.auth.fullname;
-    console.log(this.Full_Name)
-
   }
-
-  Logout(){
-    this.auth.doLogout()
-  }
-
 }

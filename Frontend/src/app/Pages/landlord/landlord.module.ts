@@ -54,7 +54,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    TenantsComponent,
+    LandlordComponent,
+    PendingComponent
   ],
   imports: [
     Ng2SearchPipeModule,

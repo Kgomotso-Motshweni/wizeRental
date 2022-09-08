@@ -7,13 +7,11 @@ import { NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [MessageService]
-
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })
   ngxLoadingComponent!: NgxLoadingComponent;
   showingTemplate = false;
@@ -21,8 +19,11 @@ export class LoginComponent implements OnInit {
   public loading = false;
 
   Form = new FormGroup({
+    fname: new FormControl(''),
+    lname: new FormControl(''),
     email: new FormControl(''),
-    password: new FormControl(''),
+    phone: new FormControl(''),
+    profile: new FormControl(''),
   });
   
   submitted = false; //bpplean
@@ -43,11 +44,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.Form = this.formBuilder.group({
+      fname: ['', Validators.required],
+      lname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{3}-[0-9]{3}-[0-9]{4}'), Validators.maxLength(12)]],
+      profile: ['', Validators.required]
     });
   }
+  keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
 
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
   }
@@ -60,39 +74,6 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return
     }
-
-    let user = {
-      email: this.Form.value.email,
-      password: this.Form.value.password
-    }
-    this.auth.login(user).subscribe({
-      next:data => {
-        this.myData = data;
-        this.userToken = this.myData.token;
-        this.decodedToken = this.auth.getDecodedAccessToken(this.userToken); //returns a decoded data from token
-
-        this.role = this.decodedToken.regData[0].user_role;
-
-        localStorage.setItem('access_token', this.userToken);
-
-        if(this.role == 'Landlord'){
-          this.router.navigate(['/landlord/dash'])
-
-        }else if(this.role == 'Tenant'){
-          this.router.navigate(['/tenant'])
-        }
-      },
-      error: err => {
-        this.loading = false;
-        this.messageService.add({
-          key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
-        });  
-      }
-    });
   }
 
-  transform(value:any): string {
-    let first = value.toLowerCase();
-    return first; 
-  }
 }

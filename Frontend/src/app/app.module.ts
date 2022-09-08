@@ -5,20 +5,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AppRoutingModule } from './app-routing.module';
+import { LandlordModule } from './Pages/landlord/landlord.module';
+import { TenantModule } from './Pages/tenant/tenant.module';
 
+//Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
-import { ApplyComponent } from './Components/apply/apply.component';
 
 //Primeng Imports
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { LandlordModule } from './Pages/landlord/landlord.module';
+
 
 @NgModule({
   declarations: [
@@ -26,13 +27,12 @@ import { LandlordModule } from './Pages/landlord/landlord.module';
     NavBarComponent,
     EditorComponent,
     HomeComponent,
-    LandlordComponent,
     LoginComponent,
     RegisterComponent,
-    ApplyComponent
   ],
   imports: [
     LandlordModule,
+    TenantModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
