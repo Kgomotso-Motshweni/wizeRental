@@ -10,9 +10,10 @@ export class DashboardComponent implements OnInit {
 
  
   rentees : any
-
+  
   constructor(private dash:DashboardService) { }
 
+  month: any = [1,3,5,7.8]
   
 
   ngOnInit(): void {

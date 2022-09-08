@@ -12,7 +12,6 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { LandlordModule } from './Pages/landlord/landlord.module';
-import { LandlordComponent } from './Pages/landlord/landlord.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,7 @@ import { LandlordComponent } from './Pages/landlord/landlord.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    LandlordComponent
+   
   ],
   imports: [
     CommonModule,

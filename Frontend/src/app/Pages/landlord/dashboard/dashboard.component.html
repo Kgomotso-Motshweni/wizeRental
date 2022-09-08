@@ -1,145 +1,118 @@
+<div class="container">
+  <br><br><br>
+  <!---------------------------------------cards---------------------------------------------------->
+  <div class="grid  md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-2 gap-4 justify-center">
 
- 
-        <div class="container">    
-        <br><br><br>
+    <div class="card card-compact bg-base-100 shadow-xl">
+      <div class="card-body">
 
-        <!-- <main class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 gap-3 justify-center"> -->
-        <p-card header="Monthly Revenue" [style]="{'width': '25rem','height': '7rem','margin-bottom': '2em'}">
-            <ng-template pTemplate="header">
-            </ng-template>
-            <p>R14 300</p>
-        </p-card>
-        
-        <p-card header="Total unpaid Amount" [style]="{'width': '25rem', 'height': '7rem','margin-bottom': '2em'}">
-            <ng-template pTemplate="header">
-                <!-- <img alt="Card" src="assets/showcase/images/usercard.png"> -->
-            </ng-template>
-            <p>R7 800</p>
-        </p-card>
+        <h2 class="card-title">Monthly Revenue</h2>
+        <p>R7 800</p>
+        <h1 class="dash-card"></h1>
+        <div class="card-actions justify-end">
 
-        <p-card header="unpaid Amount" [style]="{'width': '25rem', 'height': '7rem','margin-bottom': '2em'}">
-            <ng-template pTemplate="header">
-                <!-- <img alt="Card" src="assets/showcase/images/usercard.png"> -->
-            </ng-template>
-            <p>R6 500</p>
-        </p-card>
-        
-        <p-card header="Rooms Occupied" [style]="{'width': '25rem', 'height': '7rem','margin-bottom': '2em'}">
-            <ng-template pTemplate="header">
-                <!-- <img alt="Card" src="assets/showcase/images/usercard.png"> -->
-            </ng-template>
-            <p>7 Tenants</p>
-        </p-card>
-        
-        <p-card header="Rooms Available" [style]="{'width': '25rem', 'height': '7rem','margin-bottom': '2em'}">
-            <ng-template pTemplate="header">
-                <!-- <img alt="Card" src="assets/showcase/images/usercard.png"> -->
-            </ng-template>
-            <p>4 Tenants</p>
-        </p-card>
-       
-        <p-card header="Pending Tenants" [style]="{'width': '25rem', 'height': '7rem','margin-bottom': '2em'}">
-            <ng-template pTemplate="header">
-                <!-- <img alt="Card" src="assets/showcase/images/usercard.png"> -->
-            </ng-template>
-            <p>1 Tenant</p>
-        </p-card>
-          <!-- <br>
-          
-          <div class="card w-96 bg-primary text-primary-content">
-            <div class="card-body">
-              <h2 class="card-title">Total Amount Received</h2>
-              <p>R7 800</p>
-              <div class="card-actions justify-end">
-              </div>
-            </div>
-          </div>
-          <br>
-          
-          <div class="card w-96 bg-primary text-primary-content">
-            <div class="card-body">
-              <h2 class="card-title">unpaid Amount</h2>
-              <p>R6 500</p>
-              <div class="card-actions justify-end">
-              </div>
-            </div>
-          </div>
-          <br>
-          
-          <div class="card w-96 bg-primary text-primary-content">
-            <div class="card-body">
-              <h2 class="card-title">Rooms Occupied</h2>
-              <p>7 Tenants</p>
-              <div class="card-actions justify-end">
-              </div>
-            </div>
-          </div>
-          <br>
-          
-          <div class="card w-96 bg-primary text-primary-content">
-            <div class="card-body">
-              <h2 class="card-title">Rooms Available</h2>
-              <p> <i></i>4 Tenants</p>
-              <div class="card-actions justify-end">
-              </div>
-            </div>
-          </div>
-          <br>
-          
-          <div class="card w-96 bg-primary text-primary-content">
-            <div class="card-body">
-              <h2 class="card-title">Pending tenants</h2>
-              <p>1 Tenant</p>
-              <div class="card-actions justify-end">
-              </div>
-            </div>
-          </div> -->
-         
-<!---search bar and button-->
- <div class="flex justify-between">
-        <div class="search col-xl-12">
-            <input type="text" placeholder="Search Tenant"  class="input input-bordered"/>
-            <button class="btn btn-warning">Send Notification</button>
         </div>
- </div>
-<!--tii here-->
+      </div>
+    </div>
 
+    <div class="card card-compact bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Amount Received</h2>
+        <p>R7 800</p>
+        <div class="card-actions justify-end">
 
-          <h2><b>All Tenants</b></h2>
-          <div class="overflow-x-auto">
-              <table class="table w-full">
-                <!-- head -->
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Tenant</th>
-                    <th>Contact</th>
-                    <th>Unit</th>
-                    <th>Rent</th>
-                    <th>MOA Start</th>
-                    <th>MOA End</th>
-                    <th>MOA</th>
-                    <th>PAID</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- row 1 -->
-                  <tr *ngFor="let rentee of rentees; let x=index" >
-                    <th>{{x+1}}</th>
-                    <td>{{rentee.full_name}}</td>
-                    <td>082-145-6643</td>
-                    <td>2A</td>
-                    <td>{{rentee.rent_paid}}</td>
-                    <td>{{rentee.created_time}}</td>
-                    <td>{{rentee.r_update_time}}</td>
-                    <td></td>
-                    <td></td>
-                    <td><button class="btn btn-error">Delete</button></td>
-                  </tr> 
-                </tbody>
-              </table>
-            </div>
-        <!-- </main> -->
         </div>
-       
+      </div>
+    </div>
+
+    <div class="card card-compact bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">unpaid Amount</h2>
+        <p>R6 500</p>
+        <div class="card-actions justify-end">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-compact bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Rooms Occupied</h2>
+        <p>7 Tenants</p>
+        <div class="card-actions justify-end">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-compact bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Rooms Available</h2>
+        <p>4 Tenants</p>
+        <div class="card-actions justify-end">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-compact bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Pending Tenants</h2>
+        <p> <i></i> 1 Tenant</p>
+        <div class="card-actions justify-end">
+
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+  <!--------------------------------------------till here-------------------------------------------->
+  <!--------------------------------------------search bar and button-------------------------------->
+
+  <div class="flex justify-start">
+    <div class="search">
+      <input type="text" placeholder="Search Tenant" class="input input-bordered" />&nbsp;
+      <button class="btn btn-warning ">Send Notification</button>
+    </div>
+  </div><br>
+  <!--------------------------------------------tii here---------------------------------------------->
+
+
+  <h2><b>All Tenants</b></h2>
+  <br>
+  <div class="overflow-x-auto">
+    <table class="table w-full">
+      <!--------------------------------------------head-------------------------------------------------->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Tenant</th>
+          <th>Contact</th>
+          <th>Unit</th>
+          <th>Rent</th>
+          <th>MOA Start</th>
+          <th>MOA End</th>
+          <th>MOA</th>
+          <th>PAID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!---------------------------------------------row 1-------------------------------------------------->
+        <tr *ngFor="let rentee of rentees; let x=index">
+          <th>{{x+1}}</th>
+          <td>{{rentee.full_name}}</td>
+          <td>082-145-6643</td>
+          <td>2A</td>
+          <td>{{rentee.rent_paid}}</td>
+          <td>{{rentee.created_time}}</td>
+          <td>{{rentee.r_update_time}}</td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-error">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

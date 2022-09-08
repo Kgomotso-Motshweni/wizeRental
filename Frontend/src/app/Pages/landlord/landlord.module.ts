@@ -46,6 +46,7 @@ const routes: Routes = [
     DashboardComponent,
     TenantsComponent,
     PendingComponent,
+    LandlordComponent
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
