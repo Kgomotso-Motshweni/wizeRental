@@ -25,14 +25,10 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
   
-  submitted = false; //bpplean
+  submitted = false;
   userToken: any;
   role: any;
   myData: any = {};
-  userdata: any = {}
-  fullname: any;
-  userinfor: any = {};
-  OneUserInfor: any = {};
   decodedToken: any = {};
 
   constructor(private formBuilder: FormBuilder, 
@@ -65,6 +61,7 @@ export class LoginComponent implements OnInit {
       email: this.Form.value.email,
       password: this.Form.value.password
     }
+    
     this.auth.login(user).subscribe({
       next:data => {
         this.myData = data;
