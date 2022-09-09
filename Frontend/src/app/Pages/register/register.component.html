@@ -8,107 +8,115 @@
                         <h3 class="mb-0 text-uppercase text-center">create Account</h3>
                         <h6 class="text-center ">Let's get started!</h6>
                     </div>
-                    
-                    <form [formGroup]="Form" (ngSubmit)="onSubmit()">
-                        <div class="form-group col mb-2">
-                            <select  formControlName="usertype" class="input input-bordered w-full max-w-xs email" placeholder="Select User Role" [ngClass]="{ 'is-invalid':submitted && f['usertype'].errors}">
-                                <option value disabled selected hidden>Select User Role... </option>
-                                <option value="landlord">Landlord</option>
-                                <option value="tenant">Tenant</option>
-                            </select>
-                            <div *ngIf="submitted && f['usertype'].errors" class="invalid-feedback">
-                                <div *ngIf="f['usertype'].errors['required']">User type is required</div>
-                            </div>
-                        </div>
-    
-
-                        <div class="form-group col mb-2">
-                            <input (keypress)="keyPressAlphanumeric($event)" type="email" formControlName="fname" placeholder="First Name"
-                                class="input input-bordered w-full max-w-xs email "
-                                [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }" />
-                            <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
-                                <div *ngIf="f['fname'].errors['required']">First name is required</div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group col mb-2">
-                            
-                            <input (keypress)="keyPressAlphanumeric($event)" type="email" formControlName="lname" placeholder="Last Name"
-                                class="input input-bordered w-full max-w-xs email "
-                                [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
-                            <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
-                                <div *ngIf="f['lname'].errors['required']">Last Name is required</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col mb-2">
-                          
-                            <input type="email" formControlName="email" placeholder="Email"
-                                class="input input-bordered w-full max-w-xs email "
-                                [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
-                            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                <div *ngIf="f['email'].errors['email']">Email is invalid</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col mb-2">
-                            <input type="text" formControlName="phone" placeholder="111-111-1111"
-                                class="input input-bordered w-full max-w-xs email "
-                                [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
-                            <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
-                                <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
-                                <div *ngIf="f['phone'].errors['pattern']">Phone Number pattern is '999-999-9999'</div>
-                                <div *ngIf="f['phone'].errors['maxlength']">Phone Number must not exceed 13 character</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col mb-2" >
-                            <input type="file" formControlName="profile"
-                                class="input input-bordered w-full max-w-xs email "
-                                [ngClass]="{ 'is-invalid':submitted && f['profile'].errors }" />
-                            <div *ngIf="submitted && f['profile'].errors" class="invalid-feedback">
-                                <div *ngIf="f['profile'].errors['required']">Phone Number is required</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col mb-2"> 
-                            <input type="password" formControlName="password" placeholder="Password"
-                                class="input input-bordered w-full max-w-xs password"
-                                [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
-                            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                                <div *ngIf="f['password'].errors['required']">Password is required</div>
-                                <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character
+                    <div class="md:card w-96 shadow-xl rounded-lg">
+                        <div class="card-body rounded-md">
+                            <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                                <div class="form-group col mb-4">
+                                    <select  formControlName="usertype" class="input input-bordered w-full max-w-xs email" placeholder="Select User Role" [ngClass]="{ 'is-invalid':submitted && f['usertype'].errors}">
+                                        <option value disabled selected hidden>Select User Role... </option>
+                                        <option value="Landlord">Landlord</option>
+                                        <option value="Tenant">Tenant</option>
+                                    </select>
+                                    <div *ngIf="submitted && f['usertype'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['usertype'].errors['required']">User type is required</div>
+                                    </div>
                                 </div>
-                                <div *ngIf="f['password'].errors['maxlength']">Password must not exceed 40 character
+            
+
+                                <div class="form-group col mb-4">
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-user"></i></span>
+                                        <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="fname" placeholder="First Name"
+                                            class="input input-bordered w-full max-w-xs email "
+                                            [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['fname'].errors['required']">First name is required</div>
+                                    </div>           
                                 </div>
+
+
+                                <div class="form-group col mb-4">
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-user"></i></span>
+                                        <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="lname" placeholder="Last Name"
+                                            class="input input-bordered w-full max-w-xs email "
+                                            [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
+                                     </label>
+                                    <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['lname'].errors['required']">Last Name is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col mb-4">
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="email" formControlName="email" placeholder="Email"
+                                            class="input input-bordered w-full max-w-xs email "
+                                            [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                        <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                                    </div>         
+                                </div>
+
+                                <div class="form-group col mb-4">
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-phone"></i></span>
+                                        <input type="text" formControlName="phone" placeholder="111-111-1111"
+                                            class="input input-bordered w-full max-w-xs email " 
+                                            [ngClass]="{ 'is-invalid':submitted && f['phone'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
+                                        <div *ngIf="f['phone'].errors['pattern']">Phone Number pattern is '999-999-9999'</div>
+                                        <div *ngIf="f['phone'].errors['maxlength']">Phone Number must not exceed 13 character</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col mb-4"> 
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-key"></i></span>
+                                        <input type="password" formControlName="password" placeholder="Password"
+                                            class="input input-bordered w-full max-w-xs password"
+                                            [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                        <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character
+                                        </div>
+                                        <div *ngIf="f['password'].errors['maxlength']">Password must not exceed 40 character
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col mb-4">   
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-key"></i></span>
+                                        <input type="password" formControlName="confirmpassword" placeholder="Confirm Password"
+                                            class="input input-bordered w-full max-w-xs email"
+                                            [ngClass]="{ 'is-invalid':submitted && f['confirmpassword'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['confirmpassword'].errors['required']">Confirm Password is required</div>
+                                        <div *ngIf="f['confirmpassword'].errors['mustMatch']">Password must match</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="group relative w-32 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 btn-primary">Register</button>
+                                </div>
+                            </form>
+
+                            <div class="form-group mt-4">
+                                <P class = "Already">
+                                    Already have an account? Click
+                                    <a routerLink="/login"  class="reg" >here</a> to log in
+                                </P>
                             </div>
                         </div>
-
-                        <div class="form-group col">   
-                            <input type="password" formControlName="confirmpassword" placeholder="Confirm Password"
-                                class="input input-bordered w-full max-w-xs email"
-                                [ngClass]="{ 'is-invalid':submitted && f['confirmpassword'].errors }" />
-                            <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
-                                <div *ngIf="f['confirmpassword'].errors['required']">Confirm Password is required</div>
-                                <div *ngIf="f['confirmpassword'].errors['mustMatch']">Password must match</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="group relative w-32 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 btn btn-primary">Register</button>
-                        </div>
-
-                    </form>
-
-                    <div class="form-group mt-4">
-                        <P class = "Already">
-                            Already have an account? Click
-                            <a routerLink="/login"  class="reg" >here</a> to log in
-                        </P>
                     </div>
-
                 </div>
             </div>
         </div>

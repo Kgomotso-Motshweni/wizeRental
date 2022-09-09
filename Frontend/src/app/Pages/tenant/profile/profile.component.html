@@ -1,76 +1,72 @@
 <p-toast position="top-right" key="tc"></p-toast>
-<section class="gradient-custom">
+
+<section class="profile">
     <div class="md:container md:mx-auto">
         <div class="flex justify-center">
-            <div class="md:card w-content bg-base-100 shadow-xl">
+            <div class="md:card w-content bg-base-100 ">
+                <div class="card-body rounded-md">
+                    <div class="profile_pic rounded-full">
+                        <img src="https://placeimg.com/80/80/people" class="profile_pic rounded-circle align-self-center mr-2" width="300" height="600" />
+                    </div>
+                    
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="gradient-custom" style="margin-top:-2%;">
+    <div class="md:container md:mx-auto">
+        <div class="flex justify-center">
+            <div class="md:card w-96 bg-base-100 shadow-xl">
                 <div class="card-body rounded-md">
                     <div class="justify-start">
                         <h1>PROFILE</h1>
                     </div>
-                        <form [formGroup]="Form" (ngSubmit)="onSubmit()">
-                            <div class="form-group col mb-2">
-                                <label class="label"><span class="label-text">First Name</span></label>
-                                <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="fname" placeholder="First Name"
-                                    class="input shadow-m input-bordered w-full max-w-s email "
-                                    [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }" />
-                                <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['fname'].errors['required']">First name is required</div>
-                                </div>
-                            </div>
-    
-    
-                            <div class="form-group col mb-2">
-                                <label class="label"><span class="label-text">Last Name</span></label>
-                                <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="lname" placeholder="Last Name"
-                                    class="input shadow-m input-bordered w-full max-w-s email "
-                                    [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
-                                <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['lname'].errors['required']">Last Name is required</div>
-                                </div>
-                            </div>
-    
-                            <div class="form-group col mb-2">
-                                <label class="label"><span class="label-text">Email</span></label>
-                                <input type="email" formControlName="email" placeholder="Email"
-                                    class="input shadow-m input-bordered w-full max-w-s email "
-                                    [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
-                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                    <div *ngIf="f['email'].errors['email']">Email is invalid</div>
-                                </div>
-                            </div>
-    
-                            <div class="form-group col mb-2">
-                                <label class="label"><span class="label-text">Phone Number</span></label>
-                                <input type="text" formControlName="phone" placeholder="111-111-1111"
-                                    class="input shadow-m input-bordered w-full max-w-s email "
-                                    [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
-                                <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
-                                    <div *ngIf="f['phone'].errors['pattern']">Phone Number pattern is '999-999-9999'</div>
-                                    <div *ngIf="f['phone'].errors['maxlength']">Phone Number must not exceed 13 character</div>
-                                </div>
-                            </div>
 
-                            <div class="form-group col mb-2">   
-                                <label class="label"><span class="label-text">Profile Picture</span></label>
-                                <input type="file" formControlName="profile" placeholder="Profile Picture"
-                                    class="input  shadow-m input-bordered w-full max-w-s password"
-                                    [ngClass]="{ 'is-invalid':submitted && f['profile'].errors }" />
-                                <div *ngIf="submitted && f['profile'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['profile'].errors['required']">Password is required</div>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label class="label"><span class="label-text">First Name</span></label>
+                            <input (keypress)="keyPressAlphanumeric($event)" type="text" placeholder="First Name"
+                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.firstname" />
+                            <small class="invalid-feedback" *ngIf="submitted && !userinfor.firstname">First Name is required.</small>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label class="label"><span class="label-text">Last Name</span></label>
+                            <input (keypress)="keyPressAlphanumeric($event)" type="text" placeholder="Last Name"
+                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.lastname" />
+            
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="label"><span class="label-text">Email</span></label>
+                            <input type="email" placeholder="info@site.com"
+                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.email"/>
+            
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="label"><span class="label-text">Phone Number</span></label>
+                            <input type="text"  placeholder="111-111-1111"
+                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.cellno" />
+                        </div>
 
-                            <div class="form-group mt-4 flex" >
-                                <div class="buttons">
-                                    <button type="submit" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 btn btn-primary">Save</button>
-                                </div>
-                                <div class="buttons">
-                                    <button routerLink="/tenant/" class="group relative ml-4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 btn btn-secondary">Cancel</button>
-                                </div>
+                        <!-- <div class="form-group">   
+                            <label class="label"><span class="label-text">Profile Picture</span></label>
+                            <input class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Profile Picture">
+                        
+                        </div> -->
+                        
+                        <div class="form-group mt-4 flex" >
+                            <div class="buttons" >
+                                <button type="submit" onclick="onSubmit()" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Save</button>
                             </div>
-                        </form>
+                            <div class="buttons">
+                                <button routerLink="/tenant/" class="group relative ml-4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                
                 </div>
             </div>
         </div>
@@ -82,7 +78,6 @@
           backdropBorderRadius: '3px'
         }">
         </ngx-loading>
-
     </div>
  </section> 
 

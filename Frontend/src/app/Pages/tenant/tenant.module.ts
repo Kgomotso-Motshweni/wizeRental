@@ -21,6 +21,7 @@ import { MyroomComponent } from './myroom/myroom.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
@@ -54,8 +55,9 @@ const routes: Routes = [
     ToastModule,
     FormsModule,
     InputMaskModule,
-    ReactiveFormsModule,
     InputNumberModule,
+    InputTextModule,
+    ReactiveFormsModule,
     CommonModule,
     ConfirmDialogModule,
     MessagesModule,

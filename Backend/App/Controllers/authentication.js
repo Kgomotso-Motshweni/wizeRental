@@ -16,9 +16,9 @@ const register = async (req, res) => {
         }
 
         const data = await client.query(`SELECT * FROM users WHERE email= $1;`,[email]); //Check if user exist
-        const regData = data.rows;
+        const user = data.rows;
 
-        if(regData.length != 0){
+        if(user.length != 0){
             return res.status(400).json({
                 message: "Email already there, No need to register again."
             });
@@ -29,13 +29,13 @@ const register = async (req, res) => {
                         message: "Unable to hash password"
                     });
                 }
-                const user = {user_role, firstname, lastname, email, cellno, password: hash};
+                const regData = {user_role, firstname, lastname, email, cellno, password: hash};
                 var flag = 1;
 
                 //Inserting data to Database  
                 client.query(
                     `INSERT INTO users (user_role, firstname, lastname, email, cellno, password) VALUES ($1,$2,$3,$4,$5,$6)`, 
-                    [user.user_role, user.firstname, user.lastname, user.email, user.cellno, user.password], (err) => {
+                    [regData.user_role, regData.firstname, regData.lastname, regData.email, regData.cellno, regData.password], (err) => {
                         if (err) {
                             flag  =  0; //If user is not inserted to database assign flag as 0/false.
                             return  res.status(500).json({
@@ -48,7 +48,7 @@ const register = async (req, res) => {
                 )
                 if (flag) {
                     const  token  = jwt.sign({ //Creating a JWT Token
-                        user
+                        regData
                     },
                         SECRET_KEY,
                     { 

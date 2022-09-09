@@ -4,13 +4,9 @@
 .is-invalid{
     border-color: red;
 }
-.gradient-custom{
-    margin-top: 15vh;
-}
 .email, .password{
     padding-left: 25px;
 }
-
 //Desktop
 @media screen and (min-width: 769px){
     .gradient-custom{
@@ -27,3 +23,39 @@ select, input{
 .input{
     background-color: #fff;
 }
+
+button .p-button-rounded{
+    width:10px; 
+    height:120px;
+    margin-left: 10px;
+}
+a{
+    margin-left: 12px;
+}
+.profile_pic{
+    border-radius: 50%;
+    vertical-align: middle;
+    border-style: none;
+}
+// .btn-danger{
+//     background-color: red;
+// }
+// .btn-danger:hover{
+//     background-color: red;
+// }
+// .invalid-feedback{
+//     color: red;
+// }
+// .is-invalid{
+//     border-color: red;
+// }
+// .input:hover{
+//     border: solid 0.3em rgb(6, 212, 248);
+// }
+// img{
+//     margin-left: 3vw;
+//     width: 120px;
+// }
+// .list{
+//     margin-top:7vh;
+// }

@@ -43,14 +43,9 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-    this.Form = this.formBuilder.group({
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{3}-[0-9]{3}-[0-9]{4}'), Validators.maxLength(12)]],
-      profile: ['', Validators.required]
-    });
+    this.getProfile()
   }
+
   keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
 
     var inp = String.fromCharCode(event.keyCode);
@@ -62,9 +57,6 @@ export class ProfileComponent implements OnInit {
       return false;
     }
   }
-  get f():{ [key: string]: AbstractControl }{
-    return this.Form.controls;//it traps errors in the form
-  }
 
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
@@ -74,6 +66,17 @@ export class ProfileComponent implements OnInit {
       this.loading = false;
       return
     }
+
+    let user = {
+      firstname: this.Form.value
+      
+    }
+
+    console.log(this.Form.value)
   }
 
+  getProfile(){
+    let token:any = localStorage.getItem("access_token");
+    this.userinfor = this.auth.getDecodedAccessToken(token).regData[0] 
+  }
 }

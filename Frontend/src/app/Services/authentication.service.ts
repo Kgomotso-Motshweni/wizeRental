@@ -29,8 +29,8 @@ export class AuthenticationService {
   }
 
   //create a register request 
-  register(users : Register):Observable<any>{
-    return this.http.post(`${this.baseUrl}register`, users)
+  register(users : any, user_role:any):Observable<any>{
+    return this.http.post(`${this.baseUrl}register/${user_role}`, users)
   }
   
   //create a login request 

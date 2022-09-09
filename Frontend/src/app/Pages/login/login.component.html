@@ -2,7 +2,7 @@
 <section class="gradient-custom">
     <div class="md:container md:mx-auto">
         <div class="flex justify-center">
-            <div class="md:card w-full shadow-xl rounded-lg">
+            <div class="md:card w-content shadow-xl rounded-lg">
                 <div class="card-body rounded-md">
                     <div class="text-center">
 
@@ -14,19 +14,25 @@
                         <div class="card-body rounded-md">
                             <form [formGroup]="Form" (ngSubmit)="onSubmit()">
                                 <div class="form-group col mb-4">
-                                    <input type="email" formControlName="email" placeholder="Email"
-                                        class="input input-bordered w-full max-w-s email "
-                                        [ngClass] ="{ 'is-invalid':submitted && f['email'].errors }" />
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="email" formControlName="email" placeholder="info@site.com"
+                                            class="input input-bordered w-full max-w-s email "
+                                            [ngClass] ="{ 'is-invalid':submitted && f['email'].errors }" />
+                                    </label>
                                     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                         <div *ngIf="f['email'].errors['required']">Email is required</div>
                                         <div *ngIf="f['email'].errors['email']">Email is invalid</div>
                                     </div>
                                 </div>
 
-                                <div class="form-group col mb-4">   
-                                    <input type="password" formControlName="password" placeholder="Password"
-                                        class="input input-bordered w-full max-w-s password"
-                                        [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
+                                <div class="form-group col mb-4">  
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-key"></i></span> 
+                                        <input type="password" formControlName="password" placeholder="Password"
+                                            class="input input-bordered w-full max-w-s password"
+                                            [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
+                                    </label>            
                                     <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
                                         <div *ngIf="f['password'].errors['required']">Password is required</div>
                                         <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character
@@ -46,7 +52,7 @@
                                 </div>
 
                                 <div class="form-group mt-4">
-                                    <button type="submit" class="group relative w-32 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 btn btn-primary">Login</button>
+                                    <button type="submit" class="group relative w-32 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Login</button>
                                 </div>
                             </form>
 
