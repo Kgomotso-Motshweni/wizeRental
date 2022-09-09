@@ -1,9 +1,10 @@
+
+
+<!-- <router-outlet></router-outlet> -->
 <div class="container">
   <br><br><br>
   <!---------------------------------------cards---------------------------------------------------->
   <div class="grid  md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-2 gap-4 justify-center">
-
-
 
     <div class="card w-96 bg-base-100 shadow-xl">
       <div class="card-body">
@@ -16,68 +17,70 @@
     </div>
 
     <div class="card w-96 bg-base-100 shadow-xl">
-    <div class="card-body">
-      <h2 class="card-title">Amount Received</h2>
-      <p>R7 800</p>
-      <div class="card-actions justify-end">
-        <button class="btn-hidden"></button>
+      <div class="card-body">
+        <h2 class="card-title">Amount Received</h2>
+        <p>R7 800</p>
+        <div class="card-actions justify-end">
+          <button class="btn-hidden"></button>
+        </div>
       </div>
     </div>
-  </div>
 
-    
-  <div class="card w-96 bg-base-100 shadow-xl">
-    <div class="card-body">
-      <h2 class="card-title">unpaid Amount</h2>
-      <p>R6 800</p>
-      <div class="card-actions justify-end">
-        <button class="hidden"></button>
+
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">unpaid Amount</h2>
+        <p>R6 800</p>
+        <div class="card-actions justify-end">
+          <button class="hidden"></button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
-    <h2 class="card-title">Pending Tenants</h2>
-    <p>7 Tenant(s)</p>
-    <div class="card-actions justify-end">
-      <button class="btn-hidden"></button>
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Pending Tenants</h2>
+        <p>7 Tenant(s)</p>
+        <div class="card-actions justify-end">
+          <button class="btn-hidden"></button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
-    <h2 class="card-title">Rooms Available</h2>
-    <p>4 Tenant(s)</p>
-    <div class="card-actions justify-end">
-      <button class="btn-hidden"></button>
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Rooms Available</h2>
+        <p>4 Tenant(s)</p>
+        <div class="card-actions justify-end">
+          <button class="btn-hidden"></button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
 
-<div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
-    <h2 class="card-title">Rooms Available</h2>
-    <p>1 Tenant(s)</p>
-    <div class="card-actions justify-end">
-      <button class="btn-hidden"></button>
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Rooms Available</h2>
+        <p>1 Tenant(s)</p>
+        <div class="card-actions justify-end">
+          <button class="btn-hidden"></button>
+        </div>
+      </div>
     </div>
+    <br>
   </div>
-</div>
-<br>
-</div>
 
   <!--------------------------------------------till here-------------------------------------------->
   <!--------------------------------------------search bar and button-------------------------------->
 
   <div class="flex justify-start">
     <div class="search">
-      <input type="text" placeholder="Search Tenant" class="input input-bordered" />&nbsp;
+      <input type="text" placeholder="Search Tenant" class="input input-bordered" [(ngModel)]="searchTenant"/>&nbsp;
       <button class="btn btn-warning ">Send Notification</button>
     </div>
-  </div><br>
+    
+  </div>
+  <br>
   <!--------------------------------------------tii here---------------------------------------------->
 
 
@@ -102,7 +105,7 @@
       </thead>
       <tbody>
         <!---------------------------------------------row 1-------------------------------------------------->
-        <tr *ngFor="let rentee of rentees; let x=index">
+        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index">
           <th>{{x+1}}</th>
           <td>{{rentee.full_name}}</td>
           <td>082-145-6643</td>
@@ -118,3 +121,22 @@
     </table>
   </div>
 </div>
+
+
+
+<!-- <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index">
+  <th>{{x+1}}</th>
+  <td>{{rentee.full_name}}</td>
+  <td>082-145-6643</td>
+  <td>2A</td>
+  <td>{{rentee.rent_paid}}</td>
+  <td>{{rentee.created_time}}</td>
+  <td>{{rentee.r_update_time}}</td>
+  <td></td>
+  <td></td>
+  <td><button class="btn btn-error">Delete</button></td>
+</tr>
+</tbody>
+</table>
+</div> -->
+<!-- </div> -->

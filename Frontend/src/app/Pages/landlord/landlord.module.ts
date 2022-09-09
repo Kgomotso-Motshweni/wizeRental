@@ -8,6 +8,7 @@ import { TenantsComponent } from '../landlord/tenants/tenants.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandlordComponent } from './landlord.component';
 import { PendingComponent } from './pending/pending.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 //Primeng Imports
@@ -69,6 +70,7 @@ const routes: Routes = [
     InputTextModule,
     ConfirmDialogModule,
     MessagesModule,
+    Ng2SearchPipeModule,
 
     RouterModule.forChild(routes)
   ],

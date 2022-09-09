@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
 
  
   rentees : any
+  searchTenant : any;
   
   constructor(private dash:DashboardService) { }
 
