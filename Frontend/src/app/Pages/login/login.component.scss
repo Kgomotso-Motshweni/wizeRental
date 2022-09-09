@@ -1,0 +1,22 @@
+.invalid-feedback{
+    color: red;
+}
+.is-invalid{
+    border-color: red;
+}
+.gradient-custom{
+    margin-top: 15vh;
+}
+.email, .password{
+    padding-left: 25px;
+}
+
+//Desktop
+@media screen and (min-width: 769px){
+    .gradient-custom{
+        margin-top: 7vh;
+    }
+}
+.reg{
+    color: #ff0000;
+}

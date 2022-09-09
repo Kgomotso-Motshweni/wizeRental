@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ApplyComponent implements OnInit {
 
+ 
+
   Form = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
@@ -25,6 +27,8 @@ export class ApplyComponent implements OnInit {
     smoke: new FormControl(''),
    
   });
+
+  dob: Date = new Date();
 
   submitted = false;
   isSuccessful = false;
@@ -84,3 +88,4 @@ export class ApplyComponent implements OnInit {
       }
     }
   }
+  

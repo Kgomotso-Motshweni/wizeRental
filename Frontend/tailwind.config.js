@@ -11,6 +11,16 @@ module.exports = {
         }
     },
     daisyui:{
-        themes:["light", "dark","cupcake", "dracula" ]
+        themes:[
+            {
+                mytheme: {
+                    primary: "#55ADEA",
+                    secondary: "#D27C2C",
+                    accent: "#37cdbe",
+                    neutral: "#3d4451",
+                    "base-100": "#F4F3EF",
+                },
+            },
+        ],
     },
 };

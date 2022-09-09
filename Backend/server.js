@@ -21,7 +21,6 @@ app.use(
 );
 
 //call our database connections file for postgre
-
 const client = require('./App/Config/db.config')
 client.connect((err) =>{ // Connect to the Database
     if (err) {
@@ -38,6 +37,12 @@ const port = process.env.PORT || 8080; //create a listerning port number
 app.get("/", (req, res) =>{
     res.status(200).send("Welcome to WizeRentalz server");
 });
+
+
+//Routes Calls
+const auth = require("./App/Routes/Authentication");
+
+app.use("/api", auth) //retrive authentication infor 
 
 
 app.listen(port, () =>{  
