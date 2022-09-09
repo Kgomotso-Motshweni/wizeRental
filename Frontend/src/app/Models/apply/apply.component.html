@@ -14,14 +14,14 @@
                             </div>
                            <div class="row">
                                 <div class="bord form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="firstname" placeholder="First Name"  class="form-control" size="44" border-style="solid" [ngClass]="{ 'is-invalid':submitted && f['firstname'].errors }"/>
+                                    <input type="text" formControlName="firstname" placeholder="First Name"  class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['firstname'].errors }"/>
                                     <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
                                         <div *ngIf="f['firstname'].errors['required']">First name is required</div>
                                     </div>
                                 </div>   
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="lastname" placeholder="Last Name" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
+                                    <input type="text" formControlName="lastname" placeholder="Last Name" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
                                     <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
                                         <div *ngIf="f['lastname'].errors['required']">Last name is required</div>
                                     </div>
@@ -29,52 +29,53 @@
                             </div>
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="email" placeholder="Email" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"/>
+                                    <input type="text" formControlName="email" placeholder="Email" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"/>
                                     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                         <div *ngIf="f['email'].errors['required']">Email is required</div>
                                         <div *ngIf="f['email'].errors['email']">Email is invalid</div>
                                     </div>
                                 </div>
 
-                            <div class="row">
-                                <div class="form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="phonenumber" placeholder="012-345-6789" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['phonenumber'].errors }"/>
-                                    <div *ngIf="submitted && f['phonenumber'].errors" class="invalid-feedback">
+                                <div class="grid grid-cols-12 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                     
+                                      <input type="text" formControlName="phonenumber" placeholder="012-345-6789" autocomplete="given-name" class="mt-1 block">
+                                      <div *ngIf="submitted && f['phonenumber'].errors" class="invalid-feedback">
                                         <div *ngIf="f['phonenumber'].errors['required']">Phone Number is required</div>
                                         <div *ngIf="f['phonenumber'].errors['pattern']">Phone Number should follow the pattern 999-999-9999</div>
                                         <div *ngIf="f['phonenumber'].errors['maxlength']">Phone Number must not exceed 13 character</div>
                                     </div>
-                                </div>
-
-                                <div class="form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="age" placeholder="Age" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['age'].errors }"/>
-                                    <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
+                                    </div>
+                                
+                                    <div class="col-span-6 sm:col-span-3">
+                                      
+                                      <input type="text" formControlName="age" placeholder="Age" autocomplete="family-name" class="mt-1 block">
+                                      <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
                                         <div *ngIf="f['age'].errors['required']">age is required</div>
                                     </div>
+                                    </div>
                                 </div>
-                            
+                            <br>
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="UploadID" placeholder="Upload Identity Document" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['UploadID'].errors }"/>
+                                <input type="text" formControlName="UploadID" placeholder="Upload Identity Document" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['UploadID'].errors }"/>
                                 <div *ngIf="submitted && f['UploadID'].errors" class="invalid-feedback">
                                     <div *ngIf="f['UploadID'].errors['required']">Upload ID is required</div>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="EmpStatus" placeholder="Employement Status" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['EmpStatus'].errors }"/>
+                                <input type="text" formControlName="EmpStatus" placeholder="Employement Status" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['EmpStatus'].errors }"/>
                                 <div *ngIf="submitted && f['EmpStatus'].errors" class="invalid-feedback">
                                     <div *ngIf="f['EmpStatus'].errors['required']">Employement Status is required</div>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="Income" placeholder="Current Income" class="form-control" size="44" [ngClass]="{ 'is-invalid':submitted && f['Income'].errors }"/>
+                                <input type="text" formControlName="Income" placeholder="Current Income" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['Income'].errors }"/>
                                 <div *ngIf="submitted && f['Income'].errors" class="invalid-feedback">
                                     <div *ngIf="f['Income'].errors['required']">Current Income is required</div>
                                 </div>
-                            </div>
-
                            
                             
                                 <div class="form-group col-md-6 mb-4">
@@ -110,7 +111,7 @@
                             <div class="form-group col-md-6 mb-4">
                                 <label class="input-group">
                                     Number of pets
-                                <input type="text" formControlName="petNum" placeholder="0" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
+                                <input type="text" formControlName="petNum" placeholder="0" class="form-control"  [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
                                 <div *ngIf="submitted && f['petNum'].errors" class="invalid-feedback">
                                     <div *ngIf="f['petNum'].errors['required']">Number of pets is required</div>
                                 </div>
