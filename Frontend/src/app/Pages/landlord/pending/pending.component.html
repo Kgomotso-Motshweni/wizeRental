@@ -1,1 +1,39 @@
-<p>pending works!</p>
+<router-outlet></router-outlet>
+<br><br> <br>
+<h4>Pending Tenants</h4>
+<div class="grid  md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-2 gap-4 justify-center">
+
+
+ <!---------------------when there are pending tenants-->   
+<div class="controll" *ngIf="!pendingCount">
+<div class="container" *ngFor="let item of [1,2]">
+    
+    <br>
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Koketso Tinyane</h2>
+            <p>Koketsotinyane@gmail.com</p>
+            <p>view date: 1 Sep 2022</p>
+            <div class="card-actions justify-end">
+                <button class="btn-view">view</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>   
+</div>
+<!---------------------------end here------------------------------>
+<div class="controll" *ngIf="pendingCount">    
+        <br><br> <br>
+        <div class="card  card-compact bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title"></h2>
+                <p></p>
+                <p class="applicants">Once You Have New Applicant You <br> Will See Them Here <br> <br></p>
+                <div class="card-actions justify-end">
+                </div>
+            </div>
+        </div>
+    </div>   
+
+

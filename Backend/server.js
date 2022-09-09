@@ -8,8 +8,8 @@ require('./App/Config/dotenv.config')
 const user =require('../Backend/App/Routes/rentees')
 
 var corsOptions = {
-    // origin: ["*", "http://localhost:4200"],
-    origin: ["*"],
+    origin: ["*", "http://localhost:4200"],
+  
     credentials: true
   };// only allow the listerning addresses to connnect to the backend
   

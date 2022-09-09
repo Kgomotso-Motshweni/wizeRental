@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './Components/Landlord/dashboard.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
@@ -20,7 +19,7 @@ const routes: Routes = [
   {path:'landlord',component:LandlordComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  {path:'dash',component:DashboardComponent},
+
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];
 
