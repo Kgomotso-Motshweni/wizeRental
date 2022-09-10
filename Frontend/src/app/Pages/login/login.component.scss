@@ -4,9 +4,9 @@
 .is-invalid{
     border-color: red;
 }
-.gradient-custom{
-    margin-top: 15vh;
-}
+// .gradient-custom{
+//     margin-top: 15vh;
+// }
 .email, .password{
     padding-left: 25px;
 }
@@ -25,4 +25,18 @@ span{
 }
 .fa-solid, .pi{
     color: #55ADEA;
+}
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.header{
+    border-bottom-right-radius: 50px; /* 24px */
+    border-bottom-left-radius: 200px; /* 24px */
+}
+@media screen and (min-width: 769px){
+    .header{
+        border-bottom-left-radius: none;
+    }
 }
