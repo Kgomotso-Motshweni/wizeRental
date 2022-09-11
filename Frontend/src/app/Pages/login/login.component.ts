@@ -73,10 +73,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_token', this.userToken);
         localStorage.setItem('role', this.role);
         if(this.role == 'Landlord'){
-          this.router.navigate(['/landlord/dash'])
+          this.router.navigate(['/landlord/'])
 
         }else if(this.role == 'Tenant'){
-          this.router.navigate(['/tenant'])
+          this.router.navigate(['/tenant/'])
         }
       },
       error: err => {
