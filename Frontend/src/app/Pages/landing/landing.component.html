@@ -2,7 +2,7 @@
 
 <!-- content -->
 
-<div class="card1 bg-base-100 shadow-xl col-12 pt-5"   style="width: 100%;">
+<div class="card1 bg-base-100 shadow-xl col-12 pt-5 justify-content-center"   style="width: 100%;">
     <figure><img src="../../../assets/images/landing.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
     <div class="card-body">
       <p>Wize rentals is here to find you a 
@@ -13,7 +13,7 @@
 
   
 <!-- search -->
-<div class="class pt-5 m-3 col-12" >
+<div class="class pt-5 m-3 col-sm-12 col-xl-2 col-md-6" >
     <button class="btn btn-active btn-primary">To Rent</button>
     <button class="btn btn-active btn-primary">To Advertise</button>
   <div class="search col-xl-12">
@@ -48,13 +48,32 @@
         </div>
         </div>
       </div>
-  </div>
+ <br>
+
+
+    <div class="card w-96 bg-base-100 shadow-xl pt-5">
+      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
+      <div class="card-body">
+          <h6>Shaka accomodation</h6>
+          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+          <div class="icons">
+         
+          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
+          <div class="space">
+          </div>
+          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
+      
+      </div>
+      </div>
+    </div>
+</div>
   
 <!-- ng for -->
-  <div *ngFor="let i of properties" >
+  
 
     <div class="prop pt-5" routerLink="/view" >
       List of properties
+      <div *ngFor="let i of properties" >
       <div class="card w-96 bg-base-100 shadow-xl col-xl-12 pt-5">
         <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
         <div class="card-body">
