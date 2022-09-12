@@ -29,4 +29,5 @@ export class HeaderComponent implements OnInit {
     let first = value.toUpperCase();
     return first; 
   }
+  visibleSidebar2: boolean = false;
 }

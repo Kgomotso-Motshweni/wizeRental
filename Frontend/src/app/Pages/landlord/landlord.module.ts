@@ -35,8 +35,9 @@ import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
+import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
-
+import { NortificationComponent } from './nortification/nortification.component';
 
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
     TenantsComponent,
     LandlordComponent,
     PendingComponent,
-    HeaderComponent
+    HeaderComponent,
+    NortificationComponent
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -75,6 +77,7 @@ const routes: Routes = [
     
     FormsModule,
     InputMaskModule,
+    SidebarModule,
     ReactiveFormsModule,
     InputNumberModule,
     CommonModule,

@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { Userinfor } from 'src/app/Interfaces/userinfor';
 
 @Component({
   selector: 'app-profile',
@@ -35,12 +36,13 @@ export class ProfileComponent implements OnInit {
   userinfor: any = {};
   OneUserInfor: any = {};
   decodedToken: any = {};
+  tenantInfor: Userinfor = new Userinfor;
 
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
     private router:Router,
     private activeRoute:ActivatedRoute,
-    private messageService: MessageService,) { }
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getProfile()
@@ -58,25 +60,32 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onSubmit():void{
-    this.submitted = true;// submit when the details are true/when form is not blank
 
-    if(this.Form.invalid)
-    { 
-      this.loading = false;
-      return
-    }
 
-    let user = {
-      firstname: this.Form.value
-      
-    }
-
-    console.log(this.Form.value)
-  }
+  // editProduct(tenantInfor: Userinfor) {
+  //   this.tenantInfor = {...tenantInfor};
+  // }
 
   getProfile(){
     let token:any = localStorage.getItem("access_token");
-    this.userinfor = this.auth.getDecodedAccessToken(token).regData[0] 
+    this.userinfor = this.auth.getDecodedAccessToken(token).regData[0];
+    this.tenantInfor = {...this.userinfor};
+    console.log(this.tenantInfor)
+  }
+
+  onSubmit():void{
+    this.submitted = true;// submit when the details are true/when form is not blank
+
+    let id = this.tenantInfor.userid;
+    let user = {
+      firstname:this.tenantInfor.firstname, 
+      lastname:this.tenantInfor.lastname,
+      cellno:this.tenantInfor.cellno
+    }
+    this.auth.updateProfile(user, id).subscribe({
+      next:data => {
+        console.log(data)
+      }
+    })
   }
 }

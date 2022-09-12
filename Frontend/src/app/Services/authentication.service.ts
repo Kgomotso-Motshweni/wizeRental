@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Login } from '../Interfaces/login';
 import { Register } from '../Interfaces/register';
 import jwt_decode from 'jwt-decode';
+import { Userinfor } from '../Interfaces/userinfor';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class AuthenticationService {
   register(users : any, user_role:any):Observable<any>{
     return this.http.post(`${this.baseUrl}register/${user_role}`, users)
   }
+
+  //Update user information
+  updateProfile(user:any, id:any){
+    return this.http.patch(`${this.baseUrl}update/${id}`, user)
+  }
   
   //create a login request 
   get isLoggedIn(): boolean {
@@ -47,7 +53,6 @@ export class AuthenticationService {
     }
   }
 
- 
   getDecodedAccessToken(token: any): any {
     try {
       return jwt_decode(token);

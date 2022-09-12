@@ -139,9 +139,31 @@ const userProfile = async (req, res, next) => {
     };
 }
 
+
+const profileUpdate = async(req, res) => {
+    const id = req.params.userid;
+    const{ firstname, lastname, cellno, } = req.body
+    try{
+        client.query(`UPDATE users SET firstname = $1, lastname = $2, cellno= $3, updated_at= now()  WHERE userid=$4`,
+            [firstname, lastname, cellno, id], (error, results)=>{ //Add new employee
+                if(error){ //checks for errors and return them 
+                    return res.status(400).json({
+                        message: "Unable to update user details"
+                    }) //Throw the error in the terminal
+                }
+                res.status(200).json(results.rows) //Return a status 200 if there is no error
+            })
+    }
+    catch (err) {
+        res.status(500).json({
+           error: "Database error while retrieving products", 
+        });
+    };
+}
 module.exports = {
     SECRET_KEY,
     register,
     login,
-    userProfile
+    userProfile,
+    profileUpdate
 }
