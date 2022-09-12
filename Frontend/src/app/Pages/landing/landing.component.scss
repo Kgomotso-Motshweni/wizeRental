@@ -41,3 +41,41 @@ img{
     height: auto;
     display: inline-block;
 }
+
+.buttons{
+    background-color: #E3E3E7;
+    cursor: pointer;
+    width: auto;
+    height: 50px;
+    // justify-content: center;
+}
+.btn1{
+    width: 50%;
+    height: 40px;
+    padding:0.5px;
+}
+.btn2{
+    width: 50%;
+    height: 40px;
+}
+
+.btn1:hover{
+    background-color: #5E63EA;
+    color: white;
+    border-radius: 25px;
+}
+
+.btn2:hover{
+    background-color: #5E63EA;
+    color: white;
+    border-radius: 25px;
+}
+
+
+
+// .input{
+//     width:50%;
+// }
+// .btn{
+//     width:50%;
+// }
