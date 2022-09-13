@@ -31,7 +31,8 @@
       </div>
       <div class="space1">
     </div>
-      <button class="btn btn-outline btn-primary" style="width: 27%;">Filter By</button>
+    <label for="my-modal" class="btn modal-button btn-primary" style="width: 27%;">Filter by</label>
+      <!-- <button class="btn btn-outline btn-primary" style="width: 27%;" for="my-modal">Filter By</button> -->
   </div>
 </div>
 
@@ -111,6 +112,57 @@
       </div>
       </div>
     </div>
+</div>
+
+
+<!-- The button to open modal -->
+
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+  <div class="drop justify-center">
+    <div class="first">
+    <div class="dropdown">
+      <label tabindex="0" class="btn m-1 btn-primary" >Property type</label>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>backroom</a></li>
+        <li><a>commune</a></li>
+      </ul>
+    </div>
+
+    <div class="dropdown">
+      <label tabindex="0" class="btn m-1 btn-primary">Bedroom</label>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>Single</a></li>
+        <li><a>Sharing</a></li>
+      </ul>
+    </div>
+  </div>
+<br>
+
+
+<div class="dropdown">
+  <label tabindex="0" class="btn m-1 btn-primary">Min amount</label>
+  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a>R1500</a></li>
+    <li><a>R2000</a></li>
+  </ul>
+</div>
+
+<div class="dropdown">
+  <label tabindex="0" class="btn m-1 btn-primary">Max Amount</label>
+  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a>R3000</a></li>
+    <li><a>R4500</a></li>
+  </ul>
+</div>
+  </div>
+    <div class="modal-action">
+      <label for="my-modal" class="btn">X</label>
+    </div>
+  </div>
 </div>
   
 <!-- ng for -->

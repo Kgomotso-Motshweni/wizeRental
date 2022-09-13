@@ -15,6 +15,7 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { ApplyComponent } from './Components/apply/apply.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
+import { FilterByComponent } from './Components/filter-by/filter-by.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.compone
     RegisterComponent,
     ApplyComponent,
     LandingComponent,
-    ViewpropertyComponent
+    ViewpropertyComponent,
+    FilterByComponent
   ],
   imports: [
     BrowserModule,

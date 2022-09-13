@@ -8,6 +8,7 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { TenantsComponent } from './Pages/tenants/tenants.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
+import { FilterByComponent } from './Components/filter-by/filter-by.component';
 
 const routes: Routes = [
     {path:'', component:HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
     {path:'apply', component:ApplyComponent},
     {path:'', redirectTo:"/", pathMatch:"full"},
     {path:'landing',component:LandingComponent},
-    {path:'view', component:ViewpropertyComponent}
+    {path:'view', component:ViewpropertyComponent},
+    {path: 'filter', component:FilterByComponent}
 ];
 
 @NgModule({

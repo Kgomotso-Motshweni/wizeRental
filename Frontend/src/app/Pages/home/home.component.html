@@ -7,3 +7,198 @@
 <button class="btn btn-primary" routerLink="/tenant">Tenant</button>
 
 <button class="btn btn-primary" routerLink="/landing">landing</button>
+
+
+
+
+
+
+<!-- content -->
+
+<div class="card1 bg-base-100 shadow-xl col-12 ml-0 pt-5 justify-content-center"   style="width: 100%;">
+    <figure><img src="../../../assets/images/landing.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
+    <div class="card-body">
+      <p>Wize rentals is here to find you a 
+        accommodation in a region you want at the
+        price you can afford</p>
+    </div>
+  </div>
+
+  
+<!-- search -->
+<div class="container-fluid pt-5 ml-3 mr-3 col-sm-12 col-xl-2 col-md-6" >
+   What do you need?
+  <div class="buttons shadow-md col-md-12 justify-content-center pt-1">
+    <button class="btn1">To Rent</button>
+    <button class="btn2">To Advertise</button>
+  </div>
+
+
+  <br>
+  <div class="search col-xl-12">
+    <div class="form-control justify-content-flex" style="width: 70%;">
+        <!-- <i class="fas fa-search"></i> -->
+        
+        <input type="text" placeholder="&#xf0e0; Search address,city,location"  class="input input-bordered"/>
+        
+      </div>
+      <div class="space1">
+    </div>
+    <label for="my-modal" class="btn modal-button btn-primary" style="width: 27%;">Filter by</label>
+      <!-- <button class="btn btn-outline btn-primary" style="width: 27%;" for="my-modal">Filter By</button> -->
+  </div>
+</div>
+
+
+
+
+<!-- properties -->
+
+<!-- <div class="prop pr-1 col-sm-12 col-md-6 col-xl-4" > -->
+ <div class="grid pl-2 pr-2 ml-0 mr-2 md:grid-cols-4 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-6 justify-center">
+       
+      <div class="card w-96 bg-base-100 shadow-xl pt-5 ml-0" routerLink="/view">
+        <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
+        <div class="card-body">
+            <h6>Shaka accomodation</h6>
+            <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+            <div class="icons">
+           
+            <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
+            <div class="space">
+            </div>
+            <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
+        
+        </div>
+        </div>
+      </div>
+ <br>
+
+
+    <div class="card w-96 bg-base-100 shadow-xl pt-5">
+      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
+      <div class="card-body">
+          <h6>Shaka accomodation</h6>
+          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+          <div class="icons">
+         
+          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
+          <div class="space">
+          </div>
+          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
+      
+      </div>
+      </div>
+    </div>
+
+
+    <br>
+    <div class="card w-96 bg-base-100 shadow-xl pt-5">
+      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
+      <div class="card-body">
+          <h6>Shaka accomodation</h6>
+          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+          <div class="icons">
+         
+          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
+          <div class="space">
+          </div>
+          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
+      
+      </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="card w-96 bg-base-100 shadow-xl pt-5">
+      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
+      <div class="card-body">
+          <h6>Shaka accomodation</h6>
+          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+          <div class="icons">
+         
+          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
+          <div class="space">
+          </div>
+          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
+      
+      </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- The button to open modal -->
+
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+  <div class="drop justify-center">
+    <div class="first">
+    <div class="dropdown">
+      <label tabindex="0" class="btn m-1 btn-primary" >Property type</label>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>backroom</a></li>
+        <li><a>commune</a></li>
+      </ul>
+    </div>
+
+    <div class="dropdown">
+      <label tabindex="0" class="btn m-1 btn-primary">Bedroom</label>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>Single</a></li>
+        <li><a>Sharing</a></li>
+      </ul>
+    </div>
+  </div>
+<br>
+
+
+<div class="dropdown">
+  <label tabindex="0" class="btn m-1 btn-primary">Min amount</label>
+  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a>R1500</a></li>
+    <li><a>R2000</a></li>
+  </ul>
+</div>
+
+<div class="dropdown">
+  <label tabindex="0" class="btn m-1 btn-primary">Max Amount</label>
+  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a>R3000</a></li>
+    <li><a>R4500</a></li>
+  </ul>
+</div>
+  </div>
+    <div class="modal-action">
+      <label for="my-modal" class="btn">X</label>
+    </div>
+  </div>
+</div>
+  
+<!-- ng for -->
+  
+
+    <div class="prop pt-5" routerLink="/view" >
+      
+      <div *ngFor="let i of properties" >
+      <div class="card w-96 bg-base-100 shadow-xl col-xl-12 pt-5">
+        <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
+        <div class="card-body">
+            <h6>{{i.accName}}</h6>
+            <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+            <div class="icons">
+           
+            <i class="fa-solid fa-bed"></i><h6>{{i.rooms}} rooms </h6>
+            <div class="space">
+            </div>
+            <i class="fas fa-bath"></i><h6>{{i.rooms}} bathrooms</h6>
+        
+        </div>
+        </div>
+      </div>
+  </div>
+
+  </div>
