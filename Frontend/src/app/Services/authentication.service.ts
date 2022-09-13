@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Login } from '../Interfaces/login';
-import { Register } from '../Interfaces/register';
 import jwt_decode from 'jwt-decode';
 
+const userToken = localStorage.getItem('access_token');
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -21,16 +24,18 @@ export class AuthenticationService {
     return this.http.post(`${this.baseUrl}login`, users)
   }
 
-  getProfile(userToken: any):Observable<any>{
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
-    };
-    return this.http.get(`${this.baseUrl}profile`, httpOptions )
+  getProfile(accessToken:any,id:number):Observable<any>{
+    return this.http.get(`${this.baseUrl}profile/${id}`, accessToken )
   }
 
   //create a register request 
-  register(users : Register):Observable<any>{
-    return this.http.post(`${this.baseUrl}register`, users)
+  register(users : any, user_role:any):Observable<any>{
+    return this.http.post(`${this.baseUrl}register/${user_role}`, users)
+  }
+
+  //Update user information
+  updateProfile(user:any, id:any){
+    return this.http.patch(`${this.baseUrl}update/${id}`, user, httpOptions)
   }
   
   //create a login request 
@@ -47,7 +52,6 @@ export class AuthenticationService {
     }
   }
 
- 
   getDecodedAccessToken(token: any): any {
     try {
       return jwt_decode(token);

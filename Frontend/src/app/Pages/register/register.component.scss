@@ -4,23 +4,37 @@
 .is-invalid{
     border-color: red;
 }
-.gradient-custom{
-    margin-top: 15vh;
-}
+
 .email, .password{
     padding-left: 25px;
 }
 
 //Desktop
-@media screen and (min-width: 769px){
-    .gradient-custom{
-        margin-top: 7vh;
-    }
-}
+
 .reg{
     color: #ff0000;
 }
 
 select, input{
     color: #66615B;
+}
+
+.fa-solid, .pi{
+    color: #55ADEA;
+}
+span{
+    background-color: #deddd8;
+}
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.header{
+    border-bottom-left-radius: 100px;
+}
+@media screen and (min-width: 769px){
+    .header{
+        border-bottom-left-radius: none;
+    }
 }

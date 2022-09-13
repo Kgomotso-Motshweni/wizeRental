@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 export class HeaderComponent implements OnInit {
   Full_Name:any = '';
   token:any = '';
+  totalNumber: number = 0;
   constructor(private auth:AuthenticationService) { }
 
   ngOnInit(): void {
@@ -28,4 +29,5 @@ export class HeaderComponent implements OnInit {
     let first = value.toUpperCase();
     return first; 
   }
+  visibleSidebar2: boolean = false;
 }

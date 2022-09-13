@@ -13,10 +13,16 @@
 
             <button class="btn btn-ghost btn-circle">
                 <div class="indicator bell">
+                    <a (click)="visibleSidebar2 = true">
                       <i class="fa-regular fa-bell"></i>
-                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                    <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
+                    </a>
                 </div>
-            </button>
+            </button>    
         </div>
     </div>
 </div>
+<p-sidebar [(visible)]="visibleSidebar2" position="right" style="background-color: black;">
+    <h1>Notifications from Tenants</h1>
+    <app-nortification></app-nortification>
+</p-sidebar>

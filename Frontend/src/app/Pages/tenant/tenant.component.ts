@@ -13,10 +13,13 @@ export class TenantComponent implements OnInit {
   
   Full_Name:any = '';
   token:any = '';
-
+  userid:any = ''
+  image:any = ''
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.Full_Name = this.substring(this.token.regData[0].firstname) +'  '+ this.substring(this.token.regData[0].lastname);
+    this.image = this.token.regData[0].imageurl;
+    this.userid = this.token.regData[0].userid
   }
 
   Logout(){
