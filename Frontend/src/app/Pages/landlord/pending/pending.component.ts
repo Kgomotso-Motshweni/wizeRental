@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PendingComponent implements OnInit {
 
+
+  pendingCount = [1,2,3];
+  pendingStatus = false;
+
   constructor() { }
 
+
   ngOnInit(): void {
+
+    if(this.pendingCount.length!=0)
+    {
+        this.pendingStatus = true
+    }
+
   }
 
 }

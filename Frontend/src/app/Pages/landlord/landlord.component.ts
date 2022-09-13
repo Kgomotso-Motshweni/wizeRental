@@ -16,6 +16,7 @@ export class LandlordComponent implements OnInit {
   Full_Name:any = '';
   token:any = '';
 
+  
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
