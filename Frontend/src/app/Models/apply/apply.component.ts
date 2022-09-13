@@ -28,6 +28,7 @@ export class ApplyComponent implements OnInit {
     petNum: new FormControl(''),
     petDesc: new FormControl(''),
     smoke: new FormControl(''),
+    profile: new FormControl(''),
    
   });
 
@@ -58,6 +59,7 @@ export class ApplyComponent implements OnInit {
         petNum: ['', ],
         petDesc: ['', ],
         smoke: ['', ],
+        profile: ['', ],
        
   
       },
