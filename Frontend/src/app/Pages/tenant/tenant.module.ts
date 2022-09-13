@@ -27,7 +27,7 @@ const routes: Routes = [
   {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
-    {path:'profile', component: ProfileComponent},
+    {path:'profile/:userid', component: ProfileComponent},
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
   ]},

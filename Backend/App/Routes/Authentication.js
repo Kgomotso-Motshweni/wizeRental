@@ -6,6 +6,6 @@ const middleware = require("../Middlewares/userauth");
 
 router.post('/register/:user_role',auth.register);
 router.post('/login',auth.login);
-router.get('/profile',auth.userProfile);
+router.get('/profile/:userid', auth.userProfile);
 router.patch('/update/:userid', auth.profileUpdate)
 module.exports = router;

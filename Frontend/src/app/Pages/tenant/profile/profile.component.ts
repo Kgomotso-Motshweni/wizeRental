@@ -6,6 +6,7 @@ import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Userinfor } from 'src/app/Interfaces/userinfor';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -19,24 +20,18 @@ export class ProfileComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-  Form = new FormGroup({
-    fname: new FormControl(''),
-    lname: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    profile: new FormControl(''),
-  });
-  
   submitted = false; //bpplean
   userToken: any;
   role: any;
   myData: any = {};
   userdata: any = {}
   fullname: any;
-  userinfor: any = {};
+  userData: any = {};
   OneUserInfor: any = {};
   decodedToken: any = {};
   tenantInfor: Userinfor = new Userinfor;
+  file: any = '';
+  message: any;
 
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
@@ -45,7 +40,9 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.getProfile()
+    
+    let id = this.activeRoute.snapshot.params[('userid')]
+    this.getProfile(id)
   }
 
   keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
@@ -59,18 +56,25 @@ export class ProfileComponent implements OnInit {
       return false;
     }
   }
+  getProfile(userid:any){
+    const userToken = localStorage.getItem('access_token');
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
+    };
+    this.auth.getProfile(httpOptions, userid).subscribe({
+      next:data =>{
+        this.userData = data
+        this.Updateuser( this.userData[0])
+      }
+    })
+  }
 
+  Updateuser(tenantInfor: Userinfor){
+    this.tenantInfor = {...tenantInfor};
+  }
 
-
-  // editProduct(tenantInfor: Userinfor) {
-  //   this.tenantInfor = {...tenantInfor};
-  // }
-
-  getProfile(){
-    let token:any = localStorage.getItem("access_token");
-    this.userinfor = this.auth.getDecodedAccessToken(token).regData[0];
-    this.tenantInfor = {...this.userinfor};
-    console.log(this.tenantInfor)
+  selectThisImage(myEvent: any) {
+    this.file = myEvent.target.files[0]; 
   }
 
   onSubmit():void{
@@ -80,11 +84,23 @@ export class ProfileComponent implements OnInit {
     let user = {
       firstname:this.tenantInfor.firstname, 
       lastname:this.tenantInfor.lastname,
-      cellno:this.tenantInfor.cellno
+      cellno:this.tenantInfor.cellno,
     }
+
     this.auth.updateProfile(user, id).subscribe({
       next:data => {
-        console.log(data)
+        this.message = data
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
+        this.router.onSameUrlNavigation = 'reload'; 
+        this.messageService.add({
+          key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
+        });
+      },
+      error: err => {
+        this.loading = false;
+        this.messageService.add({
+          key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
+        });  
       }
     })
   }

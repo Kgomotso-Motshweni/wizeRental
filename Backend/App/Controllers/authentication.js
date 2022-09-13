@@ -6,7 +6,7 @@ const SECRET_KEY = randomize.generate(20)
 
 const register = async (req, res) => {
     const user_role = req.params.user_role;
-    const{ firstname, lastname, email, cellno, password} = req.body
+    const{ firstname, lastname, email, cellno, password, imageUrl} = req.body
     try{
         // check :userType paramater. only accept /Landlord or /Tenant
         if (!(user_role == 'Landlord' || user_role == 'Tenant')) {
@@ -29,13 +29,13 @@ const register = async (req, res) => {
                         message: "Unable to hash password"
                     });
                 }
-                const regData = {user_role, firstname, lastname, email, cellno, password: hash};
+                const regData = {user_role, firstname, lastname, email, cellno, password: hash, imageUrl};
                 var flag = 1;
 
                 //Inserting data to Database  
                 client.query(
-                    `INSERT INTO users (user_role, firstname, lastname, email, cellno, password) VALUES ($1,$2,$3,$4,$5,$6)`, 
-                    [regData.user_role, regData.firstname, regData.lastname, regData.email, regData.cellno, regData.password], (err) => {
+                    `INSERT INTO users (user_role, firstname, lastname, email, cellno, password, imageUrl) VALUES ($1,$2,$3,$4,$5,$6, $7) RETURNING userid`, 
+                    [regData.user_role, regData.firstname, regData.lastname, regData.email, regData.cellno, regData.password, regData.imageUrl], (err) => {
                         if (err) {
                             flag  =  0; //If user is not inserted to database assign flag as 0/false.
                             return  res.status(500).json({
@@ -121,14 +121,15 @@ const login =  async (req, res) => {
 
 //Create function to get all userprofiles
 const userProfile = async (req, res, next) => {
+    const id = req.params.userid;
     try{  
-        await client.query(`SELECT * FROM users`, (error, results) => {
+        await client.query(`SELECT * FROM users WHERE userid=$1`,[id], (error, results) => {
             if(error){ 
-                return next(error)
+                return res.status(400).json({
+                    message: "Unable to get sigle user details"
+                }) //Throw the error in the t
             }
-           
-            return res.status(200).json(
-                results.rows) //Return a status 200 if there is no error
+            return res.status(200).json(results.rows) //Return a status 200 if there is no error
         })
       
     }
@@ -151,7 +152,7 @@ const profileUpdate = async(req, res) => {
                         message: "Unable to update user details"
                     }) //Throw the error in the terminal
                 }
-                res.status(200).json(results.rows) //Return a status 200 if there is no error
+                return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
             })
     }
     catch (err) {

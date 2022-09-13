@@ -1,63 +1,61 @@
 <p-toast position="top-right" key="tc"></p-toast>
 
-<section class="profile">
+<section class="gradient-custom" style="margin-top:10%">
     <div class="md:container md:mx-auto">
         <div class="flex justify-center">
-            <div class="md:card w-content bg-base-100 ">
-                <div class="card-body rounded-md">
-                    <div class="profile_pic rounded-full">
-                        <img src="https://placeimg.com/80/80/people" class="profile_pic rounded-circle align-self-center mr-2" width="300" height="600" />
+            <div class="grid gap-6 md:grid-cols-2 card bg-base-100">
+                <div class="md:card w-content h-56 bg-base-100 shadow-xl border rounded-none">
+                    <div class="card-body rounded-md flex justify-center">
+                        <div class="flex card-profile-image justify-center">
+                            <img src="{{tenantInfor.imageurl}}" class="rounded-circle w-36">
+                        </div>
+                        <div class="body">
+                            <p>{{tenantInfor.firstname}}  {{tenantInfor.lastname}}</p>
+                            <div class="divider"></div>
+                        </div>
+                      
                     </div>
-                    
-                    <div class="divider"></div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="gradient-custom" style="margin-top:-2%;">
-    <div class="md:container md:mx-auto">
-        <div class="flex justify-center">
-            <div class="md:card w-96 bg-base-100 shadow-xl">
-                <div class="card-body rounded-md">
-                    <div class="justify-start">
-                        <h1>PROFILE</h1>
-                    </div>
-
-                        <div class="form-group">
-                            <label class="label"><span class="label-text">First Name</span></label>
-                            <input (keypress)="keyPressAlphanumeric($event)" type="text" placeholder="First Name"
-                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.firstname" />
-                            <small class="invalid-feedback" *ngIf="submitted && !userinfor.firstname">First Name is required.</small>
+                <div class="md:card w-96 md:w-full bg-base-100 shadow-xl border">
+                    <div class="card-body rounded-md">
+                        <div class="justify-start">
+                            <h1>PROFILE</h1>
                         </div>
-                    
-                        <div class="form-group">
-                            <label class="label"><span class="label-text">Last Name</span></label>
-                            <input (keypress)="keyPressAlphanumeric($event)" type="text" placeholder="Last Name"
-                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.lastname" />
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="form-group">
+                                <label class="label"><span class="label-text">First Name</span></label>
+                                <input (keypress)="keyPressAlphanumeric($event)" type="text" placeholder="First Name"
+                                    class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="tenantInfor.firstname" />
+                                <small class="invalid-feedback" *ngIf="submitted && !tenantInfor.firstname">First Name is required.</small>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label class="label"><span class="label-text">Last Name</span></label>
+                                <input (keypress)="keyPressAlphanumeric($event)" type="text" placeholder="Last Name"
+                                    class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="tenantInfor.lastname" />
+                
+                            </div>
+                        </div>
             
-                        </div>
-        
                         <div class="form-group">
                             <label class="label"><span class="label-text">Email</span></label>
-                            <input type="email" placeholder="info@site.com"
-                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.email"/>
+                            <input disabled type="email" placeholder="info@site.com"
+                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="tenantInfor.email"/>
             
                         </div>
-        
+            
                         <div class="form-group">
                             <label class="label"><span class="label-text">Phone Number</span></label>
                             <input type="text"  placeholder="111-111-1111"
-                                class="input shadow-m input-bordered w-full max-w-s email " [(ngModel)]="userinfor.cellno" />
+                                class="input shadow-m input-bordered w-full max-w-s email" [(ngModel)]="tenantInfor.cellno" />
                         </div>
 
-                        <!-- <div class="form-group">   
+                        <div class="form-group">   
                             <label class="label"><span class="label-text">Profile Picture</span></label>
-                            <input class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Profile Picture">
+                            <input (change)="selectThisImage($event)" class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Profile Picture">
                         
-                        </div> -->
-                        
+                        </div>
+                            
                         <div class="form-group mt-4 flex" >
                             <div class="buttons" >
                                 <button type="submit" (click)="onSubmit()" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Save</button>
@@ -66,7 +64,8 @@
                                 <button routerLink="/tenant/" class="group relative ml-4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-secondary">Cancel</button>
                             </div>
                         </div>
-                
+                    
+                    </div>
                 </div>
             </div>
         </div>

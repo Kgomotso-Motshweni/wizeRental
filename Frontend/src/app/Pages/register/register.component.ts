@@ -101,13 +101,20 @@ export class RegisterComponent implements OnInit {
       return
     }
     let user_role = this.Form.value.usertype;
+    if(user_role == 'Tenant'){
+
+    }else if(user_role == 'Tenant'){
+     
+    }
     let user = {
       firstname: this.Form.value.fname,
       lastname: this.Form.value.lname,
       email: this.Form.value.email,
       cellno: this.Form.value.phone,
-      password: this.Form.value.password
+      password: this.Form.value.password,
+      imageUrl: "https://gitlab.thedigitalacademy.co.za/caiphus/brainhackers/-/raw/master/angular/src/assets/profile_pic.png"
     }
+    console.log(user)
 
     this.auth.register(user, user_role).subscribe({
       next:data => {
@@ -131,13 +138,13 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-  popUp() : void {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ?',
-      header: 'terms and condition',
-      icon: 'pi pi-exclamation-triangle',
-    })
-  }
+  // popUp() : void {
+  //   this.confirmationService.confirm({
+  //     message: 'Are you sure you want to delete ?',
+  //     header: 'terms and condition',
+  //     icon: 'pi pi-exclamation-triangle',
+  //   })
+  // }
   check:boolean = false;
 
   checkit(){

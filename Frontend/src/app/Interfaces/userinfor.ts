@@ -5,6 +5,7 @@ export class Userinfor {
     lastname? :String;
     email?: String;
     cellno?:String;
+    imageurl?:Text;
     updated_at?:Date;
     created_at?:Date;
 }
