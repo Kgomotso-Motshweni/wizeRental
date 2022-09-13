@@ -1,8 +1,10 @@
 const client = require("../Config/db.config");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
-const randomize = require("rand-token")
-const SECRET_KEY = randomize.generate(20) 
+const jwt = require("jsonwebtoken");
+const randomize = require("rand-token");
+const SECRET_KEY = randomize.generate(20);
+const cloudinary = require("../Cloudinary/cloudinary");
+const multer = require("../Cloudinary/multer");
 
 const register = async (req, res) => {
     const user_role = req.params.user_role;
@@ -140,20 +142,21 @@ const userProfile = async (req, res, next) => {
     };
 }
 
-
 const profileUpdate = async(req, res) => {
-    const id = req.params.userid;
-    const{ firstname, lastname, cellno, } = req.body
     try{
-        client.query(`UPDATE users SET firstname = $1, lastname = $2, cellno= $3, updated_at= now()  WHERE userid=$4`,
-            [firstname, lastname, cellno, id], (error, results)=>{ //Add new employee
+    const id = req.params.userid;
+    const image = await cloudinary.uploader.upload(req.file.path)
+    const{ firstname, lastname, cellno } = req.body
+        client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
+            [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ 
                 if(error){ //checks for errors and return them 
                     return res.status(400).json({
                         message: "Unable to update user details"
                     }) //Throw the error in the terminal
                 }
                 return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
-            })
+            }
+        );
     }
     catch (err) {
         res.status(500).json({
@@ -161,10 +164,50 @@ const profileUpdate = async(req, res) => {
         });
     };
 }
+
+const fileUpload = async(req, res) => {
+    try{
+        const results = await cloudinary.uploader.upload(req.file.path)
+        res.json(results)
+
+    }catch (err){
+        console.log(err)
+    }
+}
 module.exports = {
     SECRET_KEY,
     register,
     login,
     userProfile,
-    profileUpdate
+    profileUpdate,
+    fileUpload
 }
+
+
+/*
+
+const profileUpdate = async(req, res) => {
+    try{
+        const id = req.params.userid;
+        const{ firstname, lastname, cellno, } = req.body
+        const image = await cloudinary.uploader.upload(req.file.path)
+
+        client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
+            [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ //Add new employee
+                if(error){ //checks for errors and return them 
+                    return res.status(400).json({
+                        message: "Unable to update user details"
+                    }) //Throw the error in the terminal
+                }
+                return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
+            }
+        )
+    }
+    catch (err) {
+        res.status(500).json({
+           error: "Database error while retrieving products", 
+        });
+    };
+}
+
+*/

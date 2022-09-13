@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
   }
 
   selectThisImage(myEvent: any) {
-    this.file = myEvent.target.files[0]; 
+    this.file = myEvent.target.files; 
   }
 
   onSubmit():void{
@@ -82,9 +82,11 @@ export class ProfileComponent implements OnInit {
 
     let id = this.tenantInfor.userid;
     let user = {
-      firstname:this.tenantInfor.firstname, 
-      lastname:this.tenantInfor.lastname,
-      cellno:this.tenantInfor.cellno,
+      // firstname:this.tenantInfor.firstname, 
+      // lastname:this.tenantInfor.lastname,
+      // cellno:this.tenantInfor.cellno,
+      imageUrl:this.file
+    //   imageUrl:"https://res.cloudinary.com/excellentmashengete/image/upload/v1663067072/aezh4gkpqpm1girqbnnv.png",
     }
 
     this.auth.updateProfile(user, id).subscribe({
