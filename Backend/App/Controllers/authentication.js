@@ -165,22 +165,12 @@ const profileUpdate = async(req, res) => {
     };
 }
 
-const fileUpload = async(req, res) => {
-    try{
-        const results = await cloudinary.uploader.upload(req.file.path)
-        res.json(results)
-
-    }catch (err){
-        console.log(err)
-    }
-}
 module.exports = {
     SECRET_KEY,
     register,
     login,
     userProfile,
-    profileUpdate,
-    fileUpload
+    profileUpdate
 }
 
 
