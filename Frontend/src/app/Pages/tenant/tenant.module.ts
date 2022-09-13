@@ -24,7 +24,7 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
+  {path:'tenant', component: TenantComponent,
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
