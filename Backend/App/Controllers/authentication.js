@@ -4,10 +4,10 @@ const jwt = require("jsonwebtoken");
 const randomize = require("rand-token");
 const SECRET_KEY = randomize.generate(20);
 const cloudinary = require("../Cloudinary/cloudinary");
-const multer = require("../Cloudinary/multer");
+
 
 const register = async (req, res) => {
-    const user_role = req.params.user_role;
+    const user_role = parseInt(req.params.user_role);
     const{ firstname, lastname, email, cellno, password, imageUrl} = req.body
     try{
         // check :userType paramater. only accept /Landlord or /Tenant
@@ -123,7 +123,7 @@ const login =  async (req, res) => {
 
 //Create function to get all userprofiles
 const userProfile = async (req, res, next) => {
-    const id = req.params.userid;
+    const id = parseInt(req.params.userid);
     try{  
         await client.query(`SELECT * FROM users WHERE userid=$1`,[id], (error, results) => {
             if(error){ 
@@ -144,7 +144,7 @@ const userProfile = async (req, res, next) => {
 
 const profileUpdate = async(req, res) => {
     try{
-    const id = req.params.userid;
+    const id = parseInt(req.params.userid);
     const image = await cloudinary.uploader.upload(req.file.path)
     const{ firstname, lastname, cellno } = req.body
         client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
