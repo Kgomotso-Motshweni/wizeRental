@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {FormControl, FormGroup } from '@angular/forms';
 import { LandingService } from 'src/app/Services/landing.service';
+import { TenantService } from 'src/app/Services/tenant.service';
 
 @Component({
   selector: 'app-landing',
@@ -13,9 +13,12 @@ export class LandingComponent implements OnInit {
  property:any;
 
  form!: FormGroup;
-  constructor(private serv:LandingService, private router: Router, private route: ActivatedRoute, private formbuilder: FormBuilder) { }
+
+//  private serv:LandingService
+  constructor(private service:LandingService) { }
 
   ngOnInit(): void {
+    
     this.form= new FormGroup({
       accName: new FormControl(''),
       bathrooms: new FormControl(''),
@@ -23,13 +26,13 @@ export class LandingComponent implements OnInit {
       rooms: new FormControl(''),
     });
 
-    this.serv.getProperties().subscribe(
-      {
-        next: (data: any) => {
-          console.log(data);
-          this.property = data;
-        }
-      })
+    // this.serv.getProperties().subscribe(
+    //   {
+    //     next: (data: any) => {
+    //       console.log(data);
+    //       this.property = data;
+    //     }
+    //   })
 
 
 
@@ -37,17 +40,17 @@ export class LandingComponent implements OnInit {
 
   // get details of the room
 
-  getProperty(numP: any) {
+  // getProperty(numP: any) {
 
-    console.log(this.property[numP].id)
-    this.serv.getProperty(this.property[numP].id).subscribe(
-      (added: any) => {
-        console.log(added[0]);
+  //   console.log(this.property[numP].id)
+  //   this.serv.getProperty(this.property[numP].id).subscribe(
+  //     (added: any) => {
+  //       console.log(added[0]);
         
-      }
-    );
+  //     }
+  //   );
 
-  }
+  // }
 
 
 }
