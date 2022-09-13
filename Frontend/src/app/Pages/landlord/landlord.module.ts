@@ -29,12 +29,14 @@ import { CardModule, } from 'primeng/card';
 import { PaginatorModule } from 'primeng/paginator';
 
 
+
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,
   children:[
     {path:'dashbord', component: DashboardComponent},
     {path:'tenants', component: TenantsComponent},
     {path:'addproperty', component: AddpropertyComponent},
+  
     {path: 'pending', component: PendingComponent},
     {path:'', redirectTo:'/landlord/dashbord', pathMatch:'full'},
   ]},

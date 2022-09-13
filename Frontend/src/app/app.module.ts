@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { LandlordModule } from './Pages/landlord/landlord.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,

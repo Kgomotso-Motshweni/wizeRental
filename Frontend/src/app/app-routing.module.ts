@@ -19,7 +19,6 @@ const routes: Routes = [
   {path:'landlord',component:LandlordComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];
 
