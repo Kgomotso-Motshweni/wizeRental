@@ -35,7 +35,7 @@ export class AuthenticationService {
 
   //Update user information
   updateProfile(user:any, id:any){
-    return this.http.put(`${this.baseUrl}update/${id}`, user, httpOptions)
+    return this.http.patch(`${this.baseUrl}update/${id}`, user, httpOptions)
   }
   
   //create a login request 

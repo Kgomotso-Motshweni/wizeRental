@@ -21,17 +21,11 @@ export class ProfileComponent implements OnInit {
   public loading = false;
 
   submitted = false; //bpplean
-  userToken: any;
-  role: any;
-  myData: any = {};
-  userdata: any = {}
-  fullname: any;
   userData: any = {};
-  OneUserInfor: any = {};
-  decodedToken: any = {};
   tenantInfor: Userinfor = new Userinfor;
-  file: any = '';
+  imageSrc: string = '';
   message: any;
+  file: any;
 
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
@@ -73,8 +67,8 @@ export class ProfileComponent implements OnInit {
     this.tenantInfor = {...tenantInfor};
   }
 
-  selectThisImage(myEvent: any) {
-    this.file = myEvent.target.files; 
+  onFileChange(myEvent: any) {
+    this.imageSrc = myEvent.target.files[0].name; 
   }
 
   onSubmit():void{
@@ -82,12 +76,13 @@ export class ProfileComponent implements OnInit {
 
     let id = this.tenantInfor.userid;
     let user = {
-      // firstname:this.tenantInfor.firstname, 
-      // lastname:this.tenantInfor.lastname,
-      // cellno:this.tenantInfor.cellno,
-      imageUrl:this.file
-    //   imageUrl:"https://res.cloudinary.com/excellentmashengete/image/upload/v1663067072/aezh4gkpqpm1girqbnnv.png",
-    }
+      firstname:this.tenantInfor.firstname, 
+      lastname:this.tenantInfor.lastname,
+      cellno:this.tenantInfor.cellno,
+      imageUrl:this.imageSrc
+      // imageUrl:this.file
+   }
+   console.log(user)
 
     this.auth.updateProfile(user, id).subscribe({
       next:data => {
