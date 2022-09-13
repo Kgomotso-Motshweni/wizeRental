@@ -1,18 +1,26 @@
 import {NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AppRoutingModule } from './app-routing.module';
+import { LandlordModule } from './Pages/landlord/landlord.module';
+import { TenantModule } from './Pages/tenant/tenant.module';
 
+//Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { LandlordModule } from './Pages/landlord/landlord.module';
 
+//Primeng Imports
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -22,17 +30,31 @@ import { LandlordModule } from './Pages/landlord/landlord.module';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-   
   ],
   imports: [
-    CommonModule,
+    LandlordModule,
+    TenantModule,
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule, 
     HttpClientModule,
-    LandlordModule,
+    ToastModule,
+    DialogModule,
+    ButtonModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.5)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff',
+      fullScreenBackdrop: false,
+    }),
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

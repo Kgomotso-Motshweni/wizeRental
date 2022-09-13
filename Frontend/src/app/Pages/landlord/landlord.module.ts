@@ -1,18 +1,27 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddpropertyComponent } from './addproperty/addproperty.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TenantsComponent } from '../landlord/tenants/tenants.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LandlordComponent } from './landlord.component';
-import { PendingComponent } from './pending/pending.component';
+
+
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+//Model for search and pagination
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
+//Components
+import { LandlordComponent } from './landlord.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PendingComponent } from './pending/pending.component';
+import { TenantsComponent } from './tenants/tenants.component';
+import { AddPropertyComponent } from './add-property/add-property.component';
+import { HeaderComponent } from './header/header.component';
+
+//Guards
+import { AuthGuard } from 'src/app/Guards/auth.guard';
 //Primeng Imports
 //primeNG 
+import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
@@ -26,58 +35,67 @@ import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
+import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
-
+import { NortificationComponent } from './nortification/nortification.component';
 
 
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent,
+  {path:'landlord', component: LandlordComponent,  canActivate:[AuthGuard],
   children:[
-    {path:'dashbord', component: DashboardComponent},
-    {path:'tenants', component: TenantsComponent},
-    {path:'addproperty', component: AddpropertyComponent},
-  
-    {path: 'pending', component: PendingComponent},
-    {path:'', redirectTo:'/landlord/dashbord', pathMatch:'full'},
+    {path:'', component: DashboardComponent},
+    {path:'tenant', component: TenantsComponent},
+    {path:'addproperty', component: AddPropertyComponent},
+    {path:'pending', component:PendingComponent},
+    {path:'', redirectTo:'/landlord/', pathMatch:'full'},
+
   ]},
 ]
 
 @NgModule({
-  
   declarations: [
-    AddpropertyComponent,
     DashboardComponent,
+    AddPropertyComponent,
     TenantsComponent,
+    LandlordComponent,
     PendingComponent,
-    LandlordComponent
-  ],
-  schemas:[
-    CUSTOM_ELEMENTS_SCHEMA
+    HeaderComponent,
+    NortificationComponent
   ],
   imports: [
-    BrowserAnimationsModule,
-    CardModule,
+    Ng2SearchPipeModule,
+    //loader
+     NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.5)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff',
+      fullScreenBackdrop: false,
+    }),
+    
     FormsModule,
     InputMaskModule,
+    SidebarModule,
     ReactiveFormsModule,
     InputNumberModule,
     CommonModule,
+    TableModule,
     CardModule,
     ToastModule,
     PaginatorModule,
-    DialogModule,
-    DropdownModule,
-    ButtonModule,
+		DialogModule,
+		DropdownModule,
+		ButtonModule,
     ProgressBarModule,
     InputTextModule,
     ConfirmDialogModule,
     MessagesModule,
-    Ng2SearchPipeModule,
 
     RouterModule.forChild(routes)
   ],
   providers: [ MessageService, ConfirmationService],
+
 })
-
-
 export class LandlordModule { }

@@ -1,44 +1,26 @@
-<div class="drawer drawer-mobile">
+<div class="drawer drawer-mobile " >
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
-    <div class="drawer-content flex flex-col" style="background-color:rgb(255, 255, 255);">
-      
+    <div class="drawer-content flex flex-col" style="background-color:whitesmoke;">
+        <!-- Navbar-->
+        <app-header></app-header>
         
-        <div class="navbar w-full fixed top-0 z-50">
-            <div class="flex-none lg:hidden " >
-                <div class="flex navb">
-                    <div>
-                        <label for="my-drawer-3" class="btn btn-square btn-ghost">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        </label>
-                    </div>
-                    <div class="appName"> 
-                       
-                    </div>
-                </div>
-            </div> 
-        </div>
-
-        
-
-
+        <!-- Page content here -->
+        <div class="body">
             <router-outlet></router-outlet>
- 
-  
-    </div>
-    <div class="drawer-side" >
+        </div>
+        
+    </div> 
+    <div class="drawer-side " >
         <label for="my-drawer-3" class="drawer-overlay"></label> 
-        <ul  class="menu p-4 overflow-y-auto w-80" >
+        <ul  class="menu p-4 overflow-y-auto w-80 primary">
             <!-- Sidebar content here  style="background-color: #053C5E" -->
-            <img id="logo" class="img" src="../../../assets/images/landlordLogo.png">
+            <img id="logo" src="../../../assets/images/landlordLogo.png">
             
-            <div class="user ml-4">
-            </div>
-            <div class="divider" ></div> 
-            <li><i class="pi pi-home"><a routerLink="/landlord/dashbord">Dashboard</a></i></li>
-            <li><i class="pi pi-users"><a routerLink="/landlord/tenants">Tenants</a></i></li>
-            <li><i class="pi pi-check" ><a routerLink="/landlord/addproperty">Add Property</a></i></li>
-            <li><i class="pi pi-times"><a routerLink="/landlord/pending" >Pending</a></i></li>
-            <li><i class="pi pi-sign-out"><a >Logout</a></i></li>
+            <li><i class="pi pi-home"><a routerLink='/landlord/'>Dashboard</a></i></li>
+            <li><i class="pi pi-users"><a routerLink='/landlord/tenant'>Tenants</a></i></li>
+            <li><i class="pi pi-check" ><a routerLink='/landlord/addproperty'>Add Property</a></i></li>
+            <li><i class="pi pi-times"><a routerLink='/landlord/pending'>Pending</a></i></li>
+            <li><i class="pi pi-power-off"><a (click)="Logout()" >Logout</a></i></li>
         </ul>    
     </div>
 </div>
@@ -46,5 +28,8 @@
 
 
 
+<<<<<<< HEAD
 
   
+=======
+>>>>>>> 7e0dd24b84ad416ce26dd3f07bb7d1ea7bbde51c

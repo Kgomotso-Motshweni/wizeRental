@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="navbar bg-base-100 top-0 z-50">
+        <div class="flex-1">
+            <label for="my-drawer-3"  class="btn btn-ghost btn-circle">
+                <i class="pi pi-align-left" style="font-size: 1rem"></i>
+            </label>
+        </div>
+
+        <div class="flex-none ">
+            <div class="user">
+                <p>Hi {{Full_Name}}</p>
+            </div>
+
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator bell">
+                    <a (click)="visibleSidebar2 = true">
+                      <i class="fa-regular fa-bell"></i>
+                    <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
+                    </a>
+                </div>
+            </button>    
+        </div>
+    </div>
+</div>
+<p-sidebar [(visible)]="visibleSidebar2" position="right" style="background-color: black;">
+    <h1>Notifications from Tenants</h1>
+    <app-nortification></app-nortification>
+</p-sidebar>

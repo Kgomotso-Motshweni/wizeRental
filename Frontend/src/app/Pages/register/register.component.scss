@@ -1,0 +1,40 @@
+.invalid-feedback{
+    color: red;
+}
+.is-invalid{
+    border-color: red;
+}
+
+.email, .password{
+    padding-left: 25px;
+}
+
+//Desktop
+
+.reg{
+    color: #ff0000;
+}
+
+select, input{
+    color: #66615B;
+}
+
+.fa-solid, .pi{
+    color: #55ADEA;
+}
+span{
+    background-color: #deddd8;
+}
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.header{
+    border-bottom-left-radius: 100px;
+}
+@media screen and (min-width: 769px){
+    .header{
+        border-bottom-left-radius: none;
+    }
+}

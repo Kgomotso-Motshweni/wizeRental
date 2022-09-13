@@ -1,1 +1,79 @@
-<p>login works!</p>
+<p-toast position="top-right" key="tc"></p-toast>
+<section class="gradient-custom">
+    <div class="md:container">
+        <div class="grid gap-6 md:grid-cols-2 card bg-base-100">
+            <div class="md:card text-center header w-full bg-primary ">
+                <div class="card-body rounded-md">
+                    <div class="text-center ">
+                        <img class="image md:w-96 md:h-80 w-40 h-24" src="../../../assets/images/landlordLogo.png">
+                        <h1 class="text-white md:text-2xl text-xs mt-2 mb-3">Login</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="grid card w-content bg-base-100 shadow-xl">
+                <div class="card-body"> 
+                    <div class="md:card w-content shadow-xl rounded-lg">
+                        <div class="card-body rounded-md">
+                            <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                                <div class="form-group mb-6">
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="email" formControlName="email" placeholder="Email"
+                                            class="input bg-gray-50 input-bordered w-full email "
+                                            [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                        <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                                    </div>         
+                                </div>
+
+                                <div class="form-group mb-6"> 
+                                    <label class="input-group">
+                                        <span><i class="fa-solid fa-key"></i></span>
+                                        <input type="password" formControlName="password" placeholder="Password"
+                                            class="input bg-gray-50 input-bordered w-full password"
+                                            [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
+                                    </label>
+                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                        <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character
+                                        </div>
+                                        <div *ngIf="f['password'].errors['maxlength']">Password must not exceed 40 character
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-6">    
+                                    <input id="check" type="checkbox" class="w-4 h-4 bg-gray-50 input input-bordered rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
+                                    <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Remember Me</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Login</button>
+                                </div>
+                            </form>
+
+                            <div class="form-group mt-4">
+                                <P class = "Already">
+                                    Not yet registered
+                                    <a routerLink="/register"  class="reg" >register</a>
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ngx-loading
+        [show]="loading"
+        [config]="{
+          animationType: ngxLoadingAnimationTypes.circleSwish,
+          primaryColour: '#ffffff', secondaryColour: '#ffffff',
+          backdropBorderRadius: '3px'
+        }">
+        </ngx-loading>
+
+    </div>
+</section> 
+
