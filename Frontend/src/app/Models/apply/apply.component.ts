@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ApplyComponent implements OnInit {
 
+
+
  
 
   Form = new FormGroup({
@@ -28,7 +30,7 @@ export class ApplyComponent implements OnInit {
    
   });
 
-  dob: Date = new Date();
+   dob: Date = new Date();
 
   submitted = false;
   isSuccessful = false;

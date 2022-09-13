@@ -6,6 +6,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +20,9 @@ import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { ApplyComponent } from './Models/apply/apply.component';
 import { MessageService } from 'primeng/api';
-import { UploadComponent } from './Models/upload/upload.component';
+
+
+
 
 
 
@@ -30,7 +33,9 @@ import { UploadComponent } from './Models/upload/upload.component';
     EditorComponent,
     HomeComponent,
     ApplyComponent,
-    UploadComponent
+   
+   
+    
     
   ],
   imports: [
@@ -44,7 +49,8 @@ import { UploadComponent } from './Models/upload/upload.component';
     FileUploadModule,
     HttpClientModule,
     CalendarModule,
-    FormsModule 
+    FormsModule,
+    DropdownModule 
 
   ],
   providers: [MessageService],
