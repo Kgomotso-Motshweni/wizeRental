@@ -1,38 +1,74 @@
-<router-outlet></router-outlet>
-<br><br> <br>
-<h4>Pending Tenants</h4>
-<div class="grid  md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-2 gap-4 justify-center">
-
-
- <!---------------------when there are pending tenants-->   
-<div class="controll" *ngIf="!pendingCount">
-<div class="container" *ngFor="let item of [1,2]">
-    
-    <br>
-    <div class="card w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
-            <h2 class="card-title">Koketso Tinyane</h2>
-            <p>Koketsotinyane@gmail.com</p>
-            <p>view date: 1 Sep 2022</p>
-            <div class="card-actions justify-end">
-                <button class="btn-view">view</button>
-            </div>
-        </div>
-    </div>
+<div class="container " style="margin-top:5vh;"> 
+    <h4>Pending Tenants</h4>
 </div>
-</div>   
-</div>
-<!---------------------------end here------------------------------>
-<div class="controll" *ngIf="pendingCount">    
-        <br><br> <br>
-        <div class="card  card-compact bg-base-100 shadow-xl">
-            <div class="card-body">
-                <h2 class="card-title"></h2>
-                <p></p>
-                <p class="applicants">Once You Have New Applicant You <br> Will See Them Here <br> <br></p>
-                <div class="card-actions justify-end">
+
+<ng-container *ngIf="pending.length == 0">
+    <div class="container">
+        <div class="flex justify-center">
+            <div class="grid sm:grid-cols-1 ">
+                <div class="card empty w-full shadow-xl">
+                    <div class="card-body">
+                        <div>
+                            <h5>You have 0 Pending Tenants</h5>
+                            <h6>Once You Have New Applicant You  Will See Them Here</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
+</ng-container>
 
+<ng-container *ngIf="pending.length != 0">
+    <div class="container pending">
+        <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card  shadow-xl">
+                <div class="grid card-body user justify-start">
+                    <h2 class="card-title">Koketso Tinyane</h2>
+                    <p>Koketsotinyane@gmail.com</p>
+                    <p>Contacts: 082 145 6643</p>
+                    <p>View Date: 1 Sep 2022</p>
+                    
+                    <div class="grid form-group justify-start">
+                        <button type="button" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="grid card-body user justify-start">
+                    <h2 class="card-title">Koketso Tinyane</h2>
+                    <p>Koketsotinyane@gmail.com</p>
+                    <p>Contacts: 082 145 6643</p>
+                    <p>View Date: 1 Sep 2022</p>
+                    
+                    <div class="grid form-group justify-start">
+                        <button type="button" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card  shadow-xl">
+                <div class="grid card-body user justify-start">
+                    <h2 class="card-title">Koketso Tinyane</h2>
+                    <p>Koketsotinyane@gmail.com</p>
+                    <p>Contacts: 082 145 6643</p>
+                    <p>View Date: 1 Sep 2022</p>
+                    
+                    <div class="grid form-group justify-start">
+                        <button type="button" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container> 
+
+<ngx-loading
+[show]="loading"
+[config]="{
+  animationType: ngxLoadingAnimationTypes.circleSwish,
+  primaryColour: '#ffffff', secondaryColour: '#ffffff',
+  backdropBorderRadius: '3px'
+}">
+</ngx-loading>
