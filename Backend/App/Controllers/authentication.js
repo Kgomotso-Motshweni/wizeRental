@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const randomize = require("rand-token");
 const SECRET_KEY = randomize.generate(20);
 const cloudinary = require("../Cloudinary/cloudinary");
+const {fileUpload} = require('../Helpers/profileUpload');
 
 
 const register = async (req, res) => {
@@ -143,21 +144,30 @@ const userProfile = async (req, res, next) => {
 }
 
 const profileUpdate = async(req, res) => {
-    
-    const id = parseInt(req.params.userid);
-    const image = await cloudinary.uploader.upload(req.file.path)
-    const{ firstname, lastname, cellno, imageurl } = req.body
-    client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageurl=$4, updated_at= now()  WHERE userid=$5`,
-        [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ 
-            if(error)
-            { //checks for errors and return them 
-                return res.status(400).json({
-                    message: "Unable to update user details"
-                    }) //Throw the error in the terminal
+    try{
+        const id = parseInt(req.params.userid);
+
+        // const image = await cloudinary.uploader.upload(req.file.path)
+        const image = await fileUpload(req.file.path, "images",'image');
+
+        console.log(req.file.path)
+        const{ firstname, lastname, cellno, imageurl } = req.body
+        client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageurl=$4, updated_at= now()  WHERE userid=$5`,
+            [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ 
+                if(error)
+                { //checks for errors and return them 
+                    return res.status(400).json({
+                        message: "Unable to update user details"
+                        }) //Throw the error in the terminal
+                }
+                return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
             }
-            return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
-        }
-    );
+        );
+    }catch (err) {
+        res.status(500).json({
+           error: "Database error while retrieving products", 
+        });
+    };
 }
 
 module.exports = {

@@ -1,12 +1,13 @@
-const { cloudinary } = require('../Cloudinary/cloudinary');
+const cloudinary = require('../Cloudinary/cloudinary');
 const fs = require('fs');
 
-module.exports = uploadProfile = async (file_path, dest_folder) => {
+
+const fileUpload = async (file_path, dest_folder,resource_type) => {
     try {
         console.log(dest_folder);
         const uploadResponse = await cloudinary.uploader.upload(file_path, {
             folder: `${dest_folder}`,
-            resource_type: 'image'
+            resource_type: `${resource_type}`
         });
         const path=file_path;
         fs.unlinkSync(path);
@@ -16,4 +17,7 @@ module.exports = uploadProfile = async (file_path, dest_folder) => {
         console.log(error.message);
        throw error;
     }
+}
+module.exports = {
+    fileUpload
 }

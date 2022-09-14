@@ -7,13 +7,18 @@ require('./App/Config/dotenv.config')
 
 var corsOptions = {
     origin: ["*", "http://localhost:4200"],
+
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
+
   
     credentials: true
   };// only allow the listerning addresses to connnect to the backend
   
 app.use(express.json());  // to support JSON-encoded
 app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({

@@ -14,7 +14,7 @@ import { LandlordComponent } from './landlord.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PendingComponent } from './pending/pending.component';
 import { TenantsComponent } from './tenants/tenants.component';
-import { AddPropertyComponent } from './add-property/add-property.component';
+import { AddpropertyComponent } from './addproperty/addproperty.component';
 import { HeaderComponent } from './header/header.component';
 
 //Guards
@@ -38,14 +38,14 @@ import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
 import { NortificationComponent } from './nortification/nortification.component';
-
+import { MypropertyComponent } from './myproperty/myproperty.component';
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent, 
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
-    {path:'addproperty', component: AddPropertyComponent},
+    {path:'addproperty', component: AddpropertyComponent},
     {path:'pending', component:PendingComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
 
@@ -55,12 +55,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    AddPropertyComponent,
+    AddpropertyComponent,
     TenantsComponent,
     LandlordComponent,
     PendingComponent,
     HeaderComponent,
-    NortificationComponent
+    NortificationComponent,
+    MypropertyComponent
   ],
   imports: [
     Ng2SearchPipeModule,
