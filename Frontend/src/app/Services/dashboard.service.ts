@@ -20,4 +20,10 @@ export class DashboardService {
     return this.http.delete(`${this.baseurl}/deleteRentee/${id}`)
   }
 
+
+  paymentStatus(){
+    return this.http.get(`${this.baseurl}/getPayment`)
+
+  }
+  
 }

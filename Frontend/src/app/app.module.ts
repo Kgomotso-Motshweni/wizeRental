@@ -21,6 +21,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ButtonModule } from 'primeng/button';
     ToastModule,
     DialogModule,
     ButtonModule,
+    ToggleButtonModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
       backdropBackgroundColour: 'rgba(0,0,0,0.5)',
