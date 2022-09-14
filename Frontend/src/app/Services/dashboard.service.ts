@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,16 @@ import { Router } from '@angular/router';
 export class DashboardService {
   constructor(private http:HttpClient) { }
 
+  baseurl:string = "http://localhost:8080/users";
+
   rentees()
   {
-    return this.http.get('http://localhost:8080/users/getRentees')
+    return this.http.get(`${this.baseurl}/getRentees`)
+  }
+
+  deleteRentee(id:any)
+  {
+    return this.http.delete(`${this.baseurl}/deleteRentee/${id}`)
   }
 
 }

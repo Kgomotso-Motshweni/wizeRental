@@ -43,11 +43,12 @@ import { NortificationComponent } from './nortification/nortification.component'
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent, 
   children:[
-    {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
     {path:'addproperty', component: AddPropertyComponent},
     {path:'pending', component:PendingComponent},
-    {path:'', redirectTo:'/landlord/', pathMatch:'full'},
+    {path:'dash', component:DashboardComponent},
+    {path:'', redirectTo:'/landlord/dash', pathMatch:'full'},
+
 
   ]},
 ]
