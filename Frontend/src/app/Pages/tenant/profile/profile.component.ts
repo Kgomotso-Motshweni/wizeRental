@@ -22,10 +22,17 @@ export class ProfileComponent implements OnInit {
 
   submitted = false; //bpplean
   userData: any = {};
-  tenantInfor: Userinfor = new Userinfor;
-  imageSrc: string = '';
+  tenantInfor: any = {};
+  preview: string = '';
   message: any;
   file: any;
+
+  Form = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    cellno: new FormControl(''),
+    profile: new FormControl('')
+  });
 
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
@@ -34,15 +41,12 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    
     let id = this.activeRoute.snapshot.params[('userid')]
     this.getProfile(id)
   }
 
   keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
-
     var inp = String.fromCharCode(event.keyCode);
-
     if (/[a-zA-Z]/.test(inp)) {
       return true;
     } else {
@@ -50,6 +54,7 @@ export class ProfileComponent implements OnInit {
       return false;
     }
   }
+
   getProfile(userid:any){
     const userToken = localStorage.getItem('access_token');
     const httpOptions = {
@@ -57,48 +62,63 @@ export class ProfileComponent implements OnInit {
     };
     this.auth.getProfile(httpOptions, userid).subscribe({
       next:data =>{
-        this.userData = data
-        this.Updateuser( this.userData[0])
+        this.userData = data;
+        this.tenantInfor = this.userData[0];
       }
     })
   }
 
-  Updateuser(tenantInfor: Userinfor){
-    this.tenantInfor = {...tenantInfor};
-  }
+  
 
-  onFileChange(myEvent: any) {
-    this.imageSrc = myEvent.target.files[0].name; 
+  handleFileInput(event:any) {
+    const image = (event.target as any ).files[0];
+    this.Form.patchValue({avator: image})
+    console.log(this.Form.patchValue)
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.preview = event.target.result;
+    } 
+    reader.readAsDataURL(image);
   }
-
+  
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
+    
+    if(this.Form.invalid)
+    { 
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('images' ,this.Form.value.profile)
 
     let id = this.tenantInfor.userid;
+  
     let user = {
-      firstname:this.tenantInfor.firstname, 
-      lastname:this.tenantInfor.lastname,
-      cellno:this.tenantInfor.cellno,
-      imageUrl:this.imageSrc
-      // imageUrl:this.file
-   }
-   console.log(user)
+      firstname:this.Form.value.firstname, 
+      lastname:this.Form.value.lastname,
+      cellno:this.Form.value.cellno,
+      imageurl: formData
+     
+    }
+   console.log(this.Form.value)
 
-    this.auth.updateProfile(user, id).subscribe({
-      next:data => {
-        this.message = data
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
-        this.router.onSameUrlNavigation = 'reload'; 
-        this.messageService.add({
-          key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
-        });
-      },
-      error: err => {
-        this.loading = false;
-        this.messageService.add({
-          key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
-        });  
-      }
-    })
+  this.auth.updateProfile(user, id).subscribe({
+    next:data => {
+      this.message = data
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
+      this.router.onSameUrlNavigation = 'reload'; 
+      this.messageService.add({
+        key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
+      });
+    },
+    error: err => {
+      this.loading = false;
+      this.messageService.add({
+        key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
+      });  
+    }
+  })
   }
 }

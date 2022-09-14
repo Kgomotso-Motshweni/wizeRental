@@ -46,7 +46,7 @@ app.get("/", (req, res) =>{
 
 //Routes Calls
 const auth = require("./App/Routes/Authentication");
-const property = require('./App/Routes/Landlrd')
+const property = require('./App/Routes/Landlord')
 // const user =require('../Backend/App/Routes/rentees')
 
 app.use("/api", auth) //retrive authentication infor 
