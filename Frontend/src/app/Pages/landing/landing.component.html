@@ -1,9 +1,9 @@
 
 
-<!-- content -->
+<!------------------------------- content ---------------------------->
 
 <div class="card1 bg-base-100 shadow-xl col-12 ml-0 pt-5 justify-content-center"   style="width: 100%;">
-    <figure><img src="../../../assets/images/landing.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
+    <figure><img src="../../../assets/images/tierra-mallorca-rgJ1J8SDEAY-unsplash.jpg" class="img-fluid w-100" alt="Shoes"/></figure>
     <div class="card-body">
       <p>Wize rentals is here to find you a 
         accommodation in a region you want at the
@@ -11,8 +11,7 @@
     </div>
   </div>
 
-  
-<!-- search -->
+<!-------------------------------- search ------------------------------>
 <div class="container-fluid pt-5 ml-3 mr-3 col-sm-12 col-xl-2 col-md-6" >
    What do you need?
   <div class="buttons shadow-md col-md-12 justify-content-center pt-1">
@@ -24,101 +23,17 @@
   <br>
   <div class="search col-xl-12">
     <div class="form-control justify-content-flex" style="width: 70%;">
-        <!-- <i class="fas fa-search"></i> -->
-        
-        <input type="text" placeholder="&#xf0e0; Search address,city,location"  class="input input-bordered"/>
+        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered"/>
         
       </div>
       <div class="space1">
     </div>
     <label for="my-modal" class="btn modal-button btn-primary" style="width: 27%;">Filter by</label>
-      <!-- <button class="btn btn-outline btn-primary" style="width: 27%;" for="my-modal">Filter By</button> -->
   </div>
 </div>
 
 
-
-
-<!-- properties -->
-
-<!-- <div class="prop pr-1 col-sm-12 col-md-6 col-xl-4" > -->
- <div class="grid pl-2 pr-2 ml-0 mr-2 md:grid-cols-4 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-6 justify-center">
-       
-      <div class="card w-96 bg-base-100 shadow-xl pt-5 ml-0" routerLink="/view">
-        <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
-        <div class="card-body">
-            <h6>Shaka accomodation</h6>
-            <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
-            <div class="icons">
-           
-            <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
-            <div class="space">
-            </div>
-            <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
-        
-        </div>
-        </div>
-      </div>
- <br>
-
-
-    <div class="card w-96 bg-base-100 shadow-xl pt-5">
-      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
-      <div class="card-body">
-          <h6>Shaka accomodation</h6>
-          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
-          <div class="icons">
-         
-          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
-          <div class="space">
-          </div>
-          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
-      
-      </div>
-      </div>
-    </div>
-
-
-    <br>
-    <div class="card w-96 bg-base-100 shadow-xl pt-5">
-      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
-      <div class="card-body">
-          <h6>Shaka accomodation</h6>
-          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
-          <div class="icons">
-         
-          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
-          <div class="space">
-          </div>
-          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
-      
-      </div>
-      </div>
-    </div>
-    <br>
-
-    <div class="card w-96 bg-base-100 shadow-xl pt-5">
-      <figure><img src="../../../assets/images/image.jpeg" alt="Shoes" /></figure>
-      <div class="card-body">
-          <h6>Shaka accomodation</h6>
-          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
-          <div class="icons">
-         
-          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
-          <div class="space">
-          </div>
-          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
-      
-      </div>
-      </div>
-    </div>
-</div>
-
-
-<!-- The button to open modal -->
-
-
-<!-- Put this part before </body> tag -->
+<!------------------------------ Modal for filter by------------------------------------>
 <input type="checkbox" id="my-modal" class="modal-toggle" />
 <div class="modal">
   <div class="modal-box">
@@ -165,27 +80,31 @@
   </div>
 </div>
   
-<!-- ng for -->
+<!--------------------------------------- ng for (properties)------------------------------------------------>
   
-
-    <div class="prop pt-5" routerLink="/view" >
-      
-      <div *ngFor="let i of properties" >
+ 
+    <div class="prop pt-5 justify-content-center md:prop-cols-1" routerLink="/view" >
+      <div class="grid pl-2 pr-2 ml-0 mr-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 justify-center">
+      <div *ngFor="let i of property| filter: searchItem;let x = index " >
+        
       <div class="card w-96 bg-base-100 shadow-xl col-xl-12 pt-5">
         <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
         <div class="card-body">
-            <h6>{{i.accName}}</h6>
-            <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+            <h6>{{i.p_name}} accommodations</h6>
+            <h6>{{i.p_address}}<br>Brixton Johannesburg, 0001</h6>
             <div class="icons">
            
-            <i class="fa-solid fa-bed"></i><h6>{{i.rooms}} rooms </h6>
+            <i class="fa-solid fa-bed"></i><h6>{{i.p_room}} rooms </h6>
             <div class="space">
             </div>
-            <i class="fas fa-bath"></i><h6>{{i.rooms}} bathrooms</h6>
+            <i class="fas fa-bath"></i><h6>{{i.p_bath}} bathrooms</h6>
         
         </div>
+        <h6>{{i.p_type}}</h6>
+        <h4>R{{i.p_price}}</h4>
         </div>
       </div>
+      <br>
   </div>
 
   </div>

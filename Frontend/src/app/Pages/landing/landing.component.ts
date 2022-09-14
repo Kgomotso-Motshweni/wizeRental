@@ -11,6 +11,7 @@ import { TenantService } from 'src/app/Services/tenant.service';
 export class LandingComponent implements OnInit {
  properties:any;
  property:any;
+ searchItem:any;
 
  form!: FormGroup;
 
@@ -26,13 +27,13 @@ export class LandingComponent implements OnInit {
       rooms: new FormControl(''),
     });
 
-    // this.serv.getProperties().subscribe(
-    //   {
-    //     next: (data: any) => {
-    //       console.log(data);
-    //       this.property = data;
-    //     }
-    //   })
+    this.service.getProperties().subscribe(
+      {
+        next: (data: any) => {
+          console.log(data);
+          this.property = data;
+        }
+      })
 
 
 
