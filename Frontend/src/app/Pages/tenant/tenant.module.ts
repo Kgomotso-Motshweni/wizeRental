@@ -22,6 +22,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import {ImageModule} from 'primeng/image';
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent,
@@ -54,6 +57,9 @@ const routes: Routes = [
     }),
     ToastModule,
     FormsModule,
+    ImageModule,
+    AvatarModule,
+    AvatarGroupModule,
     InputMaskModule,
     InputNumberModule,
     InputTextModule,

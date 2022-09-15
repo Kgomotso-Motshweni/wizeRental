@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
@@ -26,8 +25,9 @@ export class ProfileComponent implements OnInit {
   preview: string = '';
   message: any;
   file: any;
+  formData = new FormData();
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(
     private auth:AuthenticationService, 
     private router:Router,
     private activeRoute:ActivatedRoute,
@@ -61,55 +61,47 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  // selectThisImage(myEvent: any) {
-  //   this.file = myEvent.target.files[0]; 
-  // }
   editProduct(tenantInfor: Userinfor) {
     this.tenantInfor = {...tenantInfor};
   }
 
   handleFileInput(event:any) {
     const image = (event.target as any ).files[0];
-    console.log(image)
     this.file = image
+
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.preview = event.target.result;
+    }
+    reader.readAsDataURL(image);
   }
-  formData = new FormData();
+
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
     
-  
-
     this.formData.append('firstname', this.tenantInfor.firstname)
     this.formData.append('lastname', this.tenantInfor.lastname)
     this.formData.append('cellno', this.tenantInfor.cellno)
     this.formData.append('image', this.file)
 
-
     let id = this.tenantInfor.userid;
-  
-    // let user = {
-    //   firstname:this.tenantInfor.firstname,
-    //   lastname:this.tenantInfor.lastname,
-    //   cellno:this.tenantInfor.cellno,
-    //   imageurl: formData,
-    // }
-    console.log(this.formData,id)
 
-  this.auth.updateProfile(this.formData, id).subscribe({
-    next:data => {
-      this.message = data
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
-      this.router.onSameUrlNavigation = 'reload'; 
-      this.messageService.add({
-        key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
-      });
-    },
-    error: err => {
-      this.loading = false;
-      this.messageService.add({
-        key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
-      });  
-    }
-  })
+    this.auth.updateProfile(this.formData, id).subscribe({
+      next:data => {
+        this.message = data
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
+        this.router.onSameUrlNavigation = 'reload'; 
+        this.messageService.add({
+          key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
+        });
+      },
+      error: err => {
+        this.loading = false;
+        this.messageService.add({
+          key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
+        });  
+      }
+    })
   }
 }

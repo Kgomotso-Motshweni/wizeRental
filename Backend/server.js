@@ -6,19 +6,16 @@ const bodyParser = require('body-parser');
 require('./App/Config/dotenv.config')
 
 var corsOptions = {
-    origin: "*",
-
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 200,
-
-  
+    origin: ["*", "http://localhost:4200"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 200,
     credentials: true
   };// only allow the listerning addresses to connnect to the backend
   
 app.use(express.json());  // to support JSON-encoded
 app.use(cors(corsOptions));
-app.use(express.urlencoded({  extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
@@ -36,6 +33,9 @@ client.connect((err) =>{ // Connect to the Database
      console.log("Databased Connected"); //Database connection Successfuly
     }
 });
+
+
+
 
 
 const port = process.env.PORT || 8080; //create a listerning port number
@@ -58,5 +58,3 @@ app.listen(port, () =>{
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })
 
-
- 
