@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     cellno: new FormControl(''),
-
+    profile: new FormControl(''),
   });
 
   constructor(private formBuilder: FormBuilder, 
@@ -68,22 +68,22 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  selectThisImage(myEvent: any) {
-    this.file = myEvent.target.files[0]; 
-  }
-
-
-  // handleFileInput(event:any) {
-  //   const image = (event.target as any ).files[0];
-  //   this.Form.patchValue({avator: image})
-  //   console.log(image)
-  //   //Show image preview
-  //   let reader = new FileReader();
-  //   reader.onload = (event: any) => {
-  //     this.preview = event.target.result;
-  //   } 
-  //   reader.readAsDataURL(image);
+  // selectThisImage(myEvent: any) {
+  //   this.file = myEvent.target.files[0]; 
   // }
+
+
+  handleFileInput(event:any) {
+    const image = (event.target as any ).files[0];
+    this.Form.patchValue({profile: image})
+    console.log(image)
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.preview = event.target.result;
+    } 
+    reader.readAsDataURL(image);
+  }
   
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append('imageurl', this.file)
+    formData.append('imageurl', this.Form.value.profile)
   
 
 
@@ -104,8 +104,8 @@ export class ProfileComponent implements OnInit {
       firstname:this.Form.value.firstname, 
       lastname:this.Form.value.lastname,
       cellno:this.Form.value.cellno,
-      imageurl: this.file
-      
+      imageurl: this.Form.value.profile
+
      
     }
    console.log(user)
