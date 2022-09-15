@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 require('./App/Config/dotenv.config')
 
 var corsOptions = {
-    origin: ["*", "http://localhost:4200"],
+    origin: "*",
 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
@@ -18,7 +18,7 @@ var corsOptions = {
   
 app.use(express.json());  // to support JSON-encoded
 app.use(cors(corsOptions));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.urlencoded({  extended: true }));
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
@@ -36,9 +36,6 @@ client.connect((err) =>{ // Connect to the Database
      console.log("Databased Connected"); //Database connection Successfuly
     }
 });
-
-
-
 
 
 const port = process.env.PORT || 8080; //create a listerning port number

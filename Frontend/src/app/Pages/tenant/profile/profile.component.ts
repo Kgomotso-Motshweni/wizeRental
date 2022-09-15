@@ -22,17 +22,10 @@ export class ProfileComponent implements OnInit {
 
   submitted = false; //bpplean
   userData: any = {};
-  tenantInfor: any = {};
+  tenantInfor: Userinfor = new Userinfor;
   preview: string = '';
   message: any;
   file: any;
-
-  Form = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    cellno: new FormControl(''),
-    profile: new FormControl(''),
-  });
 
   constructor(private formBuilder: FormBuilder, 
     private auth:AuthenticationService, 
@@ -63,7 +56,7 @@ export class ProfileComponent implements OnInit {
     this.auth.getProfile(httpOptions, userid).subscribe({
       next:data =>{
         this.userData = data;
-        this.tenantInfor = this.userData[0];
+        this.editProduct(this.userData[0])
       }
     })
   }
@@ -71,46 +64,38 @@ export class ProfileComponent implements OnInit {
   // selectThisImage(myEvent: any) {
   //   this.file = myEvent.target.files[0]; 
   // }
-
+  editProduct(tenantInfor: Userinfor) {
+    this.tenantInfor = {...tenantInfor};
+  }
 
   handleFileInput(event:any) {
     const image = (event.target as any ).files[0];
-    this.Form.patchValue({profile: image})
     console.log(image)
-    //Show image preview
-    let reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.preview = event.target.result;
-    } 
-    reader.readAsDataURL(image);
+    this.file = image
   }
-  
+  formData = new FormData();
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
     
-    if(this.Form.invalid)
-    { 
-      return
-    }
-
-    const formData = new FormData();
-    formData.append('imageurl', this.Form.value.profile)
   
+
+    this.formData.append('firstname', this.tenantInfor.firstname)
+    this.formData.append('lastname', this.tenantInfor.lastname)
+    this.formData.append('cellno', this.tenantInfor.cellno)
+    this.formData.append('image', this.file)
 
 
     let id = this.tenantInfor.userid;
   
-    let user = {
-      firstname:this.Form.value.firstname, 
-      lastname:this.Form.value.lastname,
-      cellno:this.Form.value.cellno,
-      imageurl: this.Form.value.profile
+    // let user = {
+    //   firstname:this.tenantInfor.firstname,
+    //   lastname:this.tenantInfor.lastname,
+    //   cellno:this.tenantInfor.cellno,
+    //   imageurl: formData,
+    // }
+    console.log(this.formData,id)
 
-     
-    }
-   console.log(user)
-
-  this.auth.updateProfile(user, id).subscribe({
+  this.auth.updateProfile(this.formData, id).subscribe({
     next:data => {
       this.message = data
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;         

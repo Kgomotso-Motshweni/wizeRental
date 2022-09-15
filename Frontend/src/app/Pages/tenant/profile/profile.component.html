@@ -7,7 +7,7 @@
                 <div class="md:card w-content h-56 bg-base-100 shadow-xl border rounded-none">
                     <div class="card-body rounded-md flex justify-center">
                         <div class="flex card-profile-image justify-center">
-                            <img [src]="preview ||userData.imageurl" class="rounded-circle w-36">
+                            <img [src]="preview || tenantInfor.imageurl" class="rounded-circle w-36">
                         </div>
                         <div class="body">
                             <p>{{tenantInfor.firstname}}  {{tenantInfor.lastname}}</p>
@@ -21,25 +21,24 @@
                         <div class="justify-start">
                             <h1>PROFILE</h1>
                         </div>
-                        <form [formGroup]="Form">
                             <div class="grid gap-6 md:grid-cols-2">
                                 <div class="form-group">
                                     <label class="label"><span class="label-text">First Name</span></label>
-                                    <input (keypress)="keyPressAlphanumeric($event)" type="text"  value="{{tenantInfor.firstname}} " placeholder="First Name"
-                                        class="input shadow-m input-bordered w-full max-w-s email " formControlName="firstname" />
+                                    <input (keypress)="keyPressAlphanumeric($event)" type="text"  [(ngModel)]="tenantInfor.firstname" placeholder="First Name"
+                                        class="input shadow-m input-bordered w-full max-w-s email "  />
                                 </div>
                             
                                 <div class="form-group">
                                     <label class="label"><span class="label-text">Last Name</span></label>
-                                    <input (keypress)="keyPressAlphanumeric($event)" type="text" value="{{tenantInfor.lastname}}" placeholder="Last Name"
-                                        class="input shadow-m input-bordered w-full max-w-s email " formControlName="lastname" />
+                                    <input (keypress)="keyPressAlphanumeric($event)" type="text" [(ngModel)]="tenantInfor.lastname" placeholder="Last Name"
+                                        class="input shadow-m input-bordered w-full max-w-s email "/>
                                        
                                 </div>
                             </div>
                 
                             <div class="form-group">
                                 <label class="label"><span class="label-text">Email</span></label>
-                                <input type="email" placeholder="info@site.com" value="{{tenantInfor.email}}"  disabled
+                                <input type="email" placeholder="info@site.com" [(ngModel)]="tenantInfor.email"  disabled
                                     class="input shadow-m input-bordered w-full max-w-s email"   />
                 
                             </div>
@@ -47,12 +46,12 @@
                             <div class="form-group">
                                 <label class="label"><span class="label-text">Phone Number</span></label>
                                 <input type="text"  placeholder="111-111-1111" value="{{tenantInfor.cellno}}" 
-                                    class="input shadow-m input-bordered w-full max-w-s email" formControlName="cellno" />
+                                    class="input shadow-m input-bordered w-full max-w-s email"  />
                             </div>
 
                             <div class="form-group">   
                                 <label class="label"><span class="label-text">Profile Picture</span></label>
-                                <input (change)="handleFileInput($event)" formControlName="profile" class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Profile Picture">
+                                <input (change)="handleFileInput($event)"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Profile Picture">
                             </div>
                                 
                             <div class="form-group mt-4 flex" >
@@ -63,7 +62,6 @@
                                     <button routerLink="/tenant/" class="group relative ml-4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-secondary">Cancel</button>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
