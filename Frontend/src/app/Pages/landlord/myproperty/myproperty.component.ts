@@ -3,24 +3,21 @@ import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
 
 @Component({
-  selector: 'app-pending',
-  templateUrl: './pending.component.html',
-  styleUrls: ['./pending.component.scss']
+  selector: 'app-myproperty',
+  templateUrl: './myproperty.component.html',
+  styleUrls: ['./myproperty.component.scss']
 })
-
-export class PendingComponent implements OnInit {
+export class MypropertyComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })
   ngxLoadingComponent!: NgxLoadingComponent;
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-  pending: any = [];
-
+  myProperty: any = [];
   constructor() { }
 
   ngOnInit(): void {
-
   }
 
 }

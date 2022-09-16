@@ -1,9 +1,7 @@
 
 const client = require("../Config/db.config");
 
-
 //getRentees Function
-
 exports.get_rentees= async (req, res) => {
   try {
         //get all post form the database

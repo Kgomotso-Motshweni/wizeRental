@@ -4,7 +4,7 @@ const client = require("../Config/db.config");
 
 //Acepted a rentee Function
 
-exports.rentees = async (req, res) => {
+const rentees = async (req, res) => {
   const {applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time} = req.body;
   try {
         //Inserting data into the database
@@ -32,3 +32,7 @@ exports.rentees = async (req, res) => {
     });
   }
 };
+ 
+module.exports = {
+  rentees
+}

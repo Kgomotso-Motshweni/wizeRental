@@ -1,11 +1,14 @@
 const client = require("../Config/db.config");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
-const randomize = require("rand-token")
-const SECRET_KEY = randomize.generate(20) 
+const jwt = require("jsonwebtoken");
+const randomize = require("rand-token");
+const SECRET_KEY = randomize.generate(20);
+const cloudinary = require("../Cloudinary/cloudinary");
+const multer = require("multer");
+const path = require("path");
 
 const register = async (req, res) => {
-    const user_role = req.params.user_role;
+    const user_role = parseInt(req.params.user_role);
     const{ firstname, lastname, email, cellno, password, imageUrl} = req.body
     try{
         // check :userType paramater. only accept /Landlord or /Tenant
@@ -121,7 +124,7 @@ const login =  async (req, res) => {
 
 //Create function to get all userprofiles
 const userProfile = async (req, res, next) => {
-    const id = req.params.userid;
+    const id = parseInt(req.params.userid);
     try{  
         await client.query(`SELECT * FROM users WHERE userid=$1`,[id], (error, results) => {
             if(error){ 
@@ -140,13 +143,28 @@ const userProfile = async (req, res, next) => {
     };
 }
 
-
 const profileUpdate = async(req, res) => {
     const id = req.params.userid;
-    const{ firstname, lastname, cellno, } = req.body
+    const{ firstname, lastname, cellno } = req.body
+
     try{
-        client.query(`UPDATE users SET firstname = $1, lastname = $2, cellno= $3, updated_at= now()  WHERE userid=$4`,
-            [firstname, lastname, cellno, id], (error, results)=>{ //Add new employee
+        if(req.file){
+            const results = await cloudinary.uploader.upload(req.file.path, {
+                folder: "/images/",
+            });
+      
+            client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
+                [firstname, lastname, cellno, results.url, id], (error, results)=>{ //Add new employee
+                if(error){ //checks for errors and return them 
+                    return res.status(400).json({
+                        message: "Unable to update user details"
+                    }) //Throw the error in the terminal
+                }
+                    return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
+            })
+        }else{
+            client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, updated_at= now() WHERE userid=$4`,
+                [firstname, lastname, cellno, id], (error, results)=>{ //Add new employee
                 if(error){ //checks for errors and return them 
                     return res.status(400).json({
                         message: "Unable to update user details"
@@ -154,13 +172,15 @@ const profileUpdate = async(req, res) => {
                 }
                 return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
             })
+        }  
     }
     catch (err) {
         res.status(500).json({
-           error: "Database error while retrieving products", 
+            message: "Database error when Updating a user ", 
         });
     };
 }
+
 module.exports = {
     SECRET_KEY,
     register,
@@ -168,3 +188,29 @@ module.exports = {
     userProfile,
     profileUpdate
 }
+
+/*
+const profileUpdate = async(req, res) => {
+    try{
+        const id = req.params.userid;
+        const{ firstname, lastname, cellno, } = req.body
+        const image = await cloudinary.uploader.upload(req.file.path)
+
+        client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
+            [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ //Add new employee
+                if(error){ //checks for errors and return them 
+                    return res.status(400).json({
+                        message: "Unable to update user details"
+                    }) //Throw the error in the terminal
+                }
+                return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
+            }
+        )
+    }
+    catch (err) {
+        res.status(500).json({
+           error: "Database error while retrieving products", 
+        });
+    };
+}
+*/

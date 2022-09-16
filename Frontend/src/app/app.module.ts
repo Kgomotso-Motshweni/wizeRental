@@ -15,6 +15,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { LandlordModule } from './Pages/landlord/landlord.module';
 import { TenantModule } from './Pages/tenant/tenant.module';
 
+////////////
+// Imported Syncfusion Signature module from inputs package.
+
+
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { HttpHeaders } from '@angular/common/http';
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
+import { NgxLoadingComponent } from 'ngx-loading';
 
 @Component({
   selector: 'app-tenant',
@@ -7,6 +10,12 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
   styleUrls: ['./tenant.component.scss']
 })
 export class TenantComponent implements OnInit {
+  @ViewChild('ngxLoading', { static: false })
+  ngxLoadingComponent!: NgxLoadingComponent;
+  showingTemplate = false;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+
   constructor(
     public auth:AuthenticationService,   
   ) { }
@@ -15,13 +24,29 @@ export class TenantComponent implements OnInit {
   token:any = '';
   userid:any = ''
   image:any = ''
+  userData: any = {};
+
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    this.Full_Name = this.substring(this.token.regData[0].firstname) +'  '+ this.substring(this.token.regData[0].lastname);
-    this.image = this.token.regData[0].imageurl;
     this.userid = this.token.regData[0].userid
+    this.getProfile(this.userid)
   }
 
+  getProfile(userid:any){
+    const userToken = localStorage.getItem('access_token');
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
+    };
+
+    this.auth.getProfile(httpOptions, userid).subscribe({
+      next:data =>{
+        this.userData = data;
+        this.Full_Name = this.substring(this.userData[0].firstname) +'  '+ this.substring(this.userData[0].lastname);
+        this.image = this.userData[0].imageurl;
+      }
+    })
+  }
+  
   Logout(){
     this.auth.doLogout()
   }

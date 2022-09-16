@@ -1,10 +1,10 @@
 export class Userinfor {
     userid?:any;
     user_role? :String;
-    firstname? :String;
-    lastname? :String;
+    firstname? :any;
+    lastname? :any;
     email?: String;
-    cellno?:String;
+    cellno?:any;
     imageurl?:Text;
     updated_at?:Date;
     created_at?:Date;
