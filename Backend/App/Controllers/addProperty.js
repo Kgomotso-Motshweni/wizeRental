@@ -116,7 +116,7 @@ const deleteMyProperty = async(req, res) =>{
     const id = parseInt(req.params.userid);
     try{  
         client.query
-        (`SELECT l.p_address, l.p_city, l.p_zip_code, l.p_name, l.house_image
+        (`SELECT l.property_id, l.p_address, l.p_city, l.p_zip_code, l.p_name, l.house_image
             FROM landlordproperty l
             INNER JOIN users u  ON l.landlord_id = u.userid 
             WHERE u.userid = $1 
