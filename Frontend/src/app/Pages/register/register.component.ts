@@ -6,10 +6,7 @@ import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MustMatch } from './confirmPassword/validation';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import {DialogModule} from 'primeng/dialog';
-import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -36,23 +33,15 @@ export class RegisterComponent implements OnInit {
   });
 
   submitted = false; 
-  userToken: any;
-  role: any;
-  currentUser: any = {};
-  myData: any = {};
-  decodedToken: any = {};
   ViewDialog: boolean = false;
-  displayResponsive: boolean = false
+  check:boolean = false;
 
   constructor(private formBuilder: FormBuilder, 
     public auth:AuthenticationService, 
     private router:Router,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService,
-    private primengConfig: PrimeNGConfig) { }
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.primengConfig.ripple = true;
     this.loading = false;
     this.Form = this.formBuilder.group({
       usertype: ['', Validators.required],
@@ -83,52 +72,34 @@ export class RegisterComponent implements OnInit {
     return this.Form.controls;//it traps errors in the form
   }
 
-  // iftenant(){
-  //   if(this.Form.value.role == "tenant"){
-  //     return true;
-  //   }
-  //   else{
-  //     return false;
-  //   }
-  // }
-
-
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
 
     if(this.Form.invalid)
     { 
+      this.loading = false;
       return
     }
     let user_role = this.Form.value.usertype;
-    if(user_role == 'Tenant'){
-
-    }else if(user_role == 'Tenant'){
-     
-    }
+  
     let user = {
       firstname: this.Form.value.fname,
       lastname: this.Form.value.lname,
       email: this.Form.value.email,
       cellno: this.Form.value.phone,
       password: this.Form.value.password,
-      imageUrl: "https://gitlab.thedigitalacademy.co.za/caiphus/brainhackers/-/raw/master/angular/src/assets/profile_pic.png"
+      imageUrl: "https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png"
     }
-    console.log(user)
 
     this.auth.register(user, user_role).subscribe({
       next:data => {
-        this.myData = data;
-        this.userToken = this.myData.token;
-        this.decodedToken = this.auth.getDecodedAccessToken(this.userToken); //returns a decoded data from token
-
-        this.role = this.decodedToken.regData.user_role
-        localStorage.setItem('access_token', this.userToken);
+        this.loading = true;
         this.Form.reset();
-        this.router.navigate(['/login'])
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Registration Sucessfull. Let's start working", life: 3000
         });  
+        this.loading = false;
+        this.router.navigate(['/login'])
       },
       error: err => {
         this.loading = false;
@@ -138,19 +109,10 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-  // popUp() : void {
-  //   this.confirmationService.confirm({
-  //     message: 'Are you sure you want to delete ?',
-  //     header: 'terms and condition',
-  //     icon: 'pi pi-exclamation-triangle',
-  //   })
-  // }
-  check:boolean = false;
 
   checkit(){
     this.check = true;
   }
-
  
   showResponsiveDialog() {
     this.ViewDialog = true;
