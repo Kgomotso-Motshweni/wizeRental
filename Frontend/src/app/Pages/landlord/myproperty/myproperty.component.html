@@ -75,26 +75,21 @@
 </div>
 
 <ng-template #elseBlock >
-
     <div class="container">
         <div class="flex justify-center">
             <div class="grid sm:grid-cols-1 ">
                 <div class="card empty w-full shadow-xl">
                     <div class="card-body">
-                        
-                            <div class="form-group mb-6"> 
-                                <label class="input-group">
-                                    <span class="w-12"><i class="fa-solid fa-envelope"></i></span>
-                                        <input type="email"  placeholder="Email"
-                                            class="input bg-gray-50 input-bordered w-full email " />
-                                </label>
+                        <div class="form-group mb-6"> 
+                            <label class="input-group">
+                                <span class="w-12"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email"  placeholder="Email"
+                                    class="input bg-gray-50 input-bordered w-full email " />
+                            </label>
                                   
-                            </div>  
-                    
-
-                        <button pButton pRipple label="Cancel" (click)="hideDialog()" icon="pi pi-times" class="p-button-text" ></button>
-                        <button pButton pRipple label="Save" (click)="saveEmployee()" icon="pi pi-check" class="p-button-text" ></button>
-            
+                        </div>  
+                        <button pButton pRipple label="Cancel" (click)="hideInsertform()" icon="pi pi-times" class="p-button-text" ></button>
+                        <button pButton pRipple label="Save" (click)="SaveMypropert()" icon="pi pi-check" class="p-button-text" ></button>
                     </div>
                 </div>
             </div>
@@ -110,9 +105,3 @@
     backdropBorderRadius: '3px'
     }">
 </ngx-loading>
-
-
-
-
-
-

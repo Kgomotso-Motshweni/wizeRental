@@ -75,8 +75,7 @@ const routes: Routes = [
       secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff',
       fullScreenBackdrop: false,
-    }),
-    
+    }), 
     FormsModule,
     InputMaskModule,
     SidebarModule,
