@@ -190,5 +190,5 @@ export class MypropertyComponent implements OnInit {
     let first = value.toLowerCase();
     return first; 
   }
-*/
+  */
 }
