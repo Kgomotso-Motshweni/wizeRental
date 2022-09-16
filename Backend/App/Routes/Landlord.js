@@ -7,6 +7,7 @@ const middleware = require("../Middlewares/userauth");
 
 router.post('/add_property/:userid', upload.single("image"), landlord.addProperty);
 router.post('/add_rooms/:property_id', upload.single("image"), landlord.addRoomImages);
+router.get('/getproperty/:userid', landlord.getMyProperties);
 
 //router.patch('/update/:userid', upload.single("image"), auth.profileUpdate);
 // router.post('/file',upload.single("image"), auth.fileUpload);

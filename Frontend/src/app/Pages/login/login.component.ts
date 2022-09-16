@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       email: this.Form.value.email,
       password: this.Form.value.password
     }
-    
+   
     this.auth.login(user).subscribe({
       next:data => {
         this.myData = data;
@@ -71,7 +71,14 @@ export class LoginComponent implements OnInit {
         this.role = this.decodedToken.regData[0].user_role;
 
         localStorage.setItem('access_token', this.userToken);
+
         localStorage.setItem('role', this.role);
+        console.log(this.decodedToken)
+
+        this.messageService.add({
+          key: 'tc', severity:'error', summary: 'Error', detail: "Successfully Logged in", life: 3000
+        }); 
+        this.Form.reset();
         if(this.role == 'Landlord'){
           this.router.navigate(['/landlord/'])
 

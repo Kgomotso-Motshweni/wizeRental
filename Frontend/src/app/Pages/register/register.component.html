@@ -1,148 +1,142 @@
 <p-toast position="top-right" key="tc"></p-toast>
 <section class="gradient-custom">
-    <div class="md:container ">
-        <div class="grid gap-6 md:grid-cols-2 ">
-            <div class="md:card text-center header w-full bg-primary ">
+    <div class="container ">
+        <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+            <div class="md:card text-center header ">
                 <div class="card-body rounded-md">
-                    <div class="text-center ">
-                        <img class="image md:w-96 md:h-80 w-40 h-24" src="../../../assets/images/landlordLogo.png">
-                        <h1 class="text-white md:text-2xl text-xs mt-2 mb-3">REGISTER</h1>
+                    <div class="text-center lg:pt-16">
+                        <img class="image lg:w-80 lg:h-72 w-40 h-24" src="../../../assets/images/unknown.png">
+                        <h1 class="text-primary md:text-2xl text-xs mt-2 mb-3">REGISTER!</h1>
                     </div>
                 </div>
             </div>
-        
-            <div class="grid card w-content bg-base-100 shadow-xl">
-                <div class="card-body"> 
-                    <div class="md:card w-content shadow-xl rounded-lg">
-                        <div class="card-body rounded-md">
-                            <form [formGroup]="Form" (ngSubmit)="onSubmit()">
-                                
-                                <div class="form-group mb-6">
-                                    <select  formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select User Role" [ngClass]="{ 'is-invalid':submitted && f['usertype'].errors}">
-                                        <option value disabled selected hidden>Select User Role... </option>
-                                        <option value="Landlord">Landlord</option>
-                                        <option value="Tenant">Tenant</option>
-                                    </select>
-                                    <div *ngIf="submitted && f['usertype'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['usertype'].errors['required']">User type is required</div>
-                                    </div>
-                                </div>
-
-                                <div class="grid gap-6 md:grid-cols-2">
-                                    <div class="form-group ">
-                                        <label class="input-group">
-                                            <span><i class="fa-solid fa-user"></i></span>
-                                            <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="fname" placeholder="First Name"
-                                                class="input bg-gray-50 input-bordered w-full email "
-                                                [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }" />
-                                        </label>
-                                        <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['fname'].errors['required']">First name is required</div>
-                                        </div>           
-                                    </div>
-
-
-                                    <div class="form-group ">
-                                        <label class="input-group">
-                                            <span><i class="fa-solid fa-user"></i></span>
-                                            <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="lname" placeholder="Last Name"
-                                                class="input bg-gray-50 input-bordered w-full email "
-                                                [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
-                                        </label>
-                                        <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['lname'].errors['required']">Last Name is required</div>
-                                        </div>
-                                    </div>
-                            
-                                    <div class="form-group ">
-                                        <label class="input-group">
-                                            <span><i class="fa-solid fa-envelope"></i></span>
-                                            <input type="email" formControlName="email" placeholder="Email"
-                                                class="input bg-gray-50 input-bordered w-full email "
-                                                [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
-                                        </label>
-                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
-                                        </div>         
-                                    </div>
-
-                                    <div class="form-group mb-6">
-                                        <label class="input-group">
-                                            <span><i class="fa-solid fa-phone"></i></span>
-                                            <input type="text" formControlName="phone" placeholder="111-111-1111"
-                                                class="input bg-gray-50 input-bordered w-full email " 
-                                                [ngClass]="{ 'is-invalid':submitted && f['phone'].errors }" />
-                                        </label>
-                                        <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
-                                            <div *ngIf="f['phone'].errors['pattern']">Phone Number pattern is '999-999-9999'</div>
-                                            <div *ngIf="f['phone'].errors['maxlength']">Phone Number must not exceed 13 character</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-6"> 
-                                    <label class="input-group">
-                                        <span><i class="fa-solid fa-key"></i></span>
-                                        <input type="password" formControlName="password" placeholder="Password"
-                                            class="input bg-gray-50 input-bordered w-full password"
-                                            [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
-                                    </label>
-                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['password'].errors['required']">Password is required</div>
-                                        <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character
-                                        </div>
-                                        <div *ngIf="f['password'].errors['maxlength']">Password must not exceed 40 character
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-6">   
-                                    <label class="input-group">
-                                        <span><i class="fa-solid fa-key"></i></span>
-                                        <input type="password" formControlName="confirmpassword" placeholder="Confirm Password"
-                                            class="input bg-gray-50 input-bordered w-full email"
-                                            [ngClass]="{ 'is-invalid':submitted && f['confirmpassword'].errors }" />
-                                    </label>
-                                    <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['confirmpassword'].errors['required']">Confirm Password is required</div>
-                                        <div *ngIf="f['confirmpassword'].errors['mustMatch']">Password must match</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group mb-6">    
-                                    <input id="check" formControlName="acceptTerms" type="checkbox" class="w-4 h-4 bg-gray-50 input input-bordered rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }">
-                                    <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a (click)="showResponsiveDialog()" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
-                                    <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">Accept Ts & Cs is required</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="submit" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Register</button>
-                                </div>
-                            </form>
-
-                            <div class="form-group mt-4">
-                                <P class = "Already">
-                                    Already have an account? Click
-                                    <a routerLink="/login"  class="reg" >here</a> to log in
-                                </P>
+            
+             <div class="md:card w-content border shadow-xl">
+                <div class="card-body lg:mt-8"> 
+                    <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                        <div class="form-group mb-6">
+                            <select  formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select User Role" [ngClass]="{ 'is-invalid':submitted && f['usertype'].errors}">
+                                <option value disabled selected hidden>Select User Role... </option>
+                                <option value="Landlord">Landlord</option>
+                                <option value="Tenant">Tenant</option>
+                            </select>
+                            <div *ngIf="submitted && f['usertype'].errors" class="invalid-feedback">
+                                <div *ngIf="f['usertype'].errors['required']">User type is required</div>
                             </div>
                         </div>
+
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="form-group mb-6">
+                                <label class="input-group">
+                                    <span class="w-12"><i class="fa-solid fa-user"></i></span>
+                                    <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="fname" placeholder="First Name"
+                                        class="input bg-gray-50 input-bordered w-full email "
+                                        [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }" />
+                                </label>
+                                <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['fname'].errors['required']">First name is required</div>
+                                </div>           
+                            </div>
+
+
+                            <div class="form-group mb-6">
+                                <label class="input-group">
+                                    <span class="w-12"><i class="fa-solid fa-user"></i></span>
+                                    <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="lname" placeholder="Last Name"
+                                        class="input bg-gray-50 input-bordered w-full email "
+                                        [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
+                                </label>
+                                <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['lname'].errors['required']">Last Name is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-6"> 
+                                <label class="input-group">
+                                    <span class="w-12"><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="email" formControlName="email" placeholder="Email"
+                                            class="input bg-gray-50 input-bordered w-full email "
+                                            [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
+                                </label>
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                    <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                                </div>  
+                            </div>     
+                            <div class="form-group mb-6">
+                                <label class="input-group">
+                                    <span class="w-12"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="text" formControlName="phone" placeholder="111-111-1111"
+                                        class="input bg-gray-50 input-bordered w-full email " 
+                                        [ngClass]="{ 'is-invalid':submitted && f['phone'].errors }" />
+                                </label>
+                                <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
+                                    <div *ngIf="f['phone'].errors['pattern']">Phone Number pattern is '999-999-9999'</div>
+                                <div *ngIf="f['phone'].errors['maxlength']">Phone Number must not exceed 13 character</div>
+                                </div>
+                            </div>
+                        </div>       
+                        
+                        <div class="form-group "> 
+                            <label class="input-group mb-6">
+                                <span class="w-12"><i class="fa-solid fa-key"></i></span>
+                                <input type="password" formControlName="password" placeholder="Password"
+                                    class="input bg-gray-50 input-bordered w-full password"
+                                    [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
+                            </label>
+                            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character</div>
+                                <div *ngIf="f['password'].errors['maxlength']">Password must not exceed 40 character</div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-6">   
+                            <label class="input-group">
+                                <span class="w-12"><i class="fa-solid fa-key"></i></span>
+                                <input type="password" formControlName="confirmpassword" placeholder="Confirm Password"
+                                    class="input bg-gray-50 input-bordered w-full email"
+                                    [ngClass]="{ 'is-invalid':submitted && f['confirmpassword'].errors }" />
+                            </label>
+                            <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
+                                <div *ngIf="f['confirmpassword'].errors['required']">Confirm Password is required</div>
+                                <div *ngIf="f['confirmpassword'].errors['mustMatch']">Password must match</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-6">    
+                            <input id="check" formControlName="acceptTerms" type="checkbox" class="w-4 h-4 bg-gray-50 input input-bordered rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }">
+                            <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a (click)="showResponsiveDialog()" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                            <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Register</button>
+                        </div>
+                    </form>
+
+                    <div class="form-group mt-4">
+                        <P class = "Already">
+                            Already have an account? Click
+                            <a routerLink="/login"  class="reg" >here</a> to log in
+                        </P>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
-        <ngx-loading
-        [show]="loading"
-        [config]="{
-          animationType: ngxLoadingAnimationTypes.circleSwish,
-          primaryColour: '#ffffff', secondaryColour: '#ffffff',
-          backdropBorderRadius: '3px'
-        }">
-        </ngx-loading>
-
+        
     </div>
 </section> 
+
+
+<ngx-loading
+    [show]="loading"
+    [config]="{
+        animationType: ngxLoadingAnimationTypes.circleSwish,
+        primaryColour: '#ffffff', secondaryColour: '#ffffff',
+        backdropBorderRadius: '3px'
+    }">
+</ngx-loading>
 
 <p-dialog header="terms and conditions" [(visible)]="ViewDialog" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <p>If this Agreement conflicts with the TNC Agreement, this Agreement will prevail to such extent as this Agreement may be more favourable to the Writer. This Agreement will not be affected by any future amendment or expiry of the TNC Agreement, except that any increases to the financial terms payable under the TNC Agreement will apply to any payment due under this Agreement after the date of the increase. For the sake of clarity, the increase will not apply to payments that have already been made. This Agreement is in the form provided under the minimum terms of the TNC Agreement and any divergences from that form that are agreed between the parties are set out in Schedule 2 and/or listed by clause number in Schedule 2 for ease of reference.
@@ -152,4 +146,3 @@
         <p-button (click)="hideDialog()" label="OK" styleClass="p-button-text"></p-button>
         </ng-template>
 </p-dialog>
-

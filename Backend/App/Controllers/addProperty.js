@@ -62,17 +62,65 @@ const addRoomImages = async(req, res) =>{
 
 const getMyProperties = async(req, res) =>{
     const id = parseInt(req.params.userid);
-    const{ p_address, p_city, p_town, p_zip_code, p_propertyType, p_name, p_description, p_bedroom, p_bath, p_room, p_price, pet_friendly, title_deed} = req.body
-    
     try{  
         client.query
-        (`SELECT l.p_address, l.p_city, l.p_zip_code, l.p_name
-        FROM landlordproperty l
-        INNER JOIN users  ON orders.user_id = users.id 
-        INNER JOIN orderitems ON orderitems.orderid=orders.orderid
-        INNER JOIN products ON products.prod_id=orderitems.product_id
-        WHERE users.id = $1 
-        ORDER BY orderid ASC`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order
+        (`SELECT l.p_address, l.p_city, l.p_zip_code, l.p_name, l.house_image
+            FROM landlordproperty l
+            INNER JOIN users u  ON l.landlord_id = u.userid 
+            WHERE u.userid = $1 
+            ORDER BY u.userid ASC`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order
+
+            if(error){ //checks for errors and return them 
+                return res.status(400).json({
+                    message: "unable to retrieve all orders"
+                })//Throw t //Throw the error in the terminal
+            }
+            res.status(200).json(results.rows) //Return a status 200 if there is no error
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+           message: "Database error while retrieving my properties", 
+        });
+    };
+}
+
+const getOneProperty = async(req, res) =>{
+    const id = parseInt(req.params.userid);
+    try{  
+        client.query
+        (`SELECT l.p_address, l.p_city, l.p_zip_code, l.p_name, l.house_image
+            FROM landlordproperty l
+            INNER JOIN users u  ON l.landlord_id = u.userid 
+            WHERE u.userid = $1 
+            ORDER BY u.userid ASC`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order
+
+            if(error){ //checks for errors and return them 
+                return res.status(400).json({
+                    message: "unable to retrieve all orders"
+                })//Throw t //Throw the error in the terminal
+            }
+            res.status(200).json(results.rows) //Return a status 200 if there is no error
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+           message: "Database error while retrieving my properties", 
+        });
+    };
+}
+
+const deleteMyProperty = async(req, res) =>{
+    const id = parseInt(req.params.userid);
+    try{  
+        client.query
+        (`SELECT l.p_address, l.p_city, l.p_zip_code, l.p_name, l.house_image
+            FROM landlordproperty l
+            INNER JOIN users u  ON l.landlord_id = u.userid 
+            WHERE u.userid = $1 
+            ORDER BY u.userid ASC`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order
 
             if(error){ //checks for errors and return them 
                 return res.status(400).json({
@@ -92,5 +140,6 @@ const getMyProperties = async(req, res) =>{
 
 module.exports = {
     addProperty,
-    addRoomImages
+    addRoomImages,
+    getMyProperties
 }
