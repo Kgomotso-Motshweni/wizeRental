@@ -14,4 +14,8 @@ export class LandlordService {
   getMyProperty(id:any){
     return this.http.get(`${this.baseUrl}getproperty/${id}`)
   }
+
+  deleteMyProperty(id:any){
+    return this.http.get(`${this.baseUrl}getproperty/${id}`)
+  }
 }

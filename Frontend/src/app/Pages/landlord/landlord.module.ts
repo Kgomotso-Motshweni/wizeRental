@@ -41,15 +41,16 @@ import { NortificationComponent } from './nortification/nortification.component'
 import { MypropertyComponent } from './myproperty/myproperty.component';
 
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent, 
+  {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
-    {path:'addproperty', component: MypropertyComponent},
+    {path:'myproperty', component: MypropertyComponent},
     {path:'pending', component:PendingComponent},
+    {path:'addproperty', component:AddpropertyComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
-
-  ]},
+  ]}
+  
 ]
 
 @NgModule({

@@ -77,6 +77,7 @@ export class RegisterComponent implements OnInit {
 
     if(this.Form.invalid)
     { 
+      this.loading = false;
       return
     }
     let user_role = this.Form.value.usertype;
@@ -92,10 +93,12 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(user, user_role).subscribe({
       next:data => {
+        this.loading = true;
         this.Form.reset();
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Registration Sucessfull. Let's start working", life: 3000
         });  
+        this.loading = false;
         this.router.navigate(['/login'])
       },
       error: err => {

@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
+    this.loading = false;
     this.Form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
    
     this.auth.login(user).subscribe({
       next:data => {
+        this.loading = true;
         this.myData = data;
         this.userToken = this.myData.token;
         this.decodedToken = this.auth.getDecodedAccessToken(this.userToken); //returns a decoded data from token
@@ -80,9 +82,11 @@ export class LoginComponent implements OnInit {
         }); 
         this.Form.reset();
         if(this.role == 'Landlord'){
+          this.loading = false;
           this.router.navigate(['/landlord/'])
 
         }else if(this.role == 'Tenant'){
+          this.loading = false;
           this.router.navigate(['/tenant/'])
         }
       },
