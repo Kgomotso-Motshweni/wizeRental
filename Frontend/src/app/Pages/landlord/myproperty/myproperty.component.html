@@ -1,11 +1,10 @@
 <div class="container mx-auto mb-5" style="margin-top: 8vh;">
     <div class="flex justify-end">
         <div class="form-group addproperty">
-            <button type="btn" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Add New Property</button>
+            <button type="btn" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800"><a routerLink='/landlord/addproperty/'>Add New Property</a></button>
         </div> 
     </div>
 </div>
-
 
 <ng-container *ngIf="myProperty.length == 0" >
     <div class="container">
@@ -33,3 +32,9 @@
     backdropBorderRadius: '3px'
     }">
 </ngx-loading>
+
+
+
+
+
+

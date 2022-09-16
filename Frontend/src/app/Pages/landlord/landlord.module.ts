@@ -45,8 +45,9 @@ const routes: Routes = [
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
-    {path:'addproperty', component: MypropertyComponent},
+    {path:'addproperty', component: AddpropertyComponent},
     {path:'pending', component:PendingComponent},
+    {path:'myproperty', component:MypropertyComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
 
   ]},
