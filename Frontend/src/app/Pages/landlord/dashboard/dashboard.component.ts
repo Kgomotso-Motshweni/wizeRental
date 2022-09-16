@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DashboardService } from 'src/app/Services/dashboard.service';
+import { Payment } from '../../../Interfaces/payment';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,48 +11,87 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
+
+
+  myobject = [{
+    "applicant_id":"2",
+    "property_id":"4",
+    "full_Name":"cai",
+    "unit":"222",
+    "rent":"200",
+    "moaStart":"21-JAN-2022",
+    "moaEnd":"21-FEB-2022",
+    "rent_paid":"2000",
+    "create_time":"2022-06-21 01:00:00",
+    "r_update_time":"2022-06-21 01:00:30",
+    "payStatus":"false",
+    "paymentstatus":false
+  },
+  {
+    "applicant_id":"2",
+    "property_id":"4",
+    "full_Name":"cai",
+    "unit":"222",
+    "rent":"200",
+    "moaStart":"21-JAN-2022",
+    "moaEnd":"21-FEB-2022",
+    "rent_paid":"2000",
+    "create_time":"2022-06-21 01:00:00",
+    "r_update_time":"2022-06-21 01:00:30",
+    "payStatus":"false",
+    "paymentstatus":false
+  },
+  {
+    "applicant_id":"2",
+    "property_id":"4",
+    "full_Name":"cai",
+    "unit":"222",
+    "rent":"200",
+    "moaStart":"21-JAN-2022",
+    "moaEnd":"21-FEB-2022",
+    "rent_paid":"2000",
+    "create_time":"2022-06-21 01:00:00",
+    "r_update_time":"2022-06-21 01:00:30",
+    "payStatus":"false",
+    "paymentstatus":true
+  },
+  {
+    "applicant_id":"2",
+    "property_id":"4",
+    "full_Name":"cai",
+    "unit":"222",
+    "rent":"200",
+    "moaStart":"21-JAN-2022",
+    "moaEnd":"21-FEB-2022",
+    "rent_paid":"2000",
+    "create_time":"2022-06-21 01:00:00",
+    "r_update_time":"2022-06-21 01:00:30",
+    "payStatus":"false",
+    "paymentstatus":true
+  }
+]
+
  
   totAmnt : number = 0;
   paidAmnt : number = 0;
-  rentees : any
+  rentees! : Array<Payment> ;
   searchTenant : any;
   unpaidAmnt :number =0;
   numTenants :number | undefined;
-  payment_status: number[] | undefined;
-
-  // let list: number[] = [1, 2, 3];
-
-
-  
-  constructor(private dash:DashboardService,private router:Router, private route: ActivatedRoute) { }
-
+  payment_status!: Boolean ;
+  pay_status: any;
   month: any = [1,3,5,7.8]
 
   paid:any
 
-  
+  payment_array:Array<any>=[];
+  // let list: number[] = [1, 2, 3];
 
-  deleteUser(id:any)
-  {
-    console.log("inside")
-     this.dash.deleteRentee(this.rentees[id].rentee_id).subscribe((rent_id)=>{
-        
-  //reload page after delete
-        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/landlord/dash'], {relativeTo: this.route})
-
-     })
-  }
-
-
-  paymentStats(id:any){
-
-  }
+  constructor(private dash:DashboardService,private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.dash.rentees().subscribe((rentee)=>{
+    this.dash.rentees().subscribe((rentee:any)=>{
       this.rentees = rentee;
       
       console.table(this.rentees)
@@ -60,13 +100,15 @@ export class DashboardComponent implements OnInit {
       //Monthly Revenue
       for(let x=0;x<this.rentees.length;x++){
        
+        this.payment_array[x] = this.rentees[x].paystatus;
+        console.table(this.payment_array)
           this.totAmnt = +this.totAmnt + +this.rentees[x].rent; 
-          this.payment_status = this.rentees[x].paymentStatus
+          this.payment_status = this.rentees[x].paymentstatus
       }
 
       //Received Amount
       this.dash.paymentStatus().subscribe((payment)=>{
-        console.table(payment)
+        // console.table(payment)
         this.paid = payment;
       })
 
@@ -90,5 +132,38 @@ export class DashboardComponent implements OnInit {
       //pending Tenants
       // console.log("ghjkpl",this.paymentStats)
     })
+  }
+
+
+  deleteUser(id:any)
+  {
+    console.log("inside")
+     this.dash.deleteRentee(this.rentees[id].rentee_id).subscribe((rent_id)=>{
+        
+  //reload page after delete
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/landlord/dash'], {relativeTo: this.route})
+
+     })
+  }
+
+
+  paymentStats(id:any){
+
+  }
+
+
+   _index(payment:any){
+
+   console.log(payment)
+   return false
+   
+  }
+
+
+  get_Payment_Status(){
+    let status = this.pay_status
+    return status;
   }
 }

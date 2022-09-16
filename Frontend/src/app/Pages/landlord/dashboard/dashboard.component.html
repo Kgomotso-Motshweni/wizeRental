@@ -4,28 +4,30 @@
   <br>
   <!---------------------------------------cards---------------------------------------------------->
 
-  <div class="grid  md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 gap-4 justify-center">
+  <!-- <div class="grid  md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 gap-4 justify-center"> -->
 
 
-    <div class="card w-96 bg-base-100 shadow-xl ">
-      <div class="card-body">
-
-        <h2 class="card-title">Monthly Revenue</h2>
-        <div class="flex">
-          <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" viewBox="0 0 512 512">
-            <path
-              d="M320 96H192L144.6 24.9C137.5 14.2 145.1 0 157.9 0H354.1c12.8 0 20.4 14.2 13.3 24.9L320 96zM192 128H320c3.8 2.5 8.1 5.3 13 8.4C389.7 172.7 512 250.9 512 416c0 53-43 96-96 96H96c-53 0-96-43-96-96C0 250.9 122.3 172.7 179 136.4l0 0 0 0c4.8-3.1 9.2-5.9 13-8.4zm84.1 96c0-11.1-9-20.1-20.1-20.1s-20.1 9-20.1 20.1v6c-5.6 1.2-10.9 2.9-15.9 5.1c-15 6.8-27.9 19.4-31.1 37.7c-1.8 10.2-.8 20 3.4 29c4.2 8.8 10.7 15 17.3 19.5c11.6 7.9 26.9 12.5 38.6 16l2.2 .7c13.9 4.2 23.4 7.4 29.3 11.7c2.5 1.8 3.4 3.2 3.8 4.1c.3 .8 .9 2.6 .2 6.7c-.6 3.5-2.5 6.4-8 8.8c-6.1 2.6-16 3.9-28.8 1.9c-6-1-16.7-4.6-26.2-7.9l0 0 0 0 0 0 0 0c-2.2-.8-4.3-1.5-6.3-2.1c-10.5-3.5-21.8 2.2-25.3 12.7s2.2 21.8 12.7 25.3c1.2 .4 2.7 .9 4.4 1.5c7.9 2.7 20.3 6.9 29.8 9.1V416c0 11.1 9 20.1 20.1 20.1s20.1-9 20.1-20.1v-5.5c5.4-1 10.5-2.5 15.4-4.6c15.7-6.7 28.4-19.7 31.6-38.7c1.8-10.4 1-20.3-3-29.4c-3.9-9-10.2-15.6-16.9-20.5c-12.2-8.8-28.3-13.7-40.4-17.4l-.8-.2c-14.2-4.3-23.8-7.3-29.9-11.4c-2.6-1.8-3.4-3-3.6-3.5c-.2-.3-.7-1.6-.1-5c.3-1.9 1.9-5.2 8.2-8.1c6.4-2.9 16.4-4.5 28.6-2.6c4.3 .7 17.9 3.3 21.7 4.3c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-4.4-1.2-14.4-3.2-21-4.4V224z" />
-          </svg>
-          <p>R{{totAmnt}}</p>
-        </div>
-
-        <div class="card-actions justify-end">
-          <button class="hidden"></button>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 justify-center">
+    
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Monthly Revenue</h2>
+          <div class="flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" viewBox="0 0 512 512">
+              <path
+                d="M320 96H192L144.6 24.9C137.5 14.2 145.1 0 157.9 0H354.1c12.8 0 20.4 14.2 13.3 24.9L320 96zM192 128H320c3.8 2.5 8.1 5.3 13 8.4C389.7 172.7 512 250.9 512 416c0 53-43 96-96 96H96c-53 0-96-43-96-96C0 250.9 122.3 172.7 179 136.4l0 0 0 0c4.8-3.1 9.2-5.9 13-8.4zm84.1 96c0-11.1-9-20.1-20.1-20.1s-20.1 9-20.1 20.1v6c-5.6 1.2-10.9 2.9-15.9 5.1c-15 6.8-27.9 19.4-31.1 37.7c-1.8 10.2-.8 20 3.4 29c4.2 8.8 10.7 15 17.3 19.5c11.6 7.9 26.9 12.5 38.6 16l2.2 .7c13.9 4.2 23.4 7.4 29.3 11.7c2.5 1.8 3.4 3.2 3.8 4.1c.3 .8 .9 2.6 .2 6.7c-.6 3.5-2.5 6.4-8 8.8c-6.1 2.6-16 3.9-28.8 1.9c-6-1-16.7-4.6-26.2-7.9l0 0 0 0 0 0 0 0c-2.2-.8-4.3-1.5-6.3-2.1c-10.5-3.5-21.8 2.2-25.3 12.7s2.2 21.8 12.7 25.3c1.2 .4 2.7 .9 4.4 1.5c7.9 2.7 20.3 6.9 29.8 9.1V416c0 11.1 9 20.1 20.1 20.1s20.1-9 20.1-20.1v-5.5c5.4-1 10.5-2.5 15.4-4.6c15.7-6.7 28.4-19.7 31.6-38.7c1.8-10.4 1-20.3-3-29.4c-3.9-9-10.2-15.6-16.9-20.5c-12.2-8.8-28.3-13.7-40.4-17.4l-.8-.2c-14.2-4.3-23.8-7.3-29.9-11.4c-2.6-1.8-3.4-3-3.6-3.5c-.2-.3-.7-1.6-.1-5c.3-1.9 1.9-5.2 8.2-8.1c6.4-2.9 16.4-4.5 28.6-2.6c4.3 .7 17.9 3.3 21.7 4.3c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-4.4-1.2-14.4-3.2-21-4.4V224z" />
+            </svg>
+            <p>R{{totAmnt}}</p>
+          </div>
+          <div class="divider"></div>
+          <div class="card-actions justify-end">
+            <button class="hidden"></button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="card w-96 bg-base-100 shadow-xl ">
+ 
+    <div class="card w-content bg-base-100 shadow-xl " >
       <div class="card-body">
 
         <h2 class="card-title"> Amount Received</h2>
@@ -37,11 +39,9 @@
           </svg>
           <p>R{{paidAmnt}}</p>
         </div>
-
-        <hr>
+      <div class="divider" ></div>
         <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i>
-          <p>Update Now</p>
+          <i class="pi pi-sync" style="font-size: 1.2rem"></i><p>Update Now</p>
         </div>
         <div class="card-actions justify-end">
           <button class="btn-hidden"></button>
@@ -49,11 +49,11 @@
       </div>
     </div>
 
-
-    <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card w-content bg-base-100 shadow-xl " >
       <div class="card-body">
 
-        <h2 class="card-title">unpaid Amount</h2>
+        <h2 class="card-title"> unpaid Amount</h2>
+
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar"
             viewBox="0 0 16 16">
@@ -62,20 +62,22 @@
           </svg>
           <p>R{{unpaidAmnt}}</p>
         </div>
-        <hr>
+      <div class="divider" ></div>
         <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i>
-          <p>Update Now</p>
+          <i class="pi pi-sync" style="font-size: 1.2rem"></i><p>Update Now</p>
         </div>
         <div class="card-actions justify-end">
-          <button class="hidden"></button>
+          <button class="btn-hidden"></button>
         </div>
       </div>
     </div>
 
-    <div class="card w-96 bg-base-100 shadow-xl">
+
+    <div class="card w-content bg-base-100 shadow-xl " >
       <div class="card-body">
-        <h2 class="card-title">Rooms Occupied</h2>
+
+        <h2 class="card-title"> Rooms Occupied</h2>
+
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="27" height="27" fill="#55ADEA">
             <path
@@ -83,10 +85,9 @@
           </svg>
           <p>{{numTenants}} Tenant(s)</p>
         </div>
-        <hr>
+      <div class="divider" ></div>
         <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i>
-          <p>Update Now</p>
+          <i class="pi pi-sync" style="font-size: 1.2rem"></i><p>Update Now</p>
         </div>
         <div class="card-actions justify-end">
           <button class="btn-hidden"></button>
@@ -94,18 +95,21 @@
       </div>
     </div>
 
-    <div class="card w-96 bg-base-100 shadow-xl">
+
+
+    <div class="card w-content bg-base-100 shadow-xl " >
       <div class="card-body">
+
         <h2 class="card-title">Rooms Available</h2>
+
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="27" height="27" fill="#55ADEA"><path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zm40-176c-22.1 0-40-17.9-40-40s17.9-40 40-40s40 17.9 40 40s-17.9 40-40 40z"/></svg>
           <p>4 Tenant(s)</p>
 
         </div>
-        <hr>
+      <div class="divider" ></div>
         <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i>
-          <p>Update Now</p>
+          <i class="pi pi-sync" style="font-size: 1.2rem"></i><p>Update Now</p>
         </div>
         <div class="card-actions justify-end">
           <button class="btn-hidden"></button>
@@ -113,10 +117,13 @@
       </div>
     </div>
 
+   
 
-    <div class="card w-96 bg-base-100 shadow-xl" routerLink="/landlord/pending">
+    <div class="card w-content bg-base-100 shadow-xl " >
       <div class="card-body">
-        <h2 class="card-title">Pending Tenats</h2>
+
+        <h2 class="card-title">Pending Tenants</h2>
+
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-hourglass-top"
             viewBox="0 0 16 16">
@@ -126,10 +133,9 @@
           <p>1 Tenant(s)</p>
 
         </div>
-        <hr>
+      <div class="divider" ></div>
         <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i>
-          <p>Update Now</p>
+          <i class="pi pi-sync" style="font-size: 1.2rem"></i><p>Update Now</p>
         </div>
         <div class="card-actions justify-end">
           <button class="btn-hidden"></button>
@@ -137,6 +143,7 @@
       </div>
     </div>
     <br>
+    
   </div>
 
   <!--------------------------------------------till here-------------------------------------------->
@@ -175,7 +182,7 @@
       </thead>
       <tbody>
         <!---------------------------------------------row 1-------------------------------------------------->
-        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index;">
+        <tr *ngFor="let rentee of myobject | filter:searchTenant; let x=index;">
         
           <th>{{x+1}}</th>
           <td>{{rentee.full_name}}</td>
@@ -186,18 +193,36 @@
           <td>{{rentee.r_update_time | date:'dd-MM-yyyy'}}</td>
           <td>{{payment_status}}</td>
           <td>
-            <div class="form-control" *ngIf="!payment_status">
+            
+            <!-- <div class="form-control" *ngIf="_index(rentee.paystatus)">
+              <label class="label cursor-pointer">
+                <input type="checkbox" class="toggle toggle-primary" checked/>
+              </label>
+            </div> -->
+
+
+          
+
+
+            <div class="form-control" *ngIf="rentee.paymentstatus">
               <label class="label cursor-pointer">
                 <input type="checkbox" class="toggle toggle-primary" checked/>
               </label>
             </div>
-
-            <!-- <div class="form-control" *ngIf="rentee.payStatus">
+          
+            <div class="form-control" *ngIf="!rentee.paymentstatus">
               <label class="label cursor-pointer">
-                
                 <input type="checkbox" class="toggle toggle-primary" />
               </label>
-            </div> -->
+            </div>
+
+
+
+            
+             
+           
+
+      
           </td>
          
           <td><button class="btn btn-error" (click)="deleteUser(x)">Delete</button></td>
