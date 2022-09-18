@@ -21,8 +21,10 @@ export class DashboardComponent implements OnInit {
   constructor(private dash:DashboardService) { }
 
   month: any = [1,3,5,7.8]
-  
-
+  totNotReceived: number = 0;
+  totReceived: number = 0;
+  numPending: number = 0;
+  totExpected: number = 0;
   ngOnInit(): void {
     this.dash.rentees().subscribe((rentee)=>{
       

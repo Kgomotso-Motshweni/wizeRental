@@ -1,138 +1,89 @@
-
-
-
-<div class="container justify-center">
-  <br><br><br>
+<div class="container justify-center pending">
   <!---------------------------------------cards---------------------------------------------------->
-  <!-- <div class="container pending">
+  <div class="container  mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="card  shadow-xl">
-        <div class="grid card-body user justify-start">
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-content user justify-start">
           <h2 class="card-title">Monthly Revenue</h2> 
-          <div class="flex">
-            <div><i class="pi pi-times"></i></div>
-            <div><p>R7 800</p></div>
+            <div class="backend">R {{totExpected}}</div>
+        </div>
+
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Total Amount Received</h2> 
+          <div class="flex flex-row">
+            <div class="basis-2/5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+              </svg>
+            </div>
+            <div class="basis-1/2 backend">R {{totReceived}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="divider" ></div>
-    </div>
-  </div> -->
+      </div>
 
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-content user justify-start">
+          <h2 class="card-title">Total Amount Not Received</h2> 
+          <div class="flex flex-row">
+            <div class="basis-2/5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+              </svg>
+            </div>
+            <div class="basis-1/2 backend">R {{totNotReceived}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 justify-center">
-
-    <div class="card bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Monthly Revenue</h2>
-        <p>R7 800</p>
-        <div class="divider" ></div>
-        <div class="card-actions justify-end">
-          <button class="hidden"></button>
+      <div class="card shadow-xl border">
+        <div class="grid card-body user justify-start">
+          <h2 class=" card-title">Pending Tenants</h2> 
+          <div class="flex flex-row">
+            <div class="basis-2/5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+              </svg>
+            </div>
+            <div class="basis-1/2 backend">R {{numPending}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="card w-content bg-base-100 shadow-xl " >
-      <div class="card-body">
-        
-        <h2 class="card-title"> Amount Received</h2>
-
-      <div class="flex">
-        <p>R7 800</p>
-      </div>
-      <div class="divider" ></div>
-        <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i><p>Update Now</p>
-        </div>
-        <div class="card-actions justify-end">
-          <button class="btn-hidden"></button>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="card w-content bg-base-100 shadow-xl">
-      <div class="card-body">
-
-        <h2 class="card-title">unpaid Amount</h2>
-        <div class="flex">
-        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-          <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-        </svg><p>R6 800</p>
-      </div>
-      <div class="divider" ></div>
-        <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i><p>Update Now</p>
-        </div>
-        <div class="card-actions justify-end">
-          <button class="hidden"></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card w-content bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Rooms Occupied</h2>
-        <p>7 Tenant(s)</p>
-        <div class="divider" ></div>
-        <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i><p>Update Now</p>
-        </div>
-        <div class="card-actions justify-end">
-          <button class="btn-hidden"></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card w-content bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Rooms Available</h2>
-        <div class="flex">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#55ADEA" class="bi bi-house-door" viewBox="0 0 16 16">
-            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
-          </svg>
-        <p>4 Tenant(s)</p>
-
-        </div>
-        <div class="divider" ></div>
-        <div class="flex">
-          <i class="pi pi-sync" style="font-size: 1.5rem"></i><p>Update Now</p>
-        </div>
-        <div class="card-actions justify-end">
-          <button class="btn-hidden"></button>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="card w-content bg-base-100 shadow-xl" routerLink="/landlord/pending">
-      <div class="card-body">
-        <h2 class="card-title">Pending Tenats</h2>
-        <div class="flex">
-          <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-hourglass-top" viewBox="0 0 16 16">
-            <path d="M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5zm2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1h-7z"/>
-          </svg><p>1 Tenant(s)</p>
-        
-        </div>
-        <div class="divider" ></div>
-        <div class="flex">
-        <i class="pi pi-sync" style="font-size: 1.5rem"></i><p>Update Now</p>
-      </div>
-        <div class="card-actions justify-end">
-          <button class="btn-hidden"></button>
-        </div>
-      </div>
-    </div>
-    <br>
-  </div>
-
+  </div> 
   <!--------------------------------------------till here-------------------------------------------->
+  
   <!--------------------------------------------search bar and button-------------------------------->
-
   <div class="flex justify-start">
     <div class="grid mb-6 gap-6 md:grid-cols-2 grid-cols-1">
       <div class="search">
-        <input type="text" placeholder="Search Tenant" class="input input-bordered" [(ngModel)]="searchTenant"/>&nbsp;
+        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 w-full input-bordered" [(ngModel)]="searchTenant"/>&nbsp;
       </div>
 
       <div class="search">
@@ -142,7 +93,6 @@
   </div>
   <br>
   <!--------------------------------------------tii here---------------------------------------------->
-
 
   <h2><b>All Tenants</b></h2>
   <br>
