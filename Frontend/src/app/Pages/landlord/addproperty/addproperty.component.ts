@@ -9,10 +9,21 @@ import {SelectItem} from 'primeng/api';
   styleUrls: ['./addproperty.component.scss']
 })
 export class AddpropertyComponent implements OnInit {
+  index: number = 0;
 
-  constructor() { }
+  openNext() {
+      this.index = (this.index === 2) ? 0 : this.index + 1;
+  }
 
+  openPrev() {
+      this.index = (this.index === 0) ? 2 : this.index - 1;
+  }
+  
+  constructor() {
+
+   }
   ngOnInit(): void {
   }
+
 
 }

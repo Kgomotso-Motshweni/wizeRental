@@ -39,6 +39,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
 import { NortificationComponent } from './nortification/nortification.component';
 import { MypropertyComponent } from './myproperty/myproperty.component';
+import {TabViewModule} from 'primeng/tabview';
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
@@ -94,6 +95,7 @@ const routes: Routes = [
     InputTextModule,
     ConfirmDialogModule,
     MessagesModule,
+    TabViewModule,
 
     RouterModule.forChild(routes)
   ],
