@@ -23,9 +23,9 @@ import { RegisterComponent } from './Pages/register/register.component';
 //Primeng Imports
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule} from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-
+import { FooterComponent } from './Components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { ButtonModule } from 'primeng/button';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    FooterComponent,
   ],
   imports: [
     LandlordModule,

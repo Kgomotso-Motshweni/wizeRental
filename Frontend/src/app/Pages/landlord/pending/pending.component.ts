@@ -24,7 +24,6 @@ export class PendingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.pending = 1;
   }
 
 

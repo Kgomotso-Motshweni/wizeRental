@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Property } from 'src/app/Interfaces/property';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-myproperty',
@@ -22,12 +23,23 @@ export class MypropertyComponent implements OnInit {
   public loading = false;
 
   myProperty: any = [];
-  myData:any = {};
+  myData:any = [];
   token:any = '';
   submitted:boolean = false;
   propertyInf:Property = new Property;
+  pdfTittle: any;
+  houseImage: any;
+  formData = new FormData();
+  condition:Boolean = false;
+  id: number = 0;
+  message: any;
 
-  constructor(
+  Form = new FormGroup({
+    pdf: new FormControl(''),
+    image: new FormControl(''),
+  });
+
+  constructor(private formBuilder: FormBuilder,
     private land:LandlordService, 
     private auth:AuthenticationService,
     private messageService: MessageService,  
@@ -38,18 +50,25 @@ export class MypropertyComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     let userid = this.token.regData[0].userid
+    this.id = userid;
     this.getProperty(userid);
+    this.Form = this.formBuilder.group({
+      pdf: ['', [Validators.required]],
+      image: ['', [Validators.required]],
+    });
+  }
+
+  get f():{ [key: string]: AbstractControl }{
+    return this.Form.controls;//it traps errors in the form
   }
 
   getProperty(id:any){
     return this.land.getMyProperty(id).subscribe({
       next:data => {
         this.myData = data
-        console.log(this.myData)
       }
     })
   }
-
   deleteProduct(details:Property){
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this property name: ' + details.p_name + '?',
@@ -57,19 +76,28 @@ export class MypropertyComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.loading = true;
-        this.land.deleteMyProperty(details).subscribe();
-        this.route.navigate(['/landlord/addproperty']);
-        this.loading = false;
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Property Deleted', life: 3000})
-      },
+        this.land.deleteMyProperty(details).subscribe({
+          next:data =>{
+            this.loading = true;
+            this.message = data
+            //Route back to the current page,  this helps in refreshing data
+            this.route.navigate(['/landlord/myproperty']);  
+            this.loading = false;
+            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+          },error: err => {
+            this.loading = false;
+            //show the message if unable to add new data
+            this.message = err.error.message;
+            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+          }
+        });
+       },
       reject: () => {
         this.loading = false;
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'You have rejected', life: 3000})
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled property delete', life: 3000})
       }
     })
   }
-
-  condition:Boolean = false;
   
   //Open insert form
   openNew(){
@@ -89,6 +117,14 @@ export class MypropertyComponent implements OnInit {
     this.propertyInf = {...propertyIn};
   }
 
+  imageFileInput(event:any){
+    const proofOfOwnership = (event.target as any ).files[0];
+    this.pdfTittle = proofOfOwnership
+  }
+  pdfFileInput(event:any){
+    const image = (event.target as any ).files[0];
+    this.houseImage = image
+  }
 
   SaveMypropert(){
     this.submitted = true;// submit when the details are true/when form is not blank
@@ -97,6 +133,16 @@ export class MypropertyComponent implements OnInit {
         NB the 1st if statement  was focused on updating and else was inserting new data 
         focus on adding new data
     */
+    if(this.Form.invalid)
+    { 
+      this.loading = false;
+      return
+    }
+
+    this.formData.append('image', this.houseImage)
+    //this.formData.append('pdf', this.pdfTittle)
+    console.log(this.formData)
+    this.land.postProperty(this.formData, this.id).subscribe();
   }
 
   /*
