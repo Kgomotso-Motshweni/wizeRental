@@ -16,6 +16,4 @@ app.post('/rentees',rentees)
 app.get('/getRentees',get_rentees)
 
 
-
-
 module.exports = app
