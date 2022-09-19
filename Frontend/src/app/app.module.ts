@@ -27,9 +27,11 @@ import { HomeComponent } from './Pages/home/home.component';
 import { ApplyComponent } from './Models/apply/apply.component';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule} from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-
+import { FooterComponent } from './Components/footer/footer.component';
+import { RegisterComponent } from './Pages/register/register.component';
+import { LoginComponent } from './Pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,9 @@ import { ButtonModule } from 'primeng/button';
     EditorComponent,
     HomeComponent,
     ApplyComponent,
-  
- 
-   
-   
-    
-    
+    LoginComponent,
+    RegisterComponent,
+    FooterComponent,
   ],
   imports: [
     LandlordModule,
