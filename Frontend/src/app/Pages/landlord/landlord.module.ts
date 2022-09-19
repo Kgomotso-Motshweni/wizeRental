@@ -46,6 +46,7 @@ import { PaginatorModule } from 'primeng/paginator';
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
   children:[
+    {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
     {path:'myproperty', component: MypropertyComponent},
     {path:'pending', component:PendingComponent},

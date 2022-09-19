@@ -5,11 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  providers: [MessageService, ConfirmationService]
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })
@@ -17,8 +20,6 @@ export class DashboardComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
-
-
 
 //   myobject = [{
 //     "applicant_id":"2",
@@ -92,27 +93,31 @@ export class DashboardComponent implements OnInit {
   totReceived: number = 0;
   numPending: number = 0;
   totExpected: number = 0;
-
+  message: any;
   paid:any
 
   payment_array:Array<any>=[];
   // let list: number[] = [1, 2, 3];
 
-  constructor(private dash:DashboardService,private router:Router, private route: ActivatedRoute) { }
+  constructor(private dash:DashboardService,
+    private router:Router, 
+    private route: ActivatedRoute,
+    private messageService: MessageService,  
+    private confirmationService: ConfirmationService,) { }
 
   ngOnInit(): void {
 
     this.dash.rentees().subscribe((rentee:any)=>{
       this.rentees = rentee;
       
-      console.table(this.rentees)
+
 
 
       //Monthly Revenue
       for(let x=0;x<this.rentees.length;x++){
        
         this.payment_array[x] = this.rentees[x].paystatus;
-        console.table(this.payment_array)
+     
           this.totAmnt = +this.totAmnt + +this.rentees[x].rent; 
           this.payment_status = this.rentees[x].paymentstatus
       }
@@ -145,20 +150,38 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-
-  deleteUser(id:any)
-  {
-    console.log("inside")
-     this.dash.deleteRentee(this.rentees[id].rentee_id).subscribe((rent_id)=>{
-        
-  //reload page after delete
-        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+  deleteUser(details:Payment){
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to remove this: ' + details.full_name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        console.log(details)
+        this.loading = true;
+        this.dash.deleteRentee(details).subscribe({
+          next:data =>{
+            this.loading = true;
+            this.message = data
+            //Route back to the current page,  this helps in refreshing data
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
             this.router.navigate(['/landlord/'], {relativeTo: this.route})
-
-     })
+            this.loading = false;
+            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+          },error: err => {
+            this.loading = false;
+            //show the message if unable to add new data
+            this.message = err.error.message;
+            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+          }
+        });
+       },
+      reject: () => {
+        this.loading = false;
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
+      }
+    })
   }
-
 
   paymentStats(id:any){
 
@@ -167,7 +190,7 @@ export class DashboardComponent implements OnInit {
 
    _index(payment:any){
 
-   console.log(payment)
+ 
    return false
    
   }

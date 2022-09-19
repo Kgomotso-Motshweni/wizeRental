@@ -5,7 +5,7 @@ const Client = require('../Config/db.config')
 
 //delete rentee
 
-exports.delete_rentee = async (req,res) =>{
+module.exports = delete_rentee = async (req,res) =>{
 const id = parseInt(req.params.id);
     try {
         

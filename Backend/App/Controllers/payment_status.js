@@ -4,7 +4,7 @@ const client = require("../Config/db.config");
 
 //payment status Function
 
-exports.payment_status= async (req, res) => {
+module.exports = payment_status= async (req, res) => {
   try {
         //get all post form the database
         const data = await client.query(

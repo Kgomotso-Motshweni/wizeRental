@@ -1,24 +1,15 @@
 const express = require('express')
-const app = express();
-const bodyparser = require('body-parser')
+const router = express.Router();
 
+const rentees = require('../controllers/rentees');
 
-const {rentees} = require('../controllers/rentees');
-const { get_rentees } = require('../Controllers/get_rentees');
 const { delete_rentee } = require('../Controllers/delete_rentee');
 const { payment_status } = require('../Controllers/payment_status');
 
+router.post('/rentees',rentees)
+
+router.get('/getPayment',payment_status)
+router.delete('/deleteRentee/:id',delete_rentee)
 
 
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(bodyparser.json());
-
-
-
-app.post('/rentees',rentees)
-app.get('/getRentees',get_rentees)
-app.get('/getPayment',payment_status)
-app.delete('/deleteRentee/:id',delete_rentee)
-
-
-module.exports = app
+module.exports = router

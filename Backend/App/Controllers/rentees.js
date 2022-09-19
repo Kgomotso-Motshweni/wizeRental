@@ -4,13 +4,8 @@ const client = require("../Config/db.config");
 
 //Acepted a rentee Function
 
-<<<<<<< HEAD
-const rentees = async (req, res) => {
-  const {applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time} = req.body;
-=======
-exports.rentees = async (req, res) => {
+module.exports = rentees = async (req, res) => {
   const {applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time,payStatus,paymentstatus} = req.body;
->>>>>>> 9494ed19c0142c9a0df532fbb968b5d64228f78e
   try {
 
     console.log("payment status",payStatus)
@@ -40,6 +35,3 @@ exports.rentees = async (req, res) => {
   }
 };
  
-module.exports = {
-  rentees
-}

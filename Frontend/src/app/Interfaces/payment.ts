@@ -1,12 +1,12 @@
 export interface Payment {
     rentee_id: number;
     applicant_id:string,
-    full_Name:string,
+    full_name:string,
     property_id:number,
     rent:number,
     unit:number,
-    moaStart:Date,
-    moaEnd:Date,
+    moastart:Date,
+    moaend:Date,
     rent_paid:number,
     create_time:Date,
     r_update_time:Date,
