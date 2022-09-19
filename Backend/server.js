@@ -34,7 +34,7 @@ client.connect((err) =>{ // Connect to the Database
     }
 });
 
-const port = process.env.PORT || 8090; //create a listerning port number
+const port = process.env.PORT || 8080; //create a listerning port number
 
 
 app.get("/", (req, res) =>{
