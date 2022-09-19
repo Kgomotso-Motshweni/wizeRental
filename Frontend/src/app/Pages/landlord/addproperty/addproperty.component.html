@@ -66,14 +66,36 @@
                 </div>
             </div>
         </ng-container> 
+
     </p-tabPanel>
+
+
     <p-tabPanel header="Images">
-        Content 2
+            <ng-container >
+                <div class="container">
+                    <div class="flex justify-center">
+                        <div class="grid sm:grid-cols-1 ">
+                            <div class="card empty w-full shadow-xl">
+                                <div class="card-body">
+                                        <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <P>Image upload rules:</P><br>
+                                            <P>Acceptable image format JPG</P><br>
+                                            <P>No duplicate images</P>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </ng-container> 
     </p-tabPanel>
     <p-tabPanel header="Payment">
         Content 3
     </p-tabPanel>
 </p-tabView>
+
+
 
 
 
