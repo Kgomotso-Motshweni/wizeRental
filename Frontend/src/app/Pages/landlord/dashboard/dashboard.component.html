@@ -92,6 +92,7 @@
     </div> 
   </div>
   <br>
+
   <!--------------------------------------------tii here---------------------------------------------->
 
   <h2><b>All Tenants</b></h2>
@@ -115,17 +116,50 @@
       </thead>
       <tbody>
         <!---------------------------------------------row 1-------------------------------------------------->
-        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index">
+        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index;">
+        
           <th>{{x+1}}</th>
           <td>{{rentee.full_name}}</td>
           <td>082-145-6643</td>
           <td>2A</td>
-          <td>{{rentee.rent_paid}}</td>
-          <td>{{rentee.created_time}}</td>
-          <td>{{rentee.r_update_time}}</td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-error">Delete</button></td>
+          <td>{{rentee.rent}}</td>
+          <td>{{rentee.moastart | date:'dd-MM-yyyy'}}</td>
+          <td>{{rentee.r_update_time | date:'dd-MM-yyyy'}}</td>
+          <td>{{payment_status}}</td>
+          <td>
+            
+            <!-- <div class="form-control" *ngIf="_index(rentee.paystatus)">
+              <label class="label cursor-pointer">
+                <input type="checkbox" class="toggle toggle-primary" checked/>
+              </label>
+            </div> -->
+
+
+          
+
+
+            <div class="form-control" *ngIf="rentee.paymentstatus">
+              <label class="label cursor-pointer">
+                <input type="checkbox" class="toggle toggle-primary" checked/>
+              </label>
+            </div>
+          
+            <div class="form-control" *ngIf="!rentee.paymentstatus">
+              <label class="label cursor-pointer">
+                <input type="checkbox" class="toggle toggle-primary" />
+              </label>
+            </div>
+
+
+
+            
+             
+           
+
+      
+          </td>
+         
+          <td><button class="btn btn-error" (click)="deleteUser(x)">Delete</button></td>
         </tr>
       </tbody>
     </table>

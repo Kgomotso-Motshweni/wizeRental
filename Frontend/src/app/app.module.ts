@@ -26,6 +26,7 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule} from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { FooterComponent } from './Components/footer/footer.component';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FooterComponent } from './Components/footer/footer.component';
     ToastModule,
     DialogModule,
     ButtonModule,
+    ToggleButtonModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
       backdropBackgroundColour: 'rgba(0,0,0,0.5)',

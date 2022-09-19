@@ -13,9 +13,9 @@ export class HeaderComponent implements OnInit {
   constructor(private auth:AuthenticationService) { }
 
   ngOnInit(): void {
-    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    //this.Full_Name = this.transform(this.token.regData[0].firstname );
-    this.Full_Name = this.substring(this.token.regData[0].firstname );
+    // this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    // //this.Full_Name = this.transform(this.token.regData[0].firstname );
+    // this.Full_Name = this.substring(this.token.regData[0].firstname );
   }
 
   //Receive an entire string, take the first letter and transform it into uppercase 

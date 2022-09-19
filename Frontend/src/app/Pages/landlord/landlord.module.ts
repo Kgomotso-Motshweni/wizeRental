@@ -46,15 +46,13 @@ import { PaginatorModule } from 'primeng/paginator';
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
   children:[
-    {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
     {path:'myproperty', component: MypropertyComponent},
     {path:'pending', component:PendingComponent},
     {path:'addproperty', component:AddpropertyComponent},
     {path:'sendNortification', component:SendNortificationComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
-  ]}
-  
+  ]}  
 ]
 
 @NgModule({
@@ -107,3 +105,4 @@ const routes: Routes = [
 
 })
 export class LandlordModule { }
+
