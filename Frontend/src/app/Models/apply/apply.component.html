@@ -14,16 +14,16 @@
                             </div>
                            <div class="row">
                                 <div class="bord form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="firstname" placeholder="First Name"  class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['firstname'].errors }"/>
-                                    <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['firstname'].errors['required']">First name is required</div>
+                                    <input type="text" formControlName="fname" placeholder="First Name"  class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"/>
+                                    <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['fname'].errors['required']">First name is required</div>
                                     </div>
                                 </div>   
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="lastname" placeholder="Last Name" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
-                                    <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['lastname'].errors['required']">Last name is required</div>
+                                    <input type="text" formControlName="lname" placeholder="Last Name" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }"/>
+                                    <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['lname'].errors['required']">Last name is required</div>
                                     </div>
                                 </div>   
                             </div>
@@ -59,24 +59,24 @@
 
                             
                             <div class="form-group col-md-6 mb-4">
-                                <input type="file" formControlName="UploadID" placeholder="Upload Identity Document" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['UploadID'].errors }"/>
-                                <div *ngIf="submitted && f['UploadID'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['UploadID'].errors['required']">Upload ID is required</div>
+                                <input type="file" formControlName="uploadID" placeholder="Upload Identity Document" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['uploadID'].errors }"/>
+                                <div *ngIf="submitted && f['uploadID'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['uploadID'].errors['required']">Upload ID is required</div>
                                 </div>
                             </div>
 
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="EmpStatus" placeholder="Employement Status" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['EmpStatus'].errors }"/>
-                                <div *ngIf="submitted && f['EmpStatus'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['EmpStatus'].errors['required']">Employement Status is required</div>
+                                <input type="text" formControlName="empStatus" placeholder="Employement Status" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['empStatus'].errors }"/>
+                                <div *ngIf="submitted && f['empStatus'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['empStatus'].errors['required']">Employement Status is required</div>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="Income" placeholder="Current Income" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['Income'].errors }"/>
-                                <div *ngIf="submitted && f['Income'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['Income'].errors['required']">Current Income is required</div>
+                                <input type="text" formControlName="income" placeholder="Current Income" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['income'].errors }"/>
+                                <div *ngIf="submitted && f['income'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['income'].errors['required']">Current Income is required</div>
                                 </div>
                            
                             
@@ -91,7 +91,7 @@
                         
                             
                                 <div class="form-group col-md-6 mb-4">
-                                    <select  formControlName="usertype" class="input-bordered w-full max-w-xs" placeholder="total occupancy" [ngClass]="{ 'is-invalid':submitted && f['usertype'].errors}">
+                                    <select  formControlName="totOcc" class="input-bordered w-full max-w-xs" placeholder="total occupancy" [ngClass]="{ 'is-invalid':submitted && f['totOcc'].errors}">
                                         <option value disabled selected hidden>Total Occupancy </option>
                                         <option value="number">1</option>
                                         <option value="number">2</option>
@@ -100,8 +100,8 @@
                                         <option value="number">5</option>
                                         
                                     </select>
-                                    <div *ngIf="submitted && f['usertype'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['usertype'].errors['required']">total occupancy is required</div>
+                                    <div *ngIf="submitted && f['totOcc'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['totOcc'].errors['required']">total occupancy is required</div>
                                     </div>
                                 </div>
 

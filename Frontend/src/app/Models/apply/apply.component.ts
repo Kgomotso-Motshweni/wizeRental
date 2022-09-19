@@ -14,21 +14,19 @@ export class ApplyComponent implements OnInit {
  
 
   Form = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
+    fname: new FormControl(''),
+    lname: new FormControl(''),
     email: new FormControl(''),
     phonenumber: new FormControl(''),
     age: new FormControl(''),
-    UploadID: new FormControl(''),
-    EmpStatus: new FormControl(''),
-    Income: new FormControl(''),
+    uploadID: new FormControl(''),
+    empStatus: new FormControl(''),
+    income: new FormControl(''),
     viewDate: new FormControl(''),
-    usertype: new FormControl(''),
     totOcc: new FormControl(''),
     petNum: new FormControl(''),
     petDesc: new FormControl(''),
     smoke: new FormControl(''),
-    profile: new FormControl(''),
    
   });
 
@@ -45,8 +43,8 @@ export class ApplyComponent implements OnInit {
 
     ngOnInit(): void {
       this.Form = this.formBuilder.group({
-        firstname: ['', Validators.required],
-        lastname: ['', Validators.required],
+        fname: ['', Validators.required],
+        lname: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         phonenumber:  ['', [Validators.required, Validators.pattern('[0-9]{3}-[0-9]{3}-[0-9]{4}'), Validators.maxLength(12)]],
         age: ['', Validators.required],
@@ -54,14 +52,11 @@ export class ApplyComponent implements OnInit {
         EmpStatus: ['', Validators.required],
         Income: ['', Validators.required],
         viewDate: ['', Validators.required],
-        usertype: ['', Validators.required],
         totOcc: ['', ],
         petNum: ['', ],
         petDesc: ['', ],
         smoke: ['', ],
-        profile: ['', ],
-       
-  
+
       },
       );
     }
@@ -78,8 +73,8 @@ export class ApplyComponent implements OnInit {
       let status = true;
   
       let user = {
-        firstname : this.Form.value.firstname,
-        lastname: this.Form.value.lastname,
+        fname : this.Form.value.fname,
+        lname: this.Form.value.lname,
         email: this.Form.value.email,
         phonenumber : this.Form.value.phonenumber,
         age : this.Form.value.age,
