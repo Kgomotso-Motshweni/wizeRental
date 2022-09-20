@@ -38,19 +38,14 @@ client.connect((err) =>{ // Connect to the Database
 
 const port = process.env.PORT || 8080; //create a listerning port number
 
-<<<<<<< HEAD
 app.use('/users',user)
-=======
->>>>>>> 9e09f3362b50d0b23957ad499a4d5986b247da91
 
 app.get("/", (req, res) =>{
     res.status(200).send("Welcome to WizeRentalz server");
 });
 
-<<<<<<< HEAD
 //calling routes
 // require('./App/Routes/property.route')(app)
-=======
 
 //Routes Calls
 const auth = require("./App/Routes/Authentication");
@@ -60,7 +55,6 @@ const property = require('./App/Routes/Landlord')
 app.use("/api", auth) //retrive authentication infor 
 app.use("/api", property) //retrive Landlord infor 
 
->>>>>>> 9e09f3362b50d0b23957ad499a4d5986b247da91
 app.listen(port, () =>{  
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })

@@ -4,7 +4,6 @@
 //const {Client} = require("pg");
 //const client= new Client(process.env.DB_URL)
 
-<<<<<<< HEAD
 //Using MSQL
 // const mysql = require('mysql');
 // const client = new mysql.createConnection({
@@ -32,16 +31,7 @@ const pool = new Pool({
   port: 5432,
 })
 
-pool.connect((err) =>{
-  if(err){
-      console.log(err, 'cannot connect to the DB')
-  }
-  else{       
-      console.log('CONNECTED TO THE DB');
-  }
-})
-=======
-// hosted
+/*
 const {Client} = require("pg");
 const client = new Client({
     connectionString: process.env.DB_Posgres,
@@ -49,6 +39,5 @@ const client = new Client({
         rejectUnauthorized: false //allows external access to database when using nodejs
     }
 });
->>>>>>> 9e09f3362b50d0b23957ad499a4d5986b247da91
-
+*/
 module.exports = pool;
