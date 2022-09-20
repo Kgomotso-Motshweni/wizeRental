@@ -106,9 +106,9 @@
                             <div class="form-group col-md-6 mb-4">
                                 <label class="input-group">
                                     Number of pets
-                                <input type="text" formControlName="petNum" placeholder="0" class="form-control"  [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
-                                <div *ngIf="submitted && f['petNum'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['petNum'].errors['required']">Number of pets is required</div>
+                                <input type="text" formControlName="num_pets" placeholder="0" class="form-control"  [ngClass]="{ 'is-invalid':submitted && f['num_pets'].errors }"/>
+                                <div *ngIf="submitted && f['num_pets'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['num_pets'].errors['required']">Number of pets is required</div>
                                 </div>
                             </label>
                             </div>
@@ -116,9 +116,9 @@
                             <div class="form-group col-md-6 mb-4">
                                 <label class="input-group">
                                     Pets Description
-                                <input type="text" formControlName="petDesc" placeholder="" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['lastname'].errors }"/>
-                                <div *ngIf="submitted && f['petDesc'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['petDesc'].errors['required']">Pets Description is required</div>
+                                <input type="text" formControlName="ped_desc" placeholder="" class="form-control" [ngClass]="{ 'is-invalid':submitted && f['ped_desc'].errors }"/>
+                                <div *ngIf="submitted && f['ped_desc'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['ped_desc'].errors['required']">Pets Description is required</div>
                                 </div>
                             </label>
                             </div>
