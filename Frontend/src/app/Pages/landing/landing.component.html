@@ -1,6 +1,10 @@
+
+
+<!-- nav-bar -->
+<app-nav-bar></app-nav-bar>
 <!------------------------------- content ---------------------------->
 
-<div class="card1 bg-base-100 shadow-xl col-12 ml-0 pt-5 justify-content-center"   style="width: 100%;">
+<div class="card1 bg-base-100 shadow-xl col-12  pt-5 justify-content-center"   style="width: 100%;">
     <figure><img src="../../../assets/images/tierra-mallorca-rgJ1J8SDEAY-unsplash.jpg" class="img-fluid w-100" alt="Shoes"/></figure>
     <div class="card-body">
       <p>Wize rentals is here to find you a 
@@ -26,15 +30,20 @@
       </div>
       <div class="space1">
     </div>
-    <label for="my-modal" class="btn modal-button btn-primary" style="width: 27%;">Filter by</label>
+    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 27%;">Filter by</label>
    
   </div>
 
-  <!-- <div class="filter rounded mx-auto bg-light shadow pt-5">
+
+<!-- filter by -->
+
+  <!-- <div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2"> -->
+
+    <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2">
       <div class="drop justify-center">
         <div class="first">
         <div class="dropdown">
-          <label tabindex="0" class="btn m-1 btn-primary">Property type</label>
+          <label tabindex="0" class="btn m-1 btn-primary">Room type<i class="bi bi-caret-down-fill"></i></label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li><a>backroom</a></li>
             <li><a>commune</a></li>
@@ -42,18 +51,18 @@
         </div>
     
         <div class="dropdown">
-          <label tabindex="0" class="btn m-1 btn-primary">Bedroom</label>
+          <label tabindex="0" class="btn m-1 btn-primary">Bedroom <i class="bi bi-caret-down-fill"></i></label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li><a>Single</a></li>
             <li><a>Sharing</a></li>
           </ul>
         </div>
       </div>
-    <br>
+    
     
     <div class="sec">
     <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Min amount</label>
+      <label tabindex="0" class="btn m-1 btn-primary">Min amount <i class="bi bi-caret-down-fill"></i></label>
       <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
         <li><a>R1500</a></li>
         <li><a>R2000</a></li>
@@ -62,7 +71,7 @@
     
     
     <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Max Amount</label>
+      <label tabindex="0" class="btn m-1 btn-primary">Max Amount <i class="bi bi-caret-down-fill"></i></label>
       <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
         <li><a>R3000</a></li>
         <li><a>R4500</a></li>
@@ -72,63 +81,17 @@
     </div>
         <div class="modal-action">
         </div>
-      </div> -->
+      </div>  -->
+      <!-- endof filter -->
 </div>
 
-<!------------------------------ Modal for filter by------------------------------------>
-<input type="checkbox" id="my-modal" class="modal-toggle" />
-<!-- <div class="modal">
-  <div class="modal-box">
-  <div class="drop justify-center">
-    <div class="first">
-    <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary" >Property type</label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>backroom</a></li>
-        <li><a>commune</a></li>
-      </ul>
-    </div>
-
-    <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Bedroom</label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>Single</a></li>
-        <li><a>Sharing</a></li>
-      </ul>
-    </div>
-  </div>
-<br>
-
-
-<div class="dropdown">
-  <label tabindex="0" class="btn m-1 btn-primary">Min amount</label>
-  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a>R1500</a></li>
-    <li><a>R2000</a></li>
-  </ul>
-</div>
-
-<div class="dropdown">
-  <label tabindex="0" class="btn m-1 btn-primary">Max Amount</label>
-  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a>R3000</a></li>
-    <li><a>R4500</a></li>
-  </ul>
-</div>
-  </div>
-    <div class="modal-action">
-      <label for="my-modal" class="btn">X</label>
-    </div>
-  </div>
-</div> -->
-  
 <!--------------------------------------- ng for (properties)------------------------------------------------>
     <div class="prop pt-5 justify-content-center md:prop-cols-1 rounded" >
-      <div class="grid pl-2 pr-2 ml-0 mr-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 justify-center">
+      <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 justify-center">
       <div *ngFor="let i of property| filter: searchItem;let x = index " >
         
-      <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10 pt-5" routerLink="/view">
-        <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
+      <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" (click)="onClick(x)">
+        <figure><img class="img" src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
         <div class="card-body">
             <h6>{{i.p_name}} accommodations</h6>
             <h6>{{i.p_address}}<br>Brixton Johannesburg, 0001</h6>
