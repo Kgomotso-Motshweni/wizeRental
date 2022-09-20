@@ -1,8 +1,8 @@
 
-<p-tabView [(activeIndex)]="index">
+<p-tabView closable='true'>
     <p-tabPanel header="Property details">
         <ng-container >
-            <div class="container">
+            <div class ="container">
                 <div class="flex justify-center">
                     <div class="grid sm:grid-cols-1 ">
                         <div class="card empty w-full shadow-xl">
@@ -47,16 +47,16 @@
                                         <input type="text" id="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2" required>
                                     </div>
                                     <div class="mb-6">
-                                        <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Units*</label>
-                                        <input type="number" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
+                                        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Units*</label>
+                                        <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
                                     </div>
                                     <div class="mb-6">
-                                        <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price*</label>
-                                        <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="R2500" required>
+                                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price*</label>
+                                        <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="R2500" required>
                                     </div>
                                     <div class="mb-6">
-                                        <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload of proof of ownership*</label>
-                                        <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required>
+                                        <label for="document" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload of proof of ownership*</label>
+                                        <input type="document" id="document" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required>
                                     </div>
                                     <button type="submit"  class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Save & Continue</button>
                                 </form>
@@ -90,9 +90,7 @@
                     </div>
             </ng-container> 
     </p-tabPanel>
-    <p-tabPanel header="Payment">
-        Content 3
-    </p-tabPanel>
+
 </p-tabView>
 
 
