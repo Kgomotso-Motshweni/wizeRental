@@ -42,6 +42,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
+import {TabViewModule} from 'primeng/tabview';
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
