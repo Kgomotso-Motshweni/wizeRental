@@ -71,12 +71,8 @@ export class LoginComponent implements OnInit {
         this.decodedToken = this.auth.getDecodedAccessToken(this.userToken); //returns a decoded data from token
 
         this.role = this.decodedToken.regData[0].user_role;
-
         localStorage.setItem('access_token', this.userToken);
-
         localStorage.setItem('role', this.role);
-        console.log(this.decodedToken)
-
         this.messageService.add({
           key: 'tc', severity:'error', summary: 'Error', detail: "Successfully Logged in", life: 3000
         }); 

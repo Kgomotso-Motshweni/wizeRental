@@ -1,9 +1,29 @@
-.dash-card{
-    padding-left: 200px;
-    padding-right: 200px;
-    text-align: left;
-}
-.flex{
+// .dash-card{
+//     padding-left: 200px;
+//     padding-right: 200px;
+//     text-align: left;
+// }
+// .flex{
 
-    gap: 0.5rem;
+//     gap: 0.5rem;
+// }
+@media screen and (min-width: 630px){
+   .pending{
+        width: 73vw;
+    }
+}
+.backend{
+    font-size: 22px;
+    margin-left: 10px;
+}
+.input{
+    width: 35vw;
+}
+.fa-solid, .bi{
+    color: #55ADEA;
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+.cards{
+    margin-top: 14vh;
 }

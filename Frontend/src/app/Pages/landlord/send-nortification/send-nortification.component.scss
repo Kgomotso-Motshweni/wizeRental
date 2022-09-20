@@ -1,15 +1,4 @@
-.empty, .card-body{
-    align-items: center;
-    text-align: center;
-}
-.form-group button{
-    margin-left: -15%;
-    margin-bottom: 5%;
-}
-.user{
-    align-items: flex-start;
-    text-align: left; 
-}
+
 h4, h2{
     color: black;
 }
@@ -25,3 +14,11 @@ h4{
         width: 73vw;
     }
 }
+textarea.input {
+    min-height: 130px;
+    max-height: 130px;
+}
+/*  
+    min-width: 450px;
+    max-width: 450px;
+*/

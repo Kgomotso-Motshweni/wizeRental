@@ -1,15 +1,17 @@
 
 const client = require("../Config/db.config");
 
-//getRentees Function
-module.exports = get_rentees= async (req, res) => {
+
+//payment status Function
+
+module.exports = payment_status= async (req, res) => {
   try {
         //get all post form the database
         const data = await client.query(
-          `SELECT * FROM rentees`,
+          `SELECT payStatus FROM rentees`,
           (err,result) => {
             if (err) {
-           //If rentees are not available is not available
+           //If payments are not available is not available
               console.error(err);
               return res.status(500).json({
                 error: "Database error",
