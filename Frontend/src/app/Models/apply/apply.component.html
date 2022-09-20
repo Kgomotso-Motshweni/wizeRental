@@ -39,11 +39,11 @@
                                 <div class="grid grid-cols-12 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                      
-                                      <input type="text" formControlName="phonenumber" placeholder="012-345-6789" autocomplete="given-name" class="mt-1 block">
-                                      <div *ngIf="submitted && f['phonenumber'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['phonenumber'].errors['required']">Phone Number is required</div>
-                                        <div *ngIf="f['phonenumber'].errors['pattern']">Phone Number should follow the pattern 999-999-9999</div>
-                                        <div *ngIf="f['phonenumber'].errors['maxlength']">Phone Number must not exceed 13 character</div>
+                                      <input type="text" formControlName="phone_num" placeholder="012-345-6789" autocomplete="given-name" class="mt-1 block">
+                                      <div *ngIf="submitted && f['phone_num'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['phone_num'].errors['required']">Phone Number is required</div>
+                                        <div *ngIf="f['phone_num'].errors['pattern']">Phone Number should follow the pattern 999-999-9999</div>
+                                        <div *ngIf="f['phone_num'].errors['maxlength']">Phone Number must not exceed 13 character</div>
                                     </div>
                                     </div>
                                 
@@ -59,27 +59,22 @@
 
                             
                             <div class="form-group col-md-6 mb-4">
-                                <input type="file" formControlName="uploadID" placeholder="Upload Identity Document" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['uploadID'].errors }"/>
-                                <div *ngIf="submitted && f['uploadID'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['uploadID'].errors['required']">Upload ID is required</div>
+                                <input type="file" formControlName="id_doc" placeholder="Upload Identity Document" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }"/>
+                                <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
                                 </div>
                             </div>
 
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="empStatus" placeholder="Employement Status" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['empStatus'].errors }"/>
-                                <div *ngIf="submitted && f['empStatus'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['empStatus'].errors['required']">Employement Status is required</div>
+                                <input type="text" formControlName="occupation" placeholder="Employement Status" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['occupation'].errors }"/>
+                                <div *ngIf="submitted && f['occupation'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['occupation'].errors['required']">Employement Status is required</div>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6 mb-4">
-                                <input type="text" formControlName="income" placeholder="Current Income" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['income'].errors }"/>
-                                <div *ngIf="submitted && f['income'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['income'].errors['required']">Current Income is required</div>
-                                </div>
-                           
-                            
+                                
                                 <div class="form-group col-md-6 mb-4">
                                     <label for="basic">Schedule a View Date</label>
                             <p-calendar [(ngModel)]="dob" dateFormat="dd/mm/yy"></p-calendar>
@@ -91,7 +86,7 @@
                         
                             
                                 <div class="form-group col-md-6 mb-4">
-                                    <select  formControlName="totOcc" class="input-bordered w-full max-w-xs" placeholder="total occupancy" [ngClass]="{ 'is-invalid':submitted && f['totOcc'].errors}">
+                                    <select  formControlName="num_tenants" class="input-bordered w-full max-w-xs" placeholder="total occupancy" [ngClass]="{ 'is-invalid':submitted && f['num_tenants'].errors}">
                                         <option value disabled selected hidden>Total Occupancy </option>
                                         <option value="number">1</option>
                                         <option value="number">2</option>
@@ -100,8 +95,8 @@
                                         <option value="number">5</option>
                                         
                                     </select>
-                                    <div *ngIf="submitted && f['totOcc'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['totOcc'].errors['required']">total occupancy is required</div>
+                                    <div *ngIf="submitted && f['num_tenants'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['num_tenants'].errors['required']">total occupancy is required</div>
                                     </div>
                                 </div>
 
