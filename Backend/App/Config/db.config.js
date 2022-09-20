@@ -1,14 +1,10 @@
-//Using POSTGRES
-// const {Client} = require("pg");
-// const client = new Client({
-//     connectionString: process.env.DB_Posgres,
-//     ssl:{
-//         rejectUnauthorized: false //allows external access to database when using nodejs
-//     }
-// });
 
+//local connection
 
+//const {Client} = require("pg");
+//const client= new Client(process.env.DB_URL)
 
+<<<<<<< HEAD
 //Using MSQL
 // const mysql = require('mysql');
 // const client = new mysql.createConnection({
@@ -44,5 +40,15 @@ pool.connect((err) =>{
       console.log('CONNECTED TO THE DB');
   }
 })
+=======
+// hosted
+const {Client} = require("pg");
+const client = new Client({
+    connectionString: process.env.DB_Posgres,
+    ssl:{
+        rejectUnauthorized: false //allows external access to database when using nodejs
+    }
+});
+>>>>>>> 9e09f3362b50d0b23957ad499a4d5986b247da91
 
 module.exports = pool;

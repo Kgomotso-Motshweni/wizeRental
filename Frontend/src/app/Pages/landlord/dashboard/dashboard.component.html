@@ -1,0 +1,137 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="container justify-center pending">
+  <!---------------------------------------cards---------------------------------------------------->
+  <div class="container cards mb-6 mt-6">
+    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Monthly Revenue</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class=" backend">R {{totExpected}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <p class="ml-2"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Total Amount Received</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i> 
+            </div>
+            <div class=" backend">R {{totReceived}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-content user justify-start">
+          <h2 class="card-title">Total Amount Not Received</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class=" backend"> R {{totNotReceived}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Rooms Occupied</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-house-circle-check"></i>
+            </div>
+            <div class=" backend"> 7 Tenant(s)</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Rooms Available</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-key"></i>
+            </div>
+            <div class=" backend"> 4 Tenant(s)</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body user justify-start"> 
+          <h2 class=" card-title">Pending Tenants</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="bi bi-hourglass-top"></i>
+            </div>
+            <div class=" backend"> 1 Tenant(s)</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <!--------------------------------------------till here-------------------------------------------->
+
+
+</div>
+<div class="fixed bottom-0 w-11/12" style="overflow: hidden; z-index:-1;">
+  <app-footer></app-footer>
+</div>
+
+
+

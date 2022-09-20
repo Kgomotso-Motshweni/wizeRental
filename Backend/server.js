@@ -9,6 +9,9 @@ require('./App/Config/dotenv.config')
 
 var corsOptions = {
     origin: ["*", "http://localhost:4200"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 200,
     credentials: true
   };// only allow the listerning addresses to connnect to the backend
   
@@ -23,7 +26,6 @@ app.use(
 );
 
 //call our database connections file for postgre
-
 const client = require('./App/Config/db.config')
 client.connect((err) =>{ // Connect to the Database
     if (err) {
@@ -34,17 +36,32 @@ client.connect((err) =>{ // Connect to the Database
     }
 });
 
-
 const port = process.env.PORT || 8080; //create a listerning port number
 
+<<<<<<< HEAD
 app.use('/users',user)
+=======
+>>>>>>> 9e09f3362b50d0b23957ad499a4d5986b247da91
 
 app.get("/", (req, res) =>{
     res.status(200).send("Welcome to WizeRentalz server");
 });
 
+<<<<<<< HEAD
 //calling routes
 // require('./App/Routes/property.route')(app)
+=======
+
+//Routes Calls
+const auth = require("./App/Routes/Authentication");
+const property = require('./App/Routes/Landlord')
+// const user =require('../Backend/App/Routes/rentees')
+
+app.use("/api", auth) //retrive authentication infor 
+app.use("/api", property) //retrive Landlord infor 
+
+>>>>>>> 9e09f3362b50d0b23957ad499a4d5986b247da91
 app.listen(port, () =>{  
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })
+

@@ -1,0 +1,124 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="container mx-auto mb-5" style="margin-top: 8vh;">
+    <div class="flex justify-end">
+        <div class="form-group addproperty">
+            <button type="btn" (click)="openNew()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Add New Property</button>
+        </div> 
+    </div>
+</div>
+
+<div *ngIf="!condition; else elseBlock">
+    <ng-container *ngIf="myData.length == 0" >
+        <div class="container">
+            <div class="flex justify-center">
+                <div class="grid sm:grid-cols-1 ">
+                    <div class="card empty w-full shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title">My Properties</h2>
+                            <div>
+                                <h5>You have 0 Property</h5>
+                                <h6>Upload your property for advertising</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="myData.length != 0" >
+        <div class="container">
+            <div class="flex justify-center">
+        
+                <div class="overflow-x-auto list relative shadow-md sm:rounded-lg">
+                    <div class="p-2 max-w-21 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                        My Properties
+                    </div>
+        
+                    <table style="width:100%;" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
+                        <thead class="text-xs text-gray-50 uppercase bg-sky-800 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class=" py-3 px-6">ID</th>
+                                <th scope="col" class=" py-3 px-6">Image</th>
+                                <th scope="col" class=" py-3 px-6">Accommodation Name</th>
+                                <th scope="col" class=" py-3 px-6">Address</th>
+                                <th scope="col" class=" py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i Of myData" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"> 
+                                <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            </th>
+                                <td class="py-4 px-6" ><img [src]="i.house_image" class="w-24 lg:w-36"/></td>
+                                <td class="py-4 px-6">{{i.p_name }}</td>
+                                <td class="py-4 px-6">{{i.p_address}} {{i.p_city}}</td>
+                               
+                                <td>
+                                    <button type="btn" (click)="deleteProduct(i)" class="btn lg:ml-2 sm:mt-2 md:mt-2 text-white bg-red-600 text-center dark:hover:bg-red-600"><i class="fa fa-trash fa-lg"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ng-container> 
+</div>
+
+<ng-template #elseBlock >
+    <div class="container">
+        <div class="flex justify-center">
+            <div class="grid sm:grid-cols-1 ">
+                <div class="card empty w-full shadow-xl">
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+
+<ngx-loading
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.circleSwish,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
+</ngx-loading>
+
+<!--
+      <form [formGroup]="Form">
+                            <div class="form-group mb-6"> 
+                                <label class="input-group">Proof Of Ownership</label>
+                                    <input type="file"  (change)="pdfFileInput($event)" formControlName="pdf" placeholder="pdf"
+                                    class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    [ngClass]="{ 'is-invalid':submitted && f['pdf'].errors }" />
+                                <div *ngIf="submitted && f['pdf'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['pdf'].errors['required']">Proof Of Ownership is required</div>
+                                </div>         
+                            </div>  
+
+                            <div class="form-group mb-6"> 
+                                <label class="input-group">House Image</label>
+                                <input type="file"  (change)="imageFileInput($event)" formControlName="image" placeholder="image"
+                                    class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    [ngClass]="{ 'is-invalid':submitted && f['image'].errors }" />        
+                                <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['image'].errors['required']">House Image is required</div>
+                                </div>         
+                            </div>  
+
+
+                            <div class="form-group mb-6">
+                                <button type="btn" (click)="SaveMypropert()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Login</button>
+                                <button type="button" (click)="hideInsertform()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Login</button>
+                                
+                            </div> 
+                        </form>
+-->

@@ -1,25 +1,36 @@
-import { NgModule } from '@angular/core';
+import {NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { LandlordModule } from './Pages/landlord/landlord.module';
+import { TenantModule } from './Pages/tenant/tenant.module';
+
+////////////
+// Imported Syncfusion Signature module from inputs package.
+
+
+//Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { LandlordComponent } from './Pages/landlord/landlord.component';
-import { TenantsComponent } from './Pages/tenants/tenants.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
-import { ApplyComponent } from './Components/apply/apply.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
 import { FilterByComponent } from './Components/filter-by/filter-by.component';
 
+//Primeng Imports
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule} from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { FooterComponent } from './Components/footer/footer.component';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -27,25 +38,41 @@ import { FilterByComponent } from './Components/filter-by/filter-by.component';
     NavBarComponent,
     EditorComponent,
     HomeComponent,
-    LandlordComponent,
-    TenantsComponent,
     LoginComponent,
     RegisterComponent,
-    ApplyComponent,
     LandingComponent,
     ViewpropertyComponent,
     FilterByComponent,
-   
+    FooterComponent,
   ],
   imports: [
+    LandlordModule,
+    TenantModule,
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     Ng2SearchPipeModule,
+    FormsModule, 
+    HttpClientModule,
+    ToastModule,
+    DialogModule,
+    ButtonModule,
+    ToggleButtonModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.5)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff',
+      fullScreenBackdrop: false,
+    }),
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

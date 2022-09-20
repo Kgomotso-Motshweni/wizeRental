@@ -1,0 +1,44 @@
+.invalid-feedback{
+    color: red;
+}
+.is-invalid{
+    border-color: red;
+}
+
+.email, .password{
+    padding-left: 25px;
+}
+
+//Desktop
+@media screen and (min-width: 769px){
+    .gradient-custom{
+        margin-top: 7vh;
+    }
+}
+.reg{
+    color: #ff0000;
+}
+span{
+    background-color: #deddd8;
+}
+.fa-solid, .pi{
+    color: #55ADEA;
+}
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}

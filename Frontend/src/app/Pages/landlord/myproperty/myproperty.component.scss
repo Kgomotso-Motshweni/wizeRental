@@ -1,0 +1,26 @@
+.empty, .card-body{
+    align-items: center;
+    text-align: center;
+}
+.form-group button{
+    margin-left: -15%;
+    margin-bottom: 5%;
+}
+h2{
+    color: black;
+}
+@media screen and (min-width: 630px){
+    .empty{
+        width: 73vw;
+    }
+}
+.invalid-feedback{
+    color: red;
+}
+.is-invalid{
+    border-color: red;
+}
+.lm_wizard {
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+}
