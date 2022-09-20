@@ -3,6 +3,8 @@ const cors = require('cors'); //import cors module
 const app = express(); //Initialize express
 const bodyParser = require('body-parser');
 
+const user = require('../Backend/App/Routes/property')
+
 require('./App/Config/dotenv.config')
 
 var corsOptions = {
@@ -35,11 +37,14 @@ client.connect((err) =>{ // Connect to the Database
 
 const port = process.env.PORT || 8080; //create a listerning port number
 
+app.use('/users',user)
+
 app.get("/", (req, res) =>{
     res.status(200).send("Welcome to WizeRentalz server");
 });
 
-
+//calling routes
+// require('./App/Routes/property.route')(app)
 app.listen(port, () =>{  
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })

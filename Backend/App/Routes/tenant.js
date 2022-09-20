@@ -1,1 +1,1 @@
-router.get('/tenant:id',tenant.tenant);
+// router.get('/tenant:id',tenant.tenant);

@@ -34,7 +34,8 @@ import { FilterByComponent } from './Components/filter-by/filter-by.component';
     ApplyComponent,
     LandingComponent,
     ViewpropertyComponent,
-    FilterByComponent
+    FilterByComponent,
+   
   ],
   imports: [
     BrowserModule,

@@ -8,18 +8,15 @@ import { HttpClient } from '@angular/common/http';
 export class LandingService {
   baseUrl = environment.baseUrl
 
-
-
   constructor(private http:HttpClient) { }
 
   //getting all properties
   getProperties(){
-    return this.http.get(`${this.baseUrl}/getproperty`,{responseType: 'json'});
+    return this.http.get(`${this.baseUrl}/getproperty`);
   }
 
   //get property by id
   getProperty(id: any){
-    return this.http.get(`${this.baseUrl}/getByProperty/${id}`,{responseType: 'json'});
+    return this.http.get(`${this.baseUrl}/getByProperty/${id}`);
   }
-
 }
