@@ -9,13 +9,14 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 export class HeaderComponent implements OnInit {
   Full_Name:any = '';
   token:any = '';
-  totalNumber: number = 0;
+  totalNumber: number = 1;
   constructor(private auth:AuthenticationService) { }
 
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     //this.Full_Name = this.transform(this.token.regData[0].firstname );
     this.Full_Name = this.substring(this.token.regData[0].firstname );
+    console.log(this.token.regData[0])
   }
 
   //Receive an entire string, take the first letter and transform it into uppercase 

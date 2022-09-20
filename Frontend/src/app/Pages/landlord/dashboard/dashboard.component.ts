@@ -21,72 +21,13 @@ export class DashboardComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-//   myobject = [{
-//     "applicant_id":"2",
-//     "property_id":"4",
-//     "full_Name":"cai",
-//     "unit":"222",
-//     "rent":"200",
-//     "moaStart":"21-JAN-2022",
-//     "moaEnd":"21-FEB-2022",
-//     "rent_paid":"2000",
-//     "create_time":"2022-06-21 01:00:00",
-//     "r_update_time":"2022-06-21 01:00:30",
-//     "payStatus":"false",
-//     "paymentstatus":false
-//   },
-//   {
-//     "applicant_id":"2",
-//     "property_id":"4",
-//     "full_Name":"cai",
-//     "unit":"222",
-//     "rent":"200",
-//     "moaStart":"21-JAN-2022",
-//     "moaEnd":"21-FEB-2022",
-//     "rent_paid":"2000",
-//     "create_time":"2022-06-21 01:00:00",
-//     "r_update_time":"2022-06-21 01:00:30",
-//     "payStatus":"false",
-//     "paymentstatus":false
-//   },
-//   {
-//     "applicant_id":"2",
-//     "property_id":"4",
-//     "full_Name":"cai",
-//     "unit":"222",
-//     "rent":"200",
-//     "moaStart":"21-JAN-2022",
-//     "moaEnd":"21-FEB-2022",
-//     "rent_paid":"2000",
-//     "create_time":"2022-06-21 01:00:00",
-//     "r_update_time":"2022-06-21 01:00:30",
-//     "payStatus":"false",
-//     "paymentstatus":true
-//   },
-//   {
-//     "applicant_id":"2",
-//     "property_id":"4",
-//     "full_Name":"cai",
-//     "unit":"222",
-//     "rent":"200",
-//     "moaStart":"21-JAN-2022",
-//     "moaEnd":"21-FEB-2022",
-//     "rent_paid":"2000",
-//     "create_time":"2022-06-21 01:00:00",
-//     "r_update_time":"2022-06-21 01:00:30",
-//     "payStatus":"false",
-//     "paymentstatus":true
-//   }
-// ]
-
- 
   totAmnt : number = 0;
   paidAmnt : number = 0;
   rentees! : Array<Payment> ;
   searchTenant : any;
   unpaidAmnt :number =0;
-  numTenants :number | undefined;
-  payment_status!: Boolean ;
+  numTenants :number = 0;
+  payment_status: Boolean = false ;
   pay_status: any;
   month: any = [1,3,5,7.8]
   totNotReceived: number = 0;
@@ -97,7 +38,6 @@ export class DashboardComponent implements OnInit {
   paid:any
 
   payment_array:Array<any>=[];
-  // let list: number[] = [1, 2, 3];
 
   constructor(private dash:DashboardService,
     private router:Router, 
@@ -147,39 +87,6 @@ export class DashboardComponent implements OnInit {
       
       //pending Tenants
       // console.log("ghjkpl",this.paymentStats)
-    })
-  }
-
-  deleteUser(details:Payment){
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to remove this: ' + details.full_name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        console.log(details)
-        this.loading = true;
-        this.dash.deleteRentee(details).subscribe({
-          next:data =>{
-            this.loading = true;
-            this.message = data
-            //Route back to the current page,  this helps in refreshing data
-            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/landlord/'], {relativeTo: this.route})
-            this.loading = false;
-            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
-          },error: err => {
-            this.loading = false;
-            //show the message if unable to add new data
-            this.message = err.error.message;
-            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
-          }
-        });
-       },
-      reject: () => {
-        this.loading = false;
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
-      }
     })
   }
 

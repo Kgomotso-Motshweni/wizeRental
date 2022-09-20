@@ -2,24 +2,36 @@
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container justify-center pending">
   <!---------------------------------------cards---------------------------------------------------->
-  <div class="container  mb-6 mt-6">
+  <div class="container cards mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="card shadow-xl border">
-        <div class="grid card-body w-content user justify-start">
+        <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Monthly Revenue</h2> 
-            <div class="backend">R {{totExpected}}</div>
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class=" backend">R {{totExpected}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <p class="ml-2"></p>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
 
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Total Amount Received</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-       
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i> 
             </div>
-            <div class="basis-1/2 backend">R {{totReceived}}</div>
+            <div class=" backend">R {{totReceived}}</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -36,36 +48,10 @@
         <div class="grid card-body w-content user justify-start">
           <h2 class="card-title">Total Amount Not Received</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-             
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i>
             </div>
-            <div class="basis-1/2 backend">R {{totNotReceived}}</div>
-          </div>
-          <div class="flex flex-col">
-            <div class="basis-1/2 divider"></div>
-            <div class="basis-1/2">
-              <div class="flex flex-row">
-                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card shadow-xl border">
-        <div class="grid card-body user justify-start">
-          
-          <h2 class=" card-title">Pending Tenants</h2> 
-          <div class="flex flex-row">
-            <div class="basis-2/5">
-            
-            </div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-hourglass-top"
-                viewBox="0 0 16 16">
-                <path
-                  d="M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5zm2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1h-7z" />
-              </svg>
-            <div class="basis-1/2 backend">R {{numPending}}</div>
+            <div class=" backend"> R {{totNotReceived}}</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -82,10 +68,10 @@
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Rooms Occupied</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-       
+            <div class="">
+              <i class="fa-solid fa-house-circle-check"></i>
             </div>
-            <div class="basis-1/2 backend"> {{totReceived}}</div>
+            <div class=" backend"> 7 Tenant(s)</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -102,10 +88,30 @@
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Rooms Available</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-       
+            <div class="">
+              <i class="fa-solid fa-key"></i>
             </div>
-            <div class="basis-1/2 backend"> {{totReceived}}</div>
+            <div class=" backend"> 4 Tenant(s)</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body user justify-start"> 
+          <h2 class=" card-title">Pending Tenants</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="bi bi-hourglass-top"></i>
+            </div>
+            <div class=" backend"> 1 Tenant(s)</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -120,92 +126,12 @@
     </div>
   </div> 
   <!--------------------------------------------till here-------------------------------------------->
-  
-  <!--------------------------------------------search bar and button-------------------------------->
-  <div class="flex justify-start">
-    <div class="grid mb-6 gap-6 md:grid-cols-2 grid-cols-1">
-      <div class="search">
-        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 w-full input-bordered" [(ngModel)]="searchTenant"/>&nbsp;
-      </div>
-
-      <div class="search">
-        <button type="submit" routerLink='/landlord/sendNortification' class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send Notification</button>
-      </div> 
-    </div> 
-  </div>
-  <br>
-
-  <!--------------------------------------------tii here---------------------------------------------->
-
-  <h2><b>All Tenants</b></h2>
-  <br>
-  <div class="overflow-x-auto">
-    <table class="table w-full">
-      <!--------------------------------------------head-------------------------------------------------->
-      <thead>
-        <tr>
-          <th></th>
-          <th>Tenant</th>
-          <th>Contact</th>
-          <th>Unit</th>
-          <th>Rent</th>
-          <th>MOA Start</th>
-          <th>MOA End</th>
-          <th>MOA</th>
-          <th>PAID</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!---------------------------------------------row 1-------------------------------------------------->
-        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index;">
-        
-          <th>{{x+1}}</th>
-          <td>{{rentee.full_name}}</td>
-          <td>082-145-6643</td>
-          <td>2A</td>
-          <td>{{rentee.rent}}</td>
-          <td>{{rentee.moastart | date:'dd-MM-yyyy'}}</td>
-          <td>{{rentee.r_update_time | date:'dd-MM-yyyy'}}</td>
-          <td>{{payment_status}}</td>
-          <td>
-            
-            <!-- <div class="form-control" *ngIf="_index(rentee.paystatus)">
-              <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" checked/>
-              </label>
-            </div> -->
 
 
-          
-
-
-            <div class="form-control" *ngIf="rentee.paymentstatus">
-              <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" checked/>
-              </label>
-            </div>
-          
-            <div class="form-control" *ngIf="!rentee.paymentstatus">
-              <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" />
-              </label>
-            </div>
-      
-          </td>
-         
-          <td><button class="btn btn-error" (click)="deleteUser(rentee)">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+</div>
+<div class="fixed bottom-0 w-11/12" style="overflow: hidden; z-index:-1;">
+  <app-footer></app-footer>
 </div>
 
-<ngx-loading
-  [show]="loading"
-  [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-  }">
-</ngx-loading>
+
+
