@@ -1,16 +1,15 @@
 
 const client = require("../Config/db.config");
 
-//getRentees Function
-module.exports = get_rentees= async (req, res) => {
-  const id = parseInt(req.params.id)
+//getPending Function
+module.exports = get_pending= async (req, res) => {
   try {
-        //get all post form the database
+        //get all pending tenants
         const data = await client.query(
-          `SELECT * FROM rentees WHERE landlord_id = $1`,[id],
+          `SELECT * FROM applicationform;`,
           (err,result) => {
             if (err) {
-           //If rentees are not available is not available
+           //If tenants are not available is not available
               console.error(err);
               return res.status(500).json({
                 error: "Database error",

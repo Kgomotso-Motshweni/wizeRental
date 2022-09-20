@@ -9,10 +9,10 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
 
 const routes: Routes = [
-  {path:'', component:HomeComponent, canActivate:[LoggedGuard]},
+  {path:'', component:HomeComponent},
   {path:'landlord', component:LandlordComponent},
-  {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
-  {path:'register', component:RegisterComponent, canActivate:[LoggedGuard]},
+  {path:'login', component:LoginComponent},
+  {path:'register', component:RegisterComponent},
   {path:'tenant', component:TenantComponent},
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];

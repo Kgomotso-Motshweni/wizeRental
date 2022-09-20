@@ -11,8 +11,15 @@ export class DashboardService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
 
-  rentees(){
-    return this.http.get(`${this.baseUrl}getRentees`)
+
+  rentees(id:any){
+    return this.http.get(`${this.baseUrl}getRentees/${id}`)
+  }
+
+  getPendTenants(){
+    // return this.http.get(`${this.baseUrl}/getPending`)
+    return this.http.get("http://localhost:8080/api/getPending")
+
   }
   
   deleteRentee(id:Payment){
@@ -21,4 +28,9 @@ export class DashboardService {
   paymentStatus(){
     return this.http.get(`${this.baseUrl}getPayment`)
   }  
+
+  getProperties(id:any){
+    return this.http.get(`${this.baseUrl}getproperties/${id}`)
+  }
+
 }
