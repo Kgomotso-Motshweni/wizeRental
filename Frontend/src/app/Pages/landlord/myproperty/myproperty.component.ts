@@ -66,6 +66,7 @@ export class MypropertyComponent implements OnInit {
     return this.land.getMyProperty(id).subscribe({
       next:data => {
         this.myData = data
+        console.log(this.myData)
       }
     })
   }

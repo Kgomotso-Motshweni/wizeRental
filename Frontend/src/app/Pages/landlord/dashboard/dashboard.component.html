@@ -1,25 +1,37 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container justify-center pending">
   <!---------------------------------------cards---------------------------------------------------->
-  <div class="container  mb-6 mt-6">
+  <div class="container cards mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="card shadow-xl border">
-        <div class="grid card-body w-content user justify-start">
+        <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Monthly Revenue</h2> 
-            <div class="backend">R {{totExpected}}</div>
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class=" backend">R {{totExpected}}</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <p class="ml-2"></p>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
 
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Total Amount Received</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-              </svg>
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i> 
             </div>
-            <div class="basis-1/2 backend">R {{totReceived}}</div>
+            <div class=" backend">R {{totReceived}}</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -36,12 +48,10 @@
         <div class="grid card-body w-content user justify-start">
           <h2 class="card-title">Total Amount Not Received</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-              </svg>
+            <div class="">
+              <i class="fa-solid fa-sack-dollar"></i>
             </div>
-            <div class="basis-1/2 backend">R {{totNotReceived}}</div>
+            <div class=" backend"> R {{totNotReceived}}</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -55,15 +65,53 @@
       </div>
 
       <div class="card shadow-xl border">
-        <div class="grid card-body user justify-start">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Rooms Occupied</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-house-circle-check"></i>
+            </div>
+            <div class=" backend"> 7 Tenant(s)</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Rooms Available</h2> 
+          <div class="flex flex-row">
+            <div class="">
+              <i class="fa-solid fa-key"></i>
+            </div>
+            <div class=" backend"> 4 Tenant(s)</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="basis-1/2 divider"></div>
+            <div class="basis-1/2">
+              <div class="flex flex-row">
+                <i class="pi pi-sync" ></i><p class="ml-2">Update Now</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body user justify-start"> 
           <h2 class=" card-title">Pending Tenants</h2> 
           <div class="flex flex-row">
-            <div class="basis-2/5">
-              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-              </svg>
+            <div class="">
+              <i class="bi bi-hourglass-top"></i>
             </div>
-            <div class="basis-1/2 backend">R {{numPending}}</div>
+            <div class=" backend"> 1 Tenant(s)</div>
           </div>
           <div class="flex flex-col">
             <div class="basis-1/2 divider"></div>
@@ -78,65 +126,12 @@
     </div>
   </div> 
   <!--------------------------------------------till here-------------------------------------------->
-  
-  <!--------------------------------------------search bar and button-------------------------------->
-  <div class="flex justify-start">
-    <div class="grid mb-6 gap-6 md:grid-cols-2 grid-cols-1">
-      <div class="search">
-        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 w-full input-bordered" [(ngModel)]="searchTenant"/>&nbsp;
-      </div>
 
-      <div class="search">
-        <button type="submit" routerLink='/landlord/sendNortification' class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send Notification</button>
-      </div> 
-    </div> 
-  </div>
-  <br>
-  <!--------------------------------------------tii here---------------------------------------------->
 
-  <h2><b>All Tenants</b></h2>
-  <br>
-  <div class="overflow-x-auto">
-    <table class="table w-full">
-      <!--------------------------------------------head-------------------------------------------------->
-      <thead>
-        <tr>
-          <th></th>
-          <th>Tenant</th>
-          <th>Contact</th>
-          <th>Unit</th>
-          <th>Rent</th>
-          <th>MOA Start</th>
-          <th>MOA End</th>
-          <th>MOA</th>
-          <th>PAID</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!---------------------------------------------row 1-------------------------------------------------->
-        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index">
-          <th>{{x+1}}</th>
-          <td>{{rentee.full_name}}</td>
-          <td>082-145-6643</td>
-          <td>2A</td>
-          <td>{{rentee.rent_paid}}</td>
-          <td>{{rentee.created_time}}</td>
-          <td>{{rentee.r_update_time}}</td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-error">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+</div>
+<div class="fixed bottom-0 w-11/12" style="overflow: hidden; z-index:-1;">
+  <app-footer></app-footer>
 </div>
 
-<ngx-loading
-  [show]="loading"
-  [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-  }">
-</ngx-loading>
+
+

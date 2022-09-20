@@ -53,8 +53,7 @@ const routes: Routes = [
     {path:'addproperty', component:AddpropertyComponent},
     {path:'sendNortification', component:SendNortificationComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
-  ]}
-  
+  ]}  
 ]
 
 @NgModule({
@@ -107,3 +106,4 @@ const routes: Routes = [
 
 })
 export class LandlordModule { }
+

@@ -10,14 +10,14 @@ const addProperty = async(req, res) =>{
         folder: "/property/",
     });
         
-        // const data = await client.query(`SELECT * FROM landlordProperty WHERE p_name= $1;`,[p_name]); //Check if user exist
-        // const user = data.rows;
+        const data = await client.query(`SELECT * FROM landlordProperty WHERE p_name= $1;`,[p_name]); //Check if user exist
+        const user = data.rows;
       
-        // if(user.length != 0){
-        //     return res.status(400).json({
-        //         message: "Accomodation name already Exist, Add a new Property"
-        //     });
-        // }else{
+        if(user.length != 0){
+            return res.status(400).json({
+                message: "Accomodation name already Exist, Add a new Property"
+            });
+        }else{
             client.query(`INSERT INTO 
             landlordproperty (landlord_id, house_image)
             VALUES($1,$2) RETURNING property_id`, 
@@ -29,7 +29,7 @@ const addProperty = async(req, res) =>{
                 }
                 return res.status(200).json(results.rows[0].property_id) //Return a status 200 if there is no error
             })
-        //}
+        }
     }catch{
         res.status(500).json({
             error: "Database error when adding property details", //Database connection error
