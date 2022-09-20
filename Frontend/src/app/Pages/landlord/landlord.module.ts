@@ -16,6 +16,11 @@ import { PendingComponent } from './pending/pending.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { AddpropertyComponent } from './addproperty/addproperty.component';
 import { HeaderComponent } from './header/header.component';
+import { NortificationComponent } from './nortification/nortification.component';
+import { MypropertyComponent } from './myproperty/myproperty.component';
+import { FooterComponent } from './footer/footer.component';
+import { SendNortificationComponent } from './send-nortification/send-nortification.component';
+
 
 //Guards
 import { AuthGuard } from 'src/app/Guards/auth.guard';
@@ -37,8 +42,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
-import { NortificationComponent } from './nortification/nortification.component';
-import { MypropertyComponent } from './myproperty/myproperty.component';
+import {TabViewModule} from 'primeng/tabview';
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
@@ -48,9 +52,9 @@ const routes: Routes = [
     {path:'myproperty', component: MypropertyComponent},
     {path:'pending', component:PendingComponent},
     {path:'addproperty', component:AddpropertyComponent},
+    {path:'sendNortification', component:SendNortificationComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
-  ]}
-  
+  ]}  
 ]
 
 @NgModule({
@@ -62,10 +66,13 @@ const routes: Routes = [
     PendingComponent,
     HeaderComponent,
     NortificationComponent,
-    MypropertyComponent
+    MypropertyComponent,
+    FooterComponent,
+    SendNortificationComponent
   ],
   imports: [
     Ng2SearchPipeModule,
+  
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
@@ -93,6 +100,7 @@ const routes: Routes = [
     InputTextModule,
     ConfirmDialogModule,
     MessagesModule,
+    TabViewModule,
 
     RouterModule.forChild(routes)
   ],
@@ -100,3 +108,4 @@ const routes: Routes = [
 
 })
 export class LandlordModule { }
+

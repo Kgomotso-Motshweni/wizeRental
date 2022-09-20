@@ -11,14 +11,6 @@ CREATE TABLE users(
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS tenant CASCADE;
-CREATE TABLE tenant(
-    id SERIAL PRIMARY KEY NOT NULL,
-    profile_img TEXT NOT NULL,
-    tenant_id INT,
-    FOREIGN KEY(tenant_id) REFERENCES users (userid) 
-);
-
 DROP TABLE IF EXISTS Nortifications CASCADE;
 CREATE TABLE Nortifications(
     notification_id SERIAL PRIMARY KEY,
@@ -62,3 +54,43 @@ CREATE TABLE RoomsImages(
 	images TEXT,
 	FOREIGN KEY(property_id) REFERENCES landlordProperty(property_id) 
 );
+
+DROP TABLE IF EXISTS ApplicationForm CASCADE;
+CREATE TABLE ApplicationForm(
+	applicant_id SERIAL PRIMARY KEY NOT NULL,
+	tenant_id INT,
+	property_id INT,
+	full_name VARCHAR(255),
+	email VARCHAR(50),
+	phone_num VARCHAR(15),
+	age INT,
+	id_doc TEXT,
+	occupation VARCHAR(255),
+	view_date TIMESTAMPTZ DEFAULT NOW(),
+	num_Tenants INT,
+	num_pets INT,
+	ped_desc TEXT,
+	smoke CHAR(5),
+	app_create_time TIMESTAMPTZ DEFAULT NOW(),
+	FOREIGN KEY(tenant_id) REFERENCES users(userid),
+	FOREIGN KEY(property_id) REFERENCES landlordProperty(property_id) 
+);
+
+DROP TABLE IF EXISTS Rentees CASCADE;
+CREATE TABLE Rentees(
+	rentee_id SERIAL PRIMARY KEY NOT NULL,
+	applicant_id INT,
+	property_id INT,
+	full_name VARCHAR(255),
+	unit VARCHAR(10),
+	rent DECIMAL(8,2),
+	moaStart TIMESTAMPTZ DEFAULT NOW(),
+	moaEnd TIMESTAMPTZ DEFAULT NOW(),
+	rent_paid  DECIMAL(8,2),
+	paymentstatus BOOLEAN,
+	create_time TIMESTAMPTZ DEFAULT NOW(),
+	r_update_time TIMESTAMPTZ DEFAULT NOW(),
+	FOREIGN KEY(applicant_id) REFERENCES ApplicationForm(applicant_id),
+	FOREIGN KEY(property_id) REFERENCES landlordProperty(property_id) 
+);
+
