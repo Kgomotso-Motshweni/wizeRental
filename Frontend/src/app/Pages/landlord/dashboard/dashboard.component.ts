@@ -30,10 +30,10 @@ export class DashboardComponent implements OnInit {
   payment_status: Boolean = false ;
   pay_status: any;
   month: any = [1,3,5,7.8]
-  totNotReceived: number = 0;
-  totReceived: number = 0;
+  totNotReceived: number = 6500;
+  totReceived: number = 7800;
   numPending: number = 0;
-  totExpected: number = 0;
+  totExpected: number = 14300;
   message: any;
   paid:any
 
