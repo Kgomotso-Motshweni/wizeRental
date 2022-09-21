@@ -15,8 +15,6 @@ const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'apply', component:ApplyComponent},
   {path: 'view-property', component: ViewPropertyComponent},
-  
-  
   {path:'', component:HomeComponent, },
   {path:'landlord', component:LandlordComponent},
   {path:'login', component:LoginComponent, },

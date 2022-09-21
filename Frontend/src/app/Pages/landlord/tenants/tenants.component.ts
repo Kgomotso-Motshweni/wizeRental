@@ -49,7 +49,7 @@ export class TenantsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dash.rentees().subscribe((rentee:any)=>{
+    this.dash.rentees(1).subscribe((rentee:any)=>{
       this.rentees = rentee;
       
 
