@@ -76,7 +76,7 @@
 
                             <div class="form-group col-md-6 mb-4">
                                 
-                                <div class="form-group col-md-6 mb-4">
+                                <div class="form-group col-md-6 mb-4 max-w-s w-full">
                                     <label for="basic">Schedule a View Date</label>
                             <p-calendar [(ngModel)]="dob" dateFormat="dd/mm/yy"></p-calendar>
                             </div>
@@ -87,7 +87,7 @@
                         
                             
                                 <div class="form-group col-md-6 mb-4">
-                                    <select  formControlName="num_tenants" class="input-bordered w-full max-w-xs" placeholder="total occupancy" [ngClass]="{ 'is-invalid':submitted && f['num_tenants'].errors}">
+                                    <select  formControlName="num_tenants" class="form-control w-full" placeholder="total occupancy" [ngClass]="{ 'is-invalid':submitted && f['num_tenants'].errors}">
                                         <option value disabled selected hidden>Total Occupancy </option>
                                         <option value="number">1</option>
                                         <option value="number">2</option>
@@ -101,8 +101,6 @@
                                     </div>
                                 </div>
 
-                            
-                         
 
                             <div class="form-group col-md-6 mb-4">
                                 <label class="input-group">
@@ -125,7 +123,7 @@
                             </div>
                        
                             <div class="form-group col-md-6 mb-4">
-                                <select  formControlName="smoke" class=" input-bordered w-full max-w-xs" placeholder="smoke" [ngClass]="{ 'is-invalid':submitted && f['smoke'].errors}">
+                                <select  formControlName="smoke" class="form-control w-full" placeholder="smoke" [ngClass]="{ 'is-invalid':submitted && f['smoke'].errors}">
                                     <option value disabled selected hidden>Smoke?</option>
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>    
@@ -160,3 +158,5 @@
         </div>
     </div>
 </section>
+
+
