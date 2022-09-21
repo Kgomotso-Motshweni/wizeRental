@@ -25,7 +25,7 @@ import { SendNortificationComponent } from './send-nortification/send-nortificat
 //Guards
 import { AuthGuard } from 'src/app/Guards/auth.guard';
 //Primeng Imports
-//primeNG 
+
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -43,6 +43,14 @@ import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
+
+
+//NgWizard Imports
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default
+};
+
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
@@ -72,7 +80,7 @@ const routes: Routes = [
   ],
   imports: [
     Ng2SearchPipeModule,
-  
+    NgWizardModule.forRoot(ngWizardConfig),
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,

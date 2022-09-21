@@ -23,7 +23,7 @@ export class MypropertyComponent implements OnInit {
   public loading = false;
 
   myProperty: any = [];
-  myData:any = [];
+  myData:any ;
   token:any = '';
   submitted:boolean = false;
   propertyInf:Property = new Property;
@@ -82,6 +82,8 @@ export class MypropertyComponent implements OnInit {
             this.loading = true;
             this.message = data
             //Route back to the current page,  this helps in refreshing data
+            this.route.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.route.onSameUrlNavigation = "reload";
             this.route.navigate(['/landlord/myproperty']);  
             this.loading = false;
             this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
