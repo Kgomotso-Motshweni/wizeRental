@@ -17,7 +17,7 @@ export class ApplyComponent implements OnInit {
     fname: new FormControl(''),
     lname: new FormControl(''),
     email: new FormControl(''),
-    phonenumber: new FormControl(''),
+    phone_num: new FormControl(''),
     age: new FormControl(''),
     id_doc: new FormControl(''),
     occupation: new FormControl(''),
