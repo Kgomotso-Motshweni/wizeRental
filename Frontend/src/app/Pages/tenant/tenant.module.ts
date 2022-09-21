@@ -25,6 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import {ImageModule} from 'primeng/image';
+import { DialogModule} from 'primeng/dialog';
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent, canActivate: [AuthGuard],
@@ -65,6 +66,8 @@ const routes: Routes = [
     InputTextModule,
     ReactiveFormsModule,
     CommonModule,
+    ToastModule,
+    DialogModule,
     ConfirmDialogModule,
     MessagesModule,
     RouterModule.forChild(routes)

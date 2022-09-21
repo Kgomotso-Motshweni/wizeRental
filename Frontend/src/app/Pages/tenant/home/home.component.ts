@@ -8,11 +8,21 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 })
 export class HomeComponent implements OnInit {
   file: any = '';
+
+  
+
   constructor(private auth:AuthenticationService, ) { }
   selectThisImage(myEvent: any) {
     this.file = myEvent.target.files[0]; 
   }
   ngOnInit(): void {
   }
+
+  displayBasic: boolean = false;
+
+
+  showBasicDialog() {
+    this.displayBasic = true;
+}
 
 }

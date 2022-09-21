@@ -59,11 +59,12 @@
 
                             
                             <div class="form-group col-md-6 mb-4">
-                                <input type="file" formControlName="id_doc" placeholder="Upload Identity Document" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }"/>
+                                <input type="file" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="Upload Identity Document" class="block shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-0 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }"/>
                                 <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
                                     <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
                                 </div>
                             </div>
+
 
 
                             <div class="form-group col-md-6 mb-4">
@@ -140,10 +141,12 @@
 
 <!-- Put this part before </body> tag -->
                 <input type="checkbox" id="my-modal" class="modal-toggle" />
-                <div class="modal">
+                <div class="modal" >
+                    <a href="myroom"></a>
                     <div class="center modal-box">
                        <i class="pi pi-check pi-check-circle text-success" style="font-size: 5rem"></i>
-                       <h3 class="text-success font-bold text-lg">Application Successful</h3>
+                       <h3 class="text-success font-bold text-lg"><a href="myroom">Application Successful</a></h3>
+                       
                     <div class="modal-action">
                   <label for="my-modal" class="btn bg-success">OK</label>
                        </div>
