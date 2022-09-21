@@ -16,10 +16,9 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}getRentees/${id}`)
   }
 
+  //Get Pending Tenants
   getPendTenants(){
-    // return this.http.get(`${this.baseUrl}/getPending`)
-    return this.http.get("http://localhost:8080/api/getPending")
-
+    return this.http.get(`${this.baseUrl}getPending`)
   }
   
   deleteRentee(id:Payment){
@@ -33,4 +32,5 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}getproperties/${id}`)
   }
 
+  
 }
