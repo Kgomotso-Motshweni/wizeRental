@@ -32,5 +32,5 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}getproperties/${id}`)
   }
 
-  
+
 }
