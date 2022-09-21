@@ -1,8 +1,13 @@
 const client = require("../Config/db.config");
 
 const getPendingTenants = async(req, res ) => {
+    const id = parseInt(req.params.userid);
     try{
-        client.query(`SELECT * FROM applicationform `,(error, results) => {
+        client.query(`SELECT a.applicant_id, a.tenant_id, a.property_id, a.full_name, a.email, a.phone_num, a.age, a.id_doc, a.occupation, a.view_date, a.num_tenants, a.num_pets, a.ped_desc, a.smoke, a.app_create_time
+            FROM applicationform a
+            INNER JOIN landlordproperty l ON a.property_id = l.property_id
+            INNER JOIN users u ON l.landlord_id = u.userid
+            WHERE u.userid = $1;`,[id],(error, results) => {
                if(error){
                    return res.status(400).json({
                        message: "Unable to retrieve all pending tenants"

@@ -17,8 +17,13 @@ export class DashboardService {
   }
 
   //Get Pending Tenants
-  getPendTenants(){
-    return this.http.get(`${this.baseUrl}getPending`)
+  getPendTenants(id:number){
+    return this.http.get(`${this.baseUrl}getPending/${id}`)
+  }
+  
+  //Get One Pending Tenant
+  getOnePendTenants(id:any){
+    return this.http.get(`${this.baseUrl}getOnePending/${id}`)
   }
   
   deleteRentee(id:Payment){
