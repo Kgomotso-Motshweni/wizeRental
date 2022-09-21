@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LandingService {
+
   baseUrl = environment.baseUrl
 
   constructor(private http:HttpClient) { }
@@ -16,7 +17,12 @@ export class LandingService {
   }
 
   //get property by id
-  getProperty(id: any){
+  getProperty(id:any){
+    console.log("from service",id)
+   
+    
     return this.http.get(`${this.baseUrl}/getByProperty/${id}`);
+    // localStorage.clear();
+    // return this.http.get("http://localhost:8080/users/getByProperty/");    
   }
 }

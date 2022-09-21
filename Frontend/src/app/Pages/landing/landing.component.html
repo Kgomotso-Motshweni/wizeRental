@@ -30,7 +30,7 @@
       </div>
       <div class="space1">
     </div>
-    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 27%;">Filter by</label>
+    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 29%;">Filter by</label>
    
   </div>
 
@@ -86,11 +86,11 @@
 </div>
 
 <!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="prop pt-5 justify-content-center md:prop-cols-1 rounded" >
-      <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3 justify-center">
+    <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded" >
+      <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-5 justify-center">
       <div *ngFor="let i of property| filter: searchItem;let x = index " >
         
-      <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" (click)="onClick(x)">
+      <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
         <figure><img class="img" src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
         <div class="card-body">
             <h6>{{i.p_name}} accommodations</h6>

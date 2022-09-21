@@ -17,7 +17,7 @@ const routes: Routes = [
     {path:'login', component:LoginComponent},
     {path:'register', component:RegisterComponent},
     {path:'landing',component:LandingComponent},
-    {path:'view', component:ViewpropertyComponent},
+    {path:'view/:id', component:ViewpropertyComponent},
     {path: 'filter', component:FilterByComponent},
     {path:'tenant', component:TenantComponent},
     {path:'', redirectTo:"/", pathMatch:"full"},

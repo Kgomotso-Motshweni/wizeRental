@@ -67,15 +67,22 @@ onClick(ind:any){
   this.service.getProperties().subscribe(
     {
       next: (data: any) => {
-        console.log(data[ind].property_id);
-        this.id =data[ind].property_id;
-        localStorage.setItem('prop_id','id');
+        // console.log(data[ind]);
+        // this.id =data[ind].property_id;
+
+        this.id = this.property[ind].property_id
+        localStorage.setItem('prop_id',this.id);
+        localStorage.setItem('data',data);
+
+        const userid=localStorage.getItem('prop_id');
+
+        console.log("From landing",userid);
       }
     });
 
-    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    // this.router.onSameUrlNavigation = 'reload';
-    // this.router.navigate(['/view'], { relativeTo: this.route });
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/view'], { relativeTo: this.route });
 
 }
 

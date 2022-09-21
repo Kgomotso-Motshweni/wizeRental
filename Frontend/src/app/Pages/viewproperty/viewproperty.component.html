@@ -1,26 +1,25 @@
+<!-- nav-bar -->
+<app-nav-bar></app-nav-bar>
+
 
 <div class="prop pt-5" >
    
     <div class="card w-96 bg-base-100 shadow-xl  pt-5">
       <figure><img src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
       <div class="card-body">
-          <h6>Shaka accomodation</h6>
-          <h6>Price</h6>
-          <h6>39 Ripley Road,<br>Brixton Johannesburg, 0001</h6>
+          <h6>{{data.p_name}}</h6>
+          <h6>Price R{{data.p_price}}</h6>
+          <h6>{{data.p_address}},<br>Brixton Johannesburg, 0001</h6>
           <div class="icons">
-          <i class="fa-solid fa-bed"></i><h6> 3 rooms </h6>
+          <i class="fa-solid fa-bed"></i><h6> {{data.p_room}} rooms </h6>
           <div class="space">
         </div>
-          <i class="fas fa-bath"></i><h6>2 bathrooms</h6>
+          <i class="fas fa-bath"></i><h6> {{data.p_bath}} bathrooms</h6>
       </div>
       </div>
       <div class="card glass col-10 justify-content-center p-5 m-3">
           <h6>description</h6>
-        <p> sdgfhgjhkljiiouytdrse
-            dfgxfchvhjbkjlkhgiyf
-            utdrgxfchgvhbkjlkhogi
-            yfutdygfxxrdtcfygvubhi
-            jnhbugvycftdxrdtcfvg</p>
+        <p> {{data.p_description}}</p>
     </div>
     </div>
 </div>
