@@ -1,100 +1,78 @@
 
-<p-tabView closable='true'>
-    <p-tabPanel header="Property details">
-        <ng-container >
-            <div class ="container">
-                <div class="flex justify-center">
-                    <div class="grid sm:grid-cols-1 ">
-                        <div class="card empty w-full shadow-xl">
-                            <div class="card-body">
-                                <form>
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Location*</label>
-                                            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required>
-                                        
-                                        </div>
-                                        <div>
-                                            <!-- <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label> -->
-                                            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="City" required>
-                                        </div>
-                                        <div>
-                                            <!-- <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company</label> -->
-                                            <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Town" required>
-                                        </div> 
-                                        <div>
-                                            <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-166 dark:focus:border-blue-500" placeholder="Zip Code" required>
-                                        </div> 
-                                        <div>
-                                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property Type*</label>
-                                            <input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-                                        </div>
-                                        <div>
-                                            <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accomodation Name</label>
-                                            <input type="url" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Shaka" required>
-                                        </div>
-                                        <div>
-                                            <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Description*</label>
-                                            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" Double story house with 3 bedrooms and 2 bathrooms, It comes fully furnished. " required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-6">
-                                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Bedroom*</label>
-                                        <input type="text" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="1" required>
-                                    </div>
-                                    <div class="mb-6">
-                                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bathroom*</label>
-                                        <input type="text" id="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2" required>
-                                    </div>
-                                    <div class="mb-6">
-                                        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Units*</label>
-                                        <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
-                                    </div>
-                                    <div class="mb-6">
-                                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price*</label>
-                                        <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="R2500" required>
-                                    </div>
-                                    <div class="mb-6">
-                                        <label for="document" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload of proof of ownership*</label>
-                                        <input type="document" id="document" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required>
-                                    </div>
-                                    <button type="submit"  class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Save & Continue</button>
-                                </form>
-                            </div>
-                        </div>
+<div class="container py-5">
+    <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+    
+        <ng-wizard-step [title]="'Property details'" 
+        [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+        <span>
+            <form>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Location*</label>
+                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required>
+                    
+                    </div>
+                    <div>
+                        <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="City" required>
+                    </div>
+                    <div>
+                        <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Town" required>
+                    </div> 
+                    <div>
+                        <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-166 dark:focus:border-blue-500" placeholder="Zip Code" required>
+                    </div> 
+                    <div>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property Type*</label>
+                        <input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+                    </div>
+                    <div>
+                        <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accomodation Name</label>
+                        <input type="url" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Shaka" required>
+                    </div>
+                    <div>
+                        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Description*</label>
+                        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" Double story house with 3 bedrooms and 2 bathrooms, It comes fully furnished. " required>
                     </div>
                 </div>
-            </div>
-        </ng-container> 
+                <div class="mb-6">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Bedroom*</label>
+                    <input type="text" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="1" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bathroom*</label>
+                    <input type="text" id="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2" required>
+                </div>
+                <div class="mb-6">
+                    <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Units*</label>
+                    <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
+                </div>
+                <div class="mb-6">
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price*</label>
+                    <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="R2500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="document" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload of proof of ownership*</label>
+                    <input type="document" id="document" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required>
+                </div>
+            </form> 
+        </span>
+        </ng-wizard-step>
+        
+        <ng-wizard-step [title]="'Images'" >
+        <ng-container>
+            <h1>Image upload rules : </h1>
+            <p>
+                cceptable image format JPG and PNG <br>
+                 Maximum image file size 10mb.<br>
+            No Duplicate images<br>
+            </p>
+        </ng-container>
+        </ng-wizard-step>   
+    </ng-wizard>
+</div>
 
-    </p-tabPanel>
-
-
-    <p-tabPanel header="Images">
-            <ng-container >
-                <div class="container">
-                    <div class="flex justify-center">
-                        <div class="grid sm:grid-cols-1 ">
-                            <div class="card empty w-full shadow-xl">
-                                <div class="card-body">
-                                        <div class="grid gap-6 mb-6 md:grid-cols-2">
-                                            <P>Image upload rules:</P><br>
-                                            <P>Acceptable image format JPG</P><br>
-                                            <P>No duplicate images</P>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </ng-container> 
-    </p-tabPanel>
-
-</p-tabView>
 
 
 
 
-
-
+  

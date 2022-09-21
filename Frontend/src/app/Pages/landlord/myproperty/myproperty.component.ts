@@ -23,7 +23,7 @@ export class MypropertyComponent implements OnInit {
   public loading = false;
 
   myProperty: any = [];
-  myData:any = [];
+  myData:any ;
   token:any = '';
   submitted:boolean = false;
   propertyInf:Property = new Property;

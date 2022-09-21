@@ -28,6 +28,8 @@ import { ButtonModule } from 'primeng/button';
 import { FooterComponent } from './Components/footer/footer.component';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
