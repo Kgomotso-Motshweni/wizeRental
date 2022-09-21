@@ -2,8 +2,8 @@
 
 <!-- nav-bar -->
 <app-nav-bar></app-nav-bar>
-<!------------------------------- content ---------------------------->
 
+<!------------------------------- content ---------------------------->
 <div class="card1 bg-base-100 shadow-xl col-12  pt-5 justify-content-center"   style="width: 100%;">
     <figure><img src="../../../assets/images/tierra-mallorca-rgJ1J8SDEAY-unsplash.jpg" class="img-fluid w-100" alt="Shoes"/></figure>
     <div class="card-body">
@@ -13,15 +13,17 @@
     </div>
   </div>
 
-<!-------------------------------- search ------------------------------>
+<!-------------------------------- search/filter/toggle ------------------------------>
 <div class="container-fluid pt-5 ml-3 mr-3 col-sm-12 col-xl-2 col-md-6" >
+  
+<!------------------------------------- toggle  ------------------------------------>
    What do you need?
   <div class="buttons shadow-md col-md-12 justify-content-center pt-1">
     <button class="btn1" routerLink="/login">To Rent</button>
     <button class="btn2" routerLink="/login">To Advertise</button>
   </div>
 
-
+<!------------------------------------ search --------------------------------------->
   <br>
   <div class="search col-xl-12">
     <div class="form-control justify-content-flex" style="width: 70%;">
@@ -30,7 +32,8 @@
       </div>
       <div class="space1">
     </div>
-    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 29%;">Filter by</label>
+    <br>
+    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 27%;">Filter by</label>
    
   </div>
 
