@@ -21,8 +21,6 @@ export class SendNortificationComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-
-
   Form = new FormGroup({
     nortType: new FormControl(''),
     subject: new FormControl(''),
@@ -39,7 +37,8 @@ export class SendNortificationComponent implements OnInit {
   selectedNames: string[] = [];
   rentees: any ;
   tenantAddress: any;
-  address:Array<any> = [];
+  address:Array<any> = []; //Declare an address variable name 
+
   constructor(private formBuilder: FormBuilder,
     private dash:DashboardService,
     private messageService: MessageService,
@@ -69,7 +68,6 @@ export class SendNortificationComponent implements OnInit {
     return this.Form.controls;//it traps errors in the form
   }
 
-  
   getLandLordAddress(){
     return this.dash.address(this.id).subscribe({
       next:data => {
@@ -86,7 +84,6 @@ export class SendNortificationComponent implements OnInit {
       this.dash.rentees(this.Form.value.address[x].p_address).subscribe({
         next:data => {
           this.rentees = data;
-          console.log(this.rentees)
           }
         }
       )
@@ -96,7 +93,7 @@ export class SendNortificationComponent implements OnInit {
   recipients(){
 
   }
-  
+
   onSubmit(){
     this.submitted = true;
 
@@ -106,15 +103,18 @@ export class SendNortificationComponent implements OnInit {
       return
     }
 
-
-    let user = {
-      nortType: this.Form.value.nortType,
-      subject: this.Form.value.subject,
-      recipient: this.Form.value.recipient,
-      message: this.Form.value.message,
+    for(let i=0; i<this.Form.value.recipient.length; i++){
+      console.log(this.Form.value.recipient[i].tenant_id)
     }
 
-    console.log(user)
+    // let user = {
+    //   nortType: this.Form.value.nortType,
+    //   subject: this.Form.value.subject,
+    //   recipient: this.Form.value.recipient,
+    //   message: this.Form.value.message,
+    // }
+
+    // console.log(user)
     console.log(this.id)
   }
 }
