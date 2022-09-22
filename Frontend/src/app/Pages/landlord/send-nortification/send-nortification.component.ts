@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { SelectItem, PrimeNGConfig } from "primeng/api";
+import { DashboardService } from 'src/app/Services/dashboard.service';
 
 @Component({
   selector: 'app-send-nortification',
@@ -36,7 +37,11 @@ export class SendNortificationComponent implements OnInit {
   myData:any
   fullName:any = [];
   selectedNames: string[] = [];
-  constructor(private formBuilder: FormBuilder, 
+  rentees: any ;
+  tenantAddress: any;
+  address:Array<any> = [];
+  constructor(private formBuilder: FormBuilder,
+    private dash:DashboardService,
     private messageService: MessageService,
     private auth:AuthenticationService,
     private primengConfig: PrimeNGConfig, 
@@ -57,27 +62,41 @@ export class SendNortificationComponent implements OnInit {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     let userid = this.token.regData[0].userid
     this.id = userid;
-    this.getMyUsers();
+    this.getLandLordAddress()
   }
 
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
   }
 
-  getMyUsers(){
-    return this.mess.getMyTenantesInfor(this.id).subscribe({
-      next:data =>{
-        this.loading = true;
-
-        this.myData = data
-        this.loading = false;
-        this.myData.forEach((element:any) => {
-          this.fullName.push(element)
+  
+  getLandLordAddress(){
+    return this.dash.address(this.id).subscribe({
+      next:data => {
+        this.tenantAddress = data
+        this.tenantAddress.forEach((element:any) => {
+          this.address.push(element)
         });
       }
     })
   }
 
+  caller(){
+    for(let x = 0; x<this.Form.value.address.length; x++){
+      this.dash.rentees(this.Form.value.address[x].p_address).subscribe({
+        next:data => {
+          this.rentees = data;
+          console.log(this.rentees)
+          }
+        }
+      )
+    }
+  }
+
+  recipients(){
+
+  }
+  
   onSubmit(){
     this.submitted = true;
 
@@ -87,9 +106,10 @@ export class SendNortificationComponent implements OnInit {
       return
     }
 
+
     let user = {
-      email: this.Form.value.nortType,
-      password: this.Form.value.subject,
+      nortType: this.Form.value.nortType,
+      subject: this.Form.value.subject,
       recipient: this.Form.value.recipient,
       message: this.Form.value.message,
     }

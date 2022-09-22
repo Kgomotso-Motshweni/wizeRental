@@ -22,6 +22,8 @@ const getMyTenatsAndProperties = async(req, res ) => {
     } 
 }
 
+
 module.exports = {
-    getMyTenatsAndProperties
+    getMyTenatsAndProperties,
 }
+

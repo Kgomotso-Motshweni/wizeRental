@@ -6,7 +6,7 @@
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl">
                 <div class="card-body">
-  
+                    <form [formGroup]="Form">
                         <div class="form-group mb-6">
                             <label class="input-group ">Notification Type:</label>
                             <select formControlName="nortType" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select Notification Type ..." [ngClass]="{ 'is-invalid':submitted && f['nortType'].errors}">
@@ -29,40 +29,43 @@
                                 <div *ngIf="f['subject'].errors['required']">Subject is required</div>
                             </div>         
                         </div>  
-                        
+                            
                         <div class="form-group mb-6"> 
                             <label class="input-group ">Message:</label>
-                            <textarea type="text" formControlName="message" 
+                            <textarea type="text" formControlName="message"
                                 class="input bg-gray-50 input-bordered w-full email"
-                                [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" ></textarea>        
+                                [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+                            </textarea>        
                             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
                                 <div *ngIf="f['message'].errors['required']">message is required</div>
                             </div>
                         </div>
-                    
-                        <div class="grid gap-6 md:grid-cols-3">
-                            <div class="form-group mb-6">
+                        
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="form-group md:mb-6">
                                 <label class="input-group ">Address:</label>
-                                <p-multiSelect [options]="myData" [(ngModel)]="selectedNames" defaultLabel="Select Accommodation Address" optionLabel="p_address"
+                                <p-multiSelect [options]="address" (click)="caller()" formControlName="address" defaultLabel="Select Accommodation Address" optionLabel="p_address"
                                     display="chip">
                                 </p-multiSelect>
+                                <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['address'].errors['required']">Accommodation Address is required</div>
+                                </div>
                             </div>
-
-                            <div class="form-group mb-6">
+                            <div class="form-group ">
                                 <label class="input-group ">Send To:</label>
-                                <p-multiSelect [options]="myData" [(ngModel)]="selectedNames" defaultLabel="Select Tenants you want to send notification" optionLabel="full_name"
+                                <p-multiSelect [options]="rentees" (click)="recipients()" formControlName="recipient" defaultLabel="Select Tenants you want to send notification" optionLabel="full_name"
                                     display="chip">
-                                </p-multiSelect>
-                                
+                                </p-multiSelect>   
+                                <div *ngIf="submitted && f['recipient'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['recipient'].errors['required']">Recipients required</div>
+                                </div>                     
                             </div> 
                         </div>
                         
-                        <div class="form-group mb-6">
+                        <div class="form-group mt-6 mb-6">
                             <button type="submit" (click)="onSubmit()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Send Notification</button>
                         </div>
-               
-
-                    
+                    </form>
                 </div>
             </div>
         </div>

@@ -13,8 +13,9 @@ router.get('/getproperty/:userid', landlord.getMyProperties);
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty);
 router.get('/getPending/:userid', pending.getPendingTenants);
 router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
-router.get('/getRentees', get_rentees);
-router.get('/getRentees/:id', get_rentees);
+
+router.get('/getLandAddress/:id', get_rentees.getLandlordRes);
+router.get('/getRentees/:address', get_rentees.tenantsFromSpecifiAddress);
 router.get('/getproperties/:id',get_property);
 
 //router.patch('/update/:userid', upload.single("image"), auth.profileUpdate);
