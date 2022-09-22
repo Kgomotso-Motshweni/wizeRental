@@ -45,12 +45,20 @@ export class TenantsComponent implements OnInit {
     private auth:AuthenticationService) { }
 
   ngOnInit(): void {
+    /* Returns a decode token that has user information 
+      and only save the id of that user in a variable called id
+    */
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
     this.getLandLordAddress();
     this.code;
   }
 
+  /*
+  use Payment interface to receive all the data of a tenant you want to delete and 
+  then use primeNG component for confrm delete and a dialog to confirm first before you can delete a 
+  specific tenant
+  */
   deleteUser(details:Payment){
     this.confirmationService.confirm({
       message: 'Are you sure you want to remove this: ' + details.full_name + '?',
@@ -84,6 +92,7 @@ export class TenantsComponent implements OnInit {
     })
   }
 
+  //Get all Landlord property addresses
   getLandLordAddress(){
     return this.dash.address(this.id).subscribe({
       next:data => {
@@ -93,7 +102,9 @@ export class TenantsComponent implements OnInit {
   }
 
 
- 
+  /* when click on any property from the dropdown receive that property value and 
+    use it to get all tenants from that property
+  */
   caller(){
     return this.dash.rentees(this.Form.value.usertype).subscribe({
       next:data => {

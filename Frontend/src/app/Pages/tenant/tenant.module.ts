@@ -27,7 +27,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import {ImageModule} from 'primeng/image';
 
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent, canActivate: [AuthGuard],
+  {path:'tenant', component: TenantComponent,
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},

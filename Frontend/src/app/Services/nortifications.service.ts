@@ -10,7 +10,14 @@ export class NortificationsService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
 
-  getMyTenantesInfor(id:number){
-    return this.http.get(`${this.baseUrl}getmyplcestens/${id}`) 
+  // getMyTenantesInfor(id:number){
+  //   return this.http.get(`${this.baseUrl}getmyplcestens/${id}`) 
+  // }
+
+  //send Messages to specific user
+  sendMessage(message:any, id:number){
+    return this.http.post(`${this.baseUrl}sendMessage/${id}`, message) 
   }
+
+  
 }

@@ -1,3 +1,4 @@
+<p-toast position="top-right" key="tc"></p-toast>
 <div class="container justify-center pending">
     <div class="container  mb-6 mt-6">
         <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -44,7 +45,8 @@
       <div class="form-group mb-6">
         <label class="input-group ">Notification Type:</label>
         <select (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select Accommodation Address ...">
-            <option *ngFor="let i Of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>
+          <option value disabled selected hidden>All</option> 
+          <option *ngFor="let i Of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>
         </select>
       </div> 
     </form>

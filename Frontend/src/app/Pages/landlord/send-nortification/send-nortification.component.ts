@@ -5,17 +5,18 @@ import { NgxLoadingComponent } from 'ngx-loading';
 import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
-import { CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
 import { SelectItem, PrimeNGConfig } from "primeng/api";
 import { DashboardService } from 'src/app/Services/dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-send-nortification',
   templateUrl: './send-nortification.component.html',
   styleUrls: ['./send-nortification.component.scss'],
-  providers: [MessageService, CheckBoxSelectionService]
+  providers: [MessageService]
 })
 export class SendNortificationComponent implements OnInit {
+  @ViewChild('ngxLoading', { static: false })
   ngxLoadingComponent!: NgxLoadingComponent;
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
@@ -32,24 +33,23 @@ export class SendNortificationComponent implements OnInit {
   submitted = false;
   id: number = 0;
   token:any = '';
-  myData:any
-  fullName:any = [];
-  selectedNames: string[] = [];
   rentees: any ;
   tenantAddress: any;
-  address:Array<any> = []; //Declare an address variable name 
+  message: any;
+  address:Array<any> = []; //Declare an list array variable called address
 
   constructor(private formBuilder: FormBuilder,
     private dash:DashboardService,
     private messageService: MessageService,
     private auth:AuthenticationService,
-    private primengConfig: PrimeNGConfig, 
-    private mess:NortificationsService) { }
+    private mess:NortificationsService,
+    private router:Router, ) { }
 
   ngOnInit(): void {
 
     this.loading = false;
-    this.primengConfig.ripple = true;
+
+    //Validate user form using reactive form 
     this.Form = this.formBuilder.group({
       nortType: ['', Validators.required],
       subject: ['', Validators.required],
@@ -58,16 +58,22 @@ export class SendNortificationComponent implements OnInit {
       address: ['', Validators.required],
     }
     );
+
+    /* Returns a decode token that has user information 
+      and only save the id of that user in a variable called id
+    */
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     let userid = this.token.regData[0].userid
     this.id = userid;
     this.getLandLordAddress()
   }
 
+  //it traps errors in the form
   get f():{ [key: string]: AbstractControl }{
-    return this.Form.controls;//it traps errors in the form
+    return this.Form.controls;
   }
 
+  //Get all Landlord property addresses
   getLandLordAddress(){
     return this.dash.address(this.id).subscribe({
       next:data => {
@@ -79,6 +85,9 @@ export class SendNortificationComponent implements OnInit {
     })
   }
 
+  /* when click on any property from the dropdown receive that property value and 
+    use it to get all tenants from that property
+  */
   caller(){
     for(let x = 0; x<this.Form.value.address.length; x++){
       this.dash.rentees(this.Form.value.address[x].p_address).subscribe({
@@ -91,30 +100,48 @@ export class SendNortificationComponent implements OnInit {
   }
 
   recipients(){
-
+    
   }
 
   onSubmit(){
     this.submitted = true;
 
+    //If form invalid don't send any data 
     if(this.Form.invalid)
     { 
       this.loading = false;
       return
     }
 
+    /* Extract only tenant id from an array of object(s) selected,
+     send that information to the subscription
+    */
     for(let i=0; i<this.Form.value.recipient.length; i++){
-      console.log(this.Form.value.recipient[i].tenant_id)
+      let user = {
+        nortType: this.Form.value.nortType,
+        subject: this.Form.value.subject,
+        recipient: this.Form.value.recipient[i].tenant_id,
+        message: this.Form.value.message,
+      }
+      this.mess.sendMessage(user, this.id).subscribe({
+        next:data => {
+          this.loading = true;
+          this.message = data
+
+          this.messageService.add({ key: 'tc', severity:'success', summary: 'Success', detail: this.message.message, life: 3000})
+          
+          //router back to tenants page
+          this.router.navigate(['/landlord/tenant/'])
+          
+          //turn off the loader 
+          this.loading = false;
+        },error: err => {
+          this.loading = false;
+          //show the message if unable to add new data
+          this.message = err.error.message;
+          this.messageService.add({ key: 'tc', severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+        }
+      })
     }
-
-    // let user = {
-    //   nortType: this.Form.value.nortType,
-    //   subject: this.Form.value.subject,
-    //   recipient: this.Form.value.recipient,
-    //   message: this.Form.value.message,
-    // }
-
-    // console.log(user)
-    console.log(this.id)
   }
 }

@@ -18,7 +18,7 @@ export class PendingComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-  pending: any ={};
+  pending: any;
   submitted: boolean = false;
   pendingClients: Pending = new Pending;
   condition:Boolean = false;
