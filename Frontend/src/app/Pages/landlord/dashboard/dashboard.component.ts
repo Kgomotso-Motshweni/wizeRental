@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   totAmnt: number = 0;
   totPaid: number = 0;
   totUnPaid: number = 0;
-  totNumTenants: any;
+  totNumTenants: any =0;
   rentees!: Array<Payment>;
   searchTenant: any;
   numroomsA: number = 0;
@@ -49,6 +49,8 @@ export class DashboardComponent implements OnInit {
         //signed tenants revenue
         if (rentee[x].moa_status == "signed") {
           this.totAmnt = +this.totAmnt + +this.rentees[x].rent;
+          //Room occupied
+            this.numroomsO = this.numroomsO + 1;
           // paid tanants
           if (rentee[x].paymentstatus == true) {
             this.totPaid = +this.totPaid + +rentee[x].rent;
@@ -60,7 +62,7 @@ export class DashboardComponent implements OnInit {
         }
       }
       //Pending Tenants
-      this.dash.getPendTenants().subscribe((numTenants) => {
+      this.dash.getPendTenants(1).subscribe((numTenants) => {
         this.totNumTenants = numTenants;
         this.totNumTenants = this.totNumTenants.length;
 
@@ -75,8 +77,7 @@ export class DashboardComponent implements OnInit {
         }
       })
 
-      //Room occupied
-      this.numroomsO = this.rentees.length;
+      console.table(this.rentees)
 
     })
   }

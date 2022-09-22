@@ -7,7 +7,10 @@ module.exports = get_rentees= async (req, res) => {
   try {
         //get all post form the database
         const data = await client.query(
-          `SELECT * FROM rentees WHERE landlord_id = $1`,[id],
+         `SELECT * FROM rentees a
+          INNER JOIN landlordproperty l ON a.property_id = l.property_id
+          INNER JOIN users u ON l.landlord_id = u.userid
+          WHERE u.userid = $1;`,[id],
           (err,result) => {
             if (err) {
            //If rentees are not available is not available

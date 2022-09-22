@@ -16,18 +16,17 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}getRentees/${id}`)
   }
 
-  getPendTenants(){
-    // return this.http.get(`${this.baseUrl}/getPending`)
-    return this.http.get("http://localhost:8080/api/getPending")
+  getPendTenants(id:any){
+    return this.http.get(`${this.baseUrl}/getPending/${1}`)
+  }
 
+  deleteRentee(id:any){
+    return this.http.delete(`${this.baseUrl}deleteRentee/${id}`)
   }
-  
-  deleteRentee(id:Payment){
-    return this.http.delete(`${this.baseUrl}deleteRentee/${id.rentee_id}`)
-  }
-  paymentStatus(){
-    return this.http.get(`${this.baseUrl}getPayment`)
-  }  
+
+  // paymentStatus(){
+  //   return this.http.get(`${this.baseUrl}getPayment`)
+  // }  
 
   getProperties(id:any){
     return this.http.get(`${this.baseUrl}getproperties/${id}`)

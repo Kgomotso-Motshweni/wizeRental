@@ -7,12 +7,18 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TenantService } from 'src/app/Services/Tenants/tenant.service';
+
+
 
 @Component({
   selector: 'app-tenants',
   templateUrl: './tenants.component.html',
   styleUrls: ['./tenants.component.scss']
 })
+
+
 export class TenantsComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })
   ngxLoadingComponent!: NgxLoadingComponent;
@@ -20,7 +26,7 @@ export class TenantsComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-
+  
 
   totAmnt : number = 0;
   paidAmnt : number = 0;
@@ -37,18 +43,22 @@ export class TenantsComponent implements OnInit {
   totExpected: number = 0;
   message: any;
   paid:any
+  rente_id: any;
 
   payment_array:Array<any>=[];
   // let list: number[] = [1, 2, 3];
+
 
   constructor(private dash:DashboardService,
     private router:Router, 
     private route: ActivatedRoute,
     private messageService: MessageService,  
-    private confirmationService: ConfirmationService,) { }
-
+    private confirmationService: ConfirmationService,private tenant:TenantService) {
+      
+     }
   ngOnInit(): void {
 
+  
     this.dash.rentees(1).subscribe((rentee:any)=>{
       this.rentees = rentee;
       
@@ -64,12 +74,7 @@ export class TenantsComponent implements OnInit {
           this.payment_status = this.rentees[x].paymentstatus
       }
 
-      //Received Amount
-      this.dash.paymentStatus().subscribe((payment)=>{
-        // console.table(payment)
-        this.paid = payment;
-      })
-
+    
       //paid Amount
       for(let x=0;x<this.rentees.length;x++){
        
@@ -90,56 +95,62 @@ export class TenantsComponent implements OnInit {
       //pending Tenants
       // console.log("ghjkpl",this.paymentStats)
     })
+
+
+  }
+  deleteUser(ind:any){
+
+    console.log("cfyvguhijokpl[",ind)
+
+// this.confirmationService.confirm({
+    //   message: 'Are you sure you want to remove this: ' + this.rentees[ind].full_name+ '?',
+    //   header: 'Confirm',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: () => {
+    //     console.log(this.rentees[ind].applicant_id)
+    //     this.loading = true;
+    //     this.dash.deleteRentee(this.rentees[ind].applicant_id).subscribe({
+    //       next:data =>{
+    //         this.loading = true;
+    //         this.message = data
+    //         //Route back to the current page,  this helps in refreshing data
+    //         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+    //         this.router.onSameUrlNavigation = "reload";
+    //         this.router.navigate(['landlord/tenant'], {relativeTo: this.route})
+    //         this.loading = false;
+    //         this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+    //       },error: err => {
+    //         this.loading = false;
+    //         //show the message if unable to add new data
+    //         this.message = err.error.message;
+    //         this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+    //       }
+    //     });
+    //    },
+    //   reject: () => {
+    //     this.loading = false;
+    //     this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
+    //   }
+    // })
   }
 
-  deleteUser(details:Payment){
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to remove this: ' + details.full_name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        console.log(details)
-        this.loading = true;
-        this.dash.deleteRentee(details).subscribe({
-          next:data =>{
-            this.loading = true;
-            this.message = data
-            //Route back to the current page,  this helps in refreshing data
-            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/landlord/'], {relativeTo: this.route})
-            this.loading = false;
-            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
-          },error: err => {
-            this.loading = false;
-            //show the message if unable to add new data
-            this.message = err.error.message;
-            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
-          }
-        });
-       },
-      reject: () => {
-        this.loading = false;
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
-      }
+  updatePayment(index:any,status:any){
+    this.rente_id = this.rentees[index].rentee_id
+    console.log("The payment status for user :",this.rente_id," Is set to :",status)
+
+    const body = {
+       "rentee_id":this.rente_id,
+       "paymentStatus":status
+    }
+
+    this.tenant.updatePayment(body).subscribe(()=>{
+      console.log("updated")
     })
+    
   }
-
-  paymentStats(id:any){
-
-  }
+  
 
 
-   _index(payment:any){
-
- 
-   return false
-   
   }
 
 
-  get_Payment_Status(){
-    let status = this.pay_status
-    return status;
-  }
-}
