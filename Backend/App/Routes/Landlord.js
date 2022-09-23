@@ -4,6 +4,7 @@ const router = express.Router();
 
 const landlord = require("../Controllers/addProperty");
 const get_rentees  = require('../Controllers/get_rentees');
+const get_tenants  = require('../Controllers/get_tenants');
 const middleware = require("../Middlewares/userauth");
 const get_pending = require("../Controllers/get_pending");
 const get_property = require("../Controllers/get_property");
@@ -19,6 +20,10 @@ router.get('/getRentees/:id', get_rentees)
 router.get('/getPending/:id',get_pending)
 router.get('/getproperties/:id',get_property)
 router.put('/updatePayment',update_payment)
+router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
+router.get('/getTenants/:address',get_tenants.tenantsFromSpecifiAddress);
+// router.post('/getTenants',get_tenants.tenantsFromSpecifiAddress);
+
 //router.patch('/update/:userid', upload.single("image"), auth.profileUpdate);
 // router.post('/file',upload.single("image"), auth.fileUpload);
 module.exports = router;
