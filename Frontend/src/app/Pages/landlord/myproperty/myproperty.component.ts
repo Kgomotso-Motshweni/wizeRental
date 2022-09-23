@@ -22,8 +22,8 @@ export class MypropertyComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-  myProperty: any = [];
-  myData:any = [];
+  myProperty: any;
+  myData:any;
   token:any = '';
   submitted:boolean = false;
   propertyInf:Property = new Property;

@@ -79,7 +79,7 @@ CREATE TABLE ApplicationForm(
 DROP TABLE IF EXISTS Rentees CASCADE;
 CREATE TABLE Rentees(
 	rentee_id SERIAL PRIMARY KEY NOT NULL,
-	applicant_id INT,
+	tenant_id INT,
 	property_id INT,
 	full_name VARCHAR(255),
 	unit VARCHAR(10),
@@ -88,9 +88,10 @@ CREATE TABLE Rentees(
 	moaEnd TIMESTAMPTZ DEFAULT NOW(),
 	rent_paid  DECIMAL(8,2),
 	paymentstatus BOOLEAN,
+	moa_status VARCHAR(250),
 	create_time TIMESTAMPTZ DEFAULT NOW(),
 	r_update_time TIMESTAMPTZ DEFAULT NOW(),
-	FOREIGN KEY(applicant_id) REFERENCES ApplicationForm(applicant_id),
+	FOREIGN KEY (tenant_id) REFERENCES public.users (userid)
 	FOREIGN KEY(property_id) REFERENCES landlordProperty(property_id) 
 );
 

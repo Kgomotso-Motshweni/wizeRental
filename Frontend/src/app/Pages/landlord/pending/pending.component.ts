@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
 import { Pending } from 'src/app/Interfaces/pending';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { DashboardService } from 'src/app/Services/dashboard.service';
 
 @Component({
   selector: 'app-pending',
@@ -16,18 +18,30 @@ export class PendingComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-  pending: any = [];
+  pending: any;
   submitted: boolean = false;
   pendingClients: Pending = new Pending;
   condition:Boolean = false;
-  
-  constructor() { }
+  token:any = '';
+  id:number = 0;
+  constructor(private dash: DashboardService, private auth:AuthenticationService) { }
 
   ngOnInit(): void {
-    this.pending = 0;
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.id = this.token.regData[0].userid;
+    this.getPending(this.id);
   }
 
-
+   //Pending Tenants
+   getPending(user:number){
+    this.dash.getPendTenants(user).subscribe({
+      next:data  => {
+          this.pending = data;
+        }
+      }
+    )
+   }
+  
   //hide the Form
   hideInsertform(){
     this.condition = false;
@@ -35,8 +49,8 @@ export class PendingComponent implements OnInit {
   }
 
   //reuse the form for editing 
-  editProperty() {
+  editProperty(details:Pending) {
     this.condition = true;
-   
+    this.pendingClients = {...details}
   }
 }

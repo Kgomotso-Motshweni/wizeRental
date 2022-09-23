@@ -7,6 +7,7 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,90 +22,71 @@ export class DashboardComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-  totAmnt : number = 0;
-  paidAmnt : number = 0;
-  rentees! : Array<Payment> ;
-  searchTenant : any;
-  unpaidAmnt :number =0;
-  numTenants :number = 0;
-  payment_status: Boolean = false ;
-  pay_status: any;
-  month: any = [1,3,5,7.8]
-  totNotReceived: number = 6500;
-  totReceived: number = 7800;
+  totAmnt: number = 0;
+  totPaid: number = 0;
+  totUnPaid: number = 0;
+  totNumTenants: any;
   numPending: number = 0;
-  totExpected: number = 14300;
-  message: any;
-  paid:any
+  rentees!: Array<Payment>;
+  searchTenant: any;
+  numroomsA: number = 0;
+  numroomsO: number = 0;
 
-  payment_array:Array<any>=[];
+  payment_array: Array<any> = [];
+  my_properties: any;
+  id:number = 0;
+  token:any = '';
 
-  constructor(private dash:DashboardService,
-    private router:Router, 
+  constructor(private dash: DashboardService,
+    private router: Router,
     private route: ActivatedRoute,
-    private messageService: MessageService,  
-    private confirmationService: ConfirmationService,) { }
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private auth:AuthenticationService) { }
 
   ngOnInit(): void {
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.id = this.token.regData[0].userid;
 
-    this.dash.rentees().subscribe((rentee:any)=>{
+    this.dash.rentees(1).subscribe((rentee: any) => {
       this.rentees = rentee;
-      
 
+      for (let x = 0; x < this.rentees.length; x++) {
 
-
-      //Monthly Revenue
-      for(let x=0;x<this.rentees.length;x++){
-       
-        this.payment_array[x] = this.rentees[x].paystatus;
-     
-          this.totAmnt = +this.totAmnt + +this.rentees[x].rent; 
-          this.payment_status = this.rentees[x].paymentstatus
+        //signed tenants revenue
+        if (rentee[x].moa_status == "signed") {
+          this.totAmnt = +this.totAmnt + +this.rentees[x].rent;
+          // paid tanants
+          if (rentee[x].paymentstatus == true) {
+            this.totPaid = +this.totPaid + +rentee[x].rent;
+          }
+          //unpaid tenants
+          if (rentee[x].paymentstatus == false) {
+            this.totUnPaid = +this.totUnPaid + +rentee[x].rent;
+          }
+        }
       }
 
-      //Received Amount
-      this.dash.paymentStatus().subscribe((payment)=>{
-        // console.table(payment)
-        this.paid = payment;
+      //Pending Tenants
+      this.dash.getPendTenants(this.id).subscribe((numTenants) => {
+        this.totNumTenants = numTenants;
+        this.numPending = this.totNumTenants.length;
+
       })
 
-      //paid Amount
-      for(let x=0;x<this.rentees.length;x++){
-       
-        if(this.rentees[x].paystatus=="true"){
-         
-        this.paidAmnt  = +this.paidAmnt  + +this.rentees[x].rent;
+      //Room available
+      this.dash.getProperties(1).subscribe((properties) => {
+        this.my_properties = properties;
+        for (let x = 0; x < this.my_properties.length; x++) {
+
+          this.numroomsA = +this.numroomsA + +this.my_properties[x].p_room;
         }
-    }
-      //Unpaid Amount
-      this.unpaidAmnt = +this.totAmnt - +this.paidAmnt;
+      })
 
-      //Available Rooms
+      //Room occupied
+      this.numroomsO = this.rentees.length;
 
-
-      //Occupied Rooms
-      this.numTenants = this.rentees.length;
-      
-      //pending Tenants
-      // console.log("ghjkpl",this.paymentStats)
     })
   }
 
-  paymentStats(id:any){
-
-  }
-
-
-   _index(payment:any){
-
- 
-   return false
-   
-  }
-
-
-  get_Payment_Status(){
-    let status = this.pay_status
-    return status;
-  }
 }

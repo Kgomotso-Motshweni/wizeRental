@@ -42,9 +42,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
+  {path:'landlord', component: LandlordComponent,
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
@@ -71,7 +73,7 @@ const routes: Routes = [
   ],
   imports: [
     Ng2SearchPipeModule,
-  
+    MultiSelectModule,
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
