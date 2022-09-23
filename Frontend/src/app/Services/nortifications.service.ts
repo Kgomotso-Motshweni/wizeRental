@@ -14,10 +14,14 @@ export class NortificationsService {
   //   return this.http.get(`${this.baseUrl}getmyplcestens/${id}`) 
   // }
 
-  //send Messages to specific user
+  //Landlord send Messages to specific user
   sendMessage(message:any, id:number){
     return this.http.post(`${this.baseUrl}sendMessage/${id}`, message) 
   }
 
+  //Tenant recieve Nortifications from Landlord
+  tenantReceive(id:number){
+    return this.http.get(`${this.baseUrl}tenantReceive/${id}`);
+  }
   
 }

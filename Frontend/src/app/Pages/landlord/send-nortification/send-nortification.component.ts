@@ -105,7 +105,6 @@ export class SendNortificationComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-
     //If form invalid don't send any data 
     if(this.Form.invalid)
     { 
