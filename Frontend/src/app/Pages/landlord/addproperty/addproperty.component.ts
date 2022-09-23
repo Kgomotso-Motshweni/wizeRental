@@ -34,6 +34,7 @@ showPreviousStep(event?: Event) {
 showNextStep(event?: Event) {
   this.ngWizardService.next();
 }
+
 resetWizard(event?: Event) {
   this.ngWizardService.reset();
 }
