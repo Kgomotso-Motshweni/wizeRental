@@ -3,6 +3,7 @@ export class Pending {
     tenant_id?:Number;
     property_id?:Number;
     full_name?:String;
+    last_name?:String;
     email?:String;
     phone_num?:String;
     age?:Number;

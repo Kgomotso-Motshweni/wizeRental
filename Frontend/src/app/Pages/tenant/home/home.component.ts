@@ -38,7 +38,8 @@ export class HomeComponent implements OnInit {
   formData = new FormData();
   submitted = false;
   displayApplicationForm: boolean = false;
-  
+  firstName: string = '';
+  lastName: string = '';
   errorMessage = '';
   file: any;
 
@@ -77,12 +78,12 @@ export class HomeComponent implements OnInit {
     return this.Form.controls;
   }
 
+
+
   onSubmit():void{
     this.submitted = true;
-    let usertype = this.Form.value.usertype;
-    let status = true;
 
-    this.formData.append('full_name', this.Form.value.fname + '  '+ this.Form.value.lname)
+    this.formData.append('full_name', this.appForm.full_name + '  '+ this.Form.value.lname)
     this.formData.append('email', this.Form.value.email)
     this.formData.append('phone_num', this.Form.value.phone_num)
     this.formData.append('age', this.Form.value.age)
@@ -94,24 +95,39 @@ export class HomeComponent implements OnInit {
     this.formData.append('ped_desc', this.Form.value.ped_desc)
     this.formData.append('smoke', this.Form.value.smoke)
 
+    console.log(this.formData)
+
+    console.log(this.appForm.full_name + '   ' + this.appForm.last_name )
+    console.log(this.appForm.email )
+    console.log(this.appForm.phone_num)
+    console.log(this.appForm.age)
+    console.log(this.appForm.id_doc )
+    console.log(this.appForm.occupation)
+    console.log(this.appForm.view_date )
+    console.log(this.appForm.num_tenants )
+    console.log(this.appForm.num_pets)
+    console.log(this.appForm.ped_desc )
+    console.log(this.appForm.smoke )
 
   }
 
 
   showBasicDialog() {
-
+    this.appForm = {}
     this.displayApplicationForm = true;
     this.submitted = false;
   }
 
   hideDialog() {
+
     this.displayApplicationForm = false;
     this.submitted = false;
   }
 
-handleFileInput(event:any) {
-  const image = (event.target as any ).files[0];
-  this.file = image
-}
+  handleFileInput(event:any) {
+    const image = (event.target as any ).files[0];
+    this.file = image
+  }
+
 
 }

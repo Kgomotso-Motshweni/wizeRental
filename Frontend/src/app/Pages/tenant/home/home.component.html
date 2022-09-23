@@ -10,119 +10,97 @@
             <div class="grid gap-6 md:grid-cols-2">
                 <div class="field col mb-2">
                     <label class="label"><span class="label-text">First Name</span></label>
-                    <input   placeholder="First Name" type="text" formControlName="fname" pInputText id="first_name" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input input-bordered w-full max-w-s first_name " required autofocus />
-                    <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
-                        <div *ngIf="f['fname'].errors['required']">First name is required</div>
-                    </div>
+                    <input placeholder="First Name" type="text" [(ngModel)]="appForm.full_name" pInputText id="first_name" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input input-bordered w-full max-w-s first_name " required autofocus />
+                    <div class="invalid-feedback" *ngIf="submitted && !appForm.full_name">
+                    First name is required</div>
                 </div>
+
 
                 <div class="field col mb-2">
                     <label class="label"><span class="label-text">Last Name</span></label>
-                    <input  type="text" placeholder="Last Name" pInputText id="last_name" class="input input-bordered w-full max-w-s last_name " required autofocus />
-                    <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
-                        <div *ngIf="f['lname'].errors['required']">Last name is required</div>
-                    </div>
+                    <input placeholder="First Name" type="text" [(ngModel)]="appForm.last_name" pInputText id="first_name" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input input-bordered w-full max-w-s first_name " required autofocus />
+                    <div class="invalid-feedback" *ngIf="submitted && !appForm.last_name">
+                    Last name is required</div>
                 </div>
+                
             </div>
            
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Email</span></label>
-                <input  type="text" placeholder="Email" pInputText id="email" class="input input-bordered w-full max-w-s email " required autofocus />
-                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                    <div *ngIf="f['email'].errors['required']">Email is required</div>
-                    <div *ngIf="f['email'].errors['email']">Email is invalid</div>
-                </div>
+                <input  type="text" placeholder="Email" pInputText [(ngModel)]="appForm.email" id="email" class="input input-bordered w-full max-w-s email " required autofocus />
+                <div  class="invalid-feedback" *ngIf="submitted && !appForm.email" class="invalid-feedback">Email is invalid</div>
             </div>
 
             <div class="grid gap-6 md:grid-cols-2">
                 <div class="field col mb-2">
                     <label class="label"><span class="label-text">Phone Number</span></label>
-                    <p-inputMask mask="(999) 999-9999"  placeholder="(999) 999-9999"></p-inputMask>
-                    <div *ngIf="submitted && f['phone_num'].errors" class="invalid-feedback">
-                        <div *ngIf="f['phone_num'].errors['required']">Phone Number is required</div>
-                       <div *ngIf="f['phone_num'].errors['maxlength']">Phone Number must not exceed 13 character</div>
-                    </div>
+                    <p-inputMask mask="(999) 999-9999" [(ngModel)]="appForm.phone_num"  placeholder="(999) 999-9999"></p-inputMask>
+                    <div *ngIf="submitted && !appForm.phone_num" class="invalid-feedback">Phone Number is required</div>
                 </div>
 
                 <div class="field col mb-2">
                     <label class="label"><span class="label-text">Age</span></label>
-                    <input type="number" min="18" max="100" placeholder="Age" pInputText class="input input-bordered w-full max-w-s age " required autofocus>
-                    <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
-                        <div *ngIf="f['age'].errors['required']">age is required</div>
-                    </div>
+                    <input type="number" min="18" max="100" [(ngModel)]="appForm.age" placeholder="Age" pInputText class="input input-bordered w-full max-w-s age " required autofocus>
+                    <div *ngIf="submitted && !appForm.age" class="invalid-feedback">age is required</div>
                 </div>
             </div>
 
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Upload ID</span></label>
-                <input type="file" min="18" max="100" placeholder="id_doc" pInputText class="input input-bordered w-full max-w-s id_doc " required autofocus>
-               
-                <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
-                    <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
-                </div>
+                <input type="file" min="18" max="100" [(ngModel)]="appForm.id_doc" placeholder="id_doc" pInputText class="input input-bordered w-full max-w-s id_doc " required autofocus>
+                <div *ngIf="submitted && !appForm.id_doc" class="invalid-feedback">Upload ID is required</div>
             </div>
-        <div class="field col mb-2">
-            <label class="label"><span class="label-text">Occupation</span></label>
-            <input type="text" placeholder="Occupation" pInputText class="input input-bordered w-full max-w-s occupation " required autofocus>               
-            <div *ngIf="submitted && f['occupation'].errors" class="invalid-feedback">
-                <div *ngIf="f['occupation'].errors['required']">Employement Details required</div>
+
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Occupation</span></label>
+                <input type="text" placeholder="Occupation" [(ngModel)]="appForm.occupation" pInputText class="input input-bordered w-full max-w-s occupation " required autofocus>               
+                <div *ngIf="submitted && !appForm.occupation" class="invalid-feedback">Employement Details required</div>
             </div>
-        </div>
 
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Schedule a Date</span></label>
-                <input type="date" min="18" max="100" placeholder="Age" pInputText class="input input-bordered w-full max-w-s view_date " required autofocus>
-                <div *ngIf="submitted && f['view_date'].errors" class="invalid-feedback">
-                    <div *ngIf="f['view_date'].errors['required']">Schedule a Dat required</div>
-                </div>
+                <input type="date" min="18" max="100" [(ngModel)]="appForm.view_date" placeholder="Age" pInputText class="input input-bordered w-full max-w-s view_date " required autofocus>
+                <div *ngIf="submitted && !appForm.view_date" class="invalid-feedback">Schedule a Dat required</div>
             </div>
             
             <div class="additional-Information">Additional Information</div>
 
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Total Occupants</span></label>
-                <select class="input input-bordered w-full max-w-s department " placeholder="Choose a number of Occupants">
+                <select class="input input-bordered w-full max-w-s department " [(ngModel)]="appForm.num_tenants"  placeholder="Choose a number of Occupants">
                     <option value disabled selected hidden>Choose a number of Occupants...</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <div *ngIf="submitted && f['num_tenants'].errors" class="invalid-feedback">
-                    <div *ngIf="f['num_tenants'].errors['required']">total occupancy is required</div>
-                </div>
+                <div *ngIf="submitted && !appForm.num_tenants" class="invalid-feedback">total occupancy is required</div>
             </div>
 
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Number of pets</span></label>
-                <input type="number" min="0" max="5" placeholder="Number of pets" pInputText class="input input-bordered w-full max-w-s num_pets " required autofocus>
-                <div *ngIf="submitted && f['num_pets'].errors" class="invalid-feedback">
-                    <div *ngIf="f['num_pets'].errors['required']">Number of pets is required</div>
-                </div>
+                <input type="number" min="0" max="5" [(ngModel)]="appForm.num_pets" placeholder="Number of pets" pInputText class="input input-bordered w-full max-w-s num_pets " required autofocus>
+                <div *ngIf="submitted && !appForm.num_pets" class="invalid-feedback">Number of pets is required</div>
             </div>
            
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Pets Description</span></label>
-                <textarea type="text" placeholder="Describe your pets" pInputText class="input bg-gray-50 textarea input-bordered w-full max-w-s ped_desc " required autofocus>
+                <textarea type="text" placeholder="Describe your pets" [(ngModel)]="appForm.ped_desc" pInputText class="input bg-gray-50 textarea input-bordered w-full max-w-s ped_desc " required autofocus>
                 </textarea>
-                <div *ngIf="submitted && f['ped_desc'].errors" class="invalid-feedback">
-                    <div *ngIf="f['ped_desc'].errors['required']">Pets Description is required</div>
-                </div>
+                <div *ngIf="submitted && !appForm.ped_desc" class="invalid-feedback">Pets Description is required</div>
             </div>
        
         
 
             <div class="field col mb-2">
                 <label class="label"><span class="label-text">Smokes</span></label>
-                <select class="input input-bordered w-full max-w-s department " placeholder="Choose whether you smoke or not">
+                <select class="input input-bordered w-full max-w-s department " [(ngModel)]="appForm.smoke" placeholder="Choose whether you smoke or not">
                 <option value disabled selected hidden>Choose Below...</option>
                 <option value="NO">No</option>
                 <option value="YES">Yes</option>
                 </select>
-                <div *ngIf="submitted && f['smoke'].errors" class="invalid-feedback">
-                    <div *ngIf="f['smoke'].errors['required']">smoke is required</div>
-                </div>
-            </div>
+                <div *ngIf="submitted && !appForm.smoke" class="invalid-feedback">smoke is required</div>
+            </div> 
 
         </ng-template>
 
