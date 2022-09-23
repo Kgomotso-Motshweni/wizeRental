@@ -21,6 +21,7 @@ const routes: Routes = [
     {path: 'filter', component:FilterByComponent},
     {path:'tenant', component:TenantComponent},
     {path:'', redirectTo:"/", pathMatch:"full"},
+    {path:'tenant/home',component:HomeComponent}
 ];
 
 @NgModule({

@@ -3,6 +3,8 @@ import {FormControl, FormGroup } from '@angular/forms';
 import { LandingService } from 'src/app/Services/landing.service';
 import { TenantService } from 'src/app/Services/tenant.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,6 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
+
+  // LoginStatus$ = new BehaviorSubject<boolean>(null);
+  // username$ :Observable<string>;
+
  properties:any;
  property:any;
  searchItem:any;
@@ -17,7 +23,7 @@ export class LandingComponent implements OnInit {
  form!: FormGroup;
 
 //  private serv:LandingService
-  constructor(private service:LandingService,private router: Router,private route: ActivatedRoute) { }
+  constructor(private service:LandingService,private router: Router,private route: ActivatedRoute, private auth:AuthenticationService) { }
 
   ngOnInit(): void {
     
