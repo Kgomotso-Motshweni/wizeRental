@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import {InputTextModule} from 'primeng/inputtext';
+import { Pending } from 'src/app/Interfaces/pending';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [MessageService, ConfirmationService]
 })
 export class HomeComponent implements OnInit {
   // file: any = '';
@@ -28,33 +34,41 @@ export class HomeComponent implements OnInit {
   });
 
   dob: Date = new Date();
+  appForm: Pending = new Pending
   formData = new FormData();
   submitted = false;
-  isSuccessful = false;
-  isSignUpFailed = false;
+  displayApplicationForm: boolean = false;
+  
   errorMessage = '';
   file: any;
 
   
 
-  constructor(private auth:AuthenticationService, private formBuilder: FormBuilder, private router:Router) { }
+  constructor(
+    private auth:AuthenticationService,
+    private formBuilder: FormBuilder,
+    private router:Router,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,) { }
+
   selectThisImage(myEvent: any) {
     this.file = myEvent.target.files[0]; 
   }
+
   ngOnInit(): void {
     this.Form = this.formBuilder.group({
       fname: ['', Validators.required],
       lname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone_num:  ['', [Validators.required, Validators.pattern('[0-9]{3}-[0-9]{3}-[0-9]{4}'), Validators.maxLength(12)]],
+      phone_num:  ['', [Validators.required, Validators.maxLength(12)]],
       age: ['', Validators.required],
       id_doc: ['', Validators.required],
       occupation: ['', Validators.required],
       view_date: ['', Validators.required],
-      num_tenants: ['', ],
-      num_pets: ['', ],
-      ped_desc: ['', ],
-      smoke: ['', ],
+      num_tenants: ['', Validators.required],
+      num_pets: ['', Validators.required],
+      ped_desc: ['', Validators.required],
+      smoke: ['', Validators.required],
     },
     );
   }
@@ -83,12 +97,17 @@ export class HomeComponent implements OnInit {
 
   }
 
-  displayBasic: boolean = false;
-
 
   showBasicDialog() {
-    this.displayBasic = true;
-}
+
+    this.displayApplicationForm = true;
+    this.submitted = false;
+  }
+
+  hideDialog() {
+    this.displayApplicationForm = false;
+    this.submitted = false;
+  }
 
 handleFileInput(event:any) {
   const image = (event.target as any ).files[0];

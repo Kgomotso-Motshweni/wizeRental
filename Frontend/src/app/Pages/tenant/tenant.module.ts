@@ -24,7 +24,7 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import {ImageModule} from 'primeng/image';
+import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
 
 const routes: Routes = [

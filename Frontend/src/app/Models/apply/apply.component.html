@@ -8,7 +8,7 @@
                     <div class="card-body p-4 p-md-5">
                         <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 center">Application Form</h2>
 
-                        <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                        <form [formGroup]="Form">
 
                             <div class="row">
                             </div>
@@ -135,8 +135,10 @@
                         </div>
 
                             <!-- The button to open modal -->
-                <label for="my-modal" class="btn modal-button">Apply</label>
-
+                            <button type="button" (click)="onSubmit()">Apply</button>
+                <!-- <label for="my-modal" class="btn modal-button " >Apply</label> -->
+              
+            
 <!-- Put this part before </body> tag -->
                 <input type="checkbox" id="my-modal" class="modal-toggle" />
                 <div class="modal" >

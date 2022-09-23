@@ -1,87 +1,144 @@
-<p>home works!</p>
-<div class="form-group mt-4 flex" >
-    <div class="buttons" >
-        <button type="btn" (click)="showBasicDialog()" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Apply</button>
- 
+ <p>home works!</p>
+ <p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-<h5>Basic</h5>
+ <button type="btn" (click)="showBasicDialog()" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Apply</button>
 
-<p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}">
-    <section class=" gradient-custom">
+    <p-dialog [(visible)]="displayApplicationForm" [style]="{width: '450px', background:'#F4F3EF'}" header="Application Form" [modal]="true" styleClass="p-fluid">
 
-        <div class="container ">
+        <ng-template pTemplate="content">
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="field col mb-2">
+                    <label class="label"><span class="label-text">First Name</span></label>
+                    <input   placeholder="First Name" type="text" formControlName="fname" pInputText id="first_name" class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input input-bordered w-full max-w-s first_name " required autofocus />
+                    <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
+                        <div *ngIf="f['fname'].errors['required']">First name is required</div>
+                    </div>
+                </div>
+
+                <div class="field col mb-2">
+                    <label class="label"><span class="label-text">Last Name</span></label>
+                    <input  type="text" placeholder="Last Name" pInputText id="last_name" class="input input-bordered w-full max-w-s last_name " required autofocus />
+                    <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lname'].errors['required']">Last name is required</div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Email</span></label>
+                <input  type="text" placeholder="Email" pInputText id="email" class="input input-bordered w-full max-w-s email " required autofocus />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                    <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                </div>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="field col mb-2">
+                    <label class="label"><span class="label-text">Phone Number</span></label>
+                    <p-inputMask mask="(999) 999-9999"  placeholder="(999) 999-9999"></p-inputMask>
+                    <div *ngIf="submitted && f['phone_num'].errors" class="invalid-feedback">
+                        <div *ngIf="f['phone_num'].errors['required']">Phone Number is required</div>
+                       <div *ngIf="f['phone_num'].errors['maxlength']">Phone Number must not exceed 13 character</div>
+                    </div>
+                </div>
+
+                <div class="field col mb-2">
+                    <label class="label"><span class="label-text">Age</span></label>
+                    <input type="number" min="18" max="100" placeholder="Age" pInputText class="input input-bordered w-full max-w-s age " required autofocus>
+                    <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
+                        <div *ngIf="f['age'].errors['required']">age is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Upload ID</span></label>
+                <input type="file" min="18" max="100" placeholder="id_doc" pInputText class="input input-bordered w-full max-w-s id_doc " required autofocus>
+               
+                <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
+                    <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
+                </div>
+            </div>
+        <div class="field col mb-2">
+            <label class="label"><span class="label-text">Occupation</span></label>
+            <input type="text" placeholder="Occupation" pInputText class="input input-bordered w-full max-w-s occupation " required autofocus>               
+            <div *ngIf="submitted && f['occupation'].errors" class="invalid-feedback">
+                <div *ngIf="f['occupation'].errors['required']">Employement Details required</div>
+            </div>
+        </div>
+
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Schedule a Date</span></label>
+                <input type="date" min="18" max="100" placeholder="Age" pInputText class="input input-bordered w-full max-w-s view_date " required autofocus>
+                <div *ngIf="submitted && f['view_date'].errors" class="invalid-feedback">
+                    <div *ngIf="f['view_date'].errors['required']">Schedule a Dat required</div>
+                </div>
+            </div>
+            
+            <div class="additional-Information">Additional Information</div>
+
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Total Occupants</span></label>
+                <select class="input input-bordered w-full max-w-s department " placeholder="Choose a number of Occupants">
+                    <option value disabled selected hidden>Choose a number of Occupants...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <div *ngIf="submitted && f['num_tenants'].errors" class="invalid-feedback">
+                    <div *ngIf="f['num_tenants'].errors['required']">total occupancy is required</div>
+                </div>
+            </div>
+
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Number of pets</span></label>
+                <input type="number" min="0" max="5" placeholder="Number of pets" pInputText class="input input-bordered w-full max-w-s num_pets " required autofocus>
+                <div *ngIf="submitted && f['num_pets'].errors" class="invalid-feedback">
+                    <div *ngIf="f['num_pets'].errors['required']">Number of pets is required</div>
+                </div>
+            </div>
+           
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Pets Description</span></label>
+                <textarea type="text" placeholder="Describe your pets" pInputText class="input bg-gray-50 textarea input-bordered w-full max-w-s ped_desc " required autofocus>
+                </textarea>
+                <div *ngIf="submitted && f['ped_desc'].errors" class="invalid-feedback">
+                    <div *ngIf="f['ped_desc'].errors['required']">Pets Description is required</div>
+                </div>
+            </div>
+       
+        
+
+            <div class="field col mb-2">
+                <label class="label"><span class="label-text">Smokes</span></label>
+                <select class="input input-bordered w-full max-w-s department " placeholder="Choose whether you smoke or not">
+                <option value disabled selected hidden>Choose Below...</option>
+                <option value="NO">No</option>
+                <option value="YES">Yes</option>
+                </select>
+                <div *ngIf="submitted && f['smoke'].errors" class="invalid-feedback">
+                    <div *ngIf="f['smoke'].errors['required']">smoke is required</div>
+                </div>
+            </div>
+
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" (click)="hideDialog()" icon="pi pi-times" class="p-button-text" ></button>
+            <button pButton pRipple label="Save" (click)="onSubmit()" icon="pi pi-check pi-check-circle" class="p-button-text " ></button>
+        </ng-template>
+
+</p-dialog>
+
+
+       
+<!-- 
     
-            <div class="row justify-content-center align-items-center ">
-                <div class="col-12 col-lg-9 col-xl-7">
-                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                        <div class="card-body p-4 p-md-5">
-                            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 center">Application Form</h2>
     
-                            <form [formGroup]="Form" (ngSubmit)="onSubmit()">
-    
-                                <div class="row">
-                                </div>
-                               <div class="row">
-                                    <div class="bord form-group col-md-6 mb-4">
-                                        <input type="text" formControlName="fname" placeholder="First Name"  class="form-control w-full" [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"/>
-                                        <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['fname'].errors['required']">First name is required</div>
-                                        </div>
-                                    </div>   
-    
-                                    <div class="form-group col-md-6 mb-4">
-                                        <input type="text" formControlName="lname" placeholder="Last Name" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }"/>
-                                        <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['lname'].errors['required']">Last name is required</div>
-                                        </div>
-                                    </div>   
-                                </div>
-    
-                                    <div class="form-group col-md-6 mb-4">
-                                        <input type="email" formControlName="email" placeholder="Email" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"/>
-                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
-                                        </div>
-                                    </div>
-    
-                                    <div class="grid grid-cols-12 gap-6">
-                                        <div class="col-span-6 sm:col-span-3">
-                                         
-                                          <input type="text" formControlName="phone_num" placeholder="012-345-6789" autocomplete="given-name" class="mt-1 block">
-                                          <div *ngIf="submitted && f['phone_num'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['phone_num'].errors['required']">Phone Number is required</div>
-                                            <div *ngIf="f['phone_num'].errors['pattern']">Phone Number should follow the pattern 999-999-9999</div>
-                                            <div *ngIf="f['phone_num'].errors['maxlength']">Phone Number must not exceed 13 character</div>
-                                        </div>
-                                        </div>
-                                    
-                                        <div class="col-span-6 sm:col-span-3">
-                                          
-                                          <input type="number" formControlName="age" placeholder="Age" autocomplete="family-name" class="mt-1 block">
-                                          <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['age'].errors['required']">age is required</div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                <br>
-    
-                                
-                                <div class="form-group col-md-6 mb-4">
-                                    <input type="file" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="Upload Identity Document" class="block shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-0 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }"/>
-                                    <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
-                                    </div>
-                                </div>
-    
-    
-    
-                                <div class="form-group col-md-6 mb-4">
-                                    <input type="text" formControlName="occupation" placeholder="Employement Status" class="form-control w-full"  [ngClass]="{ 'is-invalid':submitted && f['occupation'].errors }"/>
-                                    <div *ngIf="submitted && f['occupation'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['occupation'].errors['required']">Employement Status is required</div>
-                                    </div>
-                                </div>
+                            
     
                                 <div class="form-group col-md-6 mb-4">
                                     
@@ -143,22 +200,11 @@
                                 </div>
                             </div>
     
-                                <!-- The button to open modal -->
-                    <label for="my-modal" class="btn modal-button">Apply</label>
+                                <!-- The button to open modal
+                    
     
-    <!-- Put this part before </body> tag -->
-                    <input type="checkbox" id="my-modal" class="modal-toggle" />
-                    <div class="modal" >
-                        <a href="myroom"></a>
-                        <div class="center modal-box">
-                           <i class="pi pi-check pi-check-circle text-success" style="font-size: 5rem"></i>
-                           <h3 class="text-success font-bold text-lg"><a href="myroom">Application Successful</a></h3>
-                           
-                        <div class="modal-action">
-                      <label for="my-modal" class="btn bg-success">OK</label>
-                           </div>
-                       </div>
-                   </div>
+    <!-- Put this part before </body> tag 
+                 
     
                             </form>
                         </div>
@@ -169,10 +215,25 @@
     </section>
   
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
+        <!-- <p-button icon="pi pi-check pi-check-circle" (click)="displayBasic=false" label="Apply" styleClass="p-button-text"></p-button>
+
+        <label for="my-modal" class="btn modal-button btn-success">Apply</label>
+
+        <input type="checkbox" id="my-modal" class="modal-toggle" />
+        <div class="modal" >
+            <a href="myroom"></a>
+            <div class="center modal-box">
+               <i class="pi pi-check pi-check-circle text-success" style="font-size: 5rem"></i>
+               <h3 class="text-success font-bold text-lg"><a href="myroom">Application Successful</a></h3>
+               
+            <div class="modal-action">
+          <label for="my-modal" class="btn bg-success">OK</label>
+               </div>
+           </div>
+       </div>
     </ng-template>
 </p-dialog>
 </div>
 
 </div>
-
+ -->
