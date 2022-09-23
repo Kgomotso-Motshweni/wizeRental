@@ -45,6 +45,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
 
 
+
 //NgWizard Imports
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 const ngWizardConfig: NgWizardConfig = {
@@ -110,7 +111,8 @@ const routes: Routes = [
     MessagesModule,
     TabViewModule,
 
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
   ],
   providers: [ MessageService, ConfirmationService],
 
