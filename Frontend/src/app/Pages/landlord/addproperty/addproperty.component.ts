@@ -9,7 +9,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './addproperty.component.html',
   styleUrls: ['./addproperty.component.scss']
 })
-<<<<<<< HEAD
 export class AddpropertyComponent implements OnInit {
 
   
@@ -17,9 +16,7 @@ export class AddpropertyComponent implements OnInit {
   constructor(private ngWizardService: NgWizardService) {
 
   }
-  ngOnInit(): void {
-    // console.log(this.addPropertyForm)
-  }
+  
   stepStates = {
     normal: STEP_STATE.normal,
     disabled: STEP_STATE.disabled,
@@ -30,11 +27,15 @@ export class AddpropertyComponent implements OnInit {
     selected: 0,
     theme: THEME.arrows,
     toolbarSettings: {
-      toolbarExtraButtons: [
-        { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
-      ],
+      // toolbarExtraButtons: [
+      //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
+      // ],
+      // showPreviousButton: false,
+     
+      
     }
   };
+  
   showPreviousStep(event?: Event) 
   {
     this.ngWizardService.previous();
@@ -45,6 +46,7 @@ export class AddpropertyComponent implements OnInit {
     this.ngWizardService.next();
 
   }
+
   resetWizard(event?: Event) 
   {
     this.ngWizardService.reset();
@@ -56,6 +58,7 @@ export class AddpropertyComponent implements OnInit {
   stepChanged(args: StepChangedArgs) 
   {
     console.log(args.step);
+    
   }
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
@@ -66,6 +69,10 @@ export class AddpropertyComponent implements OnInit {
   {
     return of(true);
   }
+  ngOnInit(): void {
+    
+  }
+}
 
   // addPropertyForm = new FormGroup({
   //   location: new FormGroup({
@@ -75,6 +82,7 @@ export class AddpropertyComponent implements OnInit {
   //     zipcode: new FormControl('', [Validators.required, Validators.minLength(4)])
   //   }),
   //   propertytype: new FormControl('', Validators.required),
+  
   //   accomodationname: new FormControl('', Validators.required),
   //   description: new FormControl('', Validators.required),
   //   bedroom: new FormControl('', Validators.required),
@@ -84,50 +92,3 @@ export class AddpropertyComponent implements OnInit {
   // })
 
   
-=======
-export class AddpropertyComponent {
-
-  constructor(private ngWizardService: NgWizardService){
-    
-  }
- stepStates = {
-  normal: STEP_STATE.normal,
-  disabled: STEP_STATE.disabled,
-  error: STEP_STATE.error,
-  hidden: STEP_STATE.hidden
-};
-config: NgWizardConfig = {
-  selected: 0,
-  theme: THEME.arrows ,
-  toolbarSettings: {
-    toolbarExtraButtons: [
-      { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
-    ],
-  }
-};
-showPreviousStep(event?: Event) {
-  this.ngWizardService.previous();
-}
-showNextStep(event?: Event) {
-  this.ngWizardService.next();
-}
-
-resetWizard(event?: Event) {
-  this.ngWizardService.reset();
-}
-setTheme(theme: THEME) {
-  this.ngWizardService.theme(theme);
-}
-stepChanged(args: StepChangedArgs) {
-  console.log(args.step);
-}
-isValidTypeBoolean: boolean = true;
-isValidFunctionReturnsBoolean(args: StepValidationArgs) {
-  return true;
-}
-isValidFunctionReturnsObservable(args: StepValidationArgs) {
-  return of(true);
-}
->>>>>>> 82cc642814d16cd82a35101dbc781d349ac98699
-
-}

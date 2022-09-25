@@ -4,6 +4,7 @@
     
         <ng-wizard-step [title]="'Property details'" 
         [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+        
         <span>
             <form>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -63,8 +64,8 @@
                     <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  style="width: 450px"  placeholder="R2500" required>
                 </div>
                 <div class="mb-6">
-                    <label for="document" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload of proof of ownership*</label>
-                    <input type="document" id="document" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  style="width: 450px" placeholder=" " required>
+                    <label for="document" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload proof of ownership*</label>
+                    <input type="file" id="document" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  style="width: 450px" placeholder=" " required>
                 </div>
             </form> 
         </span>
@@ -79,7 +80,11 @@
             No Duplicate images<br>
             </p>
         </ng-container>
-        </ng-wizard-step>   
+        </ng-wizard-step> 
+        <div>
+            <button type="submit" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800" >Submit</button>  
+        </div>
+        
     </ng-wizard>
 </div>
 
