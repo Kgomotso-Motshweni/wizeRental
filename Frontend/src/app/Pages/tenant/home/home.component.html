@@ -87,6 +87,7 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="5">5</option>
             </select>
             <div *ngIf="submitted && f['num_tenants'].errors" class="invalid-feedback">
                 <div *ngIf="f['num_tenants'].errors['required']">total occupancy is required</div>
@@ -126,8 +127,38 @@
 
         <div class="flex form-group mb-6 justify-end">
             <button type="submit" (click)="hideDialog()" class="text-white  btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "><i class="pi pi-times">Cancel</i></button>
+<!-- 
+            if (this.Form.value.title === ""  this.Form.value.title == null 
+      this.Form.value.description === ""  this.Form.value.description == null 
+      this.Form.value.question === ""  this.Form.value.question == null 
+      this.Form.value.option1 === ""  this.Form.value.option1 == null 
+      this.Form.value.option2 === ""  this.Form.value.option2 == null 
+      this.Form.value.option3 === "" || this.Form.value.option3 == null) {
+       Swal.fire(
+         'Please fill in all the required information',
+        'All info is required to create the survey'
+     );
+      this.isFormEmpty = false;
+
+      return false -->
         
-            <button type="submit" for="my-modal" (click)="onSubmit()" class="text-white ml-8 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "><i class="pi pi-check pi-check-circle">Apply</i></button>
+            <label for="my-modal" (click)="onSubmit()" class="text-white ml-8 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "><i class="pi pi-check pi-check-circle">Apply</i></label>
+            <!-- <label for="my-modal" (click)="onSubmit()" class="btn modal-button " >Apply</label> -->
+
+            <input type="checkbox" id="my-modal" class="modal-toggle" />
+
+            <div class="modal" >
+                <a href="myroom"></a>
+                <div class="center modal-box">
+                   <i class="pi pi-check pi-check-circle text-success" style="font-size: 5rem"></i>
+                   <h3 class="text-success font-bold text-lg"><a href="myroom">Application Successful</a></h3>
+                   
+                <div class="modal-action">
+              <label for="my-modal" class="btn bg-success">OK</label>
+                   </div>
+               </div>
+           </div>
+
         </div>
     </form>
 </p-dialog>
