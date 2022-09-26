@@ -1,5 +1,6 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
-    @media screen and (min-width: 630px){
+@media screen and (min-width: 630px){
         .empty{
             width: 73vw;
         }
@@ -7,3 +8,7 @@
 
 
     
+textarea.input {
+    min-height: 250px;
+    max-height: 250px;
+}

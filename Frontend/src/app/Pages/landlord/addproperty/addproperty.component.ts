@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-addproperty',
@@ -10,19 +10,68 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./addproperty.component.scss']
 })
 export class AddpropertyComponent implements OnInit {
-
+  @ViewChild('ngxLoading', { static: false })
+  ngxLoadingComponent!: NgxLoadingComponent;
+  showingTemplate = false;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
   
 
-  constructor(private ngWizardService: NgWizardService) {
+  Form = new FormGroup({
+    address: new FormControl(''),
+    town: new FormControl(''),
+    city: new FormControl(''),
+    zipCode: new FormControl(''),
+    options: new FormControl(''),
+    accomName: new FormControl(''),
+    description: new FormControl(''),
+    numBeds: new FormControl(''),
+    numBaths: new FormControl(''),
+    numRooms: new FormControl(''),
+    price: new FormControl(''),
+    petFriendly: new FormControl(''),
+    houseImage: new FormControl(''),
+    tittleDeed: new FormControl(''),
+  });
+
+  submitted:boolean = false; 
+  preview: string = '';
+  message: any;
+  file: any;
+  formData = new FormData();
+
+  constructor(private ngWizardService: NgWizardService, private formBuilder: FormBuilder, ) {
 
   }
-  
+
+  ngOnInit(): void {
+    this.loading = false;
+    this.Form = this.formBuilder.group({
+      address: ['', Validators.required],
+      town: ['', Validators.required],
+      city: ['', Validators.required],
+      zipCode: ['', Validators.required],
+      options: ['', Validators.required],
+      accomName: ['', Validators.required],
+      description: ['', Validators.required],
+      numBeds: ['', Validators.required],
+      numBaths: ['', Validators.required],
+      numRooms: ['', Validators.required],
+      price: ['', Validators.required],
+      petFriendly: ['', Validators.required],
+      houseImage: ['', Validators.required],
+      tittleDeed: ['', Validators.required],
+    }
+    );
+  }
+
   stepStates = {
     normal: STEP_STATE.normal,
     disabled: STEP_STATE.disabled,
     error: STEP_STATE.error,
     hidden: STEP_STATE.hidden
   };
+
   config: NgWizardConfig = {
     selected: 0,
     theme: THEME.arrows,
@@ -36,21 +85,21 @@ export class AddpropertyComponent implements OnInit {
     }
   };
   
-  showPreviousStep(event?: Event) 
+  showPreviousStep() 
   {
     this.ngWizardService.previous();
   }
 
-  showNextStep(event?: Event) 
+  showNextStep() 
   {
+    this.submitted = true;
+    if(this.Form.invalid){
+      return
+    }
+
     this.ngWizardService.next();
-
   }
 
-  resetWizard(event?: Event) 
-  {
-    this.ngWizardService.reset();
-  }
   setTheme(theme: THEME) 
   {
     this.ngWizardService.theme(theme);
@@ -69,26 +118,27 @@ export class AddpropertyComponent implements OnInit {
   {
     return of(true);
   }
-  ngOnInit(): void {
-    
+ 
+
+  get f():{ [key: string]: AbstractControl }{
+    return this.Form.controls;//it traps errors in the form
+  }
+
+  houseImage(event:any) {
+    const image = (event.target as any ).files[0];
+    this.file = image
+  }
+
+
+  proofOfOnwership(event:any) {
+    const image = (event.target as any ).files[0];
+    this.file = image
+  }
+
+  OnSubmit(){
+    this.submitted = true;
+    if(this.Form.invalid){
+      return
+    }
   }
 }
-
-  // addPropertyForm = new FormGroup({
-  //   location: new FormGroup({
-  //     address: new FormControl('', [Validators.required, Validators.minLength(4)]),
-  //     city: new FormControl('', Validators.required),
-  //     town: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  //     zipcode: new FormControl('', [Validators.required, Validators.minLength(4)])
-  //   }),
-  //   propertytype: new FormControl('', Validators.required),
-  
-  //   accomodationname: new FormControl('', Validators.required),
-  //   description: new FormControl('', Validators.required),
-  //   bedroom: new FormControl('', Validators.required),
-  //   bathroom: new FormControl('', Validators.required),
-  //   units: new FormControl('', Validators.required),
-  //   price: new FormControl('', Validators.required),
-  // })
-
-  
