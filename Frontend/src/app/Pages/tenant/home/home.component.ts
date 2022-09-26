@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   errorMessage = '';
   file: any;
   btnStatus ="disabled"
+  isFormEmpty = false;
 
   clicked = false;
 
@@ -85,34 +86,39 @@ export class HomeComponent implements OnInit {
   onSubmit():void{
     this.submitted = true;
 
-    this.formData.append('full_name', this.Form.value.full_name + '  '+ this.Form.value.lname)
-    this.formData.append('email', this.Form.value.email)
-    this.formData.append('phone_num', this.Form.value.phone_num)
-    this.formData.append('age', this.Form.value.age)
-    this.formData.append('id_doc', this.file)
-    this.formData.append('occupation', this.Form.value.occupation)
-    this.formData.append('view_date', this.Form.value.view_date)
-    this.formData.append('num_tenants', this.Form.value.num_tenants)
-    this.formData.append('num_pets', this.Form.value.num_pets)
-    this.formData.append('ped_desc', this.Form.value.ped_desc)
-    this.formData.append('smoke', this.Form.value.smoke)
-    
-    // if (this.Form.value.full_name === ""  || this.Form.value.full_name == null ||
-    //   this.Form.value.email === "" || this.Form.value.email == null ||
-    //   this.Form.value.phone_num === ""  ||this.Form.value.phone_num == null ||
-    //   this.Form.value.age === ""  ||this.Form.value.age == null ||
-    //   this.Form.value.file === ""  ||this.Form.value.file == null ||
-    //   this.Form.value.occupation === "" || this.Form.value.occupation == null ||
-    //   this.Form.value.view_date === "" || this.Form.value.view_date == null ||
-    //   this.Form.value.num_tenants === "" || this.Form.value.num_tenants == null ) {
-    //    Swal.fire(
-    //     'Please fill in all the required information',
-    //      'All info is required to create the survey'
-    //    );
+    if(this.submitted==null)
+    {
+      alert("Can't submit an empty form");
+    }
+    if (this.Form.value.full_name === ""  || this.Form.value.full_name == null ||
+      this.Form.value.email === "" || this.Form.value.email == null ||
+      this.Form.value.phone_num === ""  ||this.Form.value.phone_num == null ||
+      this.Form.value.age === ""  ||this.Form.value.age == null ||
+      this.Form.value.file === ""  ||this.Form.value.file == null ||
+      this.Form.value.occupation === "" || this.Form.value.occupation == null ||
+      this.Form.value.view_date === "" || this.Form.value.view_date == null ||
+      this.Form.value.num_tenants === "" || this.Form.value.num_tenants == null ||
+      this.Form.value.num_pets === "" || this.Form.value.num_pets == null ||
+      this.Form.value.ped_desc === "" || this.Form.value.ped_desc == null ||
+      this.Form.value.smoke === "" || this.Form.value.smoke == null ) 
+      {
+        this.isFormEmpty = true;
+    }
+    else{
 
-    //   return
-     
-    // }
+      true
+      this.formData.append('full_name', this.Form.value.full_name + '  '+ this.Form.value.lname)
+      this.formData.append('email', this.Form.value.email)
+      this.formData.append('phone_num', this.Form.value.phone_num)
+      this.formData.append('age', this.Form.value.age)
+      this.formData.append('id_doc', this.file)
+      this.formData.append('occupation', this.Form.value.occupation)
+      this.formData.append('view_date', this.Form.value.view_date)
+      this.formData.append('num_tenants', this.Form.value.num_tenants)
+      this.formData.append('num_pets', this.Form.value.num_pets)
+      this.formData.append('ped_desc', this.Form.value.ped_desc)
+      this.formData.append('smoke', this.Form.value.smoke)
+    }
 
     console.log(this.formData)
 
