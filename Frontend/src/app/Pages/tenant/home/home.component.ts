@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import {InputTextModule} from 'primeng/inputtext';
 import { Pending } from 'src/app/Interfaces/pending';
+import { retry } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -95,6 +96,23 @@ export class HomeComponent implements OnInit {
     this.formData.append('num_pets', this.Form.value.num_pets)
     this.formData.append('ped_desc', this.Form.value.ped_desc)
     this.formData.append('smoke', this.Form.value.smoke)
+    
+    // if (this.Form.value.full_name === ""  || this.Form.value.full_name == null ||
+    //   this.Form.value.email === "" || this.Form.value.email == null ||
+    //   this.Form.value.phone_num === ""  ||this.Form.value.phone_num == null ||
+    //   this.Form.value.age === ""  ||this.Form.value.age == null ||
+    //   this.Form.value.file === ""  ||this.Form.value.file == null ||
+    //   this.Form.value.occupation === "" || this.Form.value.occupation == null ||
+    //   this.Form.value.view_date === "" || this.Form.value.view_date == null ||
+    //   this.Form.value.num_tenants === "" || this.Form.value.num_tenants == null ) {
+    //    Swal.fire(
+    //     'Please fill in all the required information',
+    //      'All info is required to create the survey'
+    //    );
+
+    //   return
+     
+    // }
 
     console.log(this.formData)
 
