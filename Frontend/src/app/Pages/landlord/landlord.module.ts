@@ -42,7 +42,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
-import { MytenantsComponent } from './mytenants/mytenants.component';
+
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,
@@ -53,7 +53,6 @@ const routes: Routes = [
     {path:'pending', component:PendingComponent},
     {path:'addproperty', component:AddpropertyComponent},
     {path:'sendNortification', component:SendNortificationComponent},
-    {path:'mytenants', component:MytenantsComponent},
     {path:'', redirectTo:'/landlord/', pathMatch:'full'},
   ]}  
 ]
@@ -70,7 +69,6 @@ const routes: Routes = [
     MypropertyComponent,
     FooterComponent,
     SendNortificationComponent,
-    MytenantsComponent
   ],
   imports: [
     Ng2SearchPipeModule,
