@@ -45,10 +45,14 @@ app.get("/", (req, res) =>{
 //Routes Calls
 const auth = require("./App/Routes/Authentication");
 const property = require('./App/Routes/Landlord')
+const tenant = require('./App/Routes/tenant')
+const nortify = require('./App/Routes/Nortifications')
 // const user =require('../Backend/App/Routes/rentees')
 
 app.use("/api", auth) //retrive authentication infor 
 app.use("/api", property) //retrive Landlord infor 
+app.use("/api", tenant) //retrive Tenant infor 
+app.use("/api", nortify) //retrive Tenant infor 
 
 app.listen(port, () =>{  
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 

@@ -11,8 +11,24 @@ export class DashboardService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
 
-  rentees(){
-    return this.http.get(`${this.baseUrl}getRentees`)
+  //Get All The address for a specific landlord
+  address(id:any){
+    return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
+  }
+
+  //Get All The rentees from that specific address
+  rentees(address:any){
+    return this.http.get(`${this.baseUrl}getRentees/${address}`)
+  }
+  
+  //Get Pending Tenants
+  getPendTenants(id:number){
+    return this.http.get(`${this.baseUrl}getPending/${id}`)
+  }
+  
+  //Get One Pending Tenant
+  getOnePendTenants(id:any){
+    return this.http.get(`${this.baseUrl}getOnePending/${id}`)
   }
   
   deleteRentee(id:Payment){
@@ -21,4 +37,10 @@ export class DashboardService {
   paymentStatus(){
     return this.http.get(`${this.baseUrl}getPayment`)
   }  
+
+  getProperties(id:any){
+    return this.http.get(`${this.baseUrl}getproperties/${id}`)
+  }
+
+
 }

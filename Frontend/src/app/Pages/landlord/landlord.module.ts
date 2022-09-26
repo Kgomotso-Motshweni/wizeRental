@@ -51,10 +51,11 @@ import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.default
 };
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent,canActivate: [AuthGuard],
+  {path:'landlord', component: LandlordComponent,
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
@@ -82,6 +83,7 @@ const routes: Routes = [
   imports: [
     Ng2SearchPipeModule,
     NgWizardModule.forRoot(ngWizardConfig),
+    MultiSelectModule,
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
