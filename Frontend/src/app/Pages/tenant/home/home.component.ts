@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   public loading = false;
 
   properties:any;
-  property:any;
+  
   searchItem:any;
   condition: boolean = false;
   // form!: FormGroup;
@@ -33,21 +33,22 @@ export class HomeComponent implements OnInit {
   image:any = ''
   userData: any = {};
   id:any;
+  tenantProperty:any;
 
 
-  selectThisImage(myEvent: any) {
-    this.file = myEvent.target.files[0];
-  }
+  // selectThisImage(myEvent: any) {
+  //   this.file = myEvent.target.files[0];
+  // }
   ngOnInit(): void {
-    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    this.userid = this.token.regData[0].userid
-    this.getProfile(this.userid)
+    // this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    // this.userid = this.token.regData[0].userid
+    // this.getProfile(this.userid)
 
     this.service.getProperties().subscribe(
       {
         next: (data: any) => {
           console.log(data);
-          this.property = data;
+          this.tenantProperty = data;
         }
       })
   }
@@ -60,16 +61,16 @@ export class HomeComponent implements OnInit {
     this.service.getProperties().subscribe(
       {
         next: (data: any) => {
-          // console.log(data[ind]);
-          // this.id =data[ind].property_id;
+          console.log(data[ind]);
+          this.id =data[ind].property_id;
   
-          this.id = this.property[ind].property_id
+          this.id = this.tenantProperty[ind].property_id
           localStorage.setItem('prop_id',this.id);
           localStorage.setItem('data',data);
   
           const userid=localStorage.getItem('prop_id');
   
-          console.log("From landing",userid);
+          console.log("From tenant home",userid);
         }
       });
   
@@ -79,34 +80,34 @@ export class HomeComponent implements OnInit {
   
   }
 
-  getProfile(userid:any){
-    const userToken = localStorage.getItem('access_token');
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
-    };
-    this.auth.getProfile(httpOptions, userid).subscribe({
-      next:data =>{
-        this.userData = data;
-        this.Full_Name = this.substring(this.userData[0].firstname) +'  '+ this.substring(this.userData[0].lastname);
-        this.image = this.userData[0].imageurl;
-      }
-    })
-  }
+  // getProfile(userid:any){
+  //   const userToken = localStorage.getItem('access_token');
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
+  //   };
+  //   this.auth.getProfile(httpOptions, userid).subscribe({
+  //     next:data =>{
+  //       this.userData = data;
+  //       this.Full_Name = this.substring(this.userData[0].firstname) +'  '+ this.substring(this.userData[0].lastname);
+  //       this.image = this.userData[0].imageurl;
+  //     }
+  //   })
+  // }
 
-  Logout(){
-    this.auth.doLogout()
-  }
+  // Logout(){
+  //   this.auth.doLogout()
+  // }
 
   //Receive an entire string, take the first letter and transform it into uppercase 
-  substring(value:any): string{
-    let letter = this.transform(value.substring(0,1)) + value.substring(1); 
-    return letter
-  }
+  // substring(value:any): string{
+  //   let letter = this.transform(value.substring(0,1)) + value.substring(1); 
+  //   return letter
+  // }
 
   //Transform Strings to uppercase letter
-  transform(value:any): string {
-    let first = value.toUpperCase();
-    return first; 
-  }
+  // transform(value:any): string {
+  //   let first = value.toUpperCase();
+  //   return first; 
+  // }
 
 }

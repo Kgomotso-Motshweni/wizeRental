@@ -2,11 +2,11 @@ const express = require('express')
 const Client = require('../Config/db.config')
 
 
-exports.property = async (req,res) =>{
-
+exports.getProp = async (req,res) =>{
+    const id = parseInt(req.params.id)
   try {
     
-        const Userdata = await Client.query('SELECT * FROM landlordProperty',(err,result)=>{
+        const getdata = await Client.query('SELECT * FROM landlordProperty  WHERE property_id = $1',[id],(err,result)=>{
             if(err)
             {
                 // console.log("successful")
@@ -14,7 +14,7 @@ exports.property = async (req,res) =>{
             }else{
                
                 res.status(200).send(result.rows)
-                // console.log("successful")
+                
             }
         })
 

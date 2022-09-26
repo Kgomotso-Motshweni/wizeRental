@@ -20,8 +20,7 @@ const routes: Routes = [
     {path:'view/:id', component:ViewpropertyComponent},
     {path: 'filter', component:FilterByComponent},
     {path:'tenant', component:TenantComponent},
-    {path:'', redirectTo:"/", pathMatch:"full"},
-    {path:'tenant/home',component:HomeComponent}
+    {path:'', redirectTo:"/", pathMatch:"full"}
 ];
 
 @NgModule({
