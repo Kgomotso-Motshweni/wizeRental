@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
   onSubmit():void{
     this.submitted = true;
 
-    this.formData.append('full_name', this.appForm.full_name + '  '+ this.Form.value.lname)
+    this.formData.append('full_name', this.Form.value.full_name + '  '+ this.Form.value.lname)
     this.formData.append('email', this.Form.value.email)
     this.formData.append('phone_num', this.Form.value.phone_num)
     this.formData.append('age', this.Form.value.age)
@@ -97,17 +97,17 @@ export class HomeComponent implements OnInit {
 
     console.log(this.formData)
 
-    console.log(this.appForm.full_name + '   ' + this.appForm.last_name )
-    console.log(this.appForm.email )
-    console.log(this.appForm.phone_num)
-    console.log(this.appForm.age)
-    console.log(this.appForm.id_doc )
-    console.log(this.appForm.occupation)
-    console.log(this.appForm.view_date )
-    console.log(this.appForm.num_tenants )
-    console.log(this.appForm.num_pets)
-    console.log(this.appForm.ped_desc )
-    console.log(this.appForm.smoke )
+    console.log(this.Form.value.fname + '   ' + this.Form.value.lname )
+    console.log(this.Form.value.email )
+    console.log(this.Form.value.phone_num)
+    console.log(this.Form.value.age)
+    console.log(this.Form.value.id_doc )
+    console.log(this.Form.value.occupation)
+    console.log(this.Form.value.view_date )
+    console.log(this.Form.value.num_tenants )
+    console.log(this.Form.value.num_pets)
+    console.log(this.Form.value.ped_desc )
+    console.log(this.Form.value.smoke )
 
   }
 

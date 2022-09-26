@@ -2,13 +2,21 @@
     font-size: x-large;
 
 }
-textarea .textarea{
-    min-height: 130px;
-    max-height: 130px;
+textarea.input {
+    min-height: 100px;
+    max-height: 100px;
 }
-.invalid-feedback{
+/*  
+    min-width: 450px;
+    max-width: 450px;
+*/
+.invalid-feedback,p-inputMask{
     color: red;
 }
-// .is-invalid{
-//     border-color: red;
-// }
+.is-invalid,p-inputMask{
+    border-color: red;
+}
+
+.email{
+    padding-left: 25px;
+}
