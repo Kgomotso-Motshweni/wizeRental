@@ -1,5 +1,7 @@
 const client = require("../Config/db.config");
 const cloudinary = require("../Cloudinary/cloudinary");
+const multer = require('multer')
+const path = require('path')
 
 const addProperty = async(req, res) =>{
     const id = parseInt(req.params.userid);
@@ -19,8 +21,8 @@ const addProperty = async(req, res) =>{
             });
         }else{
             client.query(`INSERT INTO 
-            landlordproperty (landlord_id, house_image)
-            VALUES($1,$2) RETURNING property_id`, 
+            landlordproperty (landlord_id,p_address,p_city,p_town,p_zip_code,p_propertyType,p_name,p_description,p_bedroom,p_bath,title_deed, house_image)
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING property_id`, 
             [id, results.secure_url], (error, results) =>{
                 if(error){
                     return res.status(400).json({
@@ -34,14 +36,15 @@ const addProperty = async(req, res) =>{
         res.status(500).json({
             error: "Database error when adding property details", //Database connection error
         });
-    }
+       }
 }
 
 const addRoomImages = async(req, res) =>{
-    const id = parseInt(req.params.userid);
     try{  
         const property_id = parseInt(req.params.property_id); 
-        const images = await cloudinary.uploader.upload(req.file.path);
+        const images = await cloudinary.uploader.upload(req.file.path, {
+            folder: "/property/",
+        });
 
         client.query(`INSERT INTO RoomsImages (property_id, images) VALUES ($1, $2)`, 
         [property_id, images.secure_url], (error, results) => {

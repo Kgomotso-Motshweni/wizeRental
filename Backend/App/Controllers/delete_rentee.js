@@ -2,7 +2,6 @@ const express = require('express');
 
 const Client = require('../Config/db.config')
 
-
 //delete rentee
 
 module.exports = delete_rentee = async (req,res) =>{
