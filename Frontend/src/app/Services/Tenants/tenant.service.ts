@@ -31,7 +31,4 @@ export class TenantService {
     return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
   }
 
-
-  
-
 }

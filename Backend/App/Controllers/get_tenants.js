@@ -26,7 +26,7 @@ const getLandlordRes = async(req, res) => {
 
 const tenantsFromSpecifiAddress = async(req, res) => {
     const address = req.params.address;
-    const {id_tenant} = req.body
+    // const {id_tenant} = req.body
     
     try{
       client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status, r.create_time, r.r_update_time
@@ -45,10 +45,7 @@ const tenantsFromSpecifiAddress = async(req, res) => {
           }else{
 
             client.query(
-              `SELECT * FROM rentees a
-               INNER JOIN landlordproperty l ON a.property_id = l.property_id
-               INNER JOIN users u ON l.landlord_id = u.userid
-               WHERE u.userid = $1;`,[id_tenant],
+              `SELECT * FROM rentees`,
                (err,result) => {
                  if (err) {
                 //If rentees are not available is not available

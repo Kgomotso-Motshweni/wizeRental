@@ -30,9 +30,10 @@ export class TenantsComponent implements OnInit {
   totReceived: number = 0;
   numPending: number = 0;
   message: any;
-  tenantAddress: any;
+  tenantAddress :any;
   token:any = '';
   code:any;
+  attempts : number = 0;
   Form = new FormGroup({
     usertype: new FormControl(''),
     
@@ -52,12 +53,22 @@ export class TenantsComponent implements OnInit {
     */
     // this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     // this.id = this.token.regData[0].userid;
+    
+
     this.getLandLordAddress();
-   
+
+
+    this.dash.rentees(1).subscribe((tenants)=>{
+      this.rentees = tenants;
+    })
+
+
+    console.log(this.attempts)
 
     console.table(this.tenantAddress)
   
   }
+
 
   /*
   use Payment interface to receive all the data of a tenant you want to delete and 
@@ -98,7 +109,9 @@ export class TenantsComponent implements OnInit {
   }
 
   //Get all Landlord property addresses
+  
   getLandLordAddress(){
+   
     return this.tenant.address(1).subscribe({
       next:data => {
         this.tenantAddress = data
@@ -107,20 +120,28 @@ export class TenantsComponent implements OnInit {
 
   }
 
-
   /* when click on any property from the dropdown receive that property value and 
     use it to get all tenants from that property
   */
+
   caller(){
-    
+
+    this.attempts = 1;
+
+    if(this.attempts == 1 ){
     return this.tenant.rentees(this.Form.value.usertype).subscribe({
       next:data => {
         this.rentees = data;
-          console.log(this.rentees)
       }
     })
-  }
+   }else{
+    return this.dash.rentees(1).subscribe((tenants)=>{
+      this.rentees = tenants
 
+    })
+  }
+ 
+  }
 
   updatePayment(index:any,status:any){
     this.rente_id = this.rentees[index].rentee_id
