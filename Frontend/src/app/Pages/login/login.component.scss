@@ -8,13 +8,11 @@
 .email, .password{
     padding-left: 25px;
 }
-
-//Desktop
-@media screen and (min-width: 769px){
-    .gradient-custom{
-        margin-top: 7vh;
-    }
+.container{
+    position: absolute;
+    top: 10%;
 }
+
 .reg{
     color: #ff0000;
 }
@@ -29,20 +27,14 @@ span{
     margin-left: auto;
     margin-right: auto;
 }
-html, body {
-    height: 100%;
-}
-
-html {
-    display: table;
-    margin: auto;
-}
 
 body {
     display: table-cell;
     vertical-align: middle;
 }
 
-
+.header{
+    box-shadow: none;
+}
 
    

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { of } from 'rxjs';
-import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+
 
 @Component({
   selector: 'app-addproperty',
@@ -40,7 +40,7 @@ export class AddpropertyComponent implements OnInit {
   file: any;
   formData = new FormData();
 
-  constructor(private ngWizardService: NgWizardService, private formBuilder: FormBuilder, ) {
+  constructor(private formBuilder: FormBuilder, ) {
 
   }
 
@@ -65,61 +65,6 @@ export class AddpropertyComponent implements OnInit {
     );
   }
 
-  stepStates = {
-    normal: STEP_STATE.normal,
-    disabled: STEP_STATE.disabled,
-    error: STEP_STATE.error,
-    hidden: STEP_STATE.hidden
-  };
-
-  config: NgWizardConfig = {
-    selected: 0,
-    theme: THEME.arrows,
-    toolbarSettings: {
-      // toolbarExtraButtons: [
-      //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
-      // ],
-      // showPreviousButton: false,
-     
-      
-    }
-  };
-  
-  showPreviousStep() 
-  {
-    this.ngWizardService.previous();
-  }
-
-  showNextStep() 
-  {
-    this.submitted = true;
-    if(this.Form.invalid){
-      return
-    }
-
-    this.ngWizardService.next();
-  }
-
-  setTheme(theme: THEME) 
-  {
-    this.ngWizardService.theme(theme);
-  }
-  stepChanged(args: StepChangedArgs) 
-  {
-    console.log(args.step);
-    
-  }
-  isValidTypeBoolean: boolean = true;
-  isValidFunctionReturnsBoolean(args: StepValidationArgs) 
-  {
-    return true;
-  }
-  isValidFunctionReturnsObservable(args: StepValidationArgs) 
-  {
-    return of(true);
-  }
- 
-
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
   }
@@ -140,5 +85,46 @@ export class AddpropertyComponent implements OnInit {
     if(this.Form.invalid){
       return
     }
+  }
+
+  fileList: NzUploadFile[] = []
+
+
+  previewImage: string = '';
+  previewVisible = false;
+
+  getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+  
+  handlePreview = async (file: NzUploadFile): Promise<void> => {
+    if (!file.url && !file['preview']) {
+      file['preview'] = await this.getBase64(file.originFileObj!);
+    }
+    this.previewImage = file.url || file['preview'];
+    this.previewVisible = true;
+  };
+
+  index = 0;
+
+  onIndexChange(event: number): void {
+    this.index = event;
+  }
+
+  pre(): void {
+    this.index  -= 1;
+  }
+
+  next(): void {
+    this.index +=1;
+  }
+
+  done(): void {
+
+    console.log('done');
   }
 }

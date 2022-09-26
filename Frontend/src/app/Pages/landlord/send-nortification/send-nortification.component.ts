@@ -38,7 +38,8 @@ export class SendNortificationComponent implements OnInit {
   message: any;
   address:Array<any> = []; //Declare an list array variable called address
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private dash:DashboardService,
     private messageService: MessageService,
     private auth:AuthenticationService,

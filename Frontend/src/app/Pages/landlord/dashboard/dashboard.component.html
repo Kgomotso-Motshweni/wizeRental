@@ -1,7 +1,6 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container justify-center pending">
-  <!---------------------------------------cards---------------------------------------------------->
   <div class="container cards mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="card shadow-xl border">
@@ -125,14 +124,14 @@
       </div>
     </div>
   </div> 
-  <!--------------------------------------------till here-------------------------------------------->
-
-
 </div>
-<!--
-<div class="fixed bottom-0 w-11/12" style="overflow: hidden; z-index:-1;">
-  <app-footer></app-footer>
-</div>
--->
+<ngx-loading
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.circleSwish,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
+</ngx-loading>
 
 

@@ -2,15 +2,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
+
+
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
 html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    color: #66615B;
+    background-color: #F4F3EF;
     height: 100%;
-    // width: 100vh;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+:root{
+    background: #F4F3EF;
+    --btn_primary: #55ADEA;
+    --btn_secondary: #D27C2C;
+    --mainBgColor: #F0F0F0;
+    --mainBtnColor: #0D98BA;
+}
+@layer components {
+    .card {
+      border-radius: theme('borderRadius.md');
+      box-shadow: theme('boxShadow.lg');
+    }
+    /* ... */
 }

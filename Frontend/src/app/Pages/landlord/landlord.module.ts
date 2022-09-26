@@ -43,15 +43,13 @@ import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
-
-
-
-//NgWizard Imports
-import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
-const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.default
-};
 import { MultiSelectModule } from 'primeng/multiselect';
+
+
+//NG-ZORRO Imports
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 
 
 const routes: Routes = [
@@ -82,8 +80,10 @@ const routes: Routes = [
   ],
   imports: [
     Ng2SearchPipeModule,
-    NgWizardModule.forRoot(ngWizardConfig),
     MultiSelectModule,
+    NzButtonModule,
+    NzUploadModule,
+    NzStepsModule,
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,

@@ -1,14 +1,25 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+// @import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~ng-zorro-antd/button/style/index.min.css";  /* Import one component's styles */
 
 @media screen and (min-width: 630px){
-        .empty{
-            width: 73vw;
-        }
+    .empty{
+        width: 73vw;
     }
+}
 
-
-    
 textarea.input {
     min-height: 250px;
     max-height: 250px;
 }
+.images li{
+    margin-left: 12px;
+}
+
+.addedImages{
+    height: 100px;
+}
+nz-steps {
+    display: block;
+    margin-bottom: 60px;
+    box-shadow: rgb(232, 232, 232) 0px -1px 0px 0 inset;
+  }
