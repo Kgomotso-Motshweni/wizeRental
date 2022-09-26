@@ -42,8 +42,9 @@ export class HomeComponent implements OnInit {
   lastName: string = '';
   errorMessage = '';
   file: any;
+  btnStatus ="disabled"
 
-  
+  clicked = false;
 
   constructor(
     private auth:AuthenticationService,
@@ -111,6 +112,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+
+actionMethod(){
+
+}
 
   showBasicDialog() {
     this.appForm = {}

@@ -44,8 +44,10 @@ const register = async (req, res) => {
                             return  res.status(500).json({
                                 error: "Database error"
                             })
+
                         }else {
                             flag  =  1;
+                            
                         }
                     }
                 )

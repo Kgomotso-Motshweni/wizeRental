@@ -1,1 +1,73 @@
-<p>myroom works!</p>
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+
+<div class="container ">
+    <div class="navbar bg-base-100 top-0 z-50 ">
+        <div class="flex-1  ">
+            <button type="btn" (click)="logIssues()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">My Issues</button>            
+        </div>
+
+        <div class="end-part flex-none justify-end">
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator bell">
+                    <a>
+                      <i class="fa-regular fa-bell"></i>
+                    <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
+                    </a>
+                </div>
+            </button>    
+        </div>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="dialogMessage" [style]="{width: '450px'}" header="Log Issues" [modal]="true" styleClass="p-fluid">
+   <form [formGroup]="Form">
+        <div class="form-group mb-6">
+            <label for="vehicle1"> WATER </label>
+            <input type="radio" formControlName="issues" formid="vehicle1" name="vehicle1" value="Bike">
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
+            </div>
+        </div>
+
+        <div class="form-group mb-6">
+            <label for="vehicle2"> ELECTRICITY </label><br>
+            <input type="radio" formControlName="issues" id="vehicle2" name="vehicle2" value="Car"
+            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+    
+            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                <div *ngIf="f['message'].errors['required']">message is required</div>
+            </div>
+        </div>
+
+        <div class="form-group mb-6">
+            <label for="vehicle3"> WIFI</label>
+            <input type="radio" formControlName="issues" id="vehicle3" name="vehicle3" value="Boat"
+            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+            
+            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                <div *ngIf="f['message'].errors['required']">message is required</div>
+            </div>
+        </div>
+
+        <div class="form-group mb-6"> 
+            <label class="input-group ">Message:</label>
+            <textarea type="text" formControlName="message"
+                class="input bg-gray-50 input-bordered w-full email"
+                [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+            </textarea>        
+            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                <div *ngIf="f['message'].errors['required']">message is required</div>
+            </div>
+        </div>
+
+        <div class="form-group flex justify-end">
+            <button type="submit" (click)="hideDialog()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Cancel</button>
+            <button type="submit" (click)="sendNotification()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</button>
+        </div>
+      
+    </form>
+</p-dialog> 
+

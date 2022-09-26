@@ -11,8 +11,8 @@ CREATE TABLE users(
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS Nortifications CASCADE;
-CREATE TABLE Nortifications(
+DROP TABLE IF EXISTS LandlordToTenantNortifications CASCADE;
+CREATE TABLE LandlordToTenantNortifications(
     notification_id SERIAL PRIMARY KEY,
     landlord_id INT NOT NULL,
     tenant_id INT NOT NULL,
@@ -24,16 +24,27 @@ CREATE TABLE Nortifications(
     FOREIGN KEY(landlord_id) REFERENCES users (userid)
 );
 
+DROP TABLE IF EXISTS TenantToLandlordNortifications CASCADE;
+CREATE TABLE TenantToLandlordNortifications(
+    notification_id SERIAL PRIMARY KEY,
+    landlord_id INT NOT NULL,
+    tenant_id INT NOT NULL,
+    notif_type INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    FOREIGN KEY(tenant_id) REFERENCES users (userid),
+    FOREIGN KEY(landlord_id) REFERENCES users (userid)
+);
 DROP TABLE IF EXISTS landlordProperty CASCADE;
 CREATE TABLE landlordProperty(
 	property_id SERIAL PRIMARY KEY NOT NULL,
 	landlord_id INT,
-	p_address VARCHAR(100),
+	p_address VARCHAR(100) ,
 	p_city VARCHAR(100),
 	p_town VARCHAR(100),
 	p_zip_code INT,
 	p_propertyType VARCHAR(100),
-	p_name VARCHAR(150),
+	p_name VARCHAR(150) UNIQUE,
 	p_description TEXT,
 	p_bedroom INT,
 	p_bath INT,
