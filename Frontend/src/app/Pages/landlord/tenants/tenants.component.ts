@@ -25,7 +25,7 @@ export class TenantsComponent implements OnInit {
   public loading = false;
 
   countTenants : number =0;
-  rentees!: Array<Payment>;
+  rentees: Array<Payment> = [];
   searchTenant: any;
   totAmnt : number =0;
   numroomsO : number =0;
@@ -100,51 +100,45 @@ export class TenantsComponent implements OnInit {
 
   
   }
-
-
-  /*
+/*
   use Payment interface to receive all the data of a tenant you want to delete and 
   then use primeNG component for confrm delete and a dialog to confirm first before you can delete a 
   specific tenant
   */
-  deleteUser(index:any) {
-    this.id = this.rentees[index].rentee_id;
-      this.confirmationService.confirm({
-        message: 'Do you want to delete this record?',
-        header: 'Delete Confirmation',
-        icon: 'pi pi-info-circle',
-        accept: () => {
-          this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
-            this.dash.deleteRentee(this.id).subscribe(()=>{
-            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-            this.router.onSameUrlNavigation = 'reload';
-            this.router.navigate(['/landlord/tenant'], { relativeTo: this.route });
-          })
-        },
-        reject: (type: any) => {
-            switch(type) {
-                case ConfirmEventType.REJECT:
-                    this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
-                   
-      
-                        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-                        this.router.onSameUrlNavigation = 'reload';
-                        this.router.navigate(['/landlord/tenant'], { relativeTo: this.route });
-                    
-  
-                break;
-                case ConfirmEventType.CANCEL:
-                    this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
-                break;
-            }
-            
-             
-  
-                   
+  deleteUser(details:Payment){
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to remove this: ' + details.full_name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        console.log(details)
+        this.loading = true;
+        this.dash.deleteRentee(details).subscribe({
+          next:data =>{
+            this.loading = true;
+            this.message = data
+            //Route back to the current page,  this helps in refreshing data
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
+            this.loading = false;
+            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+          },error: err => {
+            this.loading = false;
+            //show the message if unable to add new data
+            this.message = err.error.message;
+            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+          }
+        });
+       },
+      reject: () => {
+        this.loading = false;
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
+      }
+    })
+  }
 
-        }
-    });
-}
+
 
   //Get all Landlord property addresses
   

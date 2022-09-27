@@ -28,8 +28,8 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}/getPending/${1}`)
   }
 
-  deleteRentee(id:any){
-    return this.http.delete(`${this.baseUrl}deleteRentee/${id}`)
+  deleteRentee(id:Payment){
+    return this.http.delete(`${this.baseUrl}deleteRentee/${id.rentee_id}`)
   } 
 
   getProperties(id:any){

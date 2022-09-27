@@ -1,3 +1,6 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
 <div class="container justify-center pending">
   <div class="container  mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -68,11 +71,10 @@
         </div>
       </form>
 
-      <div class="search">
-      
-        <input type="text" placeholder="Search Tenant" 
-          [(ngModel)]="searchTenant" />&nbsp;
+      <div class="form-group mb-6 mt-6 search">
+        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full email" [(ngModel)]="searchTenant"/>
       </div>
+
 
       <div class="search">
         <label class="input-group "></label>
