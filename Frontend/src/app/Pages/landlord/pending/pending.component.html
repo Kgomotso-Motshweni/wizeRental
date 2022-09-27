@@ -22,42 +22,15 @@
 
     <ng-container *ngIf="pending.length != 0">
         <div class="container pending">
-            <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card shadow-xl border">
+            <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" >
+                <div class="card shadow-xl border" *ngFor="let i Of pending">
                     <div class="grid card-body user justify-start">
-                        <h2 class="card-title">Koketso Tinyane</h2>
-                        <p>Koketsotinyane@gmail.com</p>
-                        <p>Contacts: 082 145 6643</p>
-                        <p>View Date: 1 Sep 2022</p>
-                        
+                        <h2 class="card-title">{{i.full_name}}</h2>
+                        <p>{{i.email}}</p>
+                        <p>Contacts: {{i.phone_num}}</p>
+                        <p>View Date: {{i.view_date | date: 'dd MMM yyyy'}}</p>
                         <div class="grid form-group justify-start">
-                            <button type="button" (click)="editProperty()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card shadow-xl border">
-                    <div class="grid card-body user justify-start">
-                        <h2 class="card-title">Benny Mabunda</h2>
-                        <p>mabunda@gmail.com</p>
-                        <p>Contacts: 082 145 6643</p>
-                        <p>View Date: 22 Sep 2022</p>
-                        
-                        <div class="grid form-group justify-start">
-                            <button type="button" (click)="editProperty()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card  shadow-xl border">
-                    <div class="grid card-body user justify-start">
-                        <h2 class="card-title">Bokamoso Kekana</h2>
-                        <p>kekana@live.com</p>
-                        <p>Contacts: 082 145 6643</p>
-                        <p>View Date: 1 Oct 2022</p>
-                        
-                        <div class="grid form-group justify-start">
-                            <button type="button" (click)="editProperty()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
+                            <button type="button" (click)="editProperty(i)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
                         </div>
                     </div>
                 </div>
@@ -77,7 +50,7 @@
                                 <label class="input-group">
                                     <span class="w-12"><i class="fa-solid fa-user"></i></span>
                                     <input type="text"  placeholder="First Name"
-                                        class="input bg-gray-50 input-bordered w-content email " />
+                                        class="input bg-gray-50 input-bordered w-content email " [placeholder]="pendingClients.full_name"/>
                                 </label>          
                             </div> 
                         </div>       

@@ -11,9 +11,9 @@ export class DashboardService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
 
-
-  rentees(id:any){
-    return this.http.get(`${this.baseUrl}getRentees/${id}`)
+  //Get All The address for a specific landlord
+  address(id:any){
+    return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
   }
 
   getPendTenants(id:any){

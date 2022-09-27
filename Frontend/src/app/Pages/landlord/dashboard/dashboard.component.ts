@@ -7,6 +7,7 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,22 +25,27 @@ export class DashboardComponent implements OnInit {
   totAmnt: number = 0;
   totPaid: number = 0;
   totUnPaid: number = 0;
-  totNumTenants: any =0;
   rentees!: Array<Payment>;
-  searchTenant: any;
-  numroomsA: number = 0;
-  numroomsO: number = 0;
-
   payment_array: Array<any> = [];
   my_properties: any;
+  id:number = 0;
+  token:any = '';
+  numroomsO : number =0;
+  totNumTenants :number = 0;
+  numroomsA :number =0;
+  numPending : number =0;
+
 
   constructor(private dash: DashboardService,
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService,) { }
+    private confirmationService: ConfirmationService,
+    private auth:AuthenticationService) { }
 
   ngOnInit(): void {
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.id = this.token.regData[0].userid;
 
     this.dash.rentees(1).subscribe((rentee: any) => {
       this.rentees = rentee;
@@ -61,10 +67,11 @@ export class DashboardComponent implements OnInit {
           }
         }
       }
+
       //Pending Tenants
       this.dash.getPendTenants(1).subscribe((numTenants) => {
         this.totNumTenants = numTenants;
-        this.totNumTenants = this.totNumTenants.length;
+        this.numPending = this.totNumTenants.length;
 
       })
 
