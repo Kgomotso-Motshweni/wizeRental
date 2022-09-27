@@ -47,6 +47,7 @@ export class AddpropertyComponent implements OnInit {
   userinfor:any
   token:any = '';
   id:number = 0;
+  img:any;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -125,7 +126,6 @@ export class AddpropertyComponent implements OnInit {
   stepChanged(args: StepChangedArgs) 
   {
  
-    
   }
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
@@ -137,14 +137,11 @@ export class AddpropertyComponent implements OnInit {
     return of(true);
   }
  
-
-
   houseImage(event:any) {
     const image = (event.target as any ).files[0];
     this.file = image
     console.log(this.file)
   }
-
 
   proofOfOnwership(event:any) {
     const image = (event.target as any ).files[0];
@@ -186,6 +183,13 @@ export class AddpropertyComponent implements OnInit {
         this.loading = false;
       }
     })
+
+    this.land.addRoomImages(this.img,this.id).subscribe({
+      next:data =>{
+        this.userinfor = data;
+        console.log(this.userinfor)
+      }
+    })
   }
 
   // fileList: Array<any> = [];
@@ -197,7 +201,7 @@ export class AddpropertyComponent implements OnInit {
   //   const image = (event.target as any ).files[0];
   //   this.file = image
 
-  //   //Show image preview
+  //   //Show image preview 
   //   let reader = new FileReader();
   //   reader.onload = (event: any) => {
   //     this.preview = event.target.result;
@@ -232,7 +236,7 @@ export class AddpropertyComponent implements OnInit {
 
   }
   onSubmit(){
-
+ 
   }
 
 }
