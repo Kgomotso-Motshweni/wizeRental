@@ -44,7 +44,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
 import { MultiSelectModule } from 'primeng/multiselect';
-
+import {BadgeModule} from 'primeng/badge';
 
 //NG-ZORRO Imports
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -55,10 +55,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 
 //NgWizard Imports
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
-const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.default
-};
 
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default,
+};
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,
@@ -93,6 +93,7 @@ const routes: Routes = [
     NzUploadModule,
     NzModalModule,
     NzStepsModule,
+    BadgeModule,
     //ng-wizard
     NgWizardModule.forRoot(ngWizardConfig),
     //loader

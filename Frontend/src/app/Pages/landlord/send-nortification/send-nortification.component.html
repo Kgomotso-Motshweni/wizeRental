@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group ">
                                 <label class="input-group ">Send To:</label>
-                                <p-multiSelect [options]="rentees" (click)="recipients()" formControlName="recipient" defaultLabel="Select Tenants you want to send notification" optionLabel="full_name"
+                                <p-multiSelect [options]="rentees" formControlName="recipient" defaultLabel="Select Tenants you want to send notification" optionLabel="full_name"
                                     display="chip" [ngClass]="{ 'is-invalid':submitted && f['recipient'].errors }">
                                 </p-multiSelect>   
                                 <div *ngIf="submitted && f['recipient'].errors" class="invalid-feedback">

@@ -47,7 +47,6 @@ export class SendNortificationComponent implements OnInit {
     private router:Router, ) { }
 
   ngOnInit(): void {
-
     this.loading = false;
 
     //Validate user form using reactive form 
@@ -57,8 +56,7 @@ export class SendNortificationComponent implements OnInit {
       recipient: ['', Validators.required],
       message: ['', Validators.required],
       address: ['', Validators.required],
-    }
-    );
+    });
 
     /* Returns a decode token that has user information 
       and only save the id of that user in a variable called id
@@ -74,14 +72,16 @@ export class SendNortificationComponent implements OnInit {
     return this.Form.controls;
   }
 
-  //Get all Landlord property addresses
+  //Get all Landlord property name
   getLandLordAddress(){
-    return this.dash.address(1).subscribe({
+    this.loading = true;
+    return this.dash.address(this.id).subscribe({
       next:data => {
         this.tenantAddress = data
         this.tenantAddress.forEach((element:any) => {
           this.address.push(element)
         });
+        this.loading = false;
       }
     })
   }
@@ -91,17 +91,15 @@ export class SendNortificationComponent implements OnInit {
   */
   caller(){
     for(let x = 0; x<this.Form.value.address.length; x++){
+      this.loading = true;
       this.dash.tenants(this.Form.value.address[x].accom_name).subscribe({
         next:data => {
           this.rentees = data;
+          this.loading = false;
           }
         }
       )
     }
-  }
-
-  recipients(){
-    
   }
 
   onSubmit(){
