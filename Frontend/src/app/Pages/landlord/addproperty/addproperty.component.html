@@ -1,197 +1,227 @@
-  
-<div class="container py-5">
-            <span>
-                <form [formGroup]="Form">
-                    <div >
-                        <label class="input-group">Location*</label>
-                        <div class="grid gap-6 md:grid-cols-2">
-                            <div class="form-group">
-                                <input type="text" formControlName="address" placeholder="Street Address"
-                                        class="input bg-gray-50 input-bordered w-full email "
-                                        [ngClass]="{ 'is-invalid':submitted && f['address'].errors }" />
-                                <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['address'].errors['required']">Street Address is required</div>
-                                </div>           
-                            </div>
+<p-toast position="top-right" key="tc"></p-toast>
+<ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
+    <ng-wizard-step [title]="'Property details'" [canEnter]="isValidTypeBoolean" 
+        [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+        <span>
+            <form [formGroup]="Form">
+                <div >
+                    <label class="input-group">Location*</label>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div class="form-group">
+                            <input type="text" formControlName="address" placeholder="Street Address"
+                                class="input bg-gray-50 input-bordered w-full email "
+                                [ngClass]="{ 'is-invalid':submitted && f['address'].errors }" />
+                            <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                                <div *ngIf="f['address'].errors['required']">Street Address is required</div>
+                            </div>           
+                        </div>
 
-                            <div class="form-group ">
-                                <input type="text" formControlName="city" placeholder="City"
-                                    class="input bg-gray-50 input-bordered w-full email "
-                                    [ngClass]="{ 'is-invalid':submitted && f['city'].errors }" />
-                                <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['city'].errors['required']">City is required</div>
-                                </div>           
-                            </div>
+                        <div class="form-group ">
+                            <input type="text" formControlName="city" placeholder="City"
+                                class="input bg-gray-50 input-bordered w-full email "
+                                [ngClass]="{ 'is-invalid':submitted && f['city'].errors }" />
+                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                <div *ngIf="f['city'].errors['required']">City is required</div>
+                            </div>           
+                        </div>
 
-                            <div class="form-group ">
-                                <input type="text" formControlName="town" placeholder="Town "
-                                    class="input bg-gray-50 input-bordered w-full email "
-                                    [ngClass]="{ 'is-invalid':submitted && f['town'].errors }" />
-                                <div *ngIf="submitted && f['town'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['town'].errors['required']">Town is required</div>
-                                </div>           
-                            </div>
+                        <div class="form-group ">
+                            <input type="text" formControlName="town" placeholder="Town "
+                                class="input bg-gray-50 input-bordered w-full email "
+                                [ngClass]="{ 'is-invalid':submitted && f['town'].errors }" />
+                            <div *ngIf="submitted && f['town'].errors" class="invalid-feedback">
+                                <div *ngIf="f['town'].errors['required']">Town is required</div>
+                            </div>           
+                        </div>
 
-                            <div class="form-group mb-6">
-                                <input type="number" formControlName="zipCode" placeholder="Zip Code"
-                                    class="input bg-gray-50 input-bordered w-full email " min="1"
-                                    [ngClass]="{ 'is-invalid':submitted && f['zipCode'].errors }" />
-                                <div *ngIf="submitted && f['zipCode'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['zipCode'].errors['required']">Zip is required</div>
-                                </div>           
-                            </div>
+                        <div class="form-group mb-6">
+                            <input type="number" formControlName="zipCode" placeholder="Zip Code"
+                                class="input bg-gray-50 input-bordered w-full email " min="1"
+                                [ngClass]="{ 'is-invalid':submitted && f['zipCode'].errors }" />
+                            <div *ngIf="submitted && f['zipCode'].errors" class="invalid-feedback">
+                                <div *ngIf="f['zipCode'].errors['required']">Zip is required</div>
+                            </div>           
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group mb-6">
-                        <label class="input-group">Property Type*</label>
-                        <select formControlName="options" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select option" [ngClass]="{ 'is-invalid':submitted && f['options'].errors}">
-                            <option value disabled selected hidden>Select option... </option>
-                            <option value="Commune">Commune</option>
-                            <option value="Backroom">Backroom</option>
-                            <option value="Studio">Studio</option>
-                        </select>
-                        <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
-                            <div *ngIf="f['options'].errors['required']">User type is required</div>
-                        </div>
+                <div class="form-group mb-6">
+                    <label class="input-group">Property Type*</label>
+                    <select formControlName="options" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select option" [ngClass]="{ 'is-invalid':submitted && f['options'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="Commune">Commune</option>
+                        <option value="Backroom">Backroom</option>
+                        <option value="Studio">Studio</option>
+                    </select>
+                    <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
+                        <div *ngIf="f['options'].errors['required']">User type is required</div>
                     </div>
+                </div>
                     
-                    <div class="form-group mb-6">
-                        <label class="input-group">Accommodation Name*</label>
-                        <input type="text" formControlName="accomName" placeholder="Accommodation Name"
-                            class="input bg-gray-50 input-bordered w-full email " min="1"
-                            [ngClass]="{ 'is-invalid':submitted && f['accomName'].errors }" />
-                        <div *ngIf="submitted && f['accomName'].errors" class="invalid-feedback">
-                            <div *ngIf="f['accomName'].errors['required']">Accommodation required</div>
-                        </div>           
-                    </div>
+                <div class="form-group mb-6">
+                    <label class="input-group">Accommodation Name*</label>
+                    <input type="text" formControlName="accomName" placeholder="Accommodation Name"
+                        class="input bg-gray-50 input-bordered w-full email " min="1"
+                        [ngClass]="{ 'is-invalid':submitted && f['accomName'].errors }" />
+                    <div *ngIf="submitted && f['accomName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['accomName'].errors['required']">Accommodation required</div>
+                    </div>           
+                </div>
 
-                    <div class="form-group mb-6">
-                        <label class="input-group">Description*</label>
-                        <textarea type="text" formControlName="description" placeholder="Description"
-                            class="input bg-gray-50 input-bordered w-full email " 
-                            [ngClass]="{ 'is-invalid':submitted && f['description'].errors }" ></textarea>
-                        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
-                            <div *ngIf="f['description'].errors['required']">Description required</div>
-                        </div>           
-                    </div>
+                <div class="form-group mb-6">
+                    <label class="input-group">Description*</label>
+                    <textarea type="text" formControlName="description" placeholder="Description"
+                        class="input bg-gray-50 input-bordered w-full email " 
+                        [ngClass]="{ 'is-invalid':submitted && f['description'].errors }" ></textarea>
+                    <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                        <div *ngIf="f['description'].errors['required']">Description required</div>
+                    </div>           
+                </div>
 
-                    <div class="form-group mb-6">
-                        <label class="input-group">Number of beds*</label>
-                        <select formControlName="numBeds" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of beds" [ngClass]="{ 'is-invalid':submitted && f['numBeds'].errors}">
-                            <option value disabled selected hidden>Select option... </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                        <div *ngIf="submitted && f['numBeds'].errors" class="invalid-feedback">
-                            <div *ngIf="f['numBeds'].errors['required']">Number of beds required</div>
-                        </div>
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of beds*</label>
+                    <select formControlName="numBeds" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of beds" [ngClass]="{ 'is-invalid':submitted && f['numBeds'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <div *ngIf="submitted && f['numBeds'].errors" class="invalid-feedback">
+                        <div *ngIf="f['numBeds'].errors['required']">Number of beds required</div>
                     </div>
+                </div>
 
-                    <div class="form-group mb-6">
-                        <label class="input-group">Number of bathrooms*</label>
-                        <select formControlName="numBaths" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of bathrooms" [ngClass]="{ 'is-invalid':submitted && f['numBaths'].errors}">
-                            <option value disabled selected hidden>Select option... </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                        <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
-                            <div *ngIf="f['options'].errors['required']">Number of bathrooms required</div>
-                        </div>
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of bathrooms*</label>
+                    <select formControlName="numBaths" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of bathrooms" [ngClass]="{ 'is-invalid':submitted && f['numBaths'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
+                        <div *ngIf="f['options'].errors['required']">Number of bathrooms required</div>
                     </div>
+                </div>
 
-                    <div class="form-group mb-6">
-                        <label class="input-group">Number of rooms*</label>
-                        <select formControlName="numRooms" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of rooms" [ngClass]="{ 'is-invalid':submitted && f['numRooms'].errors}">
-                            <option value disabled selected hidden>Select option... </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                        <div *ngIf="submitted && f['numRooms'].errors" class="invalid-feedback">
-                            <div *ngIf="f['numRooms'].errors['required']">Number of rooms required</div>
-                        </div>
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of rooms*</label>
+                    <select formControlName="numRooms" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of rooms" [ngClass]="{ 'is-invalid':submitted && f['numRooms'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <div *ngIf="submitted && f['numRooms'].errors" class="invalid-feedback">
+                        <div *ngIf="f['numRooms'].errors['required']">Number of rooms required</div>
                     </div>
+                </div>
 
-                    <div class="form-group mb-6">
-                        <label class="input-group">Price*</label>
-                        <input type="number" formControlName="price" placeholder="Price"
-                            class="input bg-gray-50 input-bordered w-full email " 
-                            [ngClass]="{ 'is-invalid':submitted && f['price'].errors }" />
-                        <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
-                            <div *ngIf="f['price'].errors['required']">Description required</div>
-                        </div>           
+                <div class="form-group mb-6">
+                    <label class="input-group">Price*</label>
+                    <input type="number" formControlName="price" placeholder="Price"
+                        class="input bg-gray-50 input-bordered w-full email " 
+                        [ngClass]="{ 'is-invalid':submitted && f['price'].errors }" />
+                    <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+                        <div *ngIf="f['price'].errors['required']">Description required</div>
+                    </div>           
+                </div>
+
+
+                <div class="form-group mb-6">
+                    <label class="input-group">PetFriendly*</label>
+                    <select formControlName="petFriendly" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select option" [ngClass]="{ 'is-invalid':submitted && f['petFriendly'].errors}" >
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select>
+                    <div *ngIf="submitted && f['petFriendly'].errors" class="invalid-feedback">
+                        <div *ngIf="f['petFriendly'].errors['required']">Pet Friendly is required</div>
                     </div>
-
-
-                    <div class="form-group mb-6">
-                        <label class="input-group">PetFriendly*</label>
-                        <select formControlName="petFriendly" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select option" [ngClass]="{ 'is-invalid':submitted && f['petFriendly'].errors}" >
-                            <option value disabled selected hidden>Select option... </option>
-                            <option value="NO">NO</option>
-                            <option value="YES">YES</option>
-                        </select>
-                        <div *ngIf="submitted && f['petFriendly'].errors" class="invalid-feedback">
-                            <div *ngIf="f['petFriendly'].errors['required']">Pet Friendly is required</div>
-                        </div>
-                    </div>
+                </div>
                 
-                    <div class="form-group mb-6">   
-                        <label class="input-group">House*</label>
-                        <input (change)="houseImage($event)"  formControlName="houseImage" [ngClass]="{ 'is-invalid':submitted && f['houseImage'].errors}"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Property Advertising Picture Image Only and png,jpeg or jpg file supported only">
-                        <div *ngIf="submitted && f['houseImage'].errors" class="invalid-feedback">
-                            <div *ngIf="f['houseImage'].errors['required']">property Advertising image required</div>
-                        </div>
+                <div class="form-group mb-6">   
+                    <label class="input-group">House*</label>
+                    <input (change)="houseImage($event)"  formControlName="houseImage" [ngClass]="{ 'is-invalid':submitted && f['houseImage'].errors}"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Property Advertising Picture Image Only and png,jpeg or jpg file supported only">
+                    <div *ngIf="submitted && f['houseImage'].errors" class="invalid-feedback">
+                        <div *ngIf="f['houseImage'].errors['required']">property Advertising image required</div>
                     </div>
+                </div>
 
-                    <div class="form-group mb-6">   
-                        <label class="input-group">Proof Of Ownership*</label>
-                        <input (change)="proofOfOnwership($event)" formControlName="tittleDeed" [ngClass]="{ 'is-invalid':submitted && f['tittleDeed'].errors}" class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Proof of ownership (PDF or Image only)">
-                        <div *ngIf="submitted && f['tittleDeed'].errors" class="invalid-feedback">
-                            <div *ngIf="f['tittleDeed'].errors['required']">Proof of ownership is required</div>
-                        </div>
+                <div class="form-group mb-6">   
+                    <label class="input-group">Proof Of Ownership*</label>
+                    <input (change)="proofOfOnwership($event)" formControlName="tittleDeed" [ngClass]="{ 'is-invalid':submitted && f['tittleDeed'].errors}" class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Proof of ownership (PDF or Image only)">
+                    <div *ngIf="submitted && f['tittleDeed'].errors" class="invalid-feedback">
+                        <div *ngIf="f['tittleDeed'].errors['required']">Proof of ownership is required</div>
                     </div>
-                </form> 
-            </span>
-            <div class="form-group">
-                <button type="btn" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save and Continue</button>
+                </div>
+            </form> 
+        </span>
+        <div class="form-group">
+            <button type="btn" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save and Continue</button>
+        </div>
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Images'" [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+        <div class="container images">
+            <div class="addedImages" >
+                <!-- <div class="flex card-profile-image justify-center">
+                    <img  *ngFor="let i of fileList" [src]="" class="w-36" /> 
+                 </div> -->
+                <!-- <nz-upload nzListType="picture-card"
+                    [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 5" (change)="handleFileInput($event)" >
+                    
+                    <div class="flex uploader flex-row">
+                        <i class="pi pi-plus"></i>
+                        <div class="AddImage">Add images</div>
+                    </div>
+                </nz-upload> -->
+
+                <nz-upload nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 5"
+                    [nzPreview]="handlePreview">
+                    <div>
+                        <i nz-icon nzType="plus"></i>
+                        <div style="margin-top: 8px">Upload</div>
+                    </div>
+                </nz-upload>
+                
+                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                (nzOnCancel)="previewVisible = false" >
+                <ng-template #modalContent>
+                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                </ng-template>
+              </nz-modal>
+
             </div>
+           
+            <!-- <div class="body">
+                <h1 >Image upload rules : </h1>
+                <li>Acceptable image format JPG and PNG</li>
+                <li>Maximum image file size 10mb.</li>
+                <li>No Duplicate images</li>
+            </div> -->
+        </div>        
+    </ng-wizard-step>
+</ng-wizard>
+
+            
 
            
-</div>
+
    
 
-<nz-steps nzType="navigation" nzSize="small" [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
+
+<!-- <nz-steps nzType="navigation" nzSize="small" [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
     <nz-step nzTitle="Step 1" nzStatus="finish" nzDescription="Property Details" >
 
     </nz-step>
     
     <nz-step nzTitle="Step 2" nzStatus="process" nzDescription="Images">
-        <div class="container images">
-            <div class="addedImages">
-                <nz-upload nzListType="picture-card"
-                    [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 5" [nzPreview]="handlePreview" >
-                    
-                    <div class="flex uploader flex-row">
-                        <i class="pi pi-plus"></i>
-                        <div style="margin-top: 8px">Add images</div>
-                    </div>
-                </nz-upload>
-            </div>
-            
-            <div class="body">
-                <h1 >Image upload rules : </h1>
-                <li>Acceptable image format JPG and PNG</li>
-                <li>Maximum image file size 10mb.</li>
-                <li>No Duplicate images</li>
-            </div>
-        </div>
+      
         
         <div>
             <div class="flex form-group justify-end">
@@ -200,9 +230,9 @@
             </div>
         </div>
     </nz-step>
-</nz-steps>
+</nz-steps> -->
 
-<div class="steps-action">
+<!-- <div class="steps-action">
     <button nz-button nzType="default" (click)="pre()" *ngIf="index > 0">
       <span>Previous</span>
     </button>
@@ -212,6 +242,6 @@
     <button nz-button nzType="primary" (click)="done()" *ngIf="index === 1">
       <span>Done</span>
     </button>
-  </div>
+  </div> -->
 
 

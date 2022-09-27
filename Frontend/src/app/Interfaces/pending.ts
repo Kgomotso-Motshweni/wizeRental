@@ -13,5 +13,10 @@ export class Pending {
     num_pets?:Number;
     ped_desc?:Text;
     smoke?:CharacterData;
-    app_create_time?:Date
+    app_create_time?:Date;
+    p_address?: String;
+    p_city?: String;
+    p_town?:String;
+    p_zip_code?:String;
+    p_name?:String;
 }

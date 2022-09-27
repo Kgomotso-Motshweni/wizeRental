@@ -51,6 +51,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
+//NgWizard Imports
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default
+};
+
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,
@@ -83,7 +91,10 @@ const routes: Routes = [
     MultiSelectModule,
     NzButtonModule,
     NzUploadModule,
+    NzModalModule,
     NzStepsModule,
+    //ng-wizard
+    NgWizardModule.forRoot(ngWizardConfig),
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
