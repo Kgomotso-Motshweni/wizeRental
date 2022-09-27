@@ -59,7 +59,7 @@
   <!-- <div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2"> -->
 
     <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 ml-2 mr-2 gap-5">
-      <div class="drop justify-center">
+      <div class="flex drop justify-center md:drop-cols-2 xl:drop-cols-4">
         <div class="first">
         <div class="dropdown">
           <label tabindex="0" class="btn m-1 btn-primary">Room type<i class="bi bi-caret-down-fill"></i></label>
@@ -99,14 +99,28 @@
       </div>
     </div>
         <div class="modal-action">
+          <button class="btn m-1 btn-primary" (click)="filterby()">filter</button>
         </div>
       </div>  -->
       <!-- endof filter -->
 </div>
 
+
+<!-- <form [formGroup]="Form">
+  <div class="form-group mb-6" >
+   
+    <select (change)="caller()" formControlName="usertype" class="email"
+      placeholder="Select Accommodation Address ...">
+      <option value disabled selected hidden>All</option>
+      <option *ngFor="let i Of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>&nbsp;
+    </select>&nbsp;
+  </div>
+</form> -->
+
+
 <!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded" >
-      <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-5 justify-center">
+    <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded"  >
+      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 90%;">
       <div *ngFor="let i of property| filter: searchItem;let x = index " >
         
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">

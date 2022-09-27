@@ -25,4 +25,9 @@ export class LandingService {
     // localStorage.clear();
     // return this.http.get("http://localhost:8080/users/getByProperty/");    
   }
+
+  // filter
+  filter(){
+    return this.http.get(`${this.baseUrl}/filtered`);
+  }
 }

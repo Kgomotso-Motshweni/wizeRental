@@ -13,13 +13,13 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 })
 export class LandingComponent implements OnInit {
 
-  // LoginStatus$ = new BehaviorSubject<boolean>(null);
-  // username$ :Observable<string>;
+  
 
  properties:any;
  property:any;
  searchItem:any;
  condition: boolean = false;
+ tenantAddress:any;
  form!: FormGroup;
 
 //  private serv:LandingService
@@ -55,17 +55,15 @@ export class LandingComponent implements OnInit {
   id:any;
 
   
-  // getProperty(numP: any) {
+  
 
-  //   console.log(this.property[numP].id)
-  //   this.service.getProperty(this.property[numP].id).subscribe(
-  //     (added: any) => {
-  //       console.log(added[0]);
-        
-  //     }
-  //   );
-
-  // }
+  filterby(){
+    this.service.filter().subscribe({
+      next: (data:any)=>{
+        console.log(data +"i dont know what to do");
+      }
+    })
+  }
 
 
 
@@ -92,5 +90,17 @@ onClick(ind:any){
 
 }
 
+
+// try filter
+
+// getLandLordAddress(){
+   
+//   return this.property.p_type(1).subscribe({
+//     next:(data:any) => {
+//       this.tenantAddress = data
+//     }
+//   })
+
+// }
 
 }

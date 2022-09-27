@@ -2,11 +2,13 @@ const express = require('express')
 const Client = require('../Config/db.config')
 
 
-exports.getProp = async (req,res) =>{
-    const id = parseInt(req.params.id)
+exports.filter = async (req,res) =>{
+    
+    const {p_price,p_type,room_type} = req.body
+
   try {
     
-        const getdata = await Client.query('SELECT * FROM landlordProperty  WHERE property_id = $1',[id],(err,result)=>{
+        const getdata = await Client.query('SELECT * FROM landlordProperty WHERE p_price >= $1 AND p_price <= $1 AND p_type = $2 AND room_type = $3' ,[p_price,p_type,room_type],(err,result)=>{
             if(err)
             {
                 // console.log("successful")
