@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="flex Nortifications justify-end">
-      <button type="submit" routerLink='/landlord/sendNortification' class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send Notification</button>
+      <button type="submit" routerLink="/landlord/sendNortification" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send Notification</button>
     </div> 
   </div>
   
@@ -113,6 +113,7 @@
   </div>
 </div>
 
+
 <ngx-loading
   [show]="loading"
   [config]="{
@@ -122,80 +123,3 @@
   }">
 </ngx-loading>
 
-
-<!--
-
-  <div class="flex justify-start">
-    <form [formGroup]="Form">
-      <div class="form-group mb-6">
-        <label class="input-group ">Notification Type:</label>
-        <select (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select Accommodation Address ...">
-          <option value disabled selected hidden>All</option> 
-          <option *ngFor="let i Of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>
-        </select>
-      </div> 
-    </form>
-
-    <div class="grid mb-6 grid-cols-1 lg:grid-cols-3 gap-6">
-      <div class="search">
-        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full email" [(ngModel)]="searchTenant"/>
-      </div>
-
-      <div class="Nortifications">
-        <button type="submit" routerLink='/landlord/sendNortification' class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send Notification</button>
-      </div> 
-    </div> 
-  </div>
-  <br>
-
-  <h2><b>All Tenants</b></h2>
-  <br>
-  <div class="overflow-x-auto">
-    <table class="table w-full">
-       <thead>
-        <tr>
-          <th></th>
-          <th>Tenant</th>
-          <th>Contact</th>
-          <th>Unit</th>
-          <th>Rent</th>
-          <th>MOA Start</th>
-          <th>MOA End</th>
-          <th>MOA</th>
-          <th>PAID</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index;">
-        
-          <th>{{x+1}}</th>
-          <td>{{rentee.full_name}}</td>
-          <td>082-145-6643</td>
-          <td>2A</td>
-          <td>{{rentee.rent}}</td>
-          <td>{{rentee.moastart | date:'dd-MM-yyyy'}}</td>
-          <td>{{rentee.r_update_time | date:'dd-MM-yyyy'}}</td>
-  
-          <td>
-          
-            <div class="form-control" *ngIf="rentee.paymentstatus">
-              <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" checked/>
-              </label>
-            </div>
-          
-            <div class="form-control" *ngIf="!rentee.paymentstatus">
-              <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" />
-              </label>
-            </div>
-      
-          </td>
-         
-          <td><button class="btn btn-error" (click)="deleteUser(rentee)">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
--->

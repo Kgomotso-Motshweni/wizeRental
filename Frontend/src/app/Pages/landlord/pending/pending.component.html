@@ -3,7 +3,7 @@
         <h4>Pending Tenants</h4>
     </div>
 
-    <ng-container *ngIf="pending.length == 0">
+    <ng-container *ngIf="number == 0">
         <div class="container">
             <div class="flex justify-center">
                 <div class="grid sm:grid-cols-1 ">
@@ -20,7 +20,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="pending.length != 0">
+    <ng-container *ngIf="number!= 0">
         <div class="container pending">
             <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" >
                 <div class="card shadow-xl border" *ngFor="let i Of pending">
@@ -95,6 +95,9 @@
                     <label class="input-group">ID: </label>
                         <input type="text" placeholder="First Name" disabled  [(ngModel)]="pendingClients.id_doc" class="input bg-white input-bordered w-full email ">           
                 </div>
+                <div class="flex form-group justify-end">
+                   <button type="button" (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+                </div>  
             </ng-wizard-step>
 
             <ng-wizard-step [title]="'Accommodation Address'" [canEnter]="isValidTypeBoolean" 
@@ -131,13 +134,21 @@
                     <label class="input-group">Unit Assign: </label>
                         <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
                 </div>
+                <div class="flex form-group justify-end">
+                    <button type="button" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                    <button type="button" (click)="showNextStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+                </div>  
+                 
             </ng-wizard-step>
 
             <ng-wizard-step [title]="'MOA'" [canEnter]="isValidTypeBoolean" 
             [canExit]="isValidFunctionReturnsBoolean.bind(this)">
                 <span>
                     <form >
-
+                        <div class="form-group justify-end">
+                            <button type="button" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                            <button type="button" (click)="onSubmit()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+                        </div>  
                     </form>
                 </span>
             </ng-wizard-step>

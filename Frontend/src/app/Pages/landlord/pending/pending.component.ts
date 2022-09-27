@@ -27,6 +27,7 @@ export class PendingComponent implements OnInit {
   condition:Boolean = false;
   token:any = '';
   id:number = 0;
+  number:number = 0;
 
   Form = new FormGroup({
 
@@ -87,6 +88,7 @@ export class PendingComponent implements OnInit {
     this.dash.getPendTenants(user).subscribe({
       next:data  => {
           this.pending = data;
+          this.number = this.pending.length
         }
       }
     )
@@ -119,7 +121,8 @@ export class PendingComponent implements OnInit {
       // toolbarExtraButtons: [
       //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
       // ],
-      // showPreviousButton: false,
+      showPreviousButton: false,
+      showNextButton: false
      
       
     }
@@ -143,7 +146,7 @@ export class PendingComponent implements OnInit {
   stepChanged(args: StepChangedArgs) 
   {
  
-    
+   
   }
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
@@ -153,5 +156,9 @@ export class PendingComponent implements OnInit {
   isValidFunctionReturnsObservable(args: StepValidationArgs) 
   {
     return of(true);
+  }
+
+  onSubmit(){
+    
   }
 }
