@@ -5,6 +5,7 @@ import { TenantService } from 'src/app/Services/tenant.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Component({
   selector: 'app-landing',
@@ -14,13 +15,27 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 export class LandingComponent implements OnInit {
 
   
-
+  name:any = "search";
  properties:any;
  property:any;
  searchItem:any;
  condition: boolean = false;
  tenantAddress:any;
  form!: FormGroup;
+
+//  transform(list: any[], value: [], key: []): any {
+//   value.forEach((name, index) => {
+//     if (name || name) {
+//       list = list.filter((item) => {
+//         return (item[key[index]]
+//           .toString()
+//           .toLowerCase()
+//           .indexOf(name.toString().toLowerCase()) !== -1)
+//       });
+//     }
+//   });
+//   return list;
+// }
 
 //  private serv:LandingService
   constructor(private service:LandingService,private router: Router,private route: ActivatedRoute, private auth:AuthenticationService) { }
@@ -102,5 +117,38 @@ onClick(ind:any){
 //   })
 
 // }
+
+
+// try
+array = [
+  {
+    name: 'Ali',
+    catName: 'Human',
+  },
+  {
+    name: 'Ahmed',
+    catName: 'Human',
+  },
+  {
+    name: 'Alexa',
+    catName: 'Robot',
+  },
+  {
+    name: 'Tom',
+    catName: 'Robot',
+  },
+  {
+    name: 'Thompson',
+    catName: 'Human',
+  },
+  {
+    name: 'Peter',
+    catName: 'Human',
+  },
+  {
+    name: 'Peshawar',
+    catName: 'City',
+  },
+]
 
 }
