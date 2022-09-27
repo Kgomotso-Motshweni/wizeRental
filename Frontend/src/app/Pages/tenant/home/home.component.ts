@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
       let property_ID:any = 2;
      
       this.formData.append('property_id', property_ID);
-      this.formData.append('full_name', this.Form.value.full_name + '  '+ this.Form.value.lname)
+      this.formData.append('full_name', this.Form.value.fname + '  '+ this.Form.value.lname)
       this.formData.append('email', this.Form.value.email)
       this.formData.append('phone_num', this.Form.value.phone_num)
       this.formData.append('age', this.Form.value.age)
