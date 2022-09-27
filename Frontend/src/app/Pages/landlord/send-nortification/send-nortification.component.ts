@@ -76,7 +76,7 @@ export class SendNortificationComponent implements OnInit {
 
   //Get all Landlord property addresses
   getLandLordAddress(){
-    return this.dash.address(this.id).subscribe({
+    return this.dash.address(1).subscribe({
       next:data => {
         this.tenantAddress = data
         this.tenantAddress.forEach((element:any) => {
@@ -91,7 +91,7 @@ export class SendNortificationComponent implements OnInit {
   */
   caller(){
     for(let x = 0; x<this.Form.value.address.length; x++){
-      this.dash.rentees(this.Form.value.address[x].p_address).subscribe({
+      this.dash.tenants(this.Form.value.address[x].accom_name).subscribe({
         next:data => {
           this.rentees = data;
           }

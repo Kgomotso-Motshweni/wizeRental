@@ -85,7 +85,7 @@ export class PendingComponent implements OnInit {
 
    //Pending Tenants
    getPending(user:number){
-    this.dash.getPendTenants(user).subscribe({
+    this.dash.getPendTenants(1).subscribe({
       next:data  => {
           this.pending = data;
           this.number = this.pending.length
@@ -157,7 +157,7 @@ export class PendingComponent implements OnInit {
   {
     return of(true);
   }
-  
+
   declined(){
 
   }

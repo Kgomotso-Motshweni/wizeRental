@@ -84,7 +84,7 @@ const routes: Routes = [
     NortificationComponent,
     MypropertyComponent,
     FooterComponent,
-    SendNortificationComponent
+    SendNortificationComponent,
   ],
   imports: [
     Ng2SearchPipeModule,

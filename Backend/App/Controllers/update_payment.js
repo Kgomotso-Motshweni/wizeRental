@@ -5,10 +5,13 @@ const client = require("../Config/db.config");
 //payment status Function
 
 module.exports = payment_status= async (req, res) => {
+  const {rentee_id,paymentStatus} = req.body
   try {
         //get all post form the database
         const data = await client.query(
-          `SELECT payStatus FROM rentees`,
+          `UPDATE rentees
+          SET paymentstatus = $2
+          WHERE rentee_id = $1;`,[rentee_id,paymentStatus],
           (err,result) => {
             if (err) {
            //If payments are not available is not available
@@ -19,7 +22,7 @@ module.exports = payment_status= async (req, res) => {
             } else {
               res
                 .status(200)
-                .send(result.rows);
+                .send({message:'suceesfully updated'});
             }
           }
         );
