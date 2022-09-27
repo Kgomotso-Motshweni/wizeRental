@@ -56,13 +56,13 @@
 
 
     <label class="input-group ">Accomodation:</label>
-    <div class="grid mb-1 gap-1 md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1">
+    <div class="grid mb-1 gap-3 md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1">
 
  
       <form [formGroup]="Form">
         <div class="form-group mb-6" >
          
-          <select (change)="caller()" formControlName="usertype" class="email"
+          <select (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email"
             placeholder="Select Accommodation Address ...">
             <option value disabled selected hidden>All</option>
             <option value="All">All</option>
@@ -71,15 +71,15 @@
         </div>
       </form>
 
-      <div class="form-group mb-6 mt-6 search">
+      <div class="form-group mb-6 search">
         <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full email" [(ngModel)]="searchTenant"/>
       </div>
 
 
-      <div class="search">
+      <div class="notification">
         <label class="input-group "></label>
         <button type="submit" routerLink='/landlord/sendNortification'
-          class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send
+          class=" input input-bordered w-full text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800 ">Send
           Notification</button>
       </div>
     </div>
@@ -131,6 +131,7 @@
               </label>
             </div>
           </td>
+          <td></td>
           <td>
             <a (click)="deleteUser(rentee)" type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
               <i class="fa fa-trash fa-lg"></i> Delete</a>
