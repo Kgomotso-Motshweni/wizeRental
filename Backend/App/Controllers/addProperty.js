@@ -99,7 +99,7 @@ const getMyProperties = async(req, res) =>{
             if(error){ //checks for errors and return them 
                 return res.status(400).json({
                     message: "unable to retrieve all orders"
-                })//Throw t //Throw the error in the terminal
+                }) //Throw the error in the terminal
             }
             res.status(200).json(results.rows) //Return a status 200 if there is no error
         })
