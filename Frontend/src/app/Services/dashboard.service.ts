@@ -16,17 +16,21 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
   }
 
+   //Get All The rentees from that specific address
+   tenants(address:any){
+    return this.http.get(`${this.baseUrl}getTenants/${address}`)
+  }
+  rentees(id:any){
+    return this.http.get(`${this.baseUrl}getRentees/${id}`)
+  }
+
   getPendTenants(id:any){
     return this.http.get(`${this.baseUrl}/getPending/${1}`)
   }
 
   deleteRentee(id:any){
     return this.http.delete(`${this.baseUrl}deleteRentee/${id}`)
-  }
-
-  // paymentStatus(){
-  //   return this.http.get(`${this.baseUrl}getPayment`)
-  // }  
+  } 
 
   getProperties(id:any){
     return this.http.get(`${this.baseUrl}getproperties/${id}`)

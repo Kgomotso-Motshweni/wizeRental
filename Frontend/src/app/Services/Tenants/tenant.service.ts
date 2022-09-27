@@ -27,8 +27,16 @@ export class TenantService {
     // }
   
   //Get All The address for a specific landlord
+
+  // address(id:any){
+  //   return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
+  // }
+  
+
   address(id:any){
-    return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
+    return this.http.get("http://localhost:8080/api//getLandAddress/1");
+    
   }
+
 
 }

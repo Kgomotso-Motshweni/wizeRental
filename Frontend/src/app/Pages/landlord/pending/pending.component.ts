@@ -29,12 +29,14 @@ export class PendingComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
-    this.getPending(this.id);
+    // this.getPending(this.id);
+    this.getPending(1);
+    
   }
 
    //Pending Tenants
    getPending(user:number){
-    this.dash.getPendTenants(user).subscribe({
+    this.dash.getPendTenants(1).subscribe({
       next:data  => {
           this.pending = data;
         }

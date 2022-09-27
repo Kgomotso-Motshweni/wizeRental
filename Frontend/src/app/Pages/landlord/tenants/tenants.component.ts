@@ -58,16 +58,37 @@ export class TenantsComponent implements OnInit {
     /* Returns a decode token that has user information 
       and only save the id of that user in a variable called id
     */
-    // this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    // this.id = this.token.regData[0].userid;
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.id = this.token.regData[0].userid;
     
 
     this.getLandLordAddress();
 
 
-    this.dash.rentees(1).subscribe((rentee:any)=>{
+
+    this.dash.rentees(this.id).subscribe((rentee:any)=>{
       this.rentees = rentee;
 
+       for (let x = 0; x < this.rentees.length; x++) {
+
+        //signed tenants revenue
+        if (rentee[x].moa_status == "signed") {
+         
+          this.totAmnt = this.totAmnt + this.rentees[x].rent;
+          console.log("gjhkl,",this.rentees[x].rent)
+
+          //Room occupied
+            this.numroomsO = this.numroomsO + 1;
+          // paid tanants
+          if (rentee[x].paymentstatus == true) {
+            this.totPaid = +this.totPaid + (+rentee[x].rent);
+          }
+          //unpaid tenants
+          if (rentee[x].paymentstatus == false) {
+            this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+          }
+        }
+      }
       this.countTenants = this.rentees.length;
 
     })
@@ -142,7 +163,7 @@ export class TenantsComponent implements OnInit {
   
   getLandLordAddress(){
    
-    return this.tenant.address(1).subscribe({
+    return this.tenant.address(this.id).subscribe({
       next:data => {
         this.tenantAddress = data
       }
@@ -163,14 +184,21 @@ export class TenantsComponent implements OnInit {
        return this.tenant.rentees(this.Form.value.usertype).subscribe((rentee:any)=>{
       
       this.rentees = rentee;
+      console.table(this.rentees)
+
+
+      //reset values 
+      this.totPaid = 0;
+      this.totUnPaid = 0;
+
 
       for (let x = 0; x < this.rentees.length; x++) {
 
         //signed tenants revenue
         if (rentee[x].moa_status == "signed") {
          
-          this.totAmnt = this.totAmnt + this.rentees[x].rent;
-          console.log("gjhkl,",this.rentees[x].rent)
+          this.totAmnt = this.totAmnt + rentee[x].rent;
+          console.log("gjhkl,",rentee[x].p_room)
 
           //Room occupied
             this.numroomsO = this.numroomsO + 1;
@@ -191,9 +219,33 @@ export class TenantsComponent implements OnInit {
    
 
    }else{
-    return this.dash.rentees(1).subscribe((rentee:any)=>{
+    return this.dash.rentees(this.id).subscribe((rentee:any)=>{
       this.rentees = rentee
+      this.totPaid = 0;
+      this.totUnPaid = 0;
 
+      console.table(this.rentees)
+
+      for (let x = 0; x < this.rentees.length; x++) {
+
+        //signed tenants revenue
+        if (rentee[x].moa_status == "signed") {
+         
+          this.totAmnt = this.totAmnt + rentee[x].rent;
+          console.log("gjhkl,",rentee[x].rent)
+
+          //Room occupied
+            this.numroomsO = this.numroomsO + 1;
+          // paid tanants
+          if (rentee[x].paymentstatus == true) {
+            this.totPaid = +this.totPaid + (+rentee[x].rent);
+          }
+          //unpaid tenants
+          if (rentee[x].paymentstatus == false) {
+            this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+          }
+        }
+      }
       this.countTenants = this.rentees.length;
     })
   }

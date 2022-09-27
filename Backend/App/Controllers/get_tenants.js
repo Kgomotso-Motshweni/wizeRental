@@ -27,9 +27,18 @@ const getLandlordRes = async(req, res) => {
 const tenantsFromSpecifiAddress = async(req, res) => {
     const address = req.params.address;
     // const {id_tenant} = req.body
+/*
+    SELECT * FROM rentees a
+          INNER JOIN landlordproperty l ON a.property_id = l.property_id
+          INNER JOIN users u ON l.landlord_id = u.userid
+          WHERE u.userid = $1;`,[id]
+
+
+          
+          */
     
     try{
-      client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status, r.create_time, r.r_update_time
+      client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
         FROM rentees r
         INNER JOIN landlordProperty p ON r.property_id = p.property_id
         INNER JOIN users u ON p.landlord_id = u.userid
