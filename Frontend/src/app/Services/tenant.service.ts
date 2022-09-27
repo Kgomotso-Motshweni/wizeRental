@@ -9,10 +9,12 @@ export class TenantService {
   constructor(private http:HttpClient) { }
   baseUrl = environment.baseUrl; 
 
+  //delete tenants
   deleteRentee(id:any){
     return this.http.delete(`${this.baseUrl}deleteRentee/${id.rentee_id}`)
   }
 
+  //toggle update
   updatePayment(body:any){
     return this.http.put(`${this.baseUrl}updatePayment`,body)
   }
@@ -21,10 +23,7 @@ export class TenantService {
    rentees(address:any){
     return this.http.get(`${this.baseUrl}getTenants/${address}`)
   }
-    // rentees(body:any){
-    //   return this.http.post(`${this.baseUrl}getTenants`,body)
-    // }
-  
+   
   //Get All The address for a specific landlord
 
   address(id:any){
