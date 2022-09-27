@@ -30,7 +30,7 @@
                         <p>Contacts: {{i.phone_num}}</p>
                         <p>View Date: {{i.view_date | date: 'dd MMM yyyy'}}</p>
                         <div class="grid form-group justify-start">
-                            <button type="button" (click)="editProperty(i)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
+                            <button (click)="loading = !loading" type="button" (click)="editProperty(i)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                         <input type="text" placeholder="First Name" disabled  [(ngModel)]="pendingClients.id_doc" class="input bg-white input-bordered w-full email ">           
                 </div>
                 <div class="flex form-group justify-end">
-                   <button type="button" (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+                   <button type="button" (click)="loading = !loading" (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
                 </div>  
             </ng-wizard-step>
 
@@ -135,8 +135,8 @@
                         <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
                 </div>
                 <div class="flex form-group justify-end">
-                    <button type="button" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
-                    <button type="button" (click)="showNextStep()" class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+                    <button type="button" (click)="loading = !loading" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                    <button type="button" (click)="loading = !loading" (click)="showNextStep()" class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
                 </div>  
                  
             </ng-wizard-step>
@@ -146,9 +146,9 @@
                 <span>
                     <form >
                         <div class="form-group justify-end">
-                            <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
-                            <button type="button" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
-                            <button type="button" (click)="onSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+                            <button type="button" (click)="loading = !loading" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
+                            <button type="button" (click)="loading = !loading" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                            <button type="button" (click)="loading = !loading" (click)="onSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
                         </div>  
                     </form>
                 </span>

@@ -13,7 +13,7 @@
 
         <button class="btn btn-ghost btn-circle">
             <div class="indicator bell">
-                <a (click)="visibleSidebar2 = true">
+                <a (click)="loading = !loading" (click)="visibleSidebar2 = true">
                 <i class="fa-regular fa-bell"></i>
                     <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
                 </a>
