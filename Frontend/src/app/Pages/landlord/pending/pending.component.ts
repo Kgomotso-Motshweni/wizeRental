@@ -157,8 +157,12 @@ export class PendingComponent implements OnInit {
   {
     return of(true);
   }
+  
+  declined(){
+
+  }
 
   onSubmit(){
-    
+
   }
 }

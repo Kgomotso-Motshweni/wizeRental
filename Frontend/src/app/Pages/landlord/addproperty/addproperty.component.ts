@@ -98,8 +98,8 @@ export class AddpropertyComponent implements OnInit {
       // toolbarExtraButtons: [
       //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
       // ],
-      // showPreviousButton: false,
-     
+      showPreviousButton: false,
+      showNextButton: false,
     }
   };
   
@@ -228,5 +228,11 @@ export class AddpropertyComponent implements OnInit {
     this.previewImage = file.url || file['preview'];
     this.previewVisible = true;
   };
+  declined(){
+
+  }
+  onSubmit(){
+
+  }
 
 }
