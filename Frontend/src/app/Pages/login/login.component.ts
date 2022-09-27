@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_token', this.userToken);
         localStorage.setItem('role', this.role);
         this.messageService.add({
-          key: 'tc', severity:'error', summary: 'Error', detail: "Successfully Logged in", life: 3000
+          key: 'tc', severity:'success', summary: 'Success', detail: "Successfully Logged in", life: 3000
         }); 
         this.Form.reset();
         if(this.role == 'Landlord'){

@@ -6,6 +6,7 @@ import { NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Userinfor } from 'src/app/Interfaces/userinfor';
 import { HttpHeaders } from '@angular/common/http';
+import { TenantsService } from 'src/app/Services/tenants.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,13 +29,14 @@ export class ProfileComponent implements OnInit {
   formData = new FormData();
 
   constructor(
-    private auth:AuthenticationService, 
+    private tenants:TenantsService,
     private router:Router,
     private activeRoute:ActivatedRoute,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     let id = this.activeRoute.snapshot.params[('userid')]
+    console.log(id)
     this.getProfile(id)
   }
 
@@ -53,7 +55,7 @@ export class ProfileComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
     };
-    this.auth.getProfile(httpOptions, userid).subscribe({
+    this.tenants.getProfile(httpOptions, userid).subscribe({
       next:data =>{
         this.userData = data;
         this.editProduct(this.userData[0])
@@ -87,7 +89,7 @@ export class ProfileComponent implements OnInit {
 
     let id = this.tenantInfor.userid;
 
-    this.auth.updateProfile(this.formData, id).subscribe({
+    this.tenants.updateProfile(this.formData, id).subscribe({
       next:data => {
         this.message = data
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;         

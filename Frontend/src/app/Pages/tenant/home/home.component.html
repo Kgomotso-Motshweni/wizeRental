@@ -1,14 +1,13 @@
-
- <p-toast></p-toast>
+<p-toast position="top-right" key="tc"></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
- <button type="btn" (click)="showBasicDialog()" [disabled]="clicked" (click)="actionMethod(); clicked = true;" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Apply Here</button>
+<button type="btn" (click)="showBasicDialog()" [disabled]="clicked" (click)="actionMethod(); clicked = true;" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Apply Here</button>
 
 <p-dialog [(visible)]="displayApplicationForm" [style]="{width: '450px', background:'#F4F3EF'}" header="Application Form" [modal]="true" styleClass="p-fluid">
     <form [formGroup]="Form">   
         <div class="grid gap-6 md:grid-cols-2">
             <div class="form-group "> 
-                <label class="label"><span class="label-text">First Name</span></label>
+                <!-- <label class="label"><span class="label-text">First Name</span></label> -->
                 <input placeholder="First Name" type="text" formControlName="fname" pInputText id="first_name"[ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input bg-gray-50 input-bordered w-full email " />
                 <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
                     <div *ngIf="f['fname'].errors['required']">First name is required</div>
@@ -17,8 +16,8 @@
 
 
             <div class="form-group mb-6"> 
-                <label class="label"><span class="label-text">Last Name</span></label>
-                <input placeholder="First Name" type="text" formControlName="lname" pInputText id="first_name" [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" class="input bg-gray-50 input-bordered w-full email " />
+                <!-- <label class="label"><span class="label-text">Last Name</span></label> -->
+                <input placeholder="Last Name" type="text" formControlName="lname" pInputText id="first_name" [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" class="input bg-gray-50 input-bordered w-full email " />
                 <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
                     <div *ngIf="f['lname'].errors['required']">Last name is required</div>
                 </div>
@@ -26,7 +25,7 @@
         </div>
            
         <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Email</span></label>
+            <!-- <label class="label"><span class="label-text">Email</span></label> -->
             <input  type="text" placeholder="Email" formControlName="email" pInputText id="email" class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"   />
             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                 <div *ngIf="f['email'].errors['required']">Email is required</div>
@@ -36,15 +35,15 @@
 
         <div class="grid gap-6 md:grid-cols-2 mb-2">
             <div class="form-group "> 
-                <label class="label"><span class="label-text">Phone Number</span></label>
-                <p-inputMask mask="999-999-9999" formControlName="phone_num" placeholder="999-999-9999" [ngClass]="{ 'is-invalid':submitted && f['phone_num'].errors }" ></p-inputMask>
+                <!-- <label class="label"><span class="label-text">Phone Number</span></label> -->
+                <p-inputMask mask="999-999-9999" formControlName="phone_num" placeholder="Phone Number" [ngClass]="{ 'is-invalid':submitted && f['phone_num'].errors }" ></p-inputMask>
                 <div *ngIf="submitted && f['phone_num'].errors" class="invalid-feedback">
                     <div *ngIf="f['phone_num'].errors['required']">Phone Number is required</div>
                 </div>
             </div>
 
             <div class="form-group mb-6"> 
-                <label class="label"><span class="label-text">Age</span></label>
+                <!-- <label class="label"><span class="label-text">Age</span></label> -->
                 <input type="number" min="18" max="100" formControlName="age" placeholder="Age" class="input bg-gray-50 input-bordered w-full email " pInputText class="input input-bordered w-full max-w-s age "  [ngClass]="{ 'is-invalid':submitted && f['age'].errors }" />
                 <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
                     <div *ngIf="f['age'].errors['required']">age is required</div>
@@ -53,7 +52,7 @@
         </div>
 
         <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Upload ID</span></label>
+            <!-- <label class="label"><span class="label-text">Upload ID</span></label> -->
             <input type="file" min="18" max="100" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="id_doc" pInputText class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }" />
             <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
                 <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
@@ -61,7 +60,7 @@
         </div>
 
         <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Occupation</span></label>
+            <!-- <label class="label"><span class="label-text">Occupation</span></label> -->
             <input type="text" placeholder="Occupation" formControlName="occupation" pInputText class="input bg-gray-50 input-bordered w-full email "  [ngClass]="{ 'is-invalid':submitted && f['occupation'].errors }" >               
             <div *ngIf="submitted && f['occupation'].errors" class="invalid-feedback">
                 <div *ngIf="f['occupation'].errors['required']">Employement Details is required</div>
@@ -69,20 +68,22 @@
         </div>
 
         <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Schedule a Date</span></label>
-            <input type="date" min="18" max="100" formControlName="view_date" placeholder="Age" pInputText class="input bg-gray-50 input-bordered w-full email "  [ngClass]="{ 'is-invalid':submitted && f['view_date'].errors }" >
+            <!-- <label class="label"><span class="label-text">Schedule a Date</span></label> -->
+            <input type="date"  min="18" max="100" formControlName="view_date" placeholder="Schedule a View Date" pInputText class="input bg-gray-50 input-bordered w-full email "  [ngClass]="{ 'is-invalid':submitted && f['view_date'].errors }" >
             
             <div *ngIf="submitted && f['view_date'].errors" class="invalid-feedback">
-                <div *ngIf="f['view_date'].errors['required']">Schedule a Dat required</div>
+                <div *ngIf="f['view_date'].errors['required']">Schedule a Date required</div>
             </div>
         </div>
             
         <div class="additional-Information">Additional Information</div>
 
-        <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Total Occupants</span></label>
+        <div class="wrap form-group mb-6"> 
+        
+            <label class="input-group">
+                Total Occupants
             <select class="input bg-gray-50 input-bordered w-full email " formControlName="num_tenants" placeholder="Choose a number of Occupants"  [ngClass]="{ 'is-invalid':submitted && f['num_tenants'].errors }" >
-                <option value disabled selected hidden>Choose a number of Occupants...</option>
+                <option value disabled selected hidden>0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -92,29 +93,35 @@
             <div *ngIf="submitted && f['num_tenants'].errors" class="invalid-feedback">
                 <div *ngIf="f['num_tenants'].errors['required']">total occupancy is required</div>
             </div>
+            </label>
         </div>
 
-        <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Number of pets</span></label>
-            <input type="number" min="0" max="5" formControlName="num_pets" placeholder="Number of pets" class="input bg-gray-50 input-bordered w-full email " pInputText class="input input-bordered w-full max-w-s num_pets "  [ngClass]="{ 'is-invalid':submitted && f['num_pets'].errors }" >
+        <div class="wrap form-group mb-6"> 
+            <label class="input-group">
+                Number of Pets
+            <input type="number" min="0" max="5" formControlName="num_pets" placeholder="0" class="input bg-gray-50 input-bordered w-full email " pInputText class="input input-bordered w-full max-w-s num_pets "  [ngClass]="{ 'is-invalid':submitted && f['num_pets'].errors }" >
             <div *ngIf="submitted && f['num_pets'].errors" class="invalid-feedback">
                 <div *ngIf="f['num_pets'].errors['required']">Number of pets is required</div>
             </div>
+            </label>
         </div>
            
-        <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Pets Description</span></label>
-            <textarea type="text"  formControlName="ped_desc" placeholder="Describe your pets" pInputText class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['ped_desc'].errors }" >
+        <div class="wrap form-group mb-6"> 
+            <label class="input-group">
+                Pets Description
+            <textarea type="text"  formControlName="ped_desc" placeholder="" pInputText class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['ped_desc'].errors }" >
             </textarea>
             <div *ngIf="submitted && f['ped_desc'].errors" class="invalid-feedback">
                 <div *ngIf="f['ped_desc'].errors['required']">Pets Description is required</div>
             </div>
+            </label>
         </div>
        
         
 
-        <div class="form-group mb-6"> 
-            <label class="label"><span class="label-text">Smokes</span></label>
+        <div class="wrap form-group mb-6"> 
+            <label class="input-group">
+                Smokes Options
             <select class="input input-bordered w-full max-w-s department " class="input bg-gray-50 input-bordered w-full email "  formControlName="smoke" placeholder="Choose whether you smoke or not" [ngClass]="{ 'is-invalid':submitted && f['smoke'].errors }" >
             <option value disabled selected hidden>Choose Below...</option>
             <option value="NO">No</option>
@@ -123,43 +130,13 @@
             <div *ngIf="submitted && f['smoke'].errors" class="invalid-feedback">
                 <div *ngIf="f['smoke'].errors['required']">smoke is required</div>
             </div>
+            </label>
         </div> 
 
         <div class="flex form-group mb-6 justify-end">
             <button type="submit" (click)="hideDialog()" class="text-white  btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "><i class="pi pi-times">Cancel</i></button>
-<!-- 
-            if (this.Form.value.title === ""  this.Form.value.title == null 
-      this.Form.value.description === ""  this.Form.value.description == null 
-      this.Form.value.question === ""  this.Form.value.question == null 
-      this.Form.value.option1 === ""  this.Form.value.option1 == null 
-      this.Form.value.option2 === ""  this.Form.value.option2 == null 
-      this.Form.value.option3 === "" || this.Form.value.option3 == null) {
-       Swal.fire(
-         'Please fill in all the required information',
-        'All info is required to create the survey'
-     );
-      this.isFormEmpty = false;
-
-      return false -->
-        
-            <label for="my-modal" (click)="onSubmit()" class="text-white ml-8 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"><i class="pi pi-check pi-check-circle">Apply</i>
-       
-            </label>
-            <!-- <label for="my-modal" (click)="onSubmit()" class="btn modal-button " >Apply</label> -->
-
-            <input type="checkbox" id="my-modal" class="modal-toggle" />
-
-            <div class="modal" >
-                <a href="myroom"></a>
-                <div class="center modal-box">
-                   <i class="pi pi-check pi-check-circle text-success" style="font-size: 5rem"></i>
-                   <h3 class="text-success font-bold text-lg"><a href="myroom">Application Successful</a></h3>
-                <div class="modal-action">
-              <label for="my-modal" class="btn bg-success">OK</label>
-                   </div>
-               </div>
-           </div>
-
+            <button type="submit" (click)="onSubmits()" class="text-white ml-8 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"><i class="pi pi-check pi-check-circle">Apply</i>
+        </button>
         </div>
     </form>
 </p-dialog>
