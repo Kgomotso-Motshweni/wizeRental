@@ -63,7 +63,7 @@ export class TenantsComponent implements OnInit {
     
 
     this.getLandLordAddress();
-
+   
 
 
     this.dash.rentees(this.id).subscribe((rentee:any)=>{
@@ -97,7 +97,7 @@ export class TenantsComponent implements OnInit {
     console.log(this.attempts)
 
 
-    console.table(this.tenantAddress)
+
   
   }
 
@@ -166,6 +166,7 @@ export class TenantsComponent implements OnInit {
     return this.tenant.address(this.id).subscribe({
       next:data => {
         this.tenantAddress = data
+        console.log(this.tenantAddress)
       }
     })
 

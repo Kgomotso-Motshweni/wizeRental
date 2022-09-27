@@ -2,13 +2,16 @@ const client = require("../Config/db.config");
 
 const getLandlordRes = async(req, res) => {
   const id = parseInt(req.params.id);
+
+  // SELECT p.property_id, p.p_address
+  // FROM rentees r
+  // INNER JOIN landlordProperty p ON r.property_id = p.property_id
+  // INNER JOIN users u ON p.landlord_id = u.userid
+  // WHERE u.userid = $1
+  // GROUP BY (p.property_id, p.p_address)
+
   try{
-    client.query(`SELECT p.property_id, p.p_address
-      FROM rentees r
-      INNER JOIN landlordProperty p ON r.property_id = p.property_id
-      INNER JOIN users u ON p.landlord_id = u.userid
-      WHERE u.userid = $1
-      GROUP BY (p.property_id, p.p_address)`, [id],(error, results) => {
+    client.query(`SELECT * FROM Accomodations WHERE landlord_id = $1`, [id],(error, results) => {
         if(error){
           return res.status(400).json({
             message: "Unable to retrieve all accommodations from that specific owner"
@@ -27,22 +30,19 @@ const getLandlordRes = async(req, res) => {
 const tenantsFromSpecifiAddress = async(req, res) => {
     const address = req.params.address;
     // const {id_tenant} = req.body
-/*
-    SELECT * FROM rentees a
-          INNER JOIN landlordproperty l ON a.property_id = l.property_id
-          INNER JOIN users u ON l.landlord_id = u.userid
-          WHERE u.userid = $1;`,[id]
 
-
-          
-          */
+    // SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
+    //     FROM rentees r
+    //     INNER JOIN landlordProperty p ON r.property_id = p.property_id
+    //     INNER JOIN users u ON p.landlord_id = u.userid
+    //     WHERE p.p_address = $1
     
     try{
       client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
         FROM rentees r
         INNER JOIN landlordProperty p ON r.property_id = p.property_id
         INNER JOIN users u ON p.landlord_id = u.userid
-        WHERE p.p_address = $1`, [address],(error, results) => {
+        WHERE p.p_name = $1`, [address],(error, results) => {
           if(error){
             return res.status(400).json({
               message: "Unable to retrieve all rentees "

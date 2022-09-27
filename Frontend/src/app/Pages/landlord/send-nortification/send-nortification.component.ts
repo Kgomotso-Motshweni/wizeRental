@@ -90,7 +90,7 @@ export class SendNortificationComponent implements OnInit {
   */
   caller(){
     for(let x = 0; x<this.Form.value.address.length; x++){
-      this.dash.tenants(this.Form.value.address[x].p_address).subscribe({
+      this.dash.tenants(this.Form.value.address[x].accom_name).subscribe({
         next:data => {
           this.rentees = data;
           }
