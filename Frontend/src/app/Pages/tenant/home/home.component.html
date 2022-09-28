@@ -14,22 +14,19 @@
   
 
 <!-------------------------------- search/filter/toggle ------------------------------>
-<div class="container-fluid ml-3 mr-3 col-sm-12 col-xl-2 col-md-6" >
-  
-<!------------------------------------- toggle  ------------------------------------>
-  
+<div class="container-fluid m-2 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
 
 <!------------------------------------ search --------------------------------------->
   <br>
-  <div class="search col-xl-12">
-    <div class="form-control justify-content-flex" style="width: 70%;">
-        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered"/>
+  <div class="flex search col-xl-12">
+   
+        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width:75%;"/>
         
-      </div>
+      
       <div class="space1">
     </div>
     <br>
-    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 27%;">Filter by</label>
+    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width:25%;">Filter by</label>
    
   </div>
 
@@ -82,7 +79,8 @@
         </div>
       </div>  -->
       <!-- endof filter -->
-</div>
+
+    </div>
 
 <!--------------------------------------- ng for (properties)------------------------------------------------>
     <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded" >

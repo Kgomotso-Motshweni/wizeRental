@@ -23,19 +23,7 @@ export class LandingComponent implements OnInit {
  tenantAddress:any;
  form!: FormGroup;
 
-//  transform(list: any[], value: [], key: []): any {
-//   value.forEach((name, index) => {
-//     if (name || name) {
-//       list = list.filter((item) => {
-//         return (item[key[index]]
-//           .toString()
-//           .toLowerCase()
-//           .indexOf(name.toString().toLowerCase()) !== -1)
-//       });
-//     }
-//   });
-//   return list;
-// }
+
 
 //  private serv:LandingService
   constructor(private service:LandingService,private router: Router,private route: ActivatedRoute, private auth:AuthenticationService) { }
@@ -120,6 +108,20 @@ onClick(ind:any){
 
 
 // try
+//  transform(list: any[], value: [], key: []): any {
+//   value.forEach((name, index) => {
+//     if (name || name) {
+//       list = list.filter((item) => {
+//         return (item[key[index]]
+//           .toString()
+//           .toLowerCase()
+//           .indexOf(name.toString().toLowerCase()) !== -1)
+//       });
+//     }
+//   });
+//   return list;
+// }
+
 array = [
   {
     name: 'Ali',

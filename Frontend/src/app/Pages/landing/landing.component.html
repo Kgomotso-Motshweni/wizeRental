@@ -4,7 +4,7 @@
 <app-nav-bar></app-nav-bar>
 
 <!------------------------------- content ---------------------------->
-<div class="card1 bg-base-100 shadow-xl col-12  pt-5 justify-content-center"   style="width: 100%;">
+<div class="card1 bg-base-100 shadow-xl col-12 justify-content-center"   style="width: 100%;">
     <figure><img src="../../../assets/images/tierra-mallorca-rgJ1J8SDEAY-unsplash.jpg" class="img-fluid w-100" alt="Shoes"/></figure>
     <div class="card-body">
       <p>Wize rentals is here to find you a 
@@ -34,7 +34,7 @@
   
 <!------------------------------------- toggle  ------------------------------------>
    What do you need?
-  <div class="buttons shadow-md col-md-12 justify-content-center pt-1" >
+  <div class="buttons shadow-md col-md-12 justify-content-center pt-1">
     <!-- /tenant/home -->
     <button class="btn1" routerLink="/login">To Rent</button>
     <button class="btn2" routerLink="/login">To Advertise</button>
@@ -122,7 +122,7 @@
 <!--------------------------------------- ng for (properties)------------------------------------------------>
     <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded"  >
       <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 90%;">
-      <div *ngFor="let i of property| filter: searchItem;let x = index " >
+      <div *ngFor="let i of property | filter:searchItem ;let x = index " >
         
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
         <figure><img class="img" src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>

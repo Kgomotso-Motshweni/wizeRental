@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LandlordModule } from './Pages/landlord/landlord.module';
@@ -65,6 +65,8 @@ import { FilterByComponent } from './Components/filter-by/filter-by.component';
     FileUploadModule,
     HttpClientModule,
     CalendarModule,
+    Ng2SearchPipeModule,
+
     FormsModule,
     DropdownModule,
     ToastModule,
