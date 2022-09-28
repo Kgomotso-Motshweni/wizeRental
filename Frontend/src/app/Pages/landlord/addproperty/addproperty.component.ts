@@ -7,6 +7,7 @@ import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, S
 import { LandlordService } from 'src/app/Services/landlord.service';
 import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addproperty',
@@ -57,7 +58,8 @@ export class AddpropertyComponent implements OnInit {
     private ngWizardService: NgWizardService, 
     private land:LandlordService,
     private messageService: MessageService,
-    private auth:AuthenticationService, ) {
+    private auth:AuthenticationService,
+    private router:Router ) {
   }
 
   ngOnInit(): void {
@@ -206,6 +208,6 @@ export class AddpropertyComponent implements OnInit {
   }
 
   declined(){
-
+    this.router.navigate(['/landlord/myproperty'])
   }
 }
