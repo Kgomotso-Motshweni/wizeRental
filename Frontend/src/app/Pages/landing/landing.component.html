@@ -35,7 +35,7 @@
   
 <!------------------------------------- toggle  ------------------------------------>
    What do you need?
-  <div class="buttons shadow-md m-2 col-md-12 justify-content-center pt-1" style="width:99%;">
+  <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
     <!-- /tenant/home -->
     <button class="btn1" routerLink="/login" style="width:50%;">To Rent</button>
     <button class="btn2" routerLink="/login" style="width:50%;">To Advertise</button>
@@ -121,8 +121,8 @@
 
 
 <!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded"  >
-      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 90%;">
+    <div class="flex prop m-2 pt-5 justify-center md:prop-cols-1 rounded"  >
+      <div class="grid m-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
       <div *ngFor="let i of property | filter:searchItem ;let x = index " >
         
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
@@ -146,6 +146,7 @@
   </div>
 
   </div>
+    </div>
 
 <!-- 
   <label for="name">Name </label>
