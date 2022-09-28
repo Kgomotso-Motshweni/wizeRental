@@ -25,16 +25,16 @@
 <p-dialog [(visible)]="dialogMessage" [style]="{width: '450px'}" header="Log Issues" [modal]="true" styleClass="p-fluid">
    <form [formGroup]="Form">
         <div class="form-group mb-6">
-            <label for="vehicle1"> Water </label>
-            <input type="radio" formControlName="issues" formid="vehicle1" name="vehicle1" value="Bike">
+            <label for="issue1"> Water </label>
+            <input type="checkbox" formControlName="issues" formid="issue1" name="issue1" value="Water">
             <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
                 <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
         </div>
 
         <div class="form-group mb-6">
-            <label for="vehicle2"> Electricity </label><br>
-            <input type="radio" formControlName="issues" id="vehicle2" name="vehicle2" value="Car"
+            <label for="issue2"> Electricity </label><br>
+            <input type="checkbox" formControlName="issues" id="issue2" name="issue2" value="Electricity"
             [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
     
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
@@ -43,8 +43,8 @@
         </div>
 
         <div class="form-group mb-6">
-            <label for="vehicle3"> Wifi</label>
-            <input type="radio" formControlName="issues" id="vehicle3" name="vehicle3" value="Boat"
+            <label for="issue3"> Wifi</label>
+            <input type="checkbox" formControlName="issues" id="issue3" name="issue3" value="Wifi"
             [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
@@ -53,8 +53,8 @@
         </div>
 
         <div class="form-group mb-6">
-            <label for="vehicle3"> Appliance</label>
-            <input type="radio" formControlName="issues" id="vehicle3" name="vehicle3" value="Boat"
+            <label for="issue4"> Appliance</label>
+            <input type="checkbox" formControlName="issues" id="issue4" name="issue4" value="Appliance"
             [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
