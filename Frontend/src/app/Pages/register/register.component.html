@@ -27,49 +27,40 @@
 
                         <div class="grid gap-6 md:grid-cols-2">
                             <div class="form-group mb-6">
-                                <label class="input-group">
                                     <span class="w-12"><i class="fa-solid fa-user"></i></span>
                                     <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="fname" placeholder="First Name"
                                         class="input bg-gray-50 input-bordered w-full email "
                                         [ngClass]="{ 'is-invalid':submitted && f['fname'].errors }" />
-                                </label>
                                 <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
                                     <div *ngIf="f['fname'].errors['required']">First name is required</div>
                                 </div>           
                             </div>
 
-
-                            <div class="form-group mb-6">
-                                <label class="input-group">
-                                    <span class="w-12"><i class="fa-solid fa-user"></i></span>
+                            <div class="flex form-group mb-6">
+                                    <span class="inline-flex items-center w-12"><i class="fa-solid fa-user"></i></span>
                                     <input (keypress)="keyPressAlphanumeric($event)" type="text" formControlName="lname" placeholder="Last Name"
                                         class="input bg-gray-50 input-bordered w-full email "
                                         [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" />
-                                </label>
                                 <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
                                     <div *ngIf="f['lname'].errors['required']">Last Name is required</div>
                                 </div>
                             </div>
 
                             <div class="form-group mb-6"> 
-                                <label class="input-group">
                                     <span class="w-12"><i class="fa-solid fa-envelope"></i></span>
                                         <input type="email" formControlName="email" placeholder="Email"
                                             class="input bg-gray-50 input-bordered w-full email "
                                             [ngClass]="{ 'is-invalid':submitted && f['email'].errors }" />
-                                </label>
                                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required</div>
                                     <div *ngIf="f['email'].errors['email']">Email is invalid</div>
                                 </div>  
                             </div>     
                             <div class="form-group mb-6">
-                                <label class="input-group">
                                     <span class="w-12"><i class="fa-solid fa-phone"></i></span>
                                     <input type="text" formControlName="phone" placeholder="111-111-1111"
                                         class="input bg-gray-50 input-bordered w-full email " 
                                         [ngClass]="{ 'is-invalid':submitted && f['phone'].errors }" />
-                                </label>
                                 <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
                                     <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
                                     <div *ngIf="f['phone'].errors['pattern']">Phone Number pattern is '999-999-9999'</div>
@@ -79,12 +70,10 @@
                         </div>       
                         
                         <div class="form-group "> 
-                            <label class="input-group mb-6">
                                 <span class="w-12"><i class="fa-solid fa-key"></i></span>
                                 <input type="password" formControlName="password" placeholder="Password"
                                     class="input bg-gray-50 input-bordered w-full password"
                                     [ngClass]="{ 'is-invalid':submitted && f['password'].errors }" />
-                            </label>
                             <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
                                 <div *ngIf="f['password'].errors['required']">Password is required</div>
                                 <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 character</div>
@@ -92,12 +81,10 @@
                             </div>
                         </div>
                         <div class="form-group mb-6">   
-                            <label class="input-group">
                                 <span class="w-12"><i class="fa-solid fa-key"></i></span>
                                 <input type="password" formControlName="confirmpassword" placeholder="Confirm Password"
                                     class="input bg-gray-50 input-bordered w-full email"
                                     [ngClass]="{ 'is-invalid':submitted && f['confirmpassword'].errors }" />
-                            </label>
                             <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
                                 <div *ngIf="f['confirmpassword'].errors['required']">Confirm Password is required</div>
                                 <div *ngIf="f['confirmpassword'].errors['mustMatch']">Password must match</div>
@@ -128,13 +115,12 @@
     </div>
 </section> 
 
-
 <ngx-loading
     [show]="loading"
     [config]="{
-        animationType: ngxLoadingAnimationTypes.circleSwish,
-        primaryColour: '#ffffff', secondaryColour: '#ffffff',
-        backdropBorderRadius: '3px'
+    animationType: ngxLoadingAnimationTypes.threeBounce,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
     }">
 </ngx-loading>
 

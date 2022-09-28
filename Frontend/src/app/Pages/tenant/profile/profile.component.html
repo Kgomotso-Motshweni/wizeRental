@@ -65,14 +65,14 @@
                 </div>
             </div>
         </div>
-        <ngx-loading
-        [show]="loading"
-        [config]="{
-          animationType: ngxLoadingAnimationTypes.circleSwish,
-          primaryColour: '#ffffff', secondaryColour: '#ffffff',
-          backdropBorderRadius: '3px'
-        }">
-        </ngx-loading>
     </div>
  </section> 
+ <ngx-loading
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.threeBounce,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
+</ngx-loading>
 

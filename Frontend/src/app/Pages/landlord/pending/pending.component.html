@@ -46,8 +46,9 @@
                 [canExit]="isValidFunctionReturnsBoolean.bind(this)">
                 <div class="form-group mb-6">
                     <div>
-                    <label class="input-group">Full Name: </label>
+                    <label class="input-group">Full Name: 
                         <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.full_name" class="input bg-white input-bordered w-full email "/>        
+                    </label>
                     </div>
                 </div>
 
@@ -156,7 +157,7 @@
 <ngx-loading
     [show]="loading"
     [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
+    animationType: ngxLoadingAnimationTypes.threeBounce,
     primaryColour: '#ffffff', secondaryColour: '#ffffff',
     backdropBorderRadius: '3px'
     }">
