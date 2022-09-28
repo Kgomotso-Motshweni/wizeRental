@@ -7,8 +7,7 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
 import { of } from 'rxjs';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgWizardComponent } from '@cmdap/ng-wizard';
-  
+
 @Component({
   selector: 'app-pending',
   templateUrl: './pending.component.html',

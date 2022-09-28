@@ -32,7 +32,7 @@ import { ButtonModule } from 'primeng/button';
 import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
-import {ToggleButtonModule} from 'primeng/togglebutton';
+import { ToggleButtonModule} from 'primeng/togglebutton';
 
 
 
