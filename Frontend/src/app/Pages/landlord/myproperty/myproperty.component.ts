@@ -93,7 +93,7 @@ export class MypropertyComponent implements OnInit {
             this.route.onSameUrlNavigation = "reload";
             this.route.navigate(['/landlord/myproperty']);  
             this.loading = false;
-            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+            this.messageService.add({severity:'success', summary: 'Successful', detail: "successfully deleted", life: 3000})
 
           },error: err => {
             //show the message if unable to add new data

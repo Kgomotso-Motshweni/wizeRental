@@ -14,14 +14,22 @@ export class LandlordService {
     return this.http.get(`${this.baseUrl}getproperty/${id}`)
   }
   
+  //Post Property Details
   postProperty(info:any, id:any){
     return this.http.post(`${this.baseUrl}add_property/${id}`, info)
   }
 
+  //Post Property Rooms used for gallery
+  AddRooms(proRooms:any, id:any){
+    return this.http.post(`${this.baseUrl}add_rooms/${id}`, proRooms)
+  }
+
+  //Delete Property 
   deleteMyProperty(id:Property){
     return this.http.delete(`${this.baseUrl}deleteProperty/${id.property_id}`)
   }
 
+  //Delete Rentees 
   deleteRentee(id:any){
     return this.http.delete(`${this.baseUrl}deleteRentee/${id.rentee_id}`)
   }

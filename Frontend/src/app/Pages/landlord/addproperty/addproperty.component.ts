@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { of } from 'rxjs';
+import { elementAt, of } from 'rxjs';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
 import { LandlordService } from 'src/app/Services/landlord.service';
 import { MessageService } from 'primeng/api';
@@ -39,15 +39,18 @@ export class AddpropertyComponent implements OnInit {
   });
 
   submitted:boolean = false; 
-  preview: string = '';
   message: any;
   file: any;
   pdf: any;
   formData = new FormData();
+  RoomImmages = new FormData();
+  gallery: Array<any> = [];
+  preview: Array<any> = [];
   userinfor:any
   token:any = '';
   id:number = 0;
   img:any;
+  previewVisible: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -55,7 +58,6 @@ export class AddpropertyComponent implements OnInit {
     private land:LandlordService,
     private messageService: MessageService,
     private auth:AuthenticationService, ) {
-
   }
 
   ngOnInit(): void {
@@ -112,9 +114,6 @@ export class AddpropertyComponent implements OnInit {
   showNextStep() 
   {
     this.submitted = true;
-    if(this.Form.invalid){
-      return
-    }
 
     this.ngWizardService.next();
   }
@@ -125,7 +124,7 @@ export class AddpropertyComponent implements OnInit {
   }
   stepChanged(args: StepChangedArgs) 
   {
- 
+
   }
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
@@ -140,13 +139,32 @@ export class AddpropertyComponent implements OnInit {
   houseImage(event:any) {
     const image = (event.target as any ).files[0];
     this.file = image
-    console.log(this.file)
   }
 
   proofOfOnwership(event:any) {
     const image = (event.target as any ).files[0];
     this.pdf = image
   }
+
+
+  roomsImages(event:any) {    
+    if(event == undefined){
+      return 
+    }else{
+      const image = (event.target as any ).files[0];
+      this.gallery.push(image)
+   
+      let reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.preview.push(event.target.result);
+        console.log(event.target.result);
+        
+      }
+
+      reader.readAsDataURL(image);
+    }
+  }
+
 
   OnSubmit(){
     this.submitted = true;
@@ -173,54 +191,46 @@ export class AddpropertyComponent implements OnInit {
       next:data => {
         this.loading = true;
         this.userinfor = data;
-        console.log(this.userinfor);
+        console.log( this.userinfor);
         
-        //Subscribe again for the room pictures
+        for(let i=0; i< this.gallery.length; i++){
+          this.RoomImmages.append('image', this.gallery[i])
+          this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe({
+            next:data => {
+              this.messageService.add({
+                  key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
+                });  
+              },
+            })  
+          }
         
-        this.messageService.add({
-          key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
-        });  
-        this.loading = false;
       }
     })
-
-   
+    this.loading = false;
   }
 
 
-  fileList: NzUploadFile[] = []
 
-  previewImage: string  = '';
-  previewVisible: boolean = false;
+  // previewImage: string  = '';
 
-  getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
 
-  handlePreview = async (file: NzUploadFile): Promise<void> => {
-    console.log(file)
-    if (!file.url && !file['preview']) {
-      file['preview'] = await this.getBase64(file.originFileObj!);
-    }
-    this.previewImage = file.url || file['preview'];
-    this.previewVisible = true;
-  };
+  // getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+  // new Promise((resolve, reject) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onload = () => resolve(reader.result);
+  //   reader.onerror = error => reject(error);
+  // });
+
+  // handlePreview = async (file: NzUploadFile): Promise<void> => {
+  //   console.log(file)
+  //   if (!file.url && !file['preview']) {
+  //     file['preview'] = await this.getBase64(file.originFileObj!);
+  //   }
+  //   this.previewImage = file.url || file['preview'];
+  //   this.previewVisible = true;
+  // };
   declined(){
 
   }
-  onSubmit(){
-    this.submitted = true;
-
-    if(this.Form.invalid){
-      
-      return
-    }
-
-
-  }
-
 }
