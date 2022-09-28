@@ -16,18 +16,21 @@ export class LandingComponent implements OnInit {
 
   
   name:any = "search";
+  propertytype: any
  properties:any;
  property:any;
  searchItem:any;
  condition: boolean = false;
  tenantAddress:any;
  form!: FormGroup;
-
+ filterItem:any;
 
 
 //  private serv:LandingService
   constructor(private service:LandingService,private router: Router,private route: ActivatedRoute, private auth:AuthenticationService) { }
 
+
+ 
   ngOnInit(): void {
     
     this.form= new FormGroup({
@@ -36,6 +39,16 @@ export class LandingComponent implements OnInit {
       address: new FormControl(''),
       rooms: new FormControl(''),
     });
+
+   
+    const propertyType = {
+      no1:"Commune",
+      no2:"Studio",
+      no3:"Backroom"
+    }
+    this.propertytype = propertyType;
+
+  //  console.log(no1);
 
     this.service.getProperties().subscribe(
       {
@@ -47,7 +60,12 @@ export class LandingComponent implements OnInit {
 
   }
   filter(){
-    this.condition = true
+    if(this.condition ==true){
+      this.condition= false
+    }else{
+      this.condition=true
+    }
+   
   }
   // get details of the room
   accName:any;
@@ -109,48 +127,23 @@ onClick(ind:any){
 
 // try
 //  transform(list: any[], value: [], key: []): any {
-//   value.forEach((name, index) => {
-//     if (name || name) {
+//   value.forEach((data, index) => {
+//     if (data) {
 //       list = list.filter((item) => {
 //         return (item[key[index]]
 //           .toString()
 //           .toLowerCase()
-//           .indexOf(name.toString().toLowerCase()) !== -1)
+//           .indexOf(data) !== -1)
 //       });
 //     }
 //   });
 //   return list;
 // }
 
-array = [
-  {
-    name: 'Ali',
-    catName: 'Human',
-  },
-  {
-    name: 'Ahmed',
-    catName: 'Human',
-  },
-  {
-    name: 'Alexa',
-    catName: 'Robot',
-  },
-  {
-    name: 'Tom',
-    catName: 'Robot',
-  },
-  {
-    name: 'Thompson',
-    catName: 'Human',
-  },
-  {
-    name: 'Peter',
-    catName: 'Human',
-  },
-  {
-    name: 'Peshawar',
-    catName: 'City',
-  },
-]
+
 
 }
+function no1(no1: any) {
+  throw new Error('Function not implemented.');
+}
+

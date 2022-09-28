@@ -51,60 +51,66 @@
       <div class="space1">
     </div>
     <br>
-    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 25%;">Filter by</label>
+    <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
    
   </div>
 
 
 <!-- filter by -->
 
-  <!-- <div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2"> -->
+<div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2 gap-5">
 
-    <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 ml-2 mr-2 gap-5">
+    <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 m-3 gap-5">
       <div class="flex drop justify-center md:drop-cols-2 xl:drop-cols-4">
         <div class="first">
-        <div class="dropdown">
-          <label tabindex="0" class="btn m-1 btn-primary">Room type<i class="bi bi-caret-down-fill"></i></label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>backroom</a></li>
-            <li><a>commune</a></li>
-          </ul>
-        </div>
-    
-        <div class="dropdown">
-          <label tabindex="0" class="btn m-1 btn-primary">Bedroom <i class="bi bi-caret-down-fill"></i></label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Single</a></li>
-            <li><a>Sharing</a></li>
-          </ul>
+          <!-- <form [formGroup]="Form"> -->
+            <div class="form-group mb-6">
+              <label ></label>
+              <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+                  <option value disabled selected hidden>All</option>
+                  <!-- <option value="backroom">Backroom</option>
+                  <option value="commune" >Commune</option> -->
+                  <option *ngFor="let i of propertytype" value="commune" >commune</option>
+              </select>
+            </div>
+          <!-- </form> -->
+          <div class="form-group mb-6">
+          <label></label>
+          <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+              <option value disabled selected hidden>All</option>
+              <option value="backroom">Backroom</option>
+              <option value="commune" >Commune</option>
+          </select>
         </div>
       </div>
     
     
-    <div class="sec">
-    <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Min amount <i class="bi bi-caret-down-fill"></i></label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>R1500</a></li>
-        <li><a>R2000</a></li>
-      </ul>
+    <!-- <div class="sec">
+      <div class="form-group mb-6">
+      <label></label>
+      <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+          <option value disabled selected hidden>All</option>
+          <option value="backroom">Backroom</option>
+          <option value="commune" >Commune</option>
+      </select>
     </div>
     
-    
-    <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Max Amount <i class="bi bi-caret-down-fill"></i></label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>R3000</a></li>
-        <li><a>R4500</a></li>
-      </ul>
-    </div>
-      </div>
+    <div class="form-group mb-6">
+    <label></label>
+              <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+                  <option value disabled selected hidden>All</option>
+                  <option value="backroom">Backroom</option>
+                  <option value="commune" >Commune</option>
+              </select>
+            </div>
+      </div> -->
     </div>
         <div class="modal-action">
-          <button class="btn m-1 btn-primary" (click)="filterby()">filter</button>
+          <button class="btn m-1 btn-primary" name="filterItem" [(ngModel)]="filterItem">filter</button>
         </div>
-      </div>  -->
+      </div> 
       <!-- endof filter -->
+      <!-- (click)="filterby()" -->
 </div>
 
 
@@ -120,10 +126,12 @@
 </form> -->
 
 
+<!-- <tr *ngFor="let item of array | search: [name.value, category.value]: ['name', 'catName'] ;"> -->
+
 <!--------------------------------------- ng for (properties)------------------------------------------------>
     <div class="flex prop m-2 pt-5 justify-center md:prop-cols-1 rounded"  >
       <div class="grid m-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
-      <div *ngFor="let i of property | filter:searchItem ;let x = index " >
+      <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index " >
         
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
         <figure><img class="img" src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
