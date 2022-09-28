@@ -148,23 +148,18 @@ export class AddpropertyComponent implements OnInit {
 
 
   roomsImages(event:any) {    
-    if(event == undefined){
-      return 
-    }else{
-      const image = (event.target as any ).files[0];
+    const image = (event.target as any ).files[0];
+    
+   
       this.gallery.push(image)
    
-      let reader = new FileReader();
+    console.log(this.gallery.length)
+    
+    let reader = new FileReader();
       reader.onload = (event: any) => {
         this.preview.push(event.target.result);
-        console.log(event.target.result);
-        
-      }
-
-      reader.readAsDataURL(image);
-    }
+      }   
   }
-
 
   OnSubmit(){
     this.submitted = true;
@@ -186,50 +181,31 @@ export class AddpropertyComponent implements OnInit {
     this.formData.append('image', this.file)
     this.formData.append('pdf', this.pdf)
 
-
-    this.land.postProperty(this.formData, this.id).subscribe({
-      next:data => {
-        this.loading = true;
-        this.userinfor = data;
-        console.log( this.userinfor);
+    //Subscribe to add new property details
+    console.log(this.gallery.length)
+    // this.land.postProperty(this.formData, this.id).subscribe({
+    //   next:data => {
+    //     this.loading = true;
+    //     this.userinfor = data;
         
-        for(let i=0; i< this.gallery.length; i++){
-          this.RoomImmages.append('image', this.gallery[i])
-          this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe({
-            next:data => {
-              this.messageService.add({
-                  key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
-                });  
-              },
-            })  
-          }
-        
-      }
-    })
+    //     //Subscribe to add new property room pictures
+    //     for(let i=0; i< this.gallery.length; i++){
+    //       //assign room images to roomImages formdata from a list
+    //       this.RoomImmages.append('image', this.gallery[i])
+    //       this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe()  
+    //     }
+    //     this.messageService.add({
+    //       key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
+    //     });  
+    //   }
+    // })
     this.loading = false;
   }
+  removeTask(data:any){
+    console.log(this.preview);
+    
+  }
 
-
-
-  // previewImage: string  = '';
-
-
-  // getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-  // new Promise((resolve, reject) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onload = () => resolve(reader.result);
-  //   reader.onerror = error => reject(error);
-  // });
-
-  // handlePreview = async (file: NzUploadFile): Promise<void> => {
-  //   console.log(file)
-  //   if (!file.url && !file['preview']) {
-  //     file['preview'] = await this.getBase64(file.originFileObj!);
-  //   }
-  //   this.previewImage = file.url || file['preview'];
-  //   this.previewVisible = true;
-  // };
   declined(){
 
   }

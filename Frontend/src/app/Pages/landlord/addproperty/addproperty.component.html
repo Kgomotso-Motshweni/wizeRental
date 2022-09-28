@@ -169,9 +169,9 @@
     <ng-wizard-step [title]="'Images'" [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
         <div class="container images">
             <div class="addedImages mt-5 justify-center" >
-                <div class="flex card-profile-image justify-center">
-                    <div  *ngFor="let i of preview" class="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-                        <img [src]="i" class="w-36 ml-10" />
+                <div class="flex card-profile-image justify-start">
+                    <div  *ngFor="let i of preview" class="grid gap-1 grid-cols-1">
+                        <a (click)="removeTask(i)"><img [src]="i" class="w-36 ml-2" /></a>
                     </div> 
                  </div>
             </div>
