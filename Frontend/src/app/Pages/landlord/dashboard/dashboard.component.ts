@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
       }
      
       //Pending Tenants
-      this.dash.getPendTenants(this.id ).subscribe((numTenants) => {
+      this.dash.getPendTenants(this.id).subscribe((numTenants) => {
 
         this.totNumTenants = numTenants;
         this.totNumTenants = this.totNumTenants.length;

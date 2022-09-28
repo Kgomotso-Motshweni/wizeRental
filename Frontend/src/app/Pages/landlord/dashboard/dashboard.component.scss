@@ -6,3 +6,19 @@
     font-size: 1.5rem;
     margin-top: 5px;
 }
+
+.dash-card{
+    padding-left: 200px;
+    padding-right: 200px;
+    text-align: left;
+}
+.flex{
+    display: flex;
+    gap: 0.5rem;
+}
+@media screen and (min-width: 630px){
+    .dashbord{
+         width: 73vw;
+     }
+ }
+ 
