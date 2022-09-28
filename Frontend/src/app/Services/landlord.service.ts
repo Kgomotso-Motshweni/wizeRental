@@ -22,10 +22,6 @@ export class LandlordService {
     return this.http.delete(`${this.baseUrl}deleteProperty/${id.property_id}`)
   }
 
-  addRoomImages(info:any, id:any){
-    return this.http.post(`${this.baseUrl}add_rooms/${id}`, info)
-  }
-
   deleteRentee(id:any){
     return this.http.delete(`${this.baseUrl}deleteRentee/${id.rentee_id}`)
   }

@@ -184,12 +184,7 @@ export class AddpropertyComponent implements OnInit {
       }
     })
 
-    // this.land.addRoomImages(this.img,this.id).subscribe({
-    //   next:data =>{
-    //     this.userinfor = data;
-    //     console.log(this.userinfor)
-    //   }
-    // })
+   
   }
 
 
