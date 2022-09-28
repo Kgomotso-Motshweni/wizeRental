@@ -95,9 +95,6 @@ export class AddpropertyComponent implements OnInit {
     selected: 0,
     theme: THEME.arrows,
     toolbarSettings: {
-      // toolbarExtraButtons: [
-      //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
-      // ],
       showPreviousButton: false,
       showNextButton: false,
     }
@@ -137,12 +134,9 @@ export class AddpropertyComponent implements OnInit {
     return of(true);
   }
  
-
-
   houseImage(event:any) {
     const image = (event.target as any ).files[0];
     this.file = image
-    console.log(this.file)
   }
 
 
@@ -179,7 +173,7 @@ export class AddpropertyComponent implements OnInit {
         console.log(this.userinfor);
         
         //Subscribe again for the room pictures
-        
+       
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
         });  
@@ -188,25 +182,6 @@ export class AddpropertyComponent implements OnInit {
     })
   }
 
-  // fileList: Array<any> = [];
-  // pictures: Array<any> = [];
-  // previewImage: string = '';
-  // previewVisible = false;
-
-  // handleFileInput(event:any){
-  //   const image = (event.target as any ).files[0];
-  //   this.file = image
-
-  //   //Show image preview
-  //   let reader = new FileReader();
-  //   reader.onload = (event: any) => {
-  //     this.preview = event.target.result;
-  //     this.fileList.push( this.preview )
-  //     this.pictures.push(this.file)
-  //   }
-  //   reader.readAsDataURL(image);
-  //   console.log(this.file)    
-  // }
   fileList: NzUploadFile[] = []
 
   previewImage: string  = '';

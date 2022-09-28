@@ -23,4 +23,6 @@ export class LandlordService {
   deleteMyProperty(id:Property){
     return this.http.delete(`${this.baseUrl}deleteProperty/${id.property_id}`)
   }
+
+
 }

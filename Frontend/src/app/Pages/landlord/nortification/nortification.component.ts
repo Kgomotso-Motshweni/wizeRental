@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
+import {NortificationsService} from 'src/app/Services/nortifications.service';
 
 @Component({
   selector: 'app-nortification',
@@ -13,9 +14,21 @@ export class NortificationComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
-  constructor() { }
+  constructor(private receive:NortificationsService) {
+
+   }
+
+   notification()
+   {
+    this.receive.landlordReceive(1).subscribe((res)=>{
+
+    })
+   }
 
   ngOnInit(): void {
   }
+  
+
+
 
 }
