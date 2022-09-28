@@ -30,27 +30,28 @@
   
 
 <!-------------------------------- search/filter/toggle ------------------------------>
-<div class="container-fluid pt-5 ml-3 mr-3 col-sm-12 col-xl-2 col-md-6" >
+<!-- <div class="container-fluid pt-5 m-2 col-sm-12 col-xl-2 col-md-6" > -->
+  <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
   
 <!------------------------------------- toggle  ------------------------------------>
    What do you need?
-  <div class="buttons shadow-md col-md-12 justify-content-center pt-1">
+  <div class="buttons shadow-md m-2 col-md-12 justify-content-center pt-1" style="width:99%;">
     <!-- /tenant/home -->
-    <button class="btn1" routerLink="/login">To Rent</button>
-    <button class="btn2" routerLink="/login">To Advertise</button>
+    <button class="btn1" routerLink="/login" style="width:50%;">To Rent</button>
+    <button class="btn2" routerLink="/login" style="width:50%;">To Advertise</button>
   </div>
 
 <!------------------------------------ search --------------------------------------->
   <br>
-  <div class="search col-xl-12">
-    <div class="form-control justify-content-flex" style="width: 70%;">
-        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered"/>
+  <div class="flex search col-xl-12">
+    
+        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
         
-      </div>
+    
       <div class="space1">
     </div>
     <br>
-    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 27%;">Filter by</label>
+    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width: 25%;">Filter by</label>
    
   </div>
 
