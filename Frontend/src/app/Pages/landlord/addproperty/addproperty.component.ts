@@ -184,33 +184,15 @@ export class AddpropertyComponent implements OnInit {
       }
     })
 
-    this.land.addRoomImages(this.img,this.id).subscribe({
-      next:data =>{
-        this.userinfor = data;
-        console.log(this.userinfor)
-      }
-    })
+    // this.land.addRoomImages(this.img,this.id).subscribe({
+    //   next:data =>{
+    //     this.userinfor = data;
+    //     console.log(this.userinfor)
+    //   }
+    // })
   }
 
-  // fileList: Array<any> = [];
-  // pictures: Array<any> = [];
-  // previewImage: string = '';
-  // previewVisible = false;
 
-  // handleFileInput(event:any){
-  //   const image = (event.target as any ).files[0];
-  //   this.file = image
-
-  //   //Show image preview 
-  //   let reader = new FileReader();
-  //   reader.onload = (event: any) => {
-  //     this.preview = event.target.result;
-  //     this.fileList.push( this.preview )
-  //     this.pictures.push(this.file)
-  //   }
-  //   reader.readAsDataURL(image);
-  //   console.log(this.file)    
-  // }
   fileList: NzUploadFile[] = []
 
   previewImage: string  = '';
@@ -236,7 +218,14 @@ export class AddpropertyComponent implements OnInit {
 
   }
   onSubmit(){
- 
+    this.submitted = true;
+
+    if(this.Form.invalid){
+      
+      return
+    }
+
+
   }
 
 }
