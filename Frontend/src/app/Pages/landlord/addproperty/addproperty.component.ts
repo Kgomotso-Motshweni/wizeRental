@@ -124,6 +124,10 @@ export class AddpropertyComponent implements OnInit {
   }
   stepChanged(args: StepChangedArgs) 
   {
+    this.submitted = true;
+    if(this.Form.invalid){
+      return
+    }
 
   }
   isValidTypeBoolean: boolean = true;
@@ -149,16 +153,14 @@ export class AddpropertyComponent implements OnInit {
 
   roomsImages(event:any) {    
     const image = (event.target as any ).files[0];
+    this.gallery.push(image)
     
-   
-      this.gallery.push(image)
-   
-    console.log(this.gallery.length)
-    
+    //Show image preview
     let reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.preview.push(event.target.result);
-      }   
+    reader.onload = (event: any) => {
+      this.preview.push(event.target.result);
+    }
+      reader.readAsDataURL(image);  
   }
 
   OnSubmit(){
@@ -183,22 +185,22 @@ export class AddpropertyComponent implements OnInit {
 
     //Subscribe to add new property details
     console.log(this.gallery.length)
-    // this.land.postProperty(this.formData, this.id).subscribe({
-    //   next:data => {
-    //     this.loading = true;
-    //     this.userinfor = data;
+    this.land.postProperty(this.formData, this.id).subscribe({
+      next:data => {
+        this.loading = true;
+        this.userinfor = data;
         
-    //     //Subscribe to add new property room pictures
-    //     for(let i=0; i< this.gallery.length; i++){
-    //       //assign room images to roomImages formdata from a list
-    //       this.RoomImmages.append('image', this.gallery[i])
-    //       this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe()  
-    //     }
-    //     this.messageService.add({
-    //       key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
-    //     });  
-    //   }
-    // })
+        //Subscribe to add new property room pictures
+        for(let i=1; i< this.gallery.length; i++){
+          //assign room images to roomImages formdata from a list
+          this.RoomImmages.append('image', this.gallery[i])
+          this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe()  
+        }
+        this.messageService.add({
+          key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
+        });  
+      }
+    })
     this.loading = false;
   }
   removeTask(data:any){

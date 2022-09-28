@@ -47,6 +47,7 @@ const addProperty = async(req, res) => {
             message: "Database error when uploading property details", 
         });
     };
+ 
 }
 
 const addRoomImages = async(req, res) =>{
@@ -82,6 +83,7 @@ const addRoomImages = async(req, res) =>{
         });
     };
 }
+
 
 const getMyProperties = async(req, res) =>{
     const id = parseInt(req.params.userid);
