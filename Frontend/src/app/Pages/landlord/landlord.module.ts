@@ -61,7 +61,7 @@ const ngWizardConfig: NgWizardConfig = {
 };
 
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent,
+  {path:'landlord', component: LandlordComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
