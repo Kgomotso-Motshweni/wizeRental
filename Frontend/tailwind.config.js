@@ -1,6 +1,7 @@
 module.exports = {
     content: ['./src/**/*.{html,js,ts}'],
-    plugins: [require('daisyui'), ],
+    plugins: [require('daisyui'),require('flowbite/plugin')],
+
     darkMode: true,
     theme: {
         container: {

@@ -24,7 +24,9 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import {ImageModule} from 'primeng/image';
+import { ImageModule} from 'primeng/image';
+import { DialogModule } from 'primeng/dialog';
+import {CheckboxModule} from 'primeng/checkbox'; 
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent,
@@ -60,6 +62,7 @@ const routes: Routes = [
     ToastModule,
     FormsModule,
     ImageModule,
+    CheckboxModule,
     AvatarModule,
     AvatarGroupModule,
     InputMaskModule,
@@ -69,6 +72,7 @@ const routes: Routes = [
     CommonModule,
     ConfirmDialogModule,
     MessagesModule,
+    DialogModule,
     RouterModule.forChild(routes)
   ],
   providers: [ MessageService, ConfirmationService],

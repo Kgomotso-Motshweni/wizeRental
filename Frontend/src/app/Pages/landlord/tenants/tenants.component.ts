@@ -2,11 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PrimeNGConfig } from 'primeng/api';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
+import { delay } from 'rxjs';
+import { TenantService } from 'src/app/Services/tenant.service';
+
 
 @Component({
   selector: 'app-tenants',
@@ -20,126 +23,189 @@ export class TenantsComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
 
-
-
-  totAmnt : number = 0;
-  paidAmnt : number = 0;
-  rentees! : Array<Payment> ;
-  searchTenant : any;
-  unpaidAmnt :number =0;
-  numTenants :number | undefined;
-  payment_status!: Boolean ;
-  pay_status: any;
-  month: any = [1,3,5,7.8]
+  countTenants : number =0;
+  rentees: Array<Payment> = [];
+  searchTenant: any;
+  totAmnt : number =0;
+  numroomsO : number =0;
+  totPaid : number = 0;
+  totUnPaid : number =0;
+  id: number = 0;
+  numTenants: number = 0;
   totNotReceived: number = 0;
   totReceived: number = 0;
   numPending: number = 0;
-  totExpected: number = 0;
   message: any;
-  paid:any
+  tenantAddress :any;
+  token:any = '';
+  code:any;
+  attempts : number = 0;
+  rente_id: any;
 
-  payment_array:Array<any>=[];
-  // let list: number[] = [1, 2, 3];
+  Form = new FormGroup({
+    usertype: new FormControl(''),
+  });
 
   constructor(private dash:DashboardService,
     private router:Router, 
     private route: ActivatedRoute,
-    private messageService: MessageService,  
-    private confirmationService: ConfirmationService,) { }
+    private confirmationService: ConfirmationService, private messageService: MessageService,
+    private auth:AuthenticationService,private tenant:TenantService) { }
 
   ngOnInit(): void {
-
-    this.dash.rentees().subscribe((rentee:any)=>{
+    /* Returns a decode token that has user information 
+      and only save the id of that user in a variable called id
+    */
+    this.loading = true
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.id = this.token.regData[0].userid;
+    
+    this.getLandLordAddress();
+   
+    this.dash.rentees(this.id).subscribe((rentee:any)=>{
+      
       this.rentees = rentee;
-      
-
-
-
-      //Monthly Revenue
-      for(let x=0;x<this.rentees.length;x++){
-       
-        this.payment_array[x] = this.rentees[x].paystatus;
-     
-          this.totAmnt = +this.totAmnt + +this.rentees[x].rent; 
-          this.payment_status = this.rentees[x].paymentstatus
-      }
-
-      //Received Amount
-      this.dash.paymentStatus().subscribe((payment)=>{
-        // console.table(payment)
-        this.paid = payment;
-      })
-
-      //paid Amount
-      for(let x=0;x<this.rentees.length;x++){
-       
-        if(this.rentees[x].paystatus=="true"){
-         
-        this.paidAmnt  = +this.paidAmnt  + +this.rentees[x].rent;
+      for (let x = 0; x < this.rentees.length; x++) {
+        //signed tenants revenue
+        if (rentee[x].moa_status == "signed") {
+          this.totAmnt = this.totAmnt + this.rentees[x].rent;
+          
+          //Room occupied
+          this.numroomsO = this.numroomsO + 1;
+          // paid tanants
+          if (rentee[x].paymentstatus == true) {
+            this.totPaid = +this.totPaid + (+rentee[x].rent);
+          }
+          //unpaid tenants
+          if (rentee[x].paymentstatus == false) {
+            this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+          }
         }
-    }
-      //Unpaid Amount
-      this.unpaidAmnt = +this.totAmnt - +this.paidAmnt;
-
-      //Available Rooms
-
-
-      //Occupied Rooms
-      this.numTenants = this.rentees.length;
-      
-      //pending Tenants
-      // console.log("ghjkpl",this.paymentStats)
+      }
+      this.countTenants = this.rentees.length;
+      this.loading = false;
     })
   }
 
+  /*
+  use Payment interface to receive all the data of a tenant you want to delete and 
+  then use primeNG component for confrm delete and a dialog to confirm first before you can delete a 
+  specific tenant
+  */
   deleteUser(details:Payment){
+  
     this.confirmationService.confirm({
       message: 'Are you sure you want to remove this: ' + details.full_name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        console.log(details)
-        this.loading = true;
         this.dash.deleteRentee(details).subscribe({
           next:data =>{
-            this.loading = true;
+            
             this.message = data
             //Route back to the current page,  this helps in refreshing data
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/landlord/'], {relativeTo: this.route})
-            this.loading = false;
+            this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
             this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+          
           },error: err => {
-            this.loading = false;
             //show the message if unable to add new data
             this.message = err.error.message;
             this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+           
           }
         });
        },
       reject: () => {
-        this.loading = false;
+        
         this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
+      
       }
     })
   }
 
-  paymentStats(id:any){
-
+  //Get all Landlord property addresses  
+  getLandLordAddress(){
+    return this.tenant.address(this.id).subscribe({
+      next:data => {
+        this.tenantAddress = data
+      }
+    })
   }
 
+  /* when click on any property from the dropdown receive that property value and 
+    use it to get all tenants from that property
+  */
+  caller(){
+    this.attempts = 1;
+    if(this.attempts == 1 ){
+      this.loading = true;
+      return this.tenant.rentees(this.Form.value.usertype).subscribe((rentee:any)=>{
+        
+        this.rentees = rentee;
+      
+        //reset values 
+        this.totPaid = 0;
+        this.totUnPaid = 0;
+        this.loading = false;
+        for (let x = 0; x < this.rentees.length; x++) {
+          //signed tenants revenue
+          if (rentee[x].moa_status == "signed") {
+            this.totAmnt = this.totAmnt + rentee[x].rent;
+            //Room occupied
+            this.numroomsO = this.numroomsO + 1;
+            // paid tanants
+            if (rentee[x].paymentstatus == true) {
+              this.totPaid = +this.totPaid + (+rentee[x].rent);
+            }
+            //unpaid tenants
+            if (rentee[x].paymentstatus == false) {
+              this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+            }
+          }
+        }
+      this.countTenants = this.rentees.length;
+      })
+    }else{
+      return this.dash.rentees(this.id).subscribe((rentee:any)=>{
+        this.rentees = rentee
+        this.totPaid = 0;
+        this.totUnPaid = 0;
 
-   _index(payment:any){
-
- 
-   return false
-   
+        for (let x = 0; x < this.rentees.length; x++) {
+          //signed tenants revenue
+          if (rentee[x].moa_status == "signed") {   
+            this.totAmnt = this.totAmnt + rentee[x].rent;
+            
+            //Room occupied
+            this.numroomsO = this.numroomsO + 1;
+            
+            // paid tanants
+            if (rentee[x].paymentstatus == true) {
+              this.totPaid = +this.totPaid + (+rentee[x].rent);
+            }
+            
+            //unpaid tenants
+            if (rentee[x].paymentstatus == false) {
+              this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+            }
+          }
+        }
+      this.countTenants = this.rentees.length;
+      })
+    }
   }
 
-
-  get_Payment_Status(){
-    let status = this.pay_status
-    return status;
+  updatePayment(index:any,status:any){
+    this.rente_id = this.rentees[index].rentee_id
+    const body = {
+       "rentee_id":this.rente_id,
+       "paymentStatus":status
+    }
+  
+    this.tenant.updatePayment(body).subscribe(()=>{
+  
+    })
   }
 }

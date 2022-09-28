@@ -1,47 +1,71 @@
 const client = require("../Config/db.config");
 const cloudinary = require("../Cloudinary/cloudinary");
+const fs = require("fs");
 
-const addProperty = async(req, res) =>{
-    const id = parseInt(req.params.userid);
-   //const{ p_address, p_city, p_town, p_zip_code, p_propertyType, p_name, p_description, p_bedroom, p_bath, p_room, p_price, pet_friendly, title_deed} = req.body
-        
-   try{
-    const results = await cloudinary.uploader.upload(req.file.path, {
-        folder: "/property/",
-    });
-        
-        const data = await client.query(`SELECT * FROM landlordProperty WHERE p_name= $1;`,[p_name]); //Check if user exist
+const addProperty = async(req, res) => {
+    const id = parseInt(req.params.id);
+    const {	p_address, p_city, p_town, p_zip_code, p_propertyType, p_name, p_description, p_bedroom,
+         p_bath ,p_room , p_price ,pet_friendly } = req.body
+
+    try{
+        const data = await client.query(`SELECT * FROM landlordProperty 
+            WHERE p_name = $1 AND p_address = $2`,[p_name, p_address]); //Check if user exist
         const user = data.rows;
-      
-        if(user.length != 0){
-            return res.status(400).json({
-                message: "Accomodation name already Exist, Add a new Property"
-            });
+
+        if(req.files['image'][0] && req.files['pdf'][0]){
+            if(user.length != 0){
+                return res.status(400).json({
+                    message: "Accomodation already Exist, Add a new Property"
+                });
+            }
+            else{
+                const house  = req.files['image'][0].path;
+
+                const pdf  = req.files['pdf'][0].path;
+        
+                const HouseImage = await cloudinary.uploader.upload(house, {
+                    folder: "/property/",
+                })
+                const Tittle_Deep = await cloudinary.uploader.upload(pdf, {
+                    folder: "/property/",
+                })
+        
+                console.log(HouseImage);
+                console.log(Tittle_Deep);
+        
+                client.query(`INSERT INTO landlordProperty(landlord_id, p_address, p_city, p_town, p_zip_code, p_propertyType, p_name, p_description, p_bedroom,
+                    p_bath, p_room, p_price, pet_friendly, title_deed, house_image ) 
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`, [id, p_address, p_city, p_town, p_zip_code, p_propertyType, p_name, p_description, p_bedroom,
+                    p_bath ,p_room , p_price, pet_friendly, Tittle_Deep.url, HouseImage.url ], (error) =>{
+                        if(error){
+                            return res.status(401).send({message:"error while inserting data"}) //Return a status 200 if there is no error
+                        }
+                        return res.status(200).send({message:"property details addedd successfully"}) //Return a status 200 if there is no error
+                })
+            }
         }else{
-            client.query(`INSERT INTO 
-            landlordproperty (landlord_id, house_image)
-            VALUES($1,$2) RETURNING property_id`, 
-            [id, results.secure_url], (error, results) =>{
-                if(error){
-                    return res.status(400).json({
-                        message: "Unable to add property details"
-                    });
-                }
-                return res.status(200).json(results.rows[0].property_id) //Return a status 200 if there is no error
-            })
+            console.log("Please upload files first to use this function")
         }
-    }catch{
-        res.status(500).json({
-            error: "Database error when adding property details", //Database connection error
-        });
+       
     }
+    catch (err) {
+        res.status(500).json({
+            message: "Database error when adding property details", 
+        });
+    };
 }
 
 const addRoomImages = async(req, res) =>{
-    const id = parseInt(req.params.userid);
     try{  
         const property_id = parseInt(req.params.property_id); 
-        const images = await cloudinary.uploader.upload(req.file.path);
+        const qualification_url = req.file.path;
+        console.log(qualification_url)
+        const images = await cloudinary.uploader.upload(qualification_url, {
+            folder: "/property/",
+        });
+
+        const path = qualification_url;
+        fs.unlinkSync(path);
 
         client.query(`INSERT INTO RoomsImages (property_id, images) VALUES ($1, $2)`, 
         [property_id, images.secure_url], (error, results) => {
@@ -50,7 +74,7 @@ const addRoomImages = async(req, res) =>{
                         message: "Unable to add property images"
                     })//Throw t //Throw the error in the terminal
                 }
-                res.status(200).json(results.rows) //Return a status 200 if there is no error
+                res.status(200).send({message:"image rooms successfully uploaded"}) //Return a status 200 if there is no error
             }
         )
     }

@@ -1,12 +1,15 @@
-
 const client = require("../Config/db.config");
 
 //getRentees Function
 module.exports = get_rentees= async (req, res) => {
+  const id = parseInt(req.params.id)
   try {
         //get all post form the database
         const data = await client.query(
-          `SELECT * FROM rentees`,
+         `SELECT * FROM rentees a
+          INNER JOIN landlordproperty l ON a.property_id = l.property_id
+          INNER JOIN users u ON l.landlord_id = u.userid
+          WHERE u.userid = $1 AND a.moa_status ='signed' ; `,[id],
           (err,result) => {
             if (err) {
            //If rentees are not available is not available
@@ -28,3 +31,4 @@ module.exports = get_rentees= async (req, res) => {
     });
   }
 };
+

@@ -25,7 +25,7 @@ import { SendNortificationComponent } from './send-nortification/send-nortificat
 //Guards
 import { AuthGuard } from 'src/app/Guards/auth.guard';
 //Primeng Imports
-//primeNG 
+
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -42,6 +42,23 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule, } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { PaginatorModule } from 'primeng/paginator';
+import {TabViewModule} from 'primeng/tabview';
+import { MultiSelectModule } from 'primeng/multiselect';
+import {BadgeModule} from 'primeng/badge';
+
+//NG-ZORRO Imports
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
+//NgWizard Imports
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default,
+};
 
 const routes: Routes = [
   {path:'landlord', component: LandlordComponent,
@@ -67,11 +84,18 @@ const routes: Routes = [
     NortificationComponent,
     MypropertyComponent,
     FooterComponent,
-    SendNortificationComponent
+    SendNortificationComponent,
   ],
   imports: [
     Ng2SearchPipeModule,
-  
+    MultiSelectModule,
+    NzButtonModule,
+    NzUploadModule,
+    NzModalModule,
+    NzStepsModule,
+    BadgeModule,
+    //ng-wizard
+    NgWizardModule.forRoot(ngWizardConfig),
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
@@ -99,8 +123,10 @@ const routes: Routes = [
     InputTextModule,
     ConfirmDialogModule,
     MessagesModule,
+    TabViewModule,
 
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
   ],
   providers: [ MessageService, ConfirmationService],
 

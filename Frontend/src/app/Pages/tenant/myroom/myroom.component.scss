@@ -1,0 +1,27 @@
+.bell .fa-bell{
+    font-size: 1.5rem
+}
+.badge{
+    font-size: medium;
+    color: red;
+}
+h1{
+    font-family: 'Inder';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+}
+textarea.input {
+    min-height: 130px;
+    max-height: 130px;
+}
+.invalid-feedback{
+    color: red;
+}
+.is-invalid, p-multiSelect{
+    border-color: red;
+}
