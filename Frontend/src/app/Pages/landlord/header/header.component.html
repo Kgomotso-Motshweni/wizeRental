@@ -7,17 +7,15 @@
     </div>
 
     <div class="end-part flex-none justify-end">
-        <div class="user">
+        <div class="user mt-3">
             <p>Hi {{Full_Name}}</p>
         </div>
 
-        <button class="btn btn-ghost btn-circle">
-            <div class="indicator bell">
-                <a (click)="visibleSidebar2 = true">
+        <button class="btn ml-4 btn-ghost btn-circle">
+            <a (click)="visibleSidebar2 = true">
                 <i class="fa-regular fa-bell"></i>
-                    <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
-                </a>
-            </div>
+                <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
+            </a>
         </button>    
     </div>
 </div>
@@ -30,6 +28,7 @@
     backdropBorderRadius: '3px'
     }">
 </ngx-loading>
+
 <p-sidebar [(visible)]="visibleSidebar2" position="right" style="background-color: black;">
     <h1>Notifications from Tenants</h1>
     <app-nortification></app-nortification>
