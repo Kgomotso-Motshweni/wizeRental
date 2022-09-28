@@ -30,7 +30,6 @@ export class PendingComponent implements OnInit {
   number:number = 0;
 
   Form = new FormGroup({
-
     address: new FormControl(''),
     town: new FormControl(''),
     city: new FormControl(''),
@@ -53,7 +52,7 @@ export class PendingComponent implements OnInit {
     private ngWizardService: NgWizardService, private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
-    this.loading = false;
+    this.loading = true;
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
     this.getPending(this.id);
@@ -68,15 +67,13 @@ export class PendingComponent implements OnInit {
       numPets: ['', Validators.required],
       smoke: ['', Validators.required],
       id: ['', Validators.required],
-
       accomName: ['', Validators.required],
       address: ['', Validators.required],
       town: ['', Validators.required],
       city: ['', Validators.required],
       zipCode: ['', Validators.required],
       unitNumber: ['', Validators.required],
-    }
-    );
+    });
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -87,8 +84,10 @@ export class PendingComponent implements OnInit {
    getPending(user:number){
     this.dash.getPendTenants(1).subscribe({
       next:data  => {
+     
           this.pending = data;
-          this.number = this.pending.length
+          this.number = this.pending.length;
+          this.loading = false;
         }
       }
     )
@@ -122,9 +121,7 @@ export class PendingComponent implements OnInit {
       //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
       // ],
       showPreviousButton: false,
-      showNextButton: false
-     
-      
+      showNextButton: false 
     }
   };
   
@@ -143,14 +140,15 @@ export class PendingComponent implements OnInit {
   {
     this.ngWizardService.theme(theme);
   }
-  stepChanged(args: StepChangedArgs) 
+    stepChanged(args: StepChangedArgs) 
   {
- 
-   
+
   }
+
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
   {
+  
     return true;
   }
   isValidFunctionReturnsObservable(args: StepValidationArgs) 
@@ -163,6 +161,12 @@ export class PendingComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
+    if(this.Form.invalid){
 
+      this.loading = false;
+      return
+    }
+    this.loading = false;
   }
 }

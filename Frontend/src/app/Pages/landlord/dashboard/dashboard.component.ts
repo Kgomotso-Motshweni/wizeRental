@@ -27,29 +27,26 @@ export class DashboardComponent implements OnInit {
   searchTenant: any;
   numroomsA: number = 0;
   numroomsO: number = 0;
-
   payment_array: Array<any> = [];
   my_properties: any;
   token: any;
   id: any;
 
-  constructor(private dash: DashboardService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private messageService: MessageService,
-    private confirmationService: ConfirmationService,private auth:AuthenticationService) { }
+  constructor(
+    private dash: DashboardService,
+    private auth:AuthenticationService) { }
 
   ngOnInit(): void {
-
-
+    this.loading = true;
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
 
+
     this.dash.rentees(this.id).subscribe((rentee: any) => {
+    
       this.rentees = rentee;
-
+      
       for (let x = 0; x < this.rentees.length; x++) {
-
         //signed tenants revenue
         if (rentee[x].moa_status == "signed") {
           this.totAmnt = +this.totAmnt + +this.rentees[x].rent;
@@ -65,26 +62,26 @@ export class DashboardComponent implements OnInit {
           }
         }
       }
+     
       //Pending Tenants
       this.dash.getPendTenants(this.id ).subscribe((numTenants) => {
+
         this.totNumTenants = numTenants;
         this.totNumTenants = this.totNumTenants.length;
-
+      
       })
 
       //Room available
       this.dash.getProperties(this.id).subscribe((properties) => {
         this.my_properties = properties;
         for (let x = 0; x < this.my_properties.length; x++) {
-
+         
           this.numroomsA = +this.numroomsA + +this.my_properties[x].p_room;
-          console.log("fghijop",this.my_properties[x].p_room)
         }
+        this.loading = false;
       })
 
-      console.table(this.rentees)
-
+    
     })
   }
-
 }

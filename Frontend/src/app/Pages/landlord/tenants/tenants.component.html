@@ -1,8 +1,8 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-<div class="container justify-center pending">
-  <div class="container  mb-6 mt-6">
+<div class=" justify-center pending">
+  <div class="mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
@@ -54,36 +54,32 @@
       </div> 
     </form> -->
 
+   
+      <div class="form-group mb-6 mt-6">
+        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full lg:w-1/2 email" [(ngModel)]="searchTenant"/>
+      </div>
 
-    <label class="input-group ">Accomodation:</label>
-    <div class="grid mb-1 gap-1 md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1">
+      <div class="grid mb-1 gap-1 md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-2 users">
+        <form [formGroup]="Form">
+          <div class="form-group mb-6">
+            <label>Filter by Accommodation Name</label>
+            <select  (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+                <option value disabled selected hidden>All</option>
+                <option value="All">All</option>
+                <option *ngFor="let i Of tenantAddress" value="{{i.accom_name}}">{{i.accom_name}}</option>
+            </select>
+          </div>
+        </form>
 
- 
-      <form [formGroup]="Form">
-        <div class="form-group mb-6" >
-         
-          <select (change)="caller()" formControlName="usertype" class="email"
-            placeholder="Select Accommodation Address ...">
-            <option value disabled selected hidden>All</option>
-            <option value="All">All</option>
-            <option *ngFor="let i Of tenantAddress" value="{{i.accom_name}}">{{i.accom_name}}</option>&nbsp;
-          </select>&nbsp;
+        <div class=" search justify-end sendNotification">
+          <button type="submit" (click)="loading = !loading" routerLink='/landlord/sendNortification'
+            class="text-white btn-secondary mt-4 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send
+            Notification</button>
         </div>
-      </form>
-
-      <div class="form-group mb-6 mt-6 search">
-        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full email" [(ngModel)]="searchTenant"/>
       </div>
+    <div>
 
-
-      <div class="search">
-        <label class="input-group "></label>
-        <button type="submit" routerLink='/landlord/sendNortification'
-          class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send
-          Notification</button>
-      </div>
     </div>
-
   <!-- </div> -->
   <br>
 

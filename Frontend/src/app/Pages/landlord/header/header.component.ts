@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   token:any = '';
   totalNumber: number = 0;
   totNumTenants: any = {};
+  visibleSidebar2: boolean = false;
   constructor(private auth:AuthenticationService,private dash: DashboardService) { }
 
   ngOnInit(): void {
@@ -30,8 +31,10 @@ export class HeaderComponent implements OnInit {
     //Pending Tenants
     this.dash.getPendTenants(id).subscribe({
       next:data  => {
+        this.loading = true;
         this.totNumTenants = data;
         this.totalNumber = this.totNumTenants.length;
+        this.loading = false;
         }
       }
     )
@@ -48,5 +51,4 @@ export class HeaderComponent implements OnInit {
     let first = value.toUpperCase();
     return first; 
   }
-  visibleSidebar2: boolean = false;
 }
