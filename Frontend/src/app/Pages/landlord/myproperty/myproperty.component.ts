@@ -55,7 +55,6 @@ export class MypropertyComponent implements OnInit {
     let userid = this.token.regData[0].userid
     this.id = userid;
     this.getProperty(userid);
-
     this.Form = this.formBuilder.group({
       pdf: ['', [Validators.required]],
       image: ['', [Validators.required]],
@@ -86,16 +85,20 @@ export class MypropertyComponent implements OnInit {
        
         this.land.deleteMyProperty(details).subscribe({  
           next:data =>{
+            this.loading = true;
             this.message = data
 
             //Route back to the current page,  this helps in refreshing data
             this.route.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.route.onSameUrlNavigation = "reload";
             this.route.navigate(['/landlord/myproperty']);  
+            this.loading = false;
             this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+
           },error: err => {
             //show the message if unable to add new data
             this.message = err.error.message;
+            this.loading = false;
             this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
           }
         });
