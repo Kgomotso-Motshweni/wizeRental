@@ -38,7 +38,7 @@ const tenantsFromSpecifiAddress = async(req, res) => {
     //     WHERE p.p_address = $1
     
     try{
-      client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
+      client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address,r.unit, r.moastart, r.moaend, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
         FROM rentees r
         INNER JOIN landlordProperty p ON r.property_id = p.property_id
         INNER JOIN users u ON p.landlord_id = u.userid

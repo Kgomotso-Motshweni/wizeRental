@@ -1,6 +1,27 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
+
+
+<ng-container *ngIf="number == 0" >
+  <div class="container">
+      <div class="flex justify-center">
+          <div class="grid sm:grid-cols-1 ">
+              <div class="card empty w-full shadow-xl">
+                  <div class="card-body">
+                      <h2 class="card-title">My Tenants</h2>
+                      <div>
+                          <h5>You have 0 Tenants</h5>
+                          <h6>check if you have any pending tenant(s)</h6>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="number !== 0" >
 <div class=" justify-center pending">
   <div class="mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -15,9 +36,9 @@
 
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
-          <h2 class="card-title">Signed</h2>
+          <h2 class="card-title">Open</h2>
           <div class="flex flex-row">
-            <div class=" backend">2 Moving in</div>
+            <div class=" backend">{{numroomsA}} Room(s)</div>
           </div>
         </div>
       </div>
@@ -42,18 +63,6 @@
     </div>
   </div>
   <!--------------------------------------------search bar and button-------------------------------->
-  <!-- <div class="flex justify-start"> -->
-
-    <!-- <form [formGroup]="Form">
-      <div class="form-group mb-6">
-        <label class="input-group ">Notification Type:</label>
-        <select (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select Accommodation Address ...">
-          <option value disabled selected hidden>All</option> 
-          <option *ngFor="let i of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>
-        </select>
-      </div> 
-    </form> -->
-
    
       <div class="form-group mb-6 mt-6">
         <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full lg:w-1/2 email" [(ngModel)]="searchTenant"/>
@@ -78,15 +87,8 @@
         </div>
       </div>
     <div>
-
-
-      <div class="notification">
-        <label class="input-group "></label>
-        <button type="submit" routerLink='/landlord/sendNortification'
-          class=" input input-bordered w-full text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800 ">Send
-          Notification</button>
-      </div>
-    </div>
+ 
+  </div>
 
   <br>
 
@@ -146,6 +148,7 @@
     </table>
   </div>
 </div>
+</ng-container>
 
 
 <ngx-loading

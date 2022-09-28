@@ -45,6 +45,9 @@ export class TenantsComponent implements OnInit {
   Form = new FormGroup({
     usertype: new FormControl(''),
   });
+  my_properties: any;
+  numroomsA: number =0;
+  number: number = 0;
 
   constructor(private dash:DashboardService,
     private router:Router, 
@@ -65,11 +68,15 @@ export class TenantsComponent implements OnInit {
     this.dash.rentees(this.id).subscribe((rentee:any)=>{
       
       this.rentees = rentee;
+      this.number = this.rentees.length
       for (let x = 0; x < this.rentees.length; x++) {
         //signed tenants revenue
         if (rentee[x].moa_status == "signed") {
           this.totAmnt = this.totAmnt + this.rentees[x].rent;
           
+          //Rooms Open
+          this.numroomsA = +this.numroomsA + +rentee[x].p_room;
+
           //Room occupied
           this.numroomsO = this.numroomsO + 1;
           // paid tanants
@@ -82,6 +89,7 @@ export class TenantsComponent implements OnInit {
           }
         }
       }
+      
       this.countTenants = this.rentees.length;
       this.loading = false;
     })
@@ -134,6 +142,8 @@ export class TenantsComponent implements OnInit {
     })
   }
 
+  
+
   /* when click on any property from the dropdown receive that property value and 
     use it to get all tenants from that property
   */
@@ -148,11 +158,14 @@ export class TenantsComponent implements OnInit {
         //reset values 
         this.totPaid = 0;
         this.totUnPaid = 0;
+        this.numroomsA = 0;
         this.loading = false;
         for (let x = 0; x < this.rentees.length; x++) {
           //signed tenants revenue
           if (rentee[x].moa_status == "signed") {
             this.totAmnt = this.totAmnt + rentee[x].rent;
+            //Rooms Open
+            this.numroomsA = +this.numroomsA + +rentee[x].p_room;
             //Room occupied
             this.numroomsO = this.numroomsO + 1;
             // paid tanants
@@ -165,6 +178,9 @@ export class TenantsComponent implements OnInit {
             }
           }
         }
+        //rooms available
+    
+
       this.countTenants = this.rentees.length;
       })
     }else{
@@ -172,26 +188,26 @@ export class TenantsComponent implements OnInit {
         this.rentees = rentee
         this.totPaid = 0;
         this.totUnPaid = 0;
-
+        this.numroomsA = 0;
         for (let x = 0; x < this.rentees.length; x++) {
           //signed tenants revenue
           if (rentee[x].moa_status == "signed") {   
             this.totAmnt = this.totAmnt + rentee[x].rent;
-            
+            //Rooms Open
+            this.numroomsA = +this.numroomsA + +rentee[x].p_room;
             //Room occupied
             this.numroomsO = this.numroomsO + 1;
-            
             // paid tanants
             if (rentee[x].paymentstatus == true) {
               this.totPaid = +this.totPaid + (+rentee[x].rent);
             }
-            
             //unpaid tenants
             if (rentee[x].paymentstatus == false) {
               this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
             }
           }
         }
+      
       this.countTenants = this.rentees.length;
       })
     }
