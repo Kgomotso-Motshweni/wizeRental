@@ -3,13 +3,14 @@ const cloudinary = require("../Cloudinary/cloudinary");
 
 const applyRoom = async(req, res) => {
     const tenant_id = parseInt(req.params.userid);
+
     const{ property_id, full_name, email, phone_num, age, occupation, view_date, num_tenants, num_pets, ped_desc, smoke } = req.body
     try{
         const id_document = await cloudinary.uploader.upload(req.file.path, {
             folder: "/images/",
         });
 
-        const data = await client.query(`SELECT * FROM applicationform WHERE full_name= $1`,[full_name]); //Check if user exist
+        const data = await client.query(`SELECT * FROM applicationform WHERE full_name = $1`,[full_name]); //Check if user exist
         const user = data.rows;
 
         if(user.length != 0){
@@ -18,7 +19,7 @@ const applyRoom = async(req, res) => {
             });
 
         }else{
-            //console.log(id_document)
+            console.log(id_document)
             client.query(`INSERT INTO applicationform (tenant_id, property_id, full_name, email, phone_num, age,  id_doc, occupation, view_date, num_tenants, num_pets, ped_desc, smoke)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`, 
             [tenant_id, property_id, full_name, email, phone_num, age, id_document.url, occupation, view_date, num_tenants, num_pets, ped_desc, smoke], (error, results) => {
