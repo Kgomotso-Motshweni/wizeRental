@@ -105,6 +105,8 @@
           <td>{{rentee.rent}}</td>
           <td>{{rentee.moastart | date:'dd-MM-yyyy'}}</td>
           <td>{{rentee.r_update_time | date:'dd-MM-yyyy'}}</td>
+
+          <td></td>
           <td>
             <div class="form-control" *ngIf="rentee.paymentstatus">
               <label class="label cursor-pointer">
@@ -118,7 +120,7 @@
               </label>
             </div>
           </td>
-          <td></td>
+          
           <td>
             <a (click)="deleteUser(rentee)" type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
               <i class="fa fa-trash fa-lg"></i> Delete</a>
