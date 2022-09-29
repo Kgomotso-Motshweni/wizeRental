@@ -25,7 +25,6 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { ApplyComponent } from './Models/apply/apply.component';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule} from 'primeng/dialog';
@@ -43,7 +42,6 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     NavBarComponent,
     EditorComponent,
     HomeComponent,
-    ApplyComponent,
     LoginComponent,
     RegisterComponent,
     FooterComponent,
