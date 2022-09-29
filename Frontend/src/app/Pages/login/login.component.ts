@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({

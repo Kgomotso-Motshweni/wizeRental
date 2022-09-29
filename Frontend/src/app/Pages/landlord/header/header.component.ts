@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 
@@ -8,21 +9,32 @@ import { DashboardService } from 'src/app/Services/dashboard.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('ngxLoading', { static: false })
+  ngxLoadingComponent!: NgxLoadingComponent;
+  showingTemplate = false;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+
   Full_Name:any = '';
   token:any = '';
   totalNumber: number = 0;
   totNumTenants: any = {};
+  visibleSidebar2: boolean = false;
   constructor(private auth:AuthenticationService,private dash: DashboardService) { }
 
   ngOnInit(): void {
+    this.loading = false;
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.Full_Name = this.transform(this.token.regData[0].firstname );
+    let id = this.token.regData[0].userid ;
+    
     //Pending Tenants
-
-    this.dash.getPendTenants(1).subscribe({
+    this.dash.getPendTenants(id).subscribe({
       next:data  => {
+        this.loading = true;
         this.totNumTenants = data;
         this.totalNumber = this.totNumTenants.length;
+        this.loading = false;
         }
       }
     )
@@ -39,5 +51,4 @@ export class HeaderComponent implements OnInit {
     let first = value.toUpperCase();
     return first; 
   }
-  visibleSidebar2: boolean = false;
 }

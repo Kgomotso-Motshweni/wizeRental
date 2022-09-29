@@ -1,82 +1,245 @@
- 
-<ul class="flex flex-wrap border-b border-gray-200">
-    <li class="mr-2">
-        <a href="#" aria-current="page" class="inline-block bg-gray-100 text-blue-600 rounded-t-lg py-4 px-4 text-sm font-medium text-center active ">Property details</a>
-    </li>
-    <li class="mr-2">
-        <a href="#" class="inline-block text-gray-500 hover:text-gray-600 hover:bg-gray-50 rounded-t-lg py-4 px-4 text-sm font-medium text-center">Images</a>
-    </li>
-    <li class="mr-2">
-        <a href="#" class="inline-block text-gray-500 hover:text-gray-600 hover:bg-gray-50 rounded-t-lg py-4 px-4 text-sm font-medium text-center">Payment</a>
-    </li>
-</ul>
- 
+<p-toast position="top-right" key="tc"></p-toast>
+<ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
+    <ng-wizard-step [title]="'Property details'" [canEnter]="isValidTypeBoolean" 
+        [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+        <span>
+            <form [formGroup]="Form">
+                <div >
+                    <label class="input-group">Location*</label>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div class="form-group">
+                            <input type="text" formControlName="address" placeholder="Street Address"
+                                class="input bg-gray-50 input-bordered w-full email "
+                                [ngClass]="{ 'is-invalid':submitted && f['address'].errors }" />
+                            <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                                <div *ngIf="f['address'].errors['required']">Street Address is required</div>
+                            </div>           
+                        </div>
 
-<ng-container >
-    <div class="container">
-        <div class="flex justify-center">
-            <div class="grid sm:grid-cols-1 ">
-                <div class="card empty w-full shadow-xl">
-                    <div class="card-body">
-                        <form>
-                            <div class="grid gap-6 mb-6 md:grid-cols-2">
-                                <div>
-                                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Location*</label>
-                                    <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required>
-                                </div>
-                                <div>
-                                    <!-- <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label> -->
-                                    <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="City" required>
-                                </div>
-                                <div>
-                                    <!-- <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company</label> -->
-                                    <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Town" required>
-                                </div> 
-                                <div>
-                                    <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-166 dark:focus:border-blue-500" placeholder="Zip Code" required>
-                                </div> 
-                                <div>
-                                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property Type*</label>
-                                    <input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-                                </div>
-                                <div>
-                                    <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accomodation Name</label>
-                                    <input type="url" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Shaka" required>
-                                </div>
-                                <div>
-                                    <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Description*</label>
-                                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" Double story house with 3 bedrooms and 2 bathrooms, It comes fully furnished. " required>
-                                </div>
-                            </div>
-                            <div class="mb-6">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bedroom*</label>
-                                <input type="text" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bathroom*</label>
-                                <input type="text" id="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Units*</label>
-                                <input type="number" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price*</label>
-                                <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="R2500" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload of proof of ownership*</label>
-                                <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required>
-                            </div>
-                           
-                           
-                            <button type="Save & Continue" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                        </form>
+                        <div class="form-group ">
+                            <input type="text" formControlName="city" placeholder="City"
+                                class="input bg-gray-50 input-bordered w-full email "
+                                [ngClass]="{ 'is-invalid':submitted && f['city'].errors }" />
+                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                <div *ngIf="f['city'].errors['required']">City is required</div>
+                            </div>           
+                        </div>
+
+                        <div class="form-group ">
+                            <input type="text" formControlName="town" placeholder="Town "
+                                class="input bg-gray-50 input-bordered w-full email "
+                                [ngClass]="{ 'is-invalid':submitted && f['town'].errors }" />
+                            <div *ngIf="submitted && f['town'].errors" class="invalid-feedback">
+                                <div *ngIf="f['town'].errors['required']">Town is required</div>
+                            </div>           
+                        </div>
+
+                        <div class="form-group mb-6">
+                            <input type="number" formControlName="zipCode" placeholder="Zip Code"
+                                class="input bg-gray-50 input-bordered w-full email " min="1"
+                                [ngClass]="{ 'is-invalid':submitted && f['zipCode'].errors }" />
+                            <div *ngIf="submitted && f['zipCode'].errors" class="invalid-feedback">
+                                <div *ngIf="f['zipCode'].errors['required']">Zip is required</div>
+                            </div>           
+                        </div>
                     </div>
                 </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Property Type*</label>
+                    <select formControlName="options" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select option" [ngClass]="{ 'is-invalid':submitted && f['options'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="Commune">Commune</option>
+                        <option value="Backroom">Backroom</option>
+                        <option value="Studio">Studio</option>
+                    </select>
+                    <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
+                        <div *ngIf="f['options'].errors['required']">User type is required</div>
+                    </div>
+                </div>
+                    
+                <div class="form-group mb-6">
+                    <label class="input-group">Accommodation Name*</label>
+                    <input type="text" formControlName="accomName" placeholder="Accommodation Name"
+                        class="input bg-gray-50 input-bordered w-full email " min="1"
+                        [ngClass]="{ 'is-invalid':submitted && f['accomName'].errors }" />
+                    <div *ngIf="submitted && f['accomName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['accomName'].errors['required']">Accommodation required</div>
+                    </div>           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Description*</label>
+                    <textarea type="text" formControlName="description" placeholder="Description"
+                        class="input bg-gray-50 input-bordered w-full email " 
+                        [ngClass]="{ 'is-invalid':submitted && f['description'].errors }" ></textarea>
+                    <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                        <div *ngIf="f['description'].errors['required']">Description required</div>
+                    </div>           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of beds*</label>
+                    <select formControlName="numBeds" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of beds" [ngClass]="{ 'is-invalid':submitted && f['numBeds'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <div *ngIf="submitted && f['numBeds'].errors" class="invalid-feedback">
+                        <div *ngIf="f['numBeds'].errors['required']">Number of beds required</div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of bathrooms*</label>
+                    <select formControlName="numBaths" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of bathrooms" [ngClass]="{ 'is-invalid':submitted && f['numBaths'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
+                        <div *ngIf="f['options'].errors['required']">Number of bathrooms required</div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of rooms*</label>
+                    <select formControlName="numRooms" class="input bg-gray-50 input-bordered w-full  email" placeholder="Number of rooms" [ngClass]="{ 'is-invalid':submitted && f['numRooms'].errors}">
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <div *ngIf="submitted && f['numRooms'].errors" class="invalid-feedback">
+                        <div *ngIf="f['numRooms'].errors['required']">Number of rooms required</div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Price*</label>
+                    <input type="number" formControlName="price" placeholder="Price"
+                        class="input bg-gray-50 input-bordered w-full email " 
+                        [ngClass]="{ 'is-invalid':submitted && f['price'].errors }" />
+                    <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+                        <div *ngIf="f['price'].errors['required']">Description required</div>
+                    </div>           
+                </div>
+
+
+                <div class="form-group mb-6">
+                    <label class="input-group">PetFriendly*</label>
+                    <select formControlName="petFriendly" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select option" [ngClass]="{ 'is-invalid':submitted && f['petFriendly'].errors}" >
+                        <option value disabled selected hidden>Select option... </option>
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select>
+                    <div *ngIf="submitted && f['petFriendly'].errors" class="invalid-feedback">
+                        <div *ngIf="f['petFriendly'].errors['required']">Pet Friendly is required</div>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-6">   
+                    <label class="input-group">House*</label>
+                    <input (change)="houseImage($event)"  formControlName="houseImage" [ngClass]="{ 'is-invalid':submitted && f['houseImage'].errors}"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Property Advertising Picture Image Only and png,jpeg or jpg file supported only">
+                    <div *ngIf="submitted && f['houseImage'].errors" class="invalid-feedback">
+                        <div *ngIf="f['houseImage'].errors['required']">property Advertising image required</div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-6">   
+                    <label class="input-group">Proof Of Ownership*</label>
+                    <input (change)="proofOfOnwership($event)" formControlName="tittleDeed" [ngClass]="{ 'is-invalid':submitted && f['tittleDeed'].errors}" class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Proof of ownership (PDF or Image only)">
+                    <div *ngIf="submitted && f['tittleDeed'].errors" class="invalid-feedback">
+                        <div *ngIf="f['tittleDeed'].errors['required']">Proof of ownership is required</div>
+                    </div>
+                </div>
+            </form> 
+        </span>
+        <div class="form-group justify-end">
+            <button type="button" (click)="showNextStep()" class="text-white btn-secondary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+        </div>  
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Images'" [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+        <div class="container images">
+            <div class="addedImages mt-5 justify-center" >
+                <div class="flex card-profile-image justify-start">
+                    <div  *ngFor="let i of preview" class="grid gap-1 grid-cols-1">
+                        <a (click)="removeTask(i)"><img [src]="i" class="w-36 ml-2" /></a>
+                    </div> 
+                 </div>
+            </div>
+
+            <div class="map">
+                <div class="input">
+                    <input type="file" (change)="roomsImages($event)" name="" id="">
+                </div>
+                <div class="body">
+                    <h1 >Image upload rules : </h1>
+                    <li>Acceptable image format JPG and PNG</li>
+                    <li>Maximum image file size 10mb.</li>
+                    <li>No Duplicate images</li>
+                </div>
+            </div>
+        </div>     
+        
+        <div class="form-group justify-end">
+            <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
+            <button type="button" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+            <button type="button" (click)="OnSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+        </div>  
+
+    </ng-wizard-step>
+</ng-wizard>
+
+<ngx-loading
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.threeBounce,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
+</ngx-loading>
+            
+
+           
+
+   
+
+
+<!-- <nz-steps nzType="navigation" nzSize="small" [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
+    <nz-step nzTitle="Step 1" nzStatus="finish" nzDescription="Property Details" >
+
+    </nz-step>
+    
+    <nz-step nzTitle="Step 2" nzStatus="process" nzDescription="Images">
+      
+        
+        <div>
+            <div class="flex form-group justify-end">
+                <button type="btn"  class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                <button type="btn" class="text-white ml-5 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save</button>
             </div>
         </div>
-    </div>
-</ng-container> 
+    </nz-step>
+</nz-steps> -->
+
+<!-- <div class="steps-action">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="index > 0">
+      <span>Previous</span>
+    </button>
+    <button nz-button nzType="default" (click)="next()" *ngIf="index < 1" >
+      <span>save and continue</span>
+    </button>
+    <button nz-button nzType="primary" (click)="done()" *ngIf="index === 1">
+      <span>Done</span>
+    </button>
+  </div> -->
 
 

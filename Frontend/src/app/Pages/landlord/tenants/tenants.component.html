@@ -1,66 +1,86 @@
-<p-toast position="top-right" key="tc"></p-toast>
-<div class="container justify-center pending">
-    <div class="container  mb-6 mt-6">
-        <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="card shadow-xl border">
-                <div class="grid card-body w-full user justify-start">
-                    <h2 class="card-title">Current</h2> 
-                    <div class="flex flex-row">
-                        <div class=" backend">{{numTenants}}Tenant(s) </div>
-                    </div>
-                </div>
-            </div>
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-            <div class="card shadow-xl border">
-                <div class="grid card-body w-full user justify-start">
-                    <h2 class="card-title">Signed</h2> 
-                    <div class="flex flex-row">
-                        <div class=" backend">2 Moving in</div>
-                    </div>
-                </div>
-            </div>
+<div class=" justify-center pending">
+  <div class="mb-6 mt-6">
+    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Current</h2>
+          <div class="flex flex-row">
+            <div class=" backend">{{countTenants}} Tenant(s) </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="card shadow-xl border">
-                <div class="grid card-body w-full user justify-start">
-                    <h2 class="card-title">Total Amount Received</h2> 
-                    <div class="flex flex-row">
-                        <div class=" backend">R {{totReceived}} </div>
-                    </div>
-                </div>
-            </div>
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Signed</h2>
+          <div class="flex flex-row">
+            <div class=" backend">2 Moving in</div>
+          </div>
+        </div>
+      </div>
 
-            <div class="card shadow-xl border">
-                <div class="grid card-body w-full user justify-start">
-                    <h2 class="card-title">Total Amount Not Received</h2> 
-                    <div class="flex flex-row">
-                        <div class=" backend">R {{totNotReceived}} </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Total Amount Received</h2>
+          <div class="flex flex-row">
+            <div class=" backend">R {{totPaid}} </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-xl border">
+        <div class="grid card-body w-full user justify-start">
+          <h2 class="card-title">Total Amount Not Received</h2>
+          <div class="flex flex-row">
+            <div class=" backend">R {{totUnPaid}} </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
   <!--------------------------------------------search bar and button-------------------------------->
-  <div class="flex justify-start">
-    <form [formGroup]="Form">
+  <!-- <div class="flex justify-start"> -->
+
+    <!-- <form [formGroup]="Form">
       <div class="form-group mb-6">
         <label class="input-group ">Notification Type:</label>
         <select (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-full  email" placeholder="Select Accommodation Address ...">
           <option value disabled selected hidden>All</option> 
-          <option *ngFor="let i Of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>
+          <option *ngFor="let i of tenantAddress" value="{{i.p_address}}">{{i.p_address}}</option>
         </select>
       </div> 
-    </form>
+    </form> -->
 
-    <div class="grid mb-6 grid-cols-1 lg:grid-cols-3 gap-6">
-      <div class="search">
-        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full email" [(ngModel)]="searchTenant"/>
+   
+      <div class="form-group mb-6 mt-6">
+        <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full lg:w-1/2 email" [(ngModel)]="searchTenant"/>
       </div>
 
-      <div class="Nortifications">
-        <button type="submit" routerLink='/landlord/sendNortification' class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send Notification</button>
-      </div> 
-    </div> 
-  </div>
+      <div class="grid mb-1 gap-1 md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-2 users">
+        <form [formGroup]="Form">
+          <div class="form-group mb-6">
+            <label>Filter by Accommodation Name</label>
+            <select  (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+                <option value disabled selected hidden>All</option>
+                <option value="All">All</option>
+                <option *ngFor="let i Of tenantAddress" value="{{i.accom_name}}">{{i.accom_name}}</option>
+            </select>
+          </div>
+        </form>
+
+        <div class=" search justify-end sendNotification">
+          <button type="submit" (click)="loading = !loading" routerLink='/landlord/sendNortification'
+            class="text-white btn-secondary mt-4 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send
+            Notification</button>
+        </div>
+      </div>
+    <div>
+
+    </div>
+  <!-- </div> -->
   <br>
 
   <!--------------------------------------------tii here---------------------------------------------->
@@ -85,45 +105,48 @@
         </tr>
       </thead>
       <tbody>
-        <!---------------------------------------------row 1-------------------------------------------------->
         <tr *ngFor="let rentee of rentees | filter:searchTenant; let x=index;">
-        
+
           <th>{{x+1}}</th>
           <td>{{rentee.full_name}}</td>
           <td>082-145-6643</td>
-          <td>2A</td>
+          <td>{{rentee.unit}}</td>
           <td>{{rentee.rent}}</td>
           <td>{{rentee.moastart | date:'dd-MM-yyyy'}}</td>
           <td>{{rentee.r_update_time | date:'dd-MM-yyyy'}}</td>
-  
           <td>
-          
             <div class="form-control" *ngIf="rentee.paymentstatus">
               <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" checked/>
+                <input type="checkbox" class="toggle toggle-primary" checked (click)="updatePayment(x,false)" />
               </label>
             </div>
-          
+    
             <div class="form-control" *ngIf="!rentee.paymentstatus">
               <label class="label cursor-pointer">
-                <input type="checkbox" class="toggle toggle-primary" />
+                <input type="checkbox" class="toggle toggle-primary " (click)="updatePayment(x,true)" />
               </label>
             </div>
-      
           </td>
-         
-          <td><button class="btn btn-error" (click)="deleteUser(rentee)">Delete</button></td>
+          <td>
+            <a (click)="deleteUser(rentee)" type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
+              <i class="fa fa-trash fa-lg"></i> Delete</a>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
+
 <ngx-loading
-  [show]="loading"
-  [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.threeBounce,
     primaryColour: '#ffffff', secondaryColour: '#ffffff',
     backdropBorderRadius: '3px'
-  }">
+    }">
 </ngx-loading>
+
+
+
+

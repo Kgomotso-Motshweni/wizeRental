@@ -3,7 +3,7 @@
         <h4>Pending Tenants</h4>
     </div>
 
-    <ng-container *ngIf="pending.length == 0">
+    <ng-container *ngIf="number == 0">
         <div class="container">
             <div class="flex justify-center">
                 <div class="grid sm:grid-cols-1 ">
@@ -20,7 +20,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="pending.length != 0">
+    <ng-container *ngIf="number!= 0">
         <div class="container pending">
             <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" >
                 <div class="card shadow-xl border" *ngFor="let i Of pending">
@@ -30,7 +30,7 @@
                         <p>Contacts: {{i.phone_num}}</p>
                         <p>View Date: {{i.view_date | date: 'dd MMM yyyy'}}</p>
                         <div class="grid form-group justify-start">
-                            <button type="button" (click)="editProperty(i)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
+                            <button  type="button" (click)="editProperty(i)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">View</button>
                         </div>
                     </div>
                 </div>
@@ -41,30 +41,123 @@
 
 <ng-template #elseBlock >
     <div class="container" style="margin-top:5vh;">
-        <div class="flex justify-center">
-            <div class="grid sm:grid-cols-1 ">
-                <div class="card empty w-full shadow-xl">
-                    <div class="card-body">
-                        <div class="grid gap-6 md:grid-cols-2">
-                            <div class="form-group mb-6">
-                                <label class="input-group">
-                                    <span class="w-12"><i class="fa-solid fa-user"></i></span>
-                                    <input type="text"  placeholder="First Name"
-                                        class="input bg-gray-50 input-bordered w-content email " [placeholder]="pendingClients.full_name"/>
-                                </label>          
-                            </div> 
-                        </div>       
+        <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
+            <ng-wizard-step [title]="'Tenant Details'" [canEnter]="isValidTypeBoolean" 
+                [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+                <div class="form-group mb-6">
+                    <div>
+                    <label class="input-group">Full Name: 
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.full_name" class="input bg-white input-bordered w-full email "/>        
+                    </label>
                     </div>
                 </div>
-            </div>
-        </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Email:  </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.email" class="input bg-white input-bordered w-full email "/>
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Contact: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.phone_num" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Age: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.age" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Employment Status: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.occupation" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Total Occupants: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.num_tenants" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Number of pets: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.num_pets" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Smoke: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.smoke" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">ID: </label>
+                        <input type="text" placeholder="First Name" disabled  [(ngModel)]="pendingClients.id_doc" class="input bg-white input-bordered w-full email ">           
+                </div>
+                <div class="flex form-group justify-end">
+                   <button type="button"  (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+                </div>  
+            </ng-wizard-step>
+
+            <ng-wizard-step [title]="'Accommodation Address'" [canEnter]="isValidTypeBoolean" 
+                [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+                <div class="form-group mb-6">
+                    <label class="input-group">Accommodation Name: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.p_name" class="input bg-white input-bordered w-full email "/>        
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Address:  </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.p_address"  class="input bg-white input-bordered w-full email "/>
+            
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">City: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.p_city" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Town: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.p_town" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Zip: </label>
+                        <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.p_zip_code" class="input bg-white input-bordered w-full email ">           
+                </div>
+
+                <div class="form-group mb-6">
+                    <label class="input-group">Unit Assign: </label>
+                        <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                </div>
+                <div class="flex form-group justify-end">
+                    <button type="button" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                    <button type="button" (click)="showNextStep()" class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
+                </div>  
+                 
+            </ng-wizard-step>
+
+            <ng-wizard-step [title]="'MOA'" [canEnter]="isValidTypeBoolean" 
+            [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+                <span>
+                    <form >
+
+                        <div class="form-group justify-end">
+                            <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
+                            <button type="button" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                            <button type="button" (click)="loading = !loading" (click)="onSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+                        </div>  
+                    </form>
+                </span>
+            </ng-wizard-step>
+        </ng-wizard>     
     </div>
 </ng-template>
 
 <ngx-loading
     [show]="loading"
     [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
+    animationType: ngxLoadingAnimationTypes.threeBounce,
     primaryColour: '#ffffff', secondaryColour: '#ffffff',
     backdropBorderRadius: '3px'
     }">

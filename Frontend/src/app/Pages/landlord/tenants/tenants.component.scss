@@ -1,8 +1,11 @@
-@media screen and (min-width: 630px){
-    .pending{
-         width: 73vw;
-     }
- }
- .backend{
-     font-size: 22px;
- }
+.button{
+    color: red;
+}
+@media screen and (min-width: 893px) { 
+    .sendNotification{
+        position: relative;
+        left:100%;
+        top:-100%
+
+    }
+}

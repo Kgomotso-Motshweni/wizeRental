@@ -1,0 +1,29 @@
+// @import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~ng-zorro-antd/button/style/index.min.css";  /* Import one component's styles */
+
+@media screen and (min-width: 630px){
+    .empty{
+        width: 73vw;
+    }
+}
+
+textarea.input {
+    min-height: 250px;
+    max-height: 250px;
+}
+.images li{
+    margin-left: 12px;
+}
+.images .body{
+    margin-top: 20px;
+}
+.addedImages{
+    height: 100px;
+}
+.uploader{
+    width: 100%;
+    height: 100%;
+}
+.map{
+    margin-top: 10%;
+}

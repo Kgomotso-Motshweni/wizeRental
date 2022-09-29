@@ -6,8 +6,12 @@ module.exports = multer({
     storage: multer.diskStorage({}),
     fileFilter: (req, file, cb ) => {
         let ext = path.extname(file.originalname);
-        if(ext == ".png" && ext == ".pdf" && ext == ".jpg" && ext == ".jpeg"){
-            cb({message: 'Unsupported file format'}, false)
+        // console.log(file)
+        // console.log(ext)
+        //test our file uploads if they meet the criteria/ test condition set below
+        if(!ext.match(/\.(png|jpg|jpeg|gif|web)$/)){
+           return  cb("message: Unsupported file format")
+            
         }
         cb(null, true);
     },
