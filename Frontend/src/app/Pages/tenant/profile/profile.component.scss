@@ -36,7 +36,6 @@ img {
     height: 150px;
     border-radius: 50%;
 }
-
 .card-profile-image img:hover{
     transition: 0.2s ease-in-out;
     transform:scale(1.1) 
@@ -46,9 +45,6 @@ img {
     margin-top:-5%;
 }
 
-.card{
-    border-radius: none;
-}
 .body{
     text-align: center;
     margin-top: -1%;
@@ -56,6 +52,9 @@ img {
 .divider{
     margin-top: 1%;
 }
-
-
-  
+.container{
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+    
+}

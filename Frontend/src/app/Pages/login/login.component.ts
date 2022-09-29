@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
@@ -74,7 +73,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_token', this.userToken);
         localStorage.setItem('role', this.role);
         this.messageService.add({
-          key: 'tc', severity:'error', summary: 'Error', detail: "Successfully Logged in", life: 3000
+          key: 'tc', severity:'success', summary: 'Success', detail: "Successfully Logged in", life: 3000
         }); 
         this.Form.reset();
         if(this.role == 'Landlord'){
