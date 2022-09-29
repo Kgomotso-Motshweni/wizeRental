@@ -16,8 +16,9 @@ import { LandlordModule } from './Pages/landlord/landlord.module';
 import { TenantModule } from './Pages/tenant/tenant.module';
 
 ////////////
-// Imported Syncfusion Signature module from inputs package.
-
+//Imported PrimeNG module .
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputMaskModule } from 'primeng/inputmask';
 
 //Components
 import { AppComponent } from './app.component';
@@ -48,6 +49,8 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     FooterComponent,
   ],
   imports: [
+    InputNumberModule,
+    InputMaskModule,
     LandlordModule,
     TenantModule,
     BrowserModule,

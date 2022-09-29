@@ -38,14 +38,16 @@ span{
     .header{
         border-bottom-left-radius: none;
     }
+    .gradient-custom{
+        position: relative;
+        align-items: center;
+        top:10%;
+
+    }
 }
-
-
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
     color: #66615B;
     height: 100%;
-    // width: 100vh;
-
 }
