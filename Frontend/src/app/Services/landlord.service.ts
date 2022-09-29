@@ -51,4 +51,8 @@ export class LandlordService {
   address(id:any){
     return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
   }
+
+  createMOA(users:any){
+    return this.http.post(`${this.baseUrl}acceptNewTenant`, users)
+  }
 }

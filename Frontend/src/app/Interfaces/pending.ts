@@ -20,4 +20,11 @@ export class Pending {
     p_town?:String;
     p_zip_code?:String;
     p_name?:String;
+    unit?:String;
+    amount?:Number;
+    agreementStart?:Date;
+    agreementEnd?:Date;
+    paymentStart?:Date;
+    paymentEnd?:Date;
+    PaymentType?:Date
 }

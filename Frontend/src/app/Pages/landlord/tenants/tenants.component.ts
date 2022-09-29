@@ -62,7 +62,7 @@ export class TenantsComponent implements OnInit {
     this.getLandLordAddress();
    
     this.dash.rentees(this.id).subscribe((rentee:any)=>{
-      
+      console.log(this.rentees)
       this.rentees = rentee;
       for (let x = 0; x < this.rentees.length; x++) {
         //signed tenants revenue
@@ -143,7 +143,7 @@ export class TenantsComponent implements OnInit {
       return this.land.rentees(this.Form.value.usertype).subscribe((rentee:any)=>{
         
         this.rentees = rentee;
-      
+        console.log(this.rentees)
         //reset values 
         this.totPaid = 0;
         this.totUnPaid = 0;
