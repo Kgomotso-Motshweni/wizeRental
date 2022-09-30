@@ -1,15 +1,18 @@
 <p-toast position="top-right" key="tc"></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container justify-center pending">
-    <button type="btn" (click)="showBasicDialog()" [disabled]="clicked" (click)="actionMethod(); clicked = true;" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Apply Here</button>
+    <!-- dialog button for popup form and it become disabled after clicking it-->
+    <button type="btn" (click)="showBasicDialog()" [disabled]="clicked" (click)="actionMethod(); clicked = true;" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Apply Here</button> 
 </div>
 
 <p-dialog [(visible)]="displayApplicationForm" [style]="{width: '450px', background:'#F4F3EF'}" header="Application Form" [modal]="true" styleClass="p-fluid">
     <h3>Applicant Information</h3>
+    <!-- reactive form for applicant detail -->
     <form [formGroup]="Form">   
         <div class="grid gap-6 md:grid-cols-2">
             <div class="form-group "> 
                 <input placeholder="First Name" type="text" formControlName="fname" pInputText id="first_name"[ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input bg-gray-50 input-bordered w-full email " />
+                <!-- *ngIf to display feedback messages to the user if the form values are not valid -->
                 <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
                     <div *ngIf="f['fname'].errors['required']">First name is required</div>
                 </div>

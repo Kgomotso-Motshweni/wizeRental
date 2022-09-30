@@ -149,7 +149,4 @@ export class HomeComponent implements OnInit {
     this.displayApplicationForm = false;
     this.submitted = false;
   }
-
-
-
 }
