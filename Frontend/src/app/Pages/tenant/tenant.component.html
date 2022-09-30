@@ -23,7 +23,8 @@
                 <li><a class="justify-between" routerLink="/tenant/profile/{{userid}}">Profile</a></li>
                 <li><a (click)="Logout()" >Logout</a></li>
             </ul>
-        </div>
+        </div>  
+        
     </div>
 </div>
 
@@ -31,10 +32,10 @@
     <router-outlet></router-outlet>
 </div>
 <ngx-loading
-[show]="loading"
-[config]="{
-  animationType: ngxLoadingAnimationTypes.circleSwish,
-  primaryColour: '#ffffff', secondaryColour: '#ffffff',
-  backdropBorderRadius: '3px'
-}">
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.threeBounce,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
 </ngx-loading>

@@ -9,6 +9,7 @@ module.exports = get_rentees= async (req, res) => {
         //get all post form the database
         const data = await client.query(
           `SELECT * FROM rentees a
+          INNER JOIN MOA r ON r.rentee_id = a.rentee_id
           INNER JOIN landlordproperty l ON a.property_id = l.property_id
           INNER JOIN users u ON l.landlord_id = u.userid
           WHERE u.userid = $1 AND a.moa_status = 'signed'; `,[id],

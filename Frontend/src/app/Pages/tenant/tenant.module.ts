@@ -11,6 +11,8 @@ import { TenantComponent } from './tenant.component';
 
 //Primeng Imports
 //primeNG 
+import { ButtonModule } from "primeng/button";
+import { BadgeModule } from "primeng/badge";
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ConfirmationService } from 'primeng/api';
@@ -25,7 +27,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
-import { DialogModule } from 'primeng/dialog';
+import { DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox'; 
 
 const routes: Routes = [
@@ -47,6 +49,8 @@ const routes: Routes = [
   ],
   imports: [
     Ng2SearchPipeModule,
+    ButtonModule,
+    BadgeModule,
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
@@ -68,6 +72,8 @@ const routes: Routes = [
     InputTextModule,
     ReactiveFormsModule,
     CommonModule,
+    ToastModule,
+    DialogModule,
     ConfirmDialogModule,
     MessagesModule,
     DialogModule,

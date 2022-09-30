@@ -46,13 +46,6 @@ import {TabViewModule} from 'primeng/tabview';
 import { MultiSelectModule } from 'primeng/multiselect';
 import {BadgeModule} from 'primeng/badge';
 
-//NG-ZORRO Imports
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzStepsModule } from 'ng-zorro-antd/steps';
-
-import { NzModalModule } from 'ng-zorro-antd/modal';
-
 //NgWizard Imports
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 
@@ -61,7 +54,7 @@ const ngWizardConfig: NgWizardConfig = {
 };
 
 const routes: Routes = [
-  {path:'landlord', component: LandlordComponent,
+  {path:'landlord', component: LandlordComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: DashboardComponent},
     {path:'tenant', component: TenantsComponent},
@@ -89,10 +82,6 @@ const routes: Routes = [
   imports: [
     Ng2SearchPipeModule,
     MultiSelectModule,
-    NzButtonModule,
-    NzUploadModule,
-    NzModalModule,
-    NzStepsModule,
     BadgeModule,
     //ng-wizard
     NgWizardModule.forRoot(ngWizardConfig),

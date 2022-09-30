@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,11 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class NortificationsService {
   baseUrl = environment.baseUrl;
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  // getMyTenantesInfor(id:number){
-  //   return this.http.get(`${this.baseUrl}getmyplcestens/${id}`) 
-  // }
 
   //Landlord send Messages to specific user
   sendMessage(message:any, id:number){
@@ -22,6 +18,11 @@ export class NortificationsService {
   //Tenant recieve Nortifications from Landlord
   tenantReceive(id:number){
     return this.http.get(`${this.baseUrl}tenantReceive/${id}`);
+  }
+
+  landlordReceive(id:any)
+  {
+    return this.http.get(`${this.baseUrl}landlordReceive/${id}`);
   }
   
 }

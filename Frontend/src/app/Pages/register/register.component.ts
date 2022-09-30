@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MustMatch } from './confirmPassword/validation';
 import { ConfirmationService } from 'primeng/api';
@@ -85,12 +84,13 @@ export class RegisterComponent implements OnInit {
     let user = {
       firstname: this.Form.value.fname,
       lastname: this.Form.value.lname,
-      email: this.Form.value.email,
+      email: this.transform(this.Form.value.email),
       cellno: this.Form.value.phone,
       password: this.Form.value.password,
       imageUrl: "https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png"
     }
 
+    console.log(user)
     this.auth.register(user, user_role).subscribe({
       next:data => {
         this.loading = true;

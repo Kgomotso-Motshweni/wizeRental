@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { LandlordService } from 'src/app/Services/landlord.service';
 import { ConfirmationService } from 'primeng/api';
@@ -55,7 +54,6 @@ export class MypropertyComponent implements OnInit {
     let userid = this.token.regData[0].userid
     this.id = userid;
     this.getProperty(userid);
-
     this.Form = this.formBuilder.group({
       pdf: ['', [Validators.required]],
       image: ['', [Validators.required]],
@@ -82,21 +80,21 @@ export class MypropertyComponent implements OnInit {
       message: 'Are you sure you want to delete this property name: ' + details.p_name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-       
+      accept: () => { 
         this.land.deleteMyProperty(details).subscribe({  
           next:data =>{
-            this.message = data
-
+            console.log(details)
+            this.loading = true;
             //Route back to the current page,  this helps in refreshing data
             this.route.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.route.onSameUrlNavigation = "reload";
             this.route.navigate(['/landlord/myproperty']);  
-            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+            this.loading = false;
+            this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Deleted", life: 3000})
           },error: err => {
             //show the message if unable to add new data
-            this.message = err.error.message;
-            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
+            this.loading = false;
+            this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
           }
         });
        },

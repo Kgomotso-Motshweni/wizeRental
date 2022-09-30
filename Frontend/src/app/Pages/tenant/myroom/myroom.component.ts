@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,6 +14,13 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   providers: [MessageService, ConfirmationService]
 })
 export class MyroomComponent implements OnInit {
+  @ViewChild('ngxLoading', { static: false })
+  ngxLoadingComponent!: NgxLoadingComponent;
+  showingTemplate = false;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+
+  
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -39,7 +46,6 @@ export class MyroomComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
-
     this.getNotifications();
 
     this.Form = this.formBuilder.group({
@@ -72,6 +78,7 @@ export class MyroomComponent implements OnInit {
     //Reset form every time you insert data
   }
 
+  
 
   hideDialog(){
     this.submitted = false;

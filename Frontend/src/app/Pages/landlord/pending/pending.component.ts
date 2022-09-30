@@ -1,17 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { Pending } from 'src/app/Interfaces/pending';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
 import { of } from 'rxjs';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LandlordService } from 'src/app/Services/landlord.service';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending',
   templateUrl: './pending.component.html',
-  styleUrls: ['./pending.component.scss']
+  styleUrls: ['./pending.component.scss'],
+  providers: [MessageService, ConfirmationService]
 })
 
 export class PendingComponent implements OnInit {
@@ -49,7 +53,10 @@ export class PendingComponent implements OnInit {
   });
 
   constructor(private dash: DashboardService, private auth:AuthenticationService,
-    private ngWizardService: NgWizardService, private formBuilder: FormBuilder,) { }
+    private ngWizardService: NgWizardService, private formBuilder: FormBuilder,
+    private land:LandlordService,  private messageService: MessageService,
+    private router:Router, 
+    private route: ActivatedRoute,  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -84,7 +91,6 @@ export class PendingComponent implements OnInit {
    getPending(user:number){
     this.dash.getPendTenants(1).subscribe({
       next:data  => {
-     
           this.pending = data;
           this.number = this.pending.length;
           this.loading = false;
@@ -159,14 +165,44 @@ export class PendingComponent implements OnInit {
   declined(){
 
   }
-
   onSubmit(){
     this.submitted = true;
-    if(this.Form.invalid){
-
-      this.loading = false;
-      return
-    }
+ 
     this.loading = false;
+    
+    //Validate if the modal is empty do not submit
+    if(!this.pendingClients.agreementStart && !this.pendingClients.agreementEnd && 
+      !this.pendingClients.paymentStart && !this.pendingClients.paymentEnd && !this.pendingClients.PaymentType ){
+      
+    }
+
+    let user = {
+      tenant_id: this.pendingClients.tenant_id,
+      property_id: this.pendingClients.property_id,
+      full_name: this.pendingClients.full_name,
+      unit: this.pendingClients.unit,
+      rent: this.pendingClients.amount,
+      paymentstatus: false,
+      moa_status: "notSigned",
+      agreeStartDate: this.pendingClients.agreementStart,
+      agreeEndDate: this.pendingClients.agreementEnd,
+      payStartDate: this.pendingClients.paymentStart,
+      payendDate: this.pendingClients.paymentEnd,
+      agreementType: this.pendingClients.PaymentType
+    }
+    
+    this.land.createMOA(user).subscribe({
+      next:data => {
+        this.loading = true;
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+        this.router.onSameUrlNavigation = "reload";
+        this.loading = false;
+        this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
+      },error: err => {
+        //show the message if unable to add new data
+        this.loading = false;
+        this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
+      }
+    })
   }
 }

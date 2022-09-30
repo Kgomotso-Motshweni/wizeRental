@@ -13,10 +13,10 @@ const middleware = require("../Middlewares/userauth");
 const get_property = require("../Controllers/get_property");
 const delete_rentee = require("../Controllers/delete_rentee");
 const update_payment = require("../Controllers/update_payment");
-
+const moa = require("../Controllers/createMOA")
 
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
-router.post('/add_rooms/:property_id', upload.single("image"), landlord.addRoomImages);
+router.post('/add_rooms/:property_id', upload.array("image", 2), landlord.addRoomImages);
 router.get('/getproperty/:userid', landlord.getMyProperties);
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty)
 router.delete('/deleteRentee/:id',delete_rentee)
@@ -30,7 +30,7 @@ router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
 router.get('/getTenants/:address',get_tenants.tenantsFromSpecifiAddress);
 // router.get('/getLandAddress/:id', get_rentees.getLandlordRes);
 // router.get('/getRentees/:address', get_rentees.tenantsFromSpecifiAddress);
-
+router.get('/getPayment',payment_status)
 
 // router.post('/getTenants',get_tenants.tenantsFromSpecifiAddress); ///
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty);
@@ -40,6 +40,9 @@ router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 
 router.get('/getproperties/:id',get_property);
 
+
+
+router.post('/acceptNewTenant', moa.CreateMOA)
 // router.patch('/update/:userid', upload.single("image"),auth.profileUpdate);
 // router.post('/file',upload.single("image"), auth.fileUpload);
 module.exports = router;

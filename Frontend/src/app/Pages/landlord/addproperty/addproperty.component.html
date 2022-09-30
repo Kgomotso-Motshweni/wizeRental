@@ -162,59 +162,50 @@
             </form> 
         </span>
         <div class="form-group justify-end">
-            <button type="button" (click)="showNextStep()" class="text-white btn-secondary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">save & continue</button>
+            <button type="button" (click)="showNextStep()" class="text-white btn-secondary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
         </div>  
     </ng-wizard-step>
 
     <ng-wizard-step [title]="'Images'" [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
         <div class="container images">
-            <div class="addedImages" >
-                <!-- <div class="flex card-profile-image justify-center">
-                    <img  *ngFor="let i of fileList" [src]="" class="w-36" /> 
-                 </div> -->
-                <!-- <nz-upload nzListType="picture-card"
-                    [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 5" (change)="handleFileInput($event)" >
-                    
-                    <div class="flex uploader flex-row">
-                        <i class="pi pi-plus"></i>
-                        <div class="AddImage">Add images</div>
-                    </div>
-                </nz-upload> -->
-
-                <nz-upload nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 5"
-                    [nzPreview]="handlePreview">
-                    <div>
-                        <i nz-icon nzType="plus"></i>
-                        <div style="margin-top: 8px">Upload</div>
-                    </div>
-                </nz-upload>
-                
-                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
-                (nzOnCancel)="previewVisible = false" >
-                <ng-template #modalContent>
-                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                </ng-template>
-              </nz-modal>
-
+            <div class="addedImages mt-5 justify-center" >
+                <div class="flex card-profile-image justify-start">
+                    <div  *ngFor="let i of preview" class="grid gap-1 grid-cols-1">
+                        <a (click)="removeTask(i)"><img [src]="i" class="w-36 ml-2" /></a>
+                    </div> 
+                 </div>
             </div>
-           
-            <!-- <div class="body">
-                <h1 >Image upload rules : </h1>
-                <li>Acceptable image format JPG and PNG</li>
-                <li>Maximum image file size 10mb.</li>
-                <li>No Duplicate images</li>
-            </div> -->
+
+            <div class="map">
+                <div class="input">
+                    <input type="file" (change)="roomsImages($event)" name="" id="">
+                </div>
+                <div class="body">
+                    <h1 >Image upload rules : </h1>
+                    <li>Acceptable image format JPG and PNG</li>
+                    <li>Maximum image file size 10mb.</li>
+                    <li>No Duplicate images</li>
+                </div>
+            </div>
         </div>     
         
         <div class="form-group justify-end">
             <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
             <button type="button" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
-            <button type="button" (click)="onSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+            <button type="button" (click)="OnSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
         </div>  
 
     </ng-wizard-step>
 </ng-wizard>
 
+<ngx-loading
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.threeBounce,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
+</ngx-loading>
             
 
            

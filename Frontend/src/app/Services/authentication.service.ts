@@ -14,6 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthenticationService {
+  getProfile(httpOptions: { headers: HttpHeaders; }, userid: any) {
+    throw new Error('Method not implemented.');
+  }
   fullname: any;
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
@@ -23,20 +26,11 @@ export class AuthenticationService {
     return this.http.post(`${this.baseUrl}login`, users)
   }
 
-  getProfile(accessToken:any,id:number):Observable<any>{
-    return this.http.get(`${this.baseUrl}profile/${id}`, accessToken )
-  }
-
   //create a register request 
   register(users : any, user_role:any):Observable<any>{
     return this.http.post(`${this.baseUrl}register/${user_role}`, users)
   }
 
-  //Update user information
-  updateProfile(user:any, id:any){
-    return this.http.patch(`${this.baseUrl}update/${id}`, user)
-  }
-  
   //create a login request 
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
