@@ -16,6 +16,7 @@ export class TenantComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
+  
 
   constructor(
     public auth:AuthenticationService,  

@@ -29,6 +29,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox'; 
+import { SidebarModule } from 'primeng/sidebar';
+import { NortificationComponent } from './nortification/nortification.component';
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent,
@@ -45,7 +47,8 @@ const routes: Routes = [
     TenantComponent,
     MyroomComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    NortificationComponent,
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -76,6 +79,7 @@ const routes: Routes = [
     DialogModule,
     ConfirmDialogModule,
     MessagesModule,
+    SidebarModule,
     DialogModule,
     RouterModule.forChild(routes)
   ],

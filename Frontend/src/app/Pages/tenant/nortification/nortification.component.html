@@ -1,0 +1,17 @@
+<div class="container justify-center " style="margin-top:5vh">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
+        <div class="card decoration-white shadow-xl text-primary-content" *ngFor="let i of myNotification">
+            <div class="card-header h-7" >
+                <h5>Shaka Accommodation</h5>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">{{i.notif_type}}</h2>
+                <p>{{i.subject}}</p>
+                <!-- <p>04 Sep</p>
+                <p>5 minutes ago</p> -->
+                <!-- <i class="pi pi-clock">29 Aug 2022</i> -->
+            </div>
+        </div>
+    </div>
+</div>
+
