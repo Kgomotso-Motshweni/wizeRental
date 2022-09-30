@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<p-toast position="top-right" ></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container mx-auto mb-5" style="margin-top: 8vh;">
     <div class="flex justify-end">
@@ -46,7 +46,7 @@
                         <td>{{i.p_name }}</td>
                         <td>{{i.p_address}} {{i.p_city}}</td>
                         <td>
-                            <a (click)="loading = !loading"  (click)="deleteProduct(i)"  type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
+                            <a (click)="deleteProduct(i)"  type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
                                 <i class="fa fa-trash fa-lg"></i> Delete
                             </a>
                         </td>
@@ -60,7 +60,7 @@
 <ngx-loading
     [show]="loading"
     [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
+    animationType: ngxLoadingAnimationTypes.threeBounce,
     primaryColour: '#ffffff', secondaryColour: '#ffffff',
     backdropBorderRadius: '3px'
     }">

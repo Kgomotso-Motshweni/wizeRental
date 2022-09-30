@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
-import { SelectItem, PrimeNGConfig } from "primeng/api";
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Router } from '@angular/router';
 

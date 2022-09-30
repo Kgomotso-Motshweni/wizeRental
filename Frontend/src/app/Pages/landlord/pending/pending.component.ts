@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { Pending } from 'src/app/Interfaces/pending';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { DashboardService } from 'src/app/Services/dashboard.service';

@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
+import { TenantsService } from 'src/app/Services/tenants.service';
 
 @Component({
   selector: 'app-tenant',
@@ -17,7 +18,8 @@ export class TenantComponent implements OnInit {
   public loading = false;
 
   constructor(
-    public auth:AuthenticationService,   
+    public auth:AuthenticationService,  
+    private tenant:TenantsService 
   ) { }
   
   Full_Name:any = '';
@@ -40,7 +42,7 @@ export class TenantComponent implements OnInit {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
     };
 
-    this.auth.getProfile(httpOptions, userid).subscribe({
+    this.tenant.getProfile(httpOptions, userid).subscribe({
       next:data =>{
         this.userData = data;
         this.Full_Name = this.substring(this.userData[0].firstname) +'  '+ this.substring(this.userData[0].lastname);

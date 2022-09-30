@@ -2,15 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [MessageService]
+  providers: []
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })

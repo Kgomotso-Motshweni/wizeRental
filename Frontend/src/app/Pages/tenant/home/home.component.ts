@@ -7,11 +7,14 @@ import { LandingService } from 'src/app/Services/landing.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxLoadingComponent } from 'ngx-loading';
+import { MessageService } from 'primeng/api/messageservice';
+import { ConfirmationService } from 'primeng/api/confirmationservice';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [MessageService, ConfirmationService]
 })
 export class HomeComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })

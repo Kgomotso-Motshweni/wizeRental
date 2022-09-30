@@ -17,15 +17,15 @@ import { TenantModule } from './Pages/tenant/tenant.module';
 
 
 ////////////
-// Imported Syncfusion Signature module from inputs package.
-
+//Imported PrimeNG module .
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputMaskModule } from 'primeng/inputmask';
 
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { ApplyComponent } from './Models/apply/apply.component';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule} from 'primeng/dialog';
@@ -46,7 +46,6 @@ import { FilterByComponent } from './Components/filter-by/filter-by.component';
     NavBarComponent,
     EditorComponent,
     HomeComponent,
-    ApplyComponent,
     LoginComponent,
     RegisterComponent,
     LandingComponent,
@@ -55,6 +54,8 @@ import { FilterByComponent } from './Components/filter-by/filter-by.component';
     FooterComponent,
   ],
   imports: [
+    InputNumberModule,
+    InputMaskModule,
     LandlordModule,
     TenantModule,
     BrowserModule,

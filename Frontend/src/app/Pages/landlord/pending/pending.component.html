@@ -3,7 +3,7 @@
         <h4>Pending Tenants</h4>
     </div>
 
-    <ng-container *ngIf="number == 0">
+    <ng-container >
         <div class="container">
             <div class="flex justify-center">
                 <div class="grid sm:grid-cols-1 ">
@@ -20,7 +20,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="number!= 0">
+    <ng-container >
         <div class="container pending">
             <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" >
                 <div class="card shadow-xl border" *ngFor="let i Of pending">
@@ -46,8 +46,9 @@
                 [canExit]="isValidFunctionReturnsBoolean.bind(this)">
                 <div class="form-group mb-6">
                     <div>
-                    <label class="input-group">Full Name: </label>
+                    <label class="input-group">Full Name: 
                         <input type="text" placeholder="First Name" disabled [(ngModel)]="pendingClients.full_name" class="input bg-white input-bordered w-full email "/>        
+                    </label>
                     </div>
                 </div>
 
@@ -140,7 +141,48 @@
             [canExit]="isValidFunctionReturnsBoolean.bind(this)">
                 <span>
                     <form >
+                        <div class="card ml-5 border-none">
+                        <div class="Header">
+                            <h3 >Set up memorandum of agreement</h3>
+                            <p>Enter the rent amount, memorandum <br>date and set the recurrence frequecy.<br>
+                                If this is a month-to-month rental, leave <br>end date empty.</p>
+                        </div>
 
+                        <div class="cardbody">
+                            <div class="form-group mb-6">
+                                <label class="input-group">Amount: </label>
+                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                            </div>
+
+                            <div class="form-group mb-6">
+                                <label class="input-group">Agreement Start Date: </label>
+                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                            </div>
+
+                            <div class="form-group mb-6">
+                                <label class="input-group">Agreement End Date: </label>
+                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                            </div>
+
+                            <div class="form-group mb-6">
+                                <label class="input-group">Payment Date: </label>
+                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                            </div>
+
+                            <div class="form-group mb-6">
+                                <label class="input-group">Payment Date Due: </label>
+                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                            </div>
+
+                            <div class="form-group mb-6">
+                                <label class="input-group">Agreement Type: </label>
+                                <select  class="input bg-gray-50 input-bordered w-full  email" placeholder="Agreement Type... " >
+                                    <option value disabled selected hidden>Agreement Type... </option>
+                                    <option value="Month-To-Month">Month-To-Month</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                         <div class="form-group justify-end">
                             <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
                             <button type="button" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
@@ -156,7 +198,7 @@
 <ngx-loading
     [show]="loading"
     [config]="{
-    animationType: ngxLoadingAnimationTypes.circleSwish,
+    animationType: ngxLoadingAnimationTypes.threeBounce,
     primaryColour: '#ffffff', secondaryColour: '#ffffff',
     backdropBorderRadius: '3px'
     }">

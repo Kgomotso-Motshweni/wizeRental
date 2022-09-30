@@ -20,7 +20,7 @@ const {filter} = require('../Controllers/filter')
 
 
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
-router.post('/add_rooms/:property_id', upload.single("image"), landlord.addRoomImages);
+router.post('/add_rooms/:property_id', upload.array("image", 2), landlord.addRoomImages);
 router.get('/getproperty/:userid', landlord.getMyProperties);
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty)
 router.delete('/deleteRentee/:id',delete_rentee)

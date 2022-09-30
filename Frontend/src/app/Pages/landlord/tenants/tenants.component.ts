@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent} from 'ngx-loading';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import { delay } from 'rxjs';
-import { TenantService } from 'src/app/Services/tenant.service';
+import { LandlordService } from 'src/app/Services/landlord.service';
 
 
 @Component({
@@ -50,7 +49,7 @@ export class TenantsComponent implements OnInit {
     private router:Router, 
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService, private messageService: MessageService,
-    private auth:AuthenticationService,private tenant:TenantService) { }
+    private auth:AuthenticationService,private land:LandlordService) { }
 
   ngOnInit(): void {
     /* Returns a decode token that has user information 
@@ -127,7 +126,7 @@ export class TenantsComponent implements OnInit {
 
   //Get all Landlord property addresses  
   getLandLordAddress(){
-    return this.tenant.address(this.id).subscribe({
+    return this.land.address(this.id).subscribe({
       next:data => {
         this.tenantAddress = data
       }
@@ -141,7 +140,7 @@ export class TenantsComponent implements OnInit {
     this.attempts = 1;
     if(this.attempts == 1 ){
       this.loading = true;
-      return this.tenant.rentees(this.Form.value.usertype).subscribe((rentee:any)=>{
+      return this.land.rentees(this.Form.value.usertype).subscribe((rentee:any)=>{
         
         this.rentees = rentee;
       
@@ -204,7 +203,7 @@ export class TenantsComponent implements OnInit {
        "paymentStatus":status
     }
   
-    this.tenant.updatePayment(body).subscribe(()=>{
+    this.land.updatePayment(body).subscribe(()=>{
   
     })
   }
