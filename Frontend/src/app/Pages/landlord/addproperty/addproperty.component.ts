@@ -112,6 +112,9 @@ export class AddpropertyComponent implements OnInit {
   showNextStep() 
   {
     this.submitted = true;
+    if(this.Form.invalid){
+      return
+    }
 
     this.ngWizardService.next();
   }
@@ -122,10 +125,7 @@ export class AddpropertyComponent implements OnInit {
   }
   stepChanged(args: StepChangedArgs) 
   {
-    this.submitted = true;
-    if(this.Form.invalid){
-      return
-    }
+
 
   }
   isValidTypeBoolean: boolean = true;

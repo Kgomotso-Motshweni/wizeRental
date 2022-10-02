@@ -29,7 +29,7 @@ CREATE TABLE TenantToLandlordNortifications(
     notification_id SERIAL PRIMARY KEY,
     landlord_id INT NOT NULL,
     tenant_id INT NOT NULL,
-    notif_type INT NOT NULL,
+    notif_type VARCHAR(255)
     message TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     FOREIGN KEY(tenant_id) REFERENCES users (userid),

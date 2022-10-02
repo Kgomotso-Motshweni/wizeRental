@@ -40,6 +40,9 @@ export class HeaderComponent implements OnInit {
     )
   }
    
+  //Landlord Receive notifications
+
+
   //Receive an entire string, take the first letter and transform it into uppercase 
   substring(value:any): string{
     let letter = this.transform(value.substring(0,1)) + value.substring(1); 

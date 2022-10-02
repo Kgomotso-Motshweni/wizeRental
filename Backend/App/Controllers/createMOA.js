@@ -2,6 +2,7 @@ const client = require("../Config/db.config");
 
 const CreateMOA = async(req, res ) => {
     const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType } = req.body
+
     try{
         //Insert user pending tenant into rentees table
         const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status ) 
@@ -9,7 +10,7 @@ const CreateMOA = async(req, res ) => {
         const user = data.rows[0].rentee_id;
 
         await client.query(`INSERT INTO MOA (rentee_id, amount, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType)
-            VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ], 
+            VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ])
         
         await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error, results) => {
             if(error){
@@ -19,9 +20,9 @@ const CreateMOA = async(req, res ) => {
             }
             //Return a status 200 if there is no error
             return res.status(200).send({messages:"tenant successfuly approved"});
-     }) )
+        }) 
            
-    }catch{
+    }catch (err) {
         res.status(500).json({
             error: "Database error when viewing pending tenants", //Database connection error
         });

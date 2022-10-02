@@ -138,7 +138,6 @@ export class PendingComponent implements OnInit {
 
   showNextStep() 
   {
-    this.submitted = true;
     this.ngWizardService.next();
   }
 
@@ -166,43 +165,41 @@ export class PendingComponent implements OnInit {
 
   }
   onSubmit(){
-    this.submitted = true;
- 
+    this.submitted = true
     this.loading = false;
     
     //Validate if the modal is empty do not submit
-    if(!this.pendingClients.agreementStart && !this.pendingClients.agreementEnd && 
-      !this.pendingClients.paymentStart && !this.pendingClients.paymentEnd && !this.pendingClients.PaymentType ){
-      
+    if(!this.pendingClients.unit || !this.pendingClients.amount || !this.pendingClients.agreementStart 
+      || !this.pendingClients.agreementEnd || !this.pendingClients.paymentStart || !this.pendingClients.paymentEnd || !this.pendingClients.PaymentType){
+        return 
     }
-
-    let user = {
-      tenant_id: this.pendingClients.tenant_id,
-      property_id: this.pendingClients.property_id,
-      full_name: this.pendingClients.full_name,
-      unit: this.pendingClients.unit,
-      rent: this.pendingClients.amount,
-      paymentstatus: false,
-      moa_status: "notSigned",
-      agreeStartDate: this.pendingClients.agreementStart,
-      agreeEndDate: this.pendingClients.agreementEnd,
-      payStartDate: this.pendingClients.paymentStart,
-      payendDate: this.pendingClients.paymentEnd,
-      agreementType: this.pendingClients.PaymentType
-    }
-    
-    this.land.createMOA(user).subscribe({
-      next:data => {
-        this.loading = true;
-        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-        this.router.onSameUrlNavigation = "reload";
-        this.loading = false;
-        this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
-      },error: err => {
-        //show the message if unable to add new data
-        this.loading = false;
-        this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
+      let user = {
+        tenant_id: this.pendingClients.tenant_id,
+        property_id: this.pendingClients.property_id,
+        full_name: this.pendingClients.full_name,
+        unit: this.pendingClients.unit,
+        rent: this.pendingClients.amount,
+        paymentstatus: false,
+        moa_status: "notSigned",
+        agreeStartDate: this.pendingClients.agreementStart,
+        agreeEndDate: this.pendingClients.agreementEnd,
+        payStartDate: this.pendingClients.paymentStart,
+        payendDate: this.pendingClients.paymentEnd,
+        agreementType: this.pendingClients.PaymentType
       }
-    })
-  }
+      console.log(user)
+      // this.land.createMOA(user).subscribe({
+      //   next:data => {
+      //     this.loading = true;
+      //     this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      //     this.router.onSameUrlNavigation = "reload";
+      //     this.loading = false;
+      //     this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
+      //   },error: err => {
+      //     //show the message if unable to add new data
+      //     this.loading = false;
+      //     this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
+      //   }
+      // })
+    }
 }
