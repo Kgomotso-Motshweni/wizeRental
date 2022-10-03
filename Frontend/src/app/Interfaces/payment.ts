@@ -11,5 +11,6 @@ export interface Payment {
     create_time:Date,
     r_update_time:Date,
     paystatus:string,
-    paymentstatus:Boolean
+    paymentstatus:Boolean,
+    p_room:number
 }
