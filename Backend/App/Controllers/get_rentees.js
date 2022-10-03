@@ -6,10 +6,13 @@ module.exports = get_rentees= async (req, res) => {
   try {
         //get all post form the database
         const data = await client.query(
-         `SELECT * FROM rentees a
-          INNER JOIN landlordproperty l ON a.property_id = l.property_id
-          INNER JOIN users u ON l.landlord_id = u.userid
-          WHERE u.userid = $1 AND a.moa_status ='signed' ; `,[id],
+         `SELECT *
+         FROM rentees r
+         INNER JOIN MOA a ON a.rentee_id = r.rentee_id
+         INNER JOIN landlordproperty l ON r.property_id = l.property_id
+         INNER JOIN users u ON l.landlord_id = u.userid
+         WHERE u.userid = $1
+         AND r.moa_status ='signed' ;`,[id],
           (err,result) => {
             if (err) {
            //If rentees are not available is not available

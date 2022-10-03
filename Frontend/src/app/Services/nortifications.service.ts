@@ -20,9 +20,13 @@ export class NortificationsService {
     return this.http.get(`${this.baseUrl}tenantReceive/${id}`);
   }
 
-  landlordReceive(id:any)
-  {
+  //Landlord recieve Nortifications from tenants
+  landlordReceive(id:number){
     return this.http.get(`${this.baseUrl}landlordReceive/${id}`);
   }
   
+  //Tenant send Messages to Landlord
+  tenantSend(message:any, id:number){
+    return this.http.post(`${this.baseUrl}tenantSend/${id}`, message)
+  }
 }

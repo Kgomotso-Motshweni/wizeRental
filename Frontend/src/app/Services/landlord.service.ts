@@ -39,8 +39,8 @@ export class LandlordService {
   }
 
   //Get All The rentees from that specific address
-   rentees(address:any){
-    return this.http.get(`${this.baseUrl}getTenants/${address}`)
+   rentees(users:any){
+    return this.http.post(`${this.baseUrl}getTenants`,users)
   }
     // rentees(body:any){
     //   return this.http.post(`${this.baseUrl}getTenants`,body)
@@ -50,5 +50,9 @@ export class LandlordService {
 
   address(id:any){
     return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
+  }
+
+  createMOA(users:any){
+    return this.http.post(`${this.baseUrl}acceptNewTenant`, users)
   }
 }

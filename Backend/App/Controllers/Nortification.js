@@ -90,7 +90,7 @@ const tenantSend = async(req, res ) => {
     const {nortType, recipient, message} = req.body;
     try{
         client.query(`INSERT INTO TenantToLandlordNortifications (tenant_id, landlord_id, notif_type, message)
-            VALUES ($1, $2, $3, $4, $5)`,[id, recipient, nortType, message ],(error, results) => {
+            VALUES ($1, $2, $3, $4)`,[id, recipient, nortType, message ],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to log issues to a specific landlord"

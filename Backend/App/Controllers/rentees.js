@@ -7,13 +7,11 @@ const client = require("../Config/db.config");
 module.exports = rentees = async (req, res) => {
   const {applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time,payStatus,paymentstatus} = req.body;
   try {
-
-    console.log("payment status",payStatus)
-        //Inserting data into the database
-        const data = await client.query(
-          `INSERT INTO rentees (applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time,payStatus,paymentstatus) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12);`,
-          [applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time,payStatus,paymentstatus],
-          (err) => {
+      //Inserting data into the database
+      const data = await client.query(
+        `INSERT INTO rentees (applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time,payStatus,paymentstatus) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12);`,
+        [applicant_id,property_id,full_Name,unit,rent,moaStart,moaEnd,rent_paid,create_time,r_update_time,payStatus,paymentstatus],
+        (err) => {
             if (err) {
            //If user is not inserted to database
               console.error(err);

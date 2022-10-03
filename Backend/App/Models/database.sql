@@ -29,7 +29,7 @@ CREATE TABLE TenantToLandlordNortifications(
     notification_id SERIAL PRIMARY KEY,
     landlord_id INT NOT NULL,
     tenant_id INT NOT NULL,
-    notif_type INT NOT NULL,
+    notif_type VARCHAR(255)
     message TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     FOREIGN KEY(tenant_id) REFERENCES users (userid),
@@ -106,3 +106,15 @@ CREATE TABLE Rentees(
 	FOREIGN KEY(property_id) REFERENCES landlordProperty(property_id) 
 );
 
+DROP TABLE IF EXISTS MOA CASCADE;
+CREATE TABLE MOA(
+	moa SERIAL PRIMARY KEY NOT NULL,
+    rentee_id INT,
+	amount decimal(8,2),
+    agreeStartDate TIMESTAMPTZ DEFAULT NOW(),
+    agreeEndDate TIMESTAMPTZ DEFAULT NOW(),
+    payStartDate TIMESTAMPTZ DEFAULT NOW(),
+    payendDate TIMESTAMPTZ DEFAULT NOW(),
+    agreementType VARCHAR(100),
+    FOREIGN KEY (rentee_id) REFERENCES public.rentees (rentee_id)
+);
