@@ -58,7 +58,12 @@ export class HomeComponent implements OnInit {
   }
 
   filter(){
-    this.condition = true
+    if(this.condition ==true){
+      this.condition= false
+    }else{
+      this.condition=true
+    }
+   
   }
 
   onClick(ind:any){

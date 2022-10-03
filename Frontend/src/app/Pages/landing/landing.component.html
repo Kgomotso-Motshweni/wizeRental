@@ -34,7 +34,7 @@
   <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
   
 <!------------------------------------- toggle  ------------------------------------>
-<div class="badge badge-primary badge-outline pt-2 m-1">What do you need?</div>
+<div class="badge badge-primary badge-outline ml-2 mt-5">What do you need?</div>
   <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
     <!-- /tenant/home -->
     <button class="btn1 " routerLink="/login" style="width:50%;">To Rent</button>
@@ -57,11 +57,12 @@
 
 <!-- filter by -->
 
-<div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2 gap-5">
+<div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-5 mr-2 gap-5">
 
-    <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 m-3 gap-5">
-      <div class="flex drop justify-center md:drop-cols-2 xl:drop-cols-4">
-        <div class="first">
+    <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 m-3 gap-5"> -->
+      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-5 justify-center" style="width: 100%;">
+
+        
           <!-- <form [formGroup]="Form"> -->
             <div class="form-group mb-6">
               <label ></label>
@@ -74,40 +75,43 @@
             </div>
           <!-- </form> -->
           <div class="form-group mb-6">
-          <label></label>
-          <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
-              <option value disabled selected hidden>All</option>
-              <option value="backroom">Backroom</option>
-              <option value="commune" >Commune</option>
-          </select>
-        </div>
+            <label ></label>
+            <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+                <option value disabled selected hidden>All</option>
+                <!-- <option value="backroom">Backroom</option>
+                <option value="commune" >Commune</option> -->
+                <option *ngFor="let i of propertytype" value="commune" >commune</option>
+            </select>
+          </div>
+      
+    
+    
+   
+      <div class="form-group mb-6">
+        <label ></label>
+        <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+            <option value disabled selected hidden>All</option>
+            <!-- <option value="backroom">Backroom</option>
+            <option value="commune" >Commune</option> -->
+            <option *ngFor="let i of propertytype" value="commune" >commune</option>
+        </select>
       </div>
     
-    
-    <!-- <div class="sec">
       <div class="form-group mb-6">
-      <label></label>
-      <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
-          <option value disabled selected hidden>All</option>
-          <option value="backroom">Backroom</option>
-          <option value="commune" >Commune</option>
-      </select>
-    </div>
+        <label ></label>
+        <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
+            <option value disabled selected hidden>All</option>
+            <!-- <option value="backroom">Backroom</option>
+            <option value="commune" >Commune</option> -->
+            <option *ngFor="let i of propertytype" value="commune" >commune</option>
+        </select>
+      </div>
     
-    <div class="form-group mb-6">
-    <label></label>
-              <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
-                  <option value disabled selected hidden>All</option>
-                  <option value="backroom">Backroom</option>
-                  <option value="commune" >Commune</option>
-              </select>
-            </div>
-      </div> -->
     </div>
         <div class="modal-action">
           <button class="btn m-1 btn-primary" name="filterItem" [(ngModel)]="filterItem">filter</button>
         </div>
-      </div> 
+      <!-- </div>  -->
       <!-- endof filter -->
       <!-- (click)="filterby()" -->
 </div>
@@ -128,8 +132,8 @@
 <!-- <tr *ngFor="let item of array | search: [name.value, category.value]: ['name', 'catName'] ;"> -->
 
 <!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="flex prop m-2 pt-5 justify-center md:prop-cols-1 rounded"  >
-      <div class="grid m-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
+    <div class="flex prop ml-5 justify-center md:prop-cols-1 rounded"  >
+      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
       <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index " >
         
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">

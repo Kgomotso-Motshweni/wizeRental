@@ -1,5 +1,4 @@
 
-<!-- nav-bar -->
 
 <!------------------------------- content ---------------------------->
 <div class="card1 bg-base-100 shadow-xl col-12  justify-content-center"   style="width: 100%;">
@@ -20,7 +19,7 @@
   <br>
   <div class="flex search col-xl-12">
    
-        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width:75%;"/>
+        <input type="text" placeholder=" Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width:75%;"/>
         
       
       <div class="space1">
@@ -33,58 +32,15 @@
 
 <!-- filter by -->
 
-  <!-- <div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2"> -->
-
-    <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-1 ml-2 mr-2">
-      <div class="drop justify-center">
-        <div class="first">
-        <div class="dropdown">
-          <label tabindex="0" class="btn m-1 btn-primary">Room type<i class="bi bi-caret-down-fill"></i></label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>backroom</a></li>
-            <li><a>commune</a></li>
-          </ul>
-        </div>
-    
-        <div class="dropdown">
-          <label tabindex="0" class="btn m-1 btn-primary">Bedroom <i class="bi bi-caret-down-fill"></i></label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Single</a></li>
-            <li><a>Sharing</a></li>
-          </ul>
-        </div>
-      </div>
-    
-    
-    <div class="sec">
-    <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Min amount <i class="bi bi-caret-down-fill"></i></label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>R1500</a></li>
-        <li><a>R2000</a></li>
-      </ul>
-    </div>
-    
-    
-    <div class="dropdown">
-      <label tabindex="0" class="btn m-1 btn-primary">Max Amount <i class="bi bi-caret-down-fill"></i></label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>R3000</a></li>
-        <li><a>R4500</a></li>
-      </ul>
-    </div>
-      </div>
-    </div>
-        <div class="modal-action">
-        </div>
-      </div>  -->
-      <!-- endof filter -->
 
     </div>
 
 <!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="flex prop pt-5 justify-center md:prop-cols-1 rounded" >
-      <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-5 justify-center">
+    <div class="flex prop justify-center md:prop-cols-1 rounded m-5" >
+      <!-- <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-5 justify-center">
+         -->
+      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
+
       <div *ngFor="let i of tenantProperty| filter: searchItem;let x = index " >
         
         <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
