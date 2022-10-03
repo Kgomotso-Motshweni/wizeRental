@@ -14,11 +14,11 @@ import { TenantComponent } from './Pages/tenant/tenant.component';
 
 
 const routes: Routes = [
-  {path:'', component:HomeComponent},
+  {path:'', component:LandingComponent},
   {path: 'view-property', component: ViewPropertyComponent},
   {path:'landlord', component:LandlordComponent},
   {path:'login', component:LoginComponent, },
-  {path:'landing',component:LandingComponent},
+  // {path:'landing',component:LandingComponent},
   {path:'view/:id', component:ViewpropertyComponent},
   {path: 'filter', component:FilterByComponent},
   {path:'tenant', component:TenantComponent},

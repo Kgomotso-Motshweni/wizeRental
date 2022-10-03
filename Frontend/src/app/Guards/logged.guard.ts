@@ -20,7 +20,7 @@ export class LoggedGuard implements CanActivate {
         if(role == 'Landlord'){
           this.router.navigate(['/landlord/'])
         }else if(role == 'Tenant'){
-          this.router.navigate(['/tenant/'])
+          this.router.navigate(['/tenant/home'])
         }
       }
     

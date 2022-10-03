@@ -60,6 +60,15 @@ img{
     border-radius: 40px
    
 }
+.badge{
+    width: 50%;
+    height: 40px;
+    padding:0.5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px
+
+}
 .btn2{
     width: 50%;
     height: 40px;
@@ -69,19 +78,20 @@ img{
 }
 
 .btn1:hover{
-    background-color: #5E63EA;
+    background-color: #55ADEA;
     color: white;
     border-radius: 25px;
 }
 
 .btn2:hover{
-    background-color: #5E63EA;
+    background-color: #55ADEA;
     color: white;
     border-radius: 25px;
 }
 
 .btn{
     width: 160px;
+    color: white;
 }
 
 // card sizes
@@ -104,3 +114,27 @@ img{
 // }
 
 
+/* Styles for wrapping the search box */
+
+.main {
+    // width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    // width: 2.375rem;
+    // height: 2.375rem;
+    // line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}

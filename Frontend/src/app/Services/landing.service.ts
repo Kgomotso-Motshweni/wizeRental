@@ -13,7 +13,7 @@ export class LandingService {
 
   //getting all properties
   getProperties(){
-    return this.http.get(`${this.baseUrl}/getproperty`);
+    return this.http.get(`${this.baseUrl}getproperty`);
   }
 
   //get property by id
@@ -21,13 +21,13 @@ export class LandingService {
     console.log("from service",id)
    
     
-    return this.http.get(`${this.baseUrl}/getByProperty/${id}`);
+    return this.http.get(`${this.baseUrl}getByProperty/${id}`);
     // localStorage.clear();
     // return this.http.get("http://localhost:8080/users/getByProperty/");    
   }
 
   // filter
   filter(){
-    return this.http.get(`${this.baseUrl}/filtered`);
+    return this.http.get(`${this.baseUrl}filtered`);
   }
 }

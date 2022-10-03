@@ -6,7 +6,7 @@
 <!------------------------------- content ---------------------------->
 <div class="card1 bg-base-100 shadow-xl col-12 justify-content-center"   style="width: 100%;">
     <figure><img src="../../../assets/images/istockphoto.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
-    <div class="card-body">
+    <div class="card-body justify-center">
       <p>Wize rentals is here to find you a 
         accommodation in a region you want at the
         price you can afford</p>
@@ -34,20 +34,19 @@
   <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
   
 <!------------------------------------- toggle  ------------------------------------>
-   What do you need?
+<div class="badge badge-primary badge-outline pt-2 m-1">What do you need?</div>
   <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
     <!-- /tenant/home -->
-    <button class="btn1" routerLink="/login" style="width:50%;">To Rent</button>
-    <button class="btn2" routerLink="/login" style="width:50%;">To Advertise</button>
+    <button class="btn1 " routerLink="/login" style="width:50%;">To Rent</button>
+    <button class="btn2 " routerLink="/login" style="width:50%;">To Advertise</button>
   </div>
 
 <!------------------------------------ search --------------------------------------->
   <br>
   <div class="flex search col-xl-12">
-    
-        <input type="text" placeholder="&#xf0e0; Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
+    <!-- &#xf0e0; -->
+        <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
         
-    
       <div class="space1">
     </div>
     <br>

@@ -76,10 +76,10 @@ export class PendingComponent implements OnInit {
   }
 
   get f():{ [key: string]: AbstractControl }{
-    return this.Form.controls;//it traps errors in the form
+    return this.Form.controls;////it traps errors in the form
   }
 
-   //Pending Tenants
+   ////Pending Tenants
    getPending(user:number){
     this.dash.getPendTenants(1).subscribe({
       next:data  => {
@@ -116,9 +116,9 @@ export class PendingComponent implements OnInit {
     selected: 0,
     theme: THEME.arrows,
     toolbarSettings: {
-      // toolbarExtraButtons: [
-      //   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
-      // ],
+      //// toolbarExtraButtons: [
+      ////   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
+      //// ],
       showPreviousButton: false,
       showNextButton: false 
     }
@@ -169,3 +169,7 @@ export class PendingComponent implements OnInit {
     this.loading = false;
   }
 }
+
+
+
+
