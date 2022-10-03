@@ -27,6 +27,8 @@ export class NortificationComponent implements OnInit {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
 
+
+
     this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
