@@ -2,12 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import {InputTextModule} from 'primeng/inputtext';
 import { Pending } from 'src/app/Interfaces/pending';
-import { retry } from 'rxjs';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 
