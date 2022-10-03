@@ -10,7 +10,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     });
   
     it('register  fail', () => {
-      cy.register('Landlord','Excellent','Mabasa','mabasa@gmail.com','079-122-3456' ,'111111', '111111');
+      cy.register('Landlord','Excellent','Mabasa','mabasa@gmail.com','079-122-3456' ,'1212121', '111111');
     });
   
     it('validation', () => {

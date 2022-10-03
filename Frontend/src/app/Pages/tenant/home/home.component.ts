@@ -118,18 +118,18 @@ export class HomeComponent implements OnInit {
       this.formData.append('ped_desc', this.Form.value.ped_desc)
       this.formData.append('smoke', this.Form.value.smoke)
 
-    // this.tenants.ApplyProperty(this.formData,  this.id).subscribe({
-    //   next:data => {
-    //     this.messageService.add({
-    //       key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
-    //     }); 
-    //   },
-    //   error: (err) =>{
-    //     this.messageService.add({
-    //       key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
-    //     }); 
-    //   }
-    // })
+    this.tenants.ApplyProperty(this.formData,  this.id).subscribe({
+      next:data => {
+        this.messageService.add({
+          key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
+        }); 
+      },
+      error: (err) =>{
+        this.messageService.add({
+          key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
+        }); 
+      }
+    })
   }
 
 

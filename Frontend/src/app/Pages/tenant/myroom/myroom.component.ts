@@ -79,7 +79,6 @@ export class MyroomComponent implements OnInit {
   }
 
   
-
   hideDialog(){
     this.submitted = false;
     this.dialogMessage = false;
