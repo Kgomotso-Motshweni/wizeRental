@@ -11,7 +11,7 @@ const register = async (req, res) => {
     const user_role = req.params.user_role;
     const{ firstname, lastname, email, cellno, password, imageUrl} = req.body
     try{
-        // // check :userType paramater. only accept /Landlord or /Tenant
+        // check :userType paramater. only accept /Landlord or /Tenant
         if (!(user_role == 'Landlord' || user_role == 'Tenant')) {
             return res.status(400).json({
                 message: "Invalid value in request parameter. : user_role parameter must be equal to Landlord or Tenant"
