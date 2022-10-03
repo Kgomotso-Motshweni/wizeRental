@@ -166,7 +166,7 @@ export class PendingComponent implements OnInit {
   }
   onSubmit(){
     this.submitted = true
-    this.loading = false;
+
     
     //Validate if the modal is empty do not submit
     if(!this.pendingClients.unit || !this.pendingClients.amount || !this.pendingClients.agreementStart 
@@ -188,18 +188,20 @@ export class PendingComponent implements OnInit {
         agreementType: this.pendingClients.PaymentType
       }
       console.log(user)
-      // this.land.createMOA(user).subscribe({
-      //   next:data => {
-      //     this.loading = true;
-      //     this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-      //     this.router.onSameUrlNavigation = "reload";
-      //     this.loading = false;
-      //     this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
-      //   },error: err => {
-      //     //show the message if unable to add new data
-      //     this.loading = false;
-      //     this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
-      //   }
-      // })
+      this.loading = true;
+      this.land.createMOA(user).subscribe({
+        next:data => {
+         
+          this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+          this.router.onSameUrlNavigation = "reload";
+          this.router.navigate(['/landlord/pending'])
+          this.loading = false;
+          this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
+        },error: err => {
+          //show the message if unable to add new data
+          this.loading = false;
+          this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
+        }
+      })
     }
 }

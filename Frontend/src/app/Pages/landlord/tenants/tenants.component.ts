@@ -55,35 +55,35 @@ export class TenantsComponent implements OnInit {
     /* Returns a decode token that has user information 
       and only save the id of that user in a variable called id
     */
-    this.loading = true
+    this.loading = false
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
-    
     this.getLandLordAddress();
    
-    this.dash.rentees(this.id).subscribe((rentee:any)=>{
-      console.log(this.rentees)
-      this.rentees = rentee;
-      for (let x = 0; x < this.rentees.length; x++) {
-        //signed tenants revenue
-        if (rentee[x].moa_status == "signed") {
-          this.totAmnt = this.totAmnt + this.rentees[x].rent;
+    // this.dash.rentees(this.id).subscribe((rentee:any)=>{
+  
+    //   this.rentees = rentee;
+    //   console.log(rentee)
+    //   for (let x = 0; x < this.rentees.length; x++) {
+    //     //signed tenants revenue
+    //     if (rentee[x].moa_status == "signed") {
+    //       this.totAmnt = this.totAmnt + this.rentees[x].rent;
           
-          //Room occupied
-          this.numroomsO = this.numroomsO + 1;
-          // paid tanants
-          if (rentee[x].paymentstatus == true) {
-            this.totPaid = +this.totPaid + (+rentee[x].rent);
-          }
-          //unpaid tenants
-          if (rentee[x].paymentstatus == false) {
-            this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
-          }
-        }
-      }
-      this.countTenants = this.rentees.length;
-      this.loading = false;
-    })
+    //       //Room occupied
+    //       this.numroomsO = this.numroomsO + 1;
+    //       // paid tanants
+    //       if (rentee[x].paymentstatus == true) {
+    //         this.totPaid = +this.totPaid + (+rentee[x].rent);
+    //       }
+    //       //unpaid tenants
+    //       if (rentee[x].paymentstatus == false) {
+    //         this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+    //       }
+    //     }
+    //   }
+    //   this.countTenants = this.rentees.length;
+    //   this.loading = false;
+    // })
   }
 
   /*
@@ -132,10 +132,28 @@ export class TenantsComponent implements OnInit {
       }
     })
   }
+  caller(){
+    if(this.Form.value.usertype == 'All'){
+      let userData = {
+        id: this.id
+      }
+      this.land.rentees(userData).subscribe((rentee:any)=>{
+        console.log(rentee)
+      })
+    }else{
 
+    let userData = {
+      id: this.id,
+      p_name: this.Form.value.usertype
+    }
+    this.land.rentees(userData).subscribe((rentee:any)=>{
+      console.log(rentee)
+    })
+    }
+  }
   /* when click on any property from the dropdown receive that property value and 
     use it to get all tenants from that property
-  */
+
   caller(){
     this.attempts = 1;
     if(this.attempts == 1 ){
@@ -171,7 +189,7 @@ export class TenantsComponent implements OnInit {
         this.rentees = rentee
         this.totPaid = 0;
         this.totUnPaid = 0;
-
+        console.log(this.rentees)
         for (let x = 0; x < this.rentees.length; x++) {
           //signed tenants revenue
           if (rentee[x].moa_status == "signed") {   
@@ -195,7 +213,7 @@ export class TenantsComponent implements OnInit {
       })
     }
   }
-
+  */
   updatePayment(index:any,status:any){
     this.rente_id = this.rentees[index].rentee_id
     const body = {
