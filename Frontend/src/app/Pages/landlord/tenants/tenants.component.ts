@@ -69,7 +69,7 @@ export class TenantsComponent implements OnInit {
     this.dash.rentees(this.id).subscribe((rentee:any)=>{
   
       this.rentees = rentee;
-      console.log("Initial tenants",rentee)
+      //console.log("Initial tenants",rentee)
       for (let x = 0; x < this.rentees.length; x++) {
         //signed tenants revenue
         if (rentee[x].moa_status == "signed") {
@@ -85,14 +85,11 @@ export class TenantsComponent implements OnInit {
           if (rentee[x].paymentstatus == false) {
             this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
           }
-
           //open Rooms
           this.numroomsA = +this.numroomsA + +this.rentees[x].p_room;
           
         }
       }
-       
-     
        this.countTenants = this.rentees.length;
        this.loading = false;
     })
@@ -150,6 +147,7 @@ export class TenantsComponent implements OnInit {
       }
     })
   }
+  
   caller(){
     this.attempts = 1;
 
@@ -165,7 +163,7 @@ export class TenantsComponent implements OnInit {
       }
       this.loading = true
       this.land.rentees(userData).subscribe((rentee:any)=>{
-        console.log(rentee)
+        //console.log(rentee)
         this.rentees = rentee;
 
         for (let x = 0; x < this.rentees.length; x++) {
@@ -201,7 +199,7 @@ export class TenantsComponent implements OnInit {
     }
     this.loading = true
     this.land.rentees(userData).subscribe((rentee:any)=>{
-      console.log(rentee)
+     // console.log(rentee)
 
       this.rentees = rentee;
       this.totAmnt  = 0;

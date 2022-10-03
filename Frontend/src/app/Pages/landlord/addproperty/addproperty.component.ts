@@ -182,10 +182,10 @@ export class AddpropertyComponent implements OnInit {
     this.formData.append('pdf', this.pdf)
 
     //Subscribe to add new property details
-    console.log(this.gallery.length)
+    this.loading = true;
     this.land.postProperty(this.formData, this.id).subscribe({
       next:data => {
-        this.loading = true;
+       
         this.userinfor = data;
         
         //Subscribe to add new property room pictures
@@ -196,7 +196,8 @@ export class AddpropertyComponent implements OnInit {
         }
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
-        });  
+        }); 
+        this.loading = false;
       }
     })
     this.loading = false;

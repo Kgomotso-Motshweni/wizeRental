@@ -45,7 +45,7 @@
                         <div class="grid gap-6 md:grid-cols-2">
                             <div class="form-group md:mb-6">
                                 <label class="input-group ">Address:</label>
-                                <p-multiSelect [options]="address" (click)="caller()" formControlName="address" defaultLabel="Select Accommodation Address" optionLabel="accom_name"
+                                <p-multiSelect [options]="address" (click)="caller()" formControlName="address" defaultLabel="Select Accommodation Address" optionLabel="p_name"
                                     display="chip" [ngClass]="{ 'is-invalid':submitted && f['address'].errors }">
                                 </p-multiSelect>
                                 <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
