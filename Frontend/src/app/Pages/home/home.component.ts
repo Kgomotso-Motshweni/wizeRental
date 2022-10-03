@@ -7,7 +7,18 @@ import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  // property:any;
+  properties:any;
+
+  searchItem: any;
   constructor() { }
-  ngOnInit(): void {}
+
+  
+  ngOnInit(): void {
+    
+
+    
+
+  } 
 
 }

@@ -1,0 +1,46 @@
+.icons{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    margin:5px;
+}
+
+.space{
+    width: 25px;
+    height: auto;
+    display: inline-block;
+}
+
+img{
+    border-radius: 15px;
+    // height: 350px;
+}
+
+
+.btn1{
+    border-radius: 15px;
+    width: 150px;
+    height: 40px;
+}
+
+.additional-Information{
+    font-size: x-large;
+}
+textarea.input {
+    min-height: 100px;
+    max-height: 100px;
+}
+
+.invalid-feedback,p-inputMask{
+    color: red;
+}
+.is-invalid,p-inputMask{
+    border-color: red;
+}
+
+.email{
+    padding-left: 25px;
+}

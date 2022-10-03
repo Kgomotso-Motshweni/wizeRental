@@ -1,4 +1,4 @@
-import {NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -6,14 +6,16 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {DropdownModule} from 'primeng/dropdown';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LandlordModule } from './Pages/landlord/landlord.module';
 import { TenantModule } from './Pages/tenant/tenant.module';
+
 
 ////////////
 //Imported PrimeNG module .
@@ -33,6 +35,9 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ToggleButtonModule} from 'primeng/togglebutton';
+import { LandingComponent } from './Pages/landing/landing.component';
+import { FilterByComponent } from './Components/filter-by/filter-by.component';
+import { ViewpropertyComponent } from './Pages/tenant/viewproperty/viewproperty.component';
 
 
 
@@ -44,14 +49,19 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    LandingComponent,
+    ViewpropertyComponent,
+    FilterByComponent,
     FooterComponent,
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     InputNumberModule,
     InputMaskModule,
     LandlordModule,
     TenantModule,
     BrowserModule,
+    ConfirmDialogModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -59,6 +69,8 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     FileUploadModule,
     HttpClientModule,
     CalendarModule,
+    Ng2SearchPipeModule,
+
     FormsModule,
     DropdownModule,
     ToastModule,
@@ -76,7 +88,8 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     }),
   ],
   providers: [MessageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 
 export class AppModule { }

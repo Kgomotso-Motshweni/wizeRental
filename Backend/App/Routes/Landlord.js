@@ -14,6 +14,10 @@ const get_property = require("../Controllers/get_property");
 const delete_rentee = require("../Controllers/delete_rentee");
 const update_payment = require("../Controllers/update_payment");
 
+const {property} = require('../Controllers/property')
+const {getProp} = require('../Controllers/getProp')
+const {filter} = require('../Controllers/filter')
+
 
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
 router.post('/add_rooms/:property_id', upload.array("image", 2), landlord.addRoomImages);
@@ -24,6 +28,13 @@ router.get('/getRentees/:id',get_rentees)
 // router.get('/getPending/:id',get_pending)
 router.get('/getproperties/:id',get_property)
 router.put('/updatePayment',update_payment)
+
+
+
+
+router.get('/getByProperty/:id',getProp);
+router.get('/getproperty',property);
+router.get('/filtered',filter);
 
 
 router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
