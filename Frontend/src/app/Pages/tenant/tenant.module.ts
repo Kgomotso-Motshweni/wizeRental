@@ -11,6 +11,8 @@ import { TenantComponent } from './tenant.component';
 
 //Primeng Imports
 //primeNG 
+import { ButtonModule } from "primeng/button";
+import { BadgeModule } from "primeng/badge";
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ConfirmationService } from 'primeng/api';
@@ -47,6 +49,8 @@ const routes: Routes = [
   ],
   imports: [
     Ng2SearchPipeModule,
+    ButtonModule,
+    BadgeModule,
     //loader
      NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,
