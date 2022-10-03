@@ -27,7 +27,7 @@ router.put('/updatePayment',update_payment)
 
 
 router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
-router.get('/getTenants/:address',get_tenants.tenantsFromSpecifiAddress);
+router.post('/getTenants',get_tenants.tenantsFromSpecifiAddress);
 // router.get('/getLandAddress/:id', get_rentees.getLandlordRes);
 // router.get('/getRentees/:address', get_rentees.tenantsFromSpecifiAddress);
 router.get('/getPayment',payment_status)

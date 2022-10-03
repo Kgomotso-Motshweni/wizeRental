@@ -75,7 +75,7 @@
             <select  (change)="caller()" formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
                 <option value disabled selected hidden>All</option>
                 <option value="All">All</option>
-                <option *ngFor="let i Of tenantAddress" value="{{i.accom_name}}">{{i.accom_name}}</option>
+                <option *ngFor="let i Of tenantAddress" value="{{i.p_name}}">{{i.p_name}}</option>
             </select>
           </div>
         </form>

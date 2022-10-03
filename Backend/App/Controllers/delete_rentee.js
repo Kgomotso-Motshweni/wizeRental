@@ -8,8 +8,9 @@ module.exports = delete_rentee = async (req,res) =>{
 const id = parseInt(req.params.id);
     try {
         
+    await Client.query('DELETE FROM moa WHERE rentee_id = $1',[id])
 
-    const deleteUser = await Client.query('DELETE FROM rentees WHERE rentee_id = $1',[id],(err)=>{
+    Client.query('DELETE FROM rentees WHERE rentee_id = $1',[id],(err)=>{
         if(err)
         {
             res.status(400).send("Failed to delete datanase error")
