@@ -52,7 +52,7 @@ const tenantsFromSpecifiAddress = async(req, res) => {
           return res.status(200).json(results.rows); //Return a status 200 if there is no error
         }else{
           if(p_name){
-            client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
+            client.query(`SELECT r.rentee_id, r.tenant_id,p.p_room, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
             FROM rentees r
             INNER JOIN MOA a ON a.rentee_id = r.rentee_id
             INNER JOIN landlordProperty p ON r.property_id = p.property_id
@@ -67,7 +67,7 @@ const tenantsFromSpecifiAddress = async(req, res) => {
               return res.status(200).json(results.rows); 
             })
           }else{
-            client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
+            client.query(`SELECT r.rentee_id, r.tenant_id,p.p_room, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
             FROM rentees r
             INNER JOIN MOA a ON a.rentee_id = r.rentee_id
             INNER JOIN landlordProperty p ON r.property_id = p.property_id
