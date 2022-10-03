@@ -15,33 +15,31 @@ export class NortificationComponent implements OnInit {
 
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
-
-  token:any = '';
-  totalNumber: number = 0;
-  userInfo:any;
-
-  constructor(private receive:NortificationsService, private auth:AuthenticationService,) {
+  token: any;
+  id: any;
+  myNotification: any;
+  totalNumber: any;
+  constructor(private receive:NortificationsService, private notif:NortificationsService,private auth:AuthenticationService) {
+ 
    }
 
-   
-
   ngOnInit(): void {
-    this.loading = false;
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    let id = this.token.regData[0].userid ;
+    this.id = this.token.regData[0].userid
 
-    this. notification(id)
-  }
-  
-  notification(userId:number){
-    this.receive.landlordReceive(userId).subscribe({
+
+
+    this.notif.tenantReceive(this.id).subscribe({
       next:data => {
-        this.userInfo = data;
-        console.log(data);
-        
+        this.myNotification = data
+
+        console.log("The tenant ",data)
+
+        this.totalNumber = this.myNotification.length
+       
       }
     })
   }
-
+  
 
 }

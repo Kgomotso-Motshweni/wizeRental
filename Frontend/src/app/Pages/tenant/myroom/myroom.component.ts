@@ -19,7 +19,7 @@ export class MyroomComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
-
+  visibleSidebar2: boolean = false;
   
   id:number = 0;
   token:any;
