@@ -117,18 +117,19 @@ export class ViewpropertyComponent implements OnInit {
     );
   }
 
-
+//it traps errors in the form
   get f():{ [key: string]: AbstractControl }{
-    return this.Form.controls;
+    return this.Form.controls; 
   }
 
+  //upload file
   handleFileInput(event:any) {
     const image = (event.target as any ).files[0];
     this.file = image
   }
 
   onSubmit():void{
-    this.submitted = true;
+    this.submitted = true; // submit when the details are true/when form is not blank
 
     if(this.Form.invalid){
       return
