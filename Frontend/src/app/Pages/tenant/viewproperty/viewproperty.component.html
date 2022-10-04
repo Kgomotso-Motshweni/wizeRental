@@ -86,7 +86,8 @@
 
 <!-- back and apply buttons  -->
 <div class="flex gap-10 m-5">
-  <button class="btn1 btn-active btn-primary ml-2" routerLink="/landing">back</button>
+  <button type="btn" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800" routerLink="/landing">back</button>
+
   <p-toast position="top-right" key="tc"></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container justify-center pending">
@@ -137,11 +138,18 @@
             </div>
         </div>
 
-        <div class="form-group mb-6"> 
-            <input type="file" min="18" max="100" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="id_doc" pInputText class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }" />
+        <!-- <div class="form-group mb-6"> 
+            <input type="file" min="18" max="100" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="id_doc" pInputText class="input bg-gray-50 input-bordered w-96 email " [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }" />
             <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
                 <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
             </div>
+        </div> -->
+        <div class="form-group mb-6">
+          <input type="file" id="id_doc" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="id_doc" class="input bg-gray-50 input w-96 email " 
+            [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }" />
+          <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
+            <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
+          </div>
         </div>
 
         <div class="form-group mb-6"> 

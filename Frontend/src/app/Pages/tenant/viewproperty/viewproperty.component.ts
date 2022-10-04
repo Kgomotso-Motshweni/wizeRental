@@ -157,12 +157,14 @@ export class ViewpropertyComponent implements OnInit {
        },
        error: (err) =>{
        this.messageService.add({
+         //show the message if unable to add new data
         key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
        }); 
       }
     })
   }
 
+  //disable apply button after applying for accommodation
   actionMethod(){
 
   }
@@ -172,25 +174,14 @@ export class ViewpropertyComponent implements OnInit {
     this.submitted = false;
   }
 
+  //hide application form to popup when you click button
   hideDialog() {
     this.displayApplicationForm = false;
     this.submitted = false;
   }
-  // newFunction(){
-  //   this.ngOnInit();
 
-  //   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  //     this.router.onSameUrlNavigation = 'reload';
-  //     this.router.navigate(['/view'], { relativeTo: this.route });
-  //   localStorage.clear();
-  // }
 }
 
-
-
-// this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-//       this.router.onSameUrlNavigation = 'reload';
-//       this.router.navigate(['/view'], { relativeTo: this.route });
 
 
 
