@@ -1,36 +1,9 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const router = express.Router();
 
-const bodyParser = require('body-parser')
+const landing = require("../Controllers/getPropertyInfo")
 
-
-const {property} = require('../Controllers/property')
-const {getProp} = require('../Controllers/getProp')
-const {filter} = require('../Controllers/filter')
-
-
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
-
-
-app.get('/getByProperty/:id',getProp);
-app.get('/getproperty',property);
-app.get('/filtered',filter);
-
-
-
-
-
-module.exports = app
-// module.exports= app =>{
-
-//      //importing 
-//     const property = require("../Controllers/property");
-//     const prop = require("../Controllers/getProp");
-
-
- 
-//     //Creating routes
-//     app.get('/property',property.getProperty);
-//     app.get('/perprop',prop.getProp);
-// }
+router.get('/getproperty', landing.getProperty);
+router.get('/getByProperty/:id', landing.getPropertyByID); 
+router.get('/getRoomsImages/:id', landing.getRoomsImages); 
+module.exports = router;

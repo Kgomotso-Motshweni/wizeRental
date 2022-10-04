@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup } from '@angular/forms';
-import { LandingService } from 'src/app/Services/landing.service';
-import { TenantService } from 'src/app/Services/tenant.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { Pipe, PipeTransform } from "@angular/core";
+import { LandingPageService } from 'src/app/Services/landing-page.service';
 
 @Component({
   selector: 'app-landing',
@@ -27,7 +24,7 @@ export class LandingComponent implements OnInit {
 
 
 //  private serv:LandingService
-  constructor(private service:LandingService,private router: Router,private route: ActivatedRoute, private auth:AuthenticationService) { }
+  constructor(private service:LandingPageService,private router: Router,private route: ActivatedRoute, private auth:AuthenticationService) { }
 
 
  
@@ -79,11 +76,7 @@ export class LandingComponent implements OnInit {
   
 
   filterby(){
-    this.service.filter().subscribe({
-      next: (data:any)=>{
-        console.log(data +"i dont know what to do");
-      }
-    })
+  
   }
 
 

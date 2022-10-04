@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewpropertyComponent } from './viewproperty.component';
+import { SinglePropertyComponent } from './single-property.component';
 
-describe('ViewpropertyComponent', () => {
-  let component: ViewpropertyComponent;
-  let fixture: ComponentFixture<ViewpropertyComponent>;
+describe('SinglePropertyComponent', () => {
+  let component: SinglePropertyComponent;
+  let fixture: ComponentFixture<SinglePropertyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewpropertyComponent ]
+      declarations: [ SinglePropertyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewpropertyComponent);
+    fixture = TestBed.createComponent(SinglePropertyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

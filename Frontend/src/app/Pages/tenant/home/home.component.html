@@ -1,66 +1,50 @@
-
-
-<!------------------------------- content ---------------------------->
-<div class="card1 bg-base-100 shadow-xl col-12  justify-content-center"   style="width: 100%;">
-    <figure><img src="../../../../assets/images/istockphoto.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
-    <div class="card-body">
-      <p>Wize rentals is here to find you a 
-        accommodation in a region you want at the
-        price you can afford</p>
-    </div>
+<div class="card1 bg-base-100 shadow-xl col-12 justify-content-center "   style="width: 100%;">
+  <figure><img src="../../../../assets/images/istockphoto.jpeg" height="50" class="img-fluid w-100" alt="Shoes"/></figure>
+  <div class="card-body">
+    <p>Wize rentals is here to find you a 
+      accommodation in a region you want at the
+      price you can afford</p>
   </div>
+</div>
 
-  
-
-<!-------------------------------- search/filter/toggle ------------------------------>
-<div class="container-fluid m-2 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
-
-<!------------------------------------ search --------------------------------------->
-  <br>
+<!--toggle-->
+<div class="container mt-7"> 
   <div class="flex search col-xl-12">
-   
-        <input type="text" placeholder=" Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width:75%;"/>
-        
-      
-      <div class="space1">
-    </div>
-    <br>
-    <label for="my-modal" class="btn modal-button btn-primary" (change)="filter" style="width:25%;">Filter by</label>
-   
+      <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
   </div>
-
-
-<!-- filter by -->
-
-
-    </div>
-
-<!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="flex prop justify-center md:prop-cols-1 rounded m-5" >
-      <!-- <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-5 justify-center">
-         -->
-      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
-
-      <div *ngFor="let i of tenantProperty| filter: searchItem;let x = index " >
-        
-        <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
-          <figure><img class="img" src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
+</div>
+  
+<!--till here-->
+<div class="container-fluid" style="margin-top:20px;">
+  <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+      <div class="card rounded-3 w-96 bg-base-100 shadow-xl " *ngFor="let i of tenantProperty| filter:searchItem  ; let m = index">
+          <figure><img  routerLink='/tenant/viewProperty/{{i.property_id}}' src='{{i.house_image}}' alt="Shoes" /></figure>
           <div class="card-body">
               <h6>{{i.p_name}} accommodations</h6>
-              <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}<br>{{i.zip_code}}</h6>
-              <div class="icons">
-             
-              <i class="fa-solid fa-bed"></i><h6>{{i.p_bedroom}} rooms </h6>
-              <div class="space">
+              <h4>{{i.p_address}}, {{i.p_city}}</h4>
+              <h4>{{i.p_town}}<br>{{i.p_zip_code}}</h4>
+              <h4>R {{i.p_price}}/ Month</h4>
+          </div>
+          <div class="card-footer py-4 justify-center">
+              <div class="flex icons flex-row">
+                  <div class="flex flex-col basis-1/4">
+                      <i class="fa-solid fa-bed base ml-4">    {{i.p_bath}}</i>
+                  </div>
+                  <div class="flex flex-col basis-1/4">
+                      <i class="fa-solid fa-bath ml-4" >  {{i.p_bath}}</i>
+                  </div>
+                  <div class="flex flex-col basis-1/4">
+                      <i class="fa-solid fa-car ml-4">{{i.p_bath}}</i>
+                  </div>
               </div>
-              <i class="fas fa-bath"></i><h6>{{i.p_bath}} bathrooms</h6>
-          
           </div>
-          <h6>{{i.p_propertytype}}</h6>
-          <h4>R{{i.p_price}}/Month</h4>
-          </div>
-        </div>
-      <br>
+      </div>
   </div>
+</div>
 
+<footer class="footer mt-7 footer-center p-4 border text-base-content ">
+  <div>
+    <p>Copyright Â© 2022 All Rights Reserved | <br>
+      Developed for WizeReantalz</p>
   </div>
+</footer>

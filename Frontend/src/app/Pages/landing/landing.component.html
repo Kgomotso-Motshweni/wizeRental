@@ -44,9 +44,7 @@
 <!------------------------------------ search --------------------------------------->
   <br>
   <div class="flex search col-xl-12">
-    <!-- &#xf0e0; -->
         <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
-        
       <div class="space1">
     </div>
     <br>
@@ -137,7 +135,8 @@
       <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index " >
         
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
-        <figure><img class="img" src="../../../assets/images/landing.jpeg" alt="Shoes" /></figure>
+        <!-- {{i.house_image}} -->
+        <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
         <div class="card-body">
             <h6>{{i.p_name}} accommodations</h6>
             <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}</h6>

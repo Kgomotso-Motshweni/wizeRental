@@ -28,7 +28,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
-import {CheckboxModule} from 'primeng/checkbox'; 
+import {CheckboxModule} from 'primeng/checkbox';
+import { SinglePropertyComponent } from './single-property/single-property.component'; 
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent,
@@ -47,7 +48,8 @@ const routes: Routes = [
     TenantComponent,
     MyroomComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    SinglePropertyComponent
   ],
   imports: [
     Ng2SearchPipeModule,

@@ -1,5 +1,28 @@
 const client = require("../Config/db.config");
 
+
+const FilterTenants = async(req, res) => {
+    const p_name = req.params.p_name;
+    try{
+        client.query(`SELECT r.full_name, r.tenant_id
+            FROM rentees r
+            INNER JOIN landlordproperty l ON r.property_id = l.property_id
+            INNER JOIN users s ON l.landlord_id = s.userid
+            AND l.p_name = $1`,[p_name],(error, results) => {
+            if(error){
+                return res.status(400).json({
+                   message: "Unable to retrieve all tenants per accommodation"
+                });
+            }
+            return res.status(200).json(results.rows); //Return a status 200 if there is no error
+        })
+    }catch{
+        res.status(500).json({
+            error: "Database error when filtering tenants per accomodation", //Database connection error
+        });
+    } 
+}
+
 const getMyTenatsAndProperties = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
@@ -69,7 +92,12 @@ const landlordReceive = async(req, res ) => {
 const tenantReceive = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
-        client.query(`SELECT * FROM LandlordToTenantNortifications WHERE tenant_id = $1 ORDER BY created_at DESC`, [id],(error, results) => {
+        client.query(`SELECT l.landlord_id, l.tenant_id, l.subject,l.notif_type,l.message,l.created_at, p.p_name,r.full_name
+        FROM landlordtotenantnortifications l
+        JOIN rentees r ON l.tenant_id = r.tenant_id
+        JOIN landlordproperty p ON p.property_id = r.property_id
+        WHERE l.tenant_id = $1
+        `,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to send message to a specific tenant(s)"
@@ -90,7 +118,7 @@ const tenantSend = async(req, res ) => {
     const {nortType, recipient, message} = req.body;
     try{
         client.query(`INSERT INTO TenantToLandlordNortifications (tenant_id, landlord_id, notif_type, message)
-            VALUES ($1, $2, $3, $4, $5)`,[id, recipient, nortType, message ],(error, results) => {
+            VALUES ($1, $2, $3, $4)`,[id, recipient, nortType, message ],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to log issues to a specific landlord"
@@ -111,6 +139,6 @@ module.exports = {
     sendToSpecificUser,
     landlordReceive,
     tenantReceive,
-    tenantSend
+    tenantSend,
+    FilterTenants
 }
-
