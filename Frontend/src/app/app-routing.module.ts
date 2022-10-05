@@ -8,13 +8,13 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { FilterByComponent } from './Components/filter-by/filter-by.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
-import { SinglePropertyComponent } from './Pages/tenant/single-property/single-property.component';
+import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
 
 
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
-  {path: 'view-property/:id', component: SinglePropertyComponent},
+  {path: 'view-property/:id', component: ViewPropertyComponent},
   {path:'landlord', component:LandlordComponent},
   {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
   {path:'filter', component:FilterByComponent},

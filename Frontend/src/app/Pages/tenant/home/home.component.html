@@ -7,16 +7,24 @@
   </div>
 </div>
 
-<!--toggle-->
-<div class="container mt-7"> 
+<!--search and filter-->
+<div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10 pt-5" style="width:100%;" >
+
   <div class="flex search col-xl-12">
       <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
-  </div>
+      <div class="space1">
+      </div>
+      <br>
+      <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
 </div>
-  
+</div>
 <!--till here-->
+
+
+
+
 <div class="container-fluid" style="margin-top:20px;">
-  <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+  <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center pt-3">
       <div class="card rounded-3 w-96 bg-base-100 shadow-xl " *ngFor="let i of tenantProperty| filter:searchItem  ; let m = index">
           <figure><img  routerLink='/tenant/viewProperty/{{i.property_id}}' src='{{i.house_image}}' alt="Shoes" /></figure>
           <div class="card-body">

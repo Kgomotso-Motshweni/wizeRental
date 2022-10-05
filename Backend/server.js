@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 require('./App/Config/dotenv.config')
 
 var corsOptions = {
-    origin: ["*", "http://localhost:4200/"],
+    origin: ["*", "http://localhost:4200"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 200,
@@ -58,4 +58,3 @@ app.use("/api", public) //retrive Tenant infor
 app.listen(port, () =>{
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })
- 

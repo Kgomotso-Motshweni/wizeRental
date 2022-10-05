@@ -17,22 +17,35 @@ export class HomeComponent implements OnInit {
   searchItem:any;
   tenantProperty:any
 
+  // filter vars
+  condition: boolean = false;
+
+
+
+
+
   constructor(private service: LandingPageService,) { }
 
-  filter(){
 
+  // if statement for the filter button
+  filter(){
+    if(this.condition ==true){
+      this.condition= false
+    }else{
+      this.condition=true
+    }
+   
   } 
+
+  // function for getting all the properties 
   ngOnInit(): void {
     this.loading =true
-   this.getProperty();
+    this.getProperty();
   }
   getProperty(){
-    this.loading = true
     this.service.getProperties().subscribe({
       next: (data: any) => {
-        this.loading = true
           this.tenantProperty = data;
-          this.loading = false
           console.log(data)
         }
       })

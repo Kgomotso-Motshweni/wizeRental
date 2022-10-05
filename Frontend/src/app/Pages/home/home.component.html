@@ -10,7 +10,9 @@
 </div>
 
 <!--toggle-->
-<div class=""> 
+<div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
+
+<div class="">
 <div class="badge badge-primary badge-outline ml-2 mt-5">What do you need?</div>
   <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
     <!-- /tenant/home -->
@@ -25,12 +27,18 @@
 </div>
 <br>
 <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
-
 </div>
 </div>
-
-
+</div>
 <!--till here-->
+
+<!-- filter -->
+<div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-5 mr-2 gap-5">
+    <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-5 justify-center" style="width: 100%;">
+        <!-- <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/> -->
+        <!-- <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/> -->
+    </div>
+</div>
 
 
 <div class="container-fluid" style="margin-top:20px;">

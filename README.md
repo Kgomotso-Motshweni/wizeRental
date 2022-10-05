@@ -79,3 +79,11 @@ To run the project do:<strong>npm run start</strong>
 
 
 ## FrontEnd
+
+### installed modules
+
+```json
+{
+
+}
+```

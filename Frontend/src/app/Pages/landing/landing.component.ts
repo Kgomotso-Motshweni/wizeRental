@@ -12,8 +12,8 @@ import { LandingPageService } from 'src/app/Services/landing-page.service';
 export class LandingComponent implements OnInit {
 
   
-  name:any = "search";
-  propertytype: any
+name:any = "search";
+propertytype: any
  properties:any;
  property:any;
  searchItem:any;

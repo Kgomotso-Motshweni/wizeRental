@@ -39,6 +39,7 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { FilterByComponent } from './Components/filter-by/filter-by.component';
+import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
 
 
 
@@ -53,6 +54,7 @@ import { FilterByComponent } from './Components/filter-by/filter-by.component';
     LandingComponent,
     FilterByComponent,
     FooterComponent,
+    ViewPropertyComponent,
   ],
   imports: [
     ConfirmDialogModule,
