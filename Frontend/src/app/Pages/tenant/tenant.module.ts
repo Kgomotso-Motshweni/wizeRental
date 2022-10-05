@@ -31,13 +31,15 @@ import { DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox'; 
 import { SidebarModule } from 'primeng/sidebar';
 import { NortificationComponent } from './nortification/nortification.component';
+import { ViewPropertyComponent } from './view-property/view-property.component';
 
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent,
+  {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
     {path:'myroom', component: MyroomComponent},
+    {path:'viewProperty/:id', component:ViewPropertyComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
   ]},
 ]
@@ -49,6 +51,7 @@ const routes: Routes = [
     ProfileComponent,
     HomeComponent,
     NortificationComponent,
+    ViewPropertyComponent,
   ],
   imports: [
     Ng2SearchPipeModule,

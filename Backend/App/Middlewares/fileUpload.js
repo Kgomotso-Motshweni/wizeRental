@@ -9,7 +9,7 @@ module.exports = multer({
         // console.log(file)
         // console.log(ext)
         //test our file uploads if they meet the criteria/ test condition set below
-        if(!ext.match(/\.(png|jpg|jpeg|gif|web)$/)){
+        if(!ext.match(/\.(png|jpg|jpeg|gif|web|pdf)$/)){
            return  cb("message: Unsupported file format")   
         }
         cb(null, true);

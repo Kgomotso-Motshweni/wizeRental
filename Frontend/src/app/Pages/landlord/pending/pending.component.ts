@@ -32,7 +32,7 @@ export class PendingComponent implements OnInit {
   token:any = '';
   id:number = 0;
   number:number = 0;
-
+  image:any;
   Form = new FormGroup({
     address: new FormControl(''),
     town: new FormControl(''),
@@ -89,9 +89,11 @@ export class PendingComponent implements OnInit {
 
    //Pending Tenants
    getPending(user:number){
-    this.dash.getPendTenants(1).subscribe({
+    this.dash.getPendTenants(user).subscribe({
       next:data  => {
           this.pending = data;
+          this.image = this.pending[0].id_doc
+          console.log(this.image)
           this.number = this.pending.length;
           this.loading = false;
         }
@@ -180,7 +182,7 @@ export class PendingComponent implements OnInit {
         unit: this.pendingClients.unit,
         rent: this.pendingClients.amount,
         paymentstatus: false,
-        moa_status: "notSigned",
+        moa_status: "signed",
         agreeStartDate: this.pendingClients.agreementStart,
         agreeEndDate: this.pendingClients.agreementEnd,
         payStartDate: this.pendingClients.paymentStart,

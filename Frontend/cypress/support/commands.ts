@@ -6,7 +6,7 @@
 declare namespace Cypress {
   interface Chainable<Subject = any> {
     login(email: any, password:any): typeof login;
-    register(usertype:any, firstname:any, lastname:any, email: any, phone:any,  password: any, confirmpassword:any): typeof register;
+    register(usertype:any, fname:any, lname:any, email: any, phone:any,  password: any, confirmpassword:any): typeof register;
   }
 }
 
@@ -17,11 +17,11 @@ function login(email: any, password: any): void {
     cy.get('button').click()
 }
 
-function register(usertype:any, firstname:any, lastname:any, email: any, phone:any,  password: any, confirmpassword:any): void {
+function register(usertype:any, fname:any, lname:any, email: any, phone:any,  password: any, confirmpassword:any): void {
     cy.visit( 'http://localhost:4200/register ')
-    cy.get('[formControlName="usertype"]').type(usertype)
-    cy.get('[formControlName="firstname"]').type(firstname)
-    cy.get('[formControlName="lastname"]').type(lastname)
+    cy.get('[formControlName="usertype"]').select('Landlord')
+    cy.get('[formControlName="fname"]').type(fname)
+    cy.get('[formControlName="lname"]').type(lname)
     cy.get('[formControlName="email"]').type(email)
     cy.get('[formControlName="phone"]').type(phone)
     cy.get('[formControlName="password"]').type(password)

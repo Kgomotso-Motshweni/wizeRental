@@ -63,37 +63,35 @@ export class TenantsComponent implements OnInit {
     this.id = this.token.regData[0].userid;
     this.getLandLordAddress();
    
-
     if(this.attempts==0)
     {
-    this.dash.rentees(this.id).subscribe((rentee:any)=>{
+      this.dash.rentees(this.id).subscribe((rentee:any)=>{
   
-      this.rentees = rentee;
-      //console.log("Initial tenants",rentee)
-      for (let x = 0; x < this.rentees.length; x++) {
-        //signed tenants revenue
-        if (rentee[x].moa_status == "signed") {
-          this.totAmnt = this.totAmnt + this.rentees[x].rent;
-          
-          //Room occupied
-          this.numroomsO = this.numroomsO + 1;
-          // paid tanants
-          if (rentee[x].paymentstatus == true) {
-            this.totPaid = +this.totPaid + (+rentee[x].rent);
+        this.rentees = rentee;
+        //console.log("Initial tenants",rentee)
+        for (let x = 0; x < this.rentees.length; x++) {
+          //signed tenants revenue
+          if (rentee[x].moa_status == "signed") {
+            this.totAmnt = this.totAmnt + this.rentees[x].rent;
+            
+            //Room occupied
+            this.numroomsO = this.numroomsO + 1;
+            // paid tanants
+            if (rentee[x].paymentstatus == true) {
+              this.totPaid = +this.totPaid + (+rentee[x].rent);
+            }
+            //unpaid tenants
+            if (rentee[x].paymentstatus == false) {
+              this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+            }
+            //open Rooms
+            this.numroomsA = +this.numroomsA + +this.rentees[x].p_room;
           }
-          //unpaid tenants
-          if (rentee[x].paymentstatus == false) {
-            this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
-          }
-          //open Rooms
-          this.numroomsA = +this.numroomsA + +this.rentees[x].p_room;
-          
         }
-      }
-       this.countTenants = this.rentees.length;
-       this.loading = false;
-    })
-  }
+        this.countTenants = this.rentees.length;
+        this.loading = false;
+      })
+    }
 
   }
 
@@ -103,7 +101,6 @@ export class TenantsComponent implements OnInit {
   specific tenant
   */
   deleteUser(details:Payment){
-  
     this.confirmationService.confirm({
       message: 'Are you sure you want to remove this: ' + details.full_name + '?',
       header: 'Confirm',
@@ -111,17 +108,18 @@ export class TenantsComponent implements OnInit {
       accept: () => {
         this.dash.deleteRentee(details).subscribe({
           next:data =>{
-            
+            this.loading = true
             this.message = data
             //Route back to the current page,  this helps in refreshing data
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
             this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
+            this.loading = false
             this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
-          
           },error: err => {
             //show the message if unable to add new data
             this.message = err.error.message;
+            this.loading = false
             this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
            
           }
@@ -137,7 +135,6 @@ export class TenantsComponent implements OnInit {
 
   //Get all Landlord property addresses  
   getLandLordAddress(){
-   
     return this.land.address(this.id).subscribe({
       next:data => {
         this.loading = true
@@ -193,60 +190,60 @@ export class TenantsComponent implements OnInit {
       })
     }else{
 
-    let userData = {
-      id: this.id,
-      p_name: this.Form.value.usertype
-    }
-    this.loading = true
-    this.land.rentees(userData).subscribe((rentee:any)=>{
-     // console.log(rentee)
-
-      this.rentees = rentee;
-      this.totAmnt  = 0;
-      this.numroomsO  =0;
-      this.totPaid  = 0;
-      this.totUnPaid  = 0;
-      this.numroomsA = 0 ;
-
-      
-
-      for (let x = 0; x < this.rentees.length; x++) {
-        //signed tenants revenue
-        if (rentee[x].moa_status == "signed") {
-          this.totAmnt = this.totAmnt + this.rentees[x].rent;
-          
-          //Room occupied
-          this.numroomsO = this.numroomsO + 1;
-          // paid tanants
-          if (rentee[x].paymentstatus == true) {
-            this.totPaid = +this.totPaid + (+rentee[x].rent);
-          }
-          //unpaid tenants
-          if (rentee[x].paymentstatus == false) {
-            this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
-          }
-          //open Rooms
-        this.numroomsA = +this.numroomsA + +this.rentees[x].p_room;
-        }
+      let userData = {
+        id: this.id,
+        p_name: this.Form.value.usertype
       }
-      
-        
 
-      this.countTenants = this.rentees.length;
-      this.loading = false
-    })
+      this.loading = true
+      this.land.rentees(userData).subscribe((rentee:any)=>{
+      // console.log(rentee)
+
+        this.rentees = rentee;
+        this.totAmnt  = 0;
+        this.numroomsO  =0;
+        this.totPaid  = 0;
+        this.totUnPaid  = 0;
+        this.numroomsA = 0 ;
+
+        for (let x = 0; x < this.rentees.length; x++) {
+          //signed tenants revenue
+          if (rentee[x].moa_status == "signed") {
+            this.totAmnt = this.totAmnt + this.rentees[x].rent;
+            
+            //Room occupied
+            this.numroomsO = this.numroomsO + 1;
+            // paid tanants
+            if (rentee[x].paymentstatus == true) {
+              this.totPaid = +this.totPaid + (+rentee[x].rent);
+            }
+            //unpaid tenants
+            if (rentee[x].paymentstatus == false) {
+              this.totUnPaid = +this.totUnPaid + (+rentee[x].rent);
+            }
+            //open Rooms
+            this.numroomsA = +this.numroomsA + +this.rentees[x].p_room;
+          }
+        }
+        this.countTenants = this.rentees.length;
+        this.loading = false
+      })
     }
   }
 
   updatePayment(index:any,status:any){
     this.rente_id = this.rentees[index].rentee_id
     const body = {
-       "rentee_id":this.rente_id,
-       "paymentStatus":status
+      "rentee_id":this.rente_id,
+      "paymentStatus":status
     }
   
+    this.loading = true
     this.land.updatePayment(body).subscribe(()=>{
-  
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/landlord/tenant'])
+      this.loading = false
     })
   }
 }

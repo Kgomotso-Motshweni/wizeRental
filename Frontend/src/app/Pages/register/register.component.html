@@ -85,7 +85,7 @@
                     
                         <div class="form-group mb-6">    
                             <input class="form-check-input" formControlName="acceptTerms" type="checkbox" id="check" [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }">
-                            <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a (click)="showResponsiveDialog()" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                            <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree to <a (click)="showResponsiveDialog()" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
                             <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">Accept Ts & Cs is required</div>
                         </div>
 

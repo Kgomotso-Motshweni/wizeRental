@@ -90,9 +90,11 @@ export class ProfileComponent implements OnInit {
 
     this.tenants.updateProfile(this.formData, id).subscribe({
       next:data => {
+        this.loading = false;
         this.message = data
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
         this.router.onSameUrlNavigation = 'reload'; 
+        this.loading = true
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
         });

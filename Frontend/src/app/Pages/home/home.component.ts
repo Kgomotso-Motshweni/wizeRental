@@ -1,5 +1,6 @@
-import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { LandingPageService } from 'src/app/Services/landing-page.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,33 @@ import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
-  ngOnInit(): void {}
+  @ViewChild('ngxLoading', { static: false })
+  ngxLoadingComponent!: NgxLoadingComponent;
+  showingTemplate = false;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
 
+  searchItem:any;
+  tenantProperty:any
+  
+  constructor(private service: LandingPageService,) { }
+
+  filter(){
+
+  } 
+  ngOnInit(): void {
+    this.loading =true
+   this.getProperty();
+  }
+  getProperty(){
+    this.loading = true
+    this.service.getProperties().subscribe({
+      next: (data: any) => {
+        this.loading = true
+          this.tenantProperty = data;
+          this.loading = false
+          console.log(data)
+        }
+      })
+  }
 }
