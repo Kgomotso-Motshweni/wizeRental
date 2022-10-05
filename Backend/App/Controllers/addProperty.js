@@ -53,6 +53,7 @@ const addProperty = async(req, res) => {
  
 }
 
+// ADD INTERIOR PICTURES OF THE ACCOMODATION
 const addRoomImages = async(req, res) =>{
     try{  
         const property_id = parseInt(req.params.property_id); 
@@ -87,7 +88,7 @@ const addRoomImages = async(req, res) =>{
     };
 }
 
-
+// GET PICTURES OF THE PROPERTY THAT THE LANDLORD ADDED
 const getMyProperties = async(req, res) =>{
     const id = parseInt(req.params.userid);
     try{  
@@ -114,6 +115,7 @@ const getMyProperties = async(req, res) =>{
     };
 }
 
+// DELETES PICTURES OF THE PROPERTY THAT THE LANDLORD ADDED
 const deleteMyProperty = async(req, res) =>{
     const id = parseInt(req.params.property_id);
     try{  

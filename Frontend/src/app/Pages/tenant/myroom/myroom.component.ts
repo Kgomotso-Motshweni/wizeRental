@@ -51,8 +51,7 @@ export class MyroomComponent implements OnInit {
       message: ['', Validators.required],
       issues: ['', Validators.required],
       electricity: ['', Validators.required],
-    }
-    );
+    });
   }
 
   get f():{ [key: string]: AbstractControl }{
