@@ -26,5 +26,8 @@ export class TenantsService {
   updateProfile(user:any, id:any){
     return this.http.patch(`${this.baseUrl}update/${id}`, user)
   }
+
+
+  
   
 }

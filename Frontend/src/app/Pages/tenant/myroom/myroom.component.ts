@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-myroom',
   templateUrl: './myroom.component.html',
@@ -84,4 +85,10 @@ export class MyroomComponent implements OnInit {
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
   }
+
 }
+  
+ 
+
+
+
