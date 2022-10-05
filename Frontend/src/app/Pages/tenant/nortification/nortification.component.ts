@@ -20,7 +20,6 @@ export class NortificationComponent implements OnInit {
   myNotification: any;
   totalNumber: any;
   constructor(private notif:NortificationsService, private auth:AuthenticationService) {
- 
    }
 
   ngOnInit(): void {
@@ -29,9 +28,8 @@ export class NortificationComponent implements OnInit {
 
     this.notif.tenantReceive(this.id).subscribe({
       next:data => {
-        this.myNotification = data
-        console.log(data);
         
+        this.myNotification = data
         this.totalNumber = this.myNotification.length
 
       }
