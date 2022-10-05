@@ -45,17 +45,19 @@ propertytype: any
     private auth:AuthenticationService,
     private router:Router,
     private formBuilder: FormBuilder,
-    private service:MyroomComponent,
-    private route: ActivatedRoute,) { }
+  ) { }
+
+  // private service:MyroomComponent,
+  // private route: ActivatedRoute,
 
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
       electricity: new FormControl(''),
-      address : new FormControl(''),
-      propertytype : new FormControl(''),
-      price : new FormControl(''),
-      status : new FormControl('')
+      // address : new FormControl(''),
+      // propertytype : new FormControl(''),
+      // price : new FormControl(''),
+      // status : new FormControl('')
     });
 
     
@@ -68,11 +70,18 @@ propertytype: any
       message: ['', Validators.required],
       issues: ['', Validators.required],
       electricity: ['', Validators.required],
-      address:['', Validators.required],
-      propertytype: ['', Validators.required],
-      price: ['', Validators.required],
-      status: ['', Validators.required]
+      // address:['', Validators.required],
+      // propertytype: ['', Validators.required],
+      // price: ['', Validators.required],
+      // status: ['', Validators.required]
     });
+
+    // const propertyType = {
+    //   no1:"Commune",
+    //   no2:"Studio",
+    //   no3:"Backroom"
+    // }
+    // this.propertytype = propertyType;
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -106,3 +115,7 @@ propertytype: any
     console.log(this.Form.value.electricity)
   }
 }
+
+// function no1(no1: any) {
+//   throw new Error('Function not implemented.');
+// }
