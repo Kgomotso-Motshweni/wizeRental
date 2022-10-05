@@ -7,6 +7,11 @@ textarea.input {
     min-height: 100px;
     max-height: 100px;
 }
+.space1{
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}
 
 .buttons{
     background-color: #E3E3E7;
@@ -27,7 +32,7 @@ textarea.input {
    
 }
 .badge{
-    width: 50%;
+    width:100%;
     height: 40px;
     padding:0.5px;
     border-style: solid;
@@ -63,11 +68,15 @@ textarea.input {
 // card sizes
 
 .card{
-    // height: 465px;
-    width: 350px;
+    height: 465px;
+    width: 345px;
 }
 
 .img{
     border-radius: 8px;
-    width: 350px;
+    width: 400px;
+    height: 250px;
+}
+.card1{
+    margin-top: -43px;
 }

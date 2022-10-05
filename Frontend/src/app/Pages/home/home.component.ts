@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
+import { Pipe, PipeTransform } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,8 @@ import { LandingPageService } from 'src/app/Services/landing-page.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+
   @ViewChild('ngxLoading', { static: false })
   ngxLoadingComponent!: NgxLoadingComponent;
   showingTemplate = false;
@@ -16,9 +20,14 @@ export class HomeComponent implements OnInit {
 
   searchItem:any;
   tenantProperty:any
+  name: any
+  category: any
+
   
   // filter vars
   condition: boolean = false;
+  // name = new FormControl('');
+  // category = new FormControl(''); 
 
   constructor(private service: LandingPageService,) { }
 
@@ -32,6 +41,19 @@ export class HomeComponent implements OnInit {
     }
    
   } 
+// trying filter
+  transform(value: any[], prop: string) {
+    if (!Array.isArray(value) || value.length === 0 || !prop) { 
+      return value;
+    }
+    // Here we sort the items based on passed `property`
+    value.sort((a, b) => b[prop] - a[prop]);
+    const max = value[0][prop];
+    const min = value[value.length - 1][prop];
+
+    return [max, min];
+  }
+
 
   // function for getting all the properties 
   ngOnInit(): void {
