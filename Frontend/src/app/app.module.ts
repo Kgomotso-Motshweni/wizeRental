@@ -38,10 +38,7 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { LandingComponent } from './Pages/landing/landing.component';
-import { FilterByComponent } from './Components/filter-by/filter-by.component';
 import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
-
-
 
 @NgModule({
   declarations: [
@@ -52,7 +49,6 @@ import { ViewPropertyComponent } from './Pages/view-property/view-property.compo
     LoginComponent,
     RegisterComponent,
     LandingComponent,
-    FilterByComponent,
     FooterComponent,
     ViewPropertyComponent,
   ],

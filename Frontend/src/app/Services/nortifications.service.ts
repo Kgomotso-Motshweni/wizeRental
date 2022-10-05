@@ -9,6 +9,10 @@ export class NortificationsService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
+  //Filter sending tenants
+  getTenantsData(id:any){
+    return this.http.get(`${this.baseUrl}filterTenants/${id}`)
+  }
 
   //Landlord send Messages to specific user
   sendMessage(message:any, id:number){
@@ -16,13 +20,17 @@ export class NortificationsService {
   }
 
   //Tenant recieve Nortifications from Landlord
-  tenantReceive(id:number){
+  tenantReceive(id:any){
     return this.http.get(`${this.baseUrl}tenantReceive/${id}`);
   }
 
-  landlordReceive(id:any)
-  {
+  //Landlord recieve Nortifications from tenants
+  landlordReceive(id:number){
     return this.http.get(`${this.baseUrl}landlordReceive/${id}`);
   }
   
+  //Tenant send Messages to Landlord
+  tenantSend(message:any, id:number){
+    return this.http.post(`${this.baseUrl}tenantSend/${id}`, message)
+  }
 }

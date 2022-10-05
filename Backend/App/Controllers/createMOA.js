@@ -9,9 +9,11 @@ const CreateMOA = async(req, res ) => {
         VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status ])
         const user = data.rows[0].rentee_id;
 
+        //Insert moa details using rentees_id returned from the above 
         await client.query(`INSERT INTO MOA (rentee_id, amount, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType)
             VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ])
-
+        
+        //Delete the pending tenant from pending table 
         await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error, results) => {
             if(error){
                 return res.status(400).json({
@@ -21,7 +23,7 @@ const CreateMOA = async(req, res ) => {
             //Return a status 200 if there is no error
             return res.status(200).send({messages:"tenant successfuly approved"});
         }) 
-
+           
     }catch (err) {
         res.status(500).json({
             error: "Database error when viewing pending tenants", //Database connection error

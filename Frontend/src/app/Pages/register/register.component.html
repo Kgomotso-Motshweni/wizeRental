@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1"> <i class="fa-solid fa-envelope"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
                                 <input type="email" class="form-control input bg-gray-50 input-bordered w-full email " formControlName="email" placeholder="Email"[ngClass]="{ 'is-invalid':submitted && f['email'].errors }"  aria-label="Username" aria-describedby="basic-addon1">
                                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required</div>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="input-group mb-6">
-                                <span class="input-group-text" id="basic-addon1"> <i class="fa-solid fa-envelope"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
                                 <input type="text" class="form-control input bg-gray-50 input-bordered w-full email " formControlName="phone" placeholder="111-111-1111" [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"  aria-label="Username" aria-describedby="basic-addon1">
                                 <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
                                     <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
@@ -85,7 +85,7 @@
                     
                         <div class="form-group mb-6">    
                             <input class="form-check-input" formControlName="acceptTerms" type="checkbox" id="check" [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }">
-                            <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a (click)="showResponsiveDialog()" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                            <label for="check" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree to <a (click)="showResponsiveDialog()" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
                             <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">Accept Ts & Cs is required</div>
                         </div>
 

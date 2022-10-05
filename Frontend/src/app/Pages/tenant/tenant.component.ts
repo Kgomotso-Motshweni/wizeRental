@@ -16,6 +16,7 @@ export class TenantComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
+  
 
   constructor(
     public auth:AuthenticationService,  
@@ -29,16 +30,23 @@ export class TenantComponent implements OnInit {
   userData: any = {};
 
   ngOnInit(): void {
-    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))    
+    //Returns decoded user data from a token 
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))  
+    
+    //Extract only the userid of the current loggedin user 
     this.userid = this.token.regData[0].userid
+
+    //Pass the id as an argument to the function getProfile
     this.getProfile(this.userid)
   }
 
+  //Receives the userID as a parameter 
   getProfile(userid:any){
     const userToken = localStorage.getItem('access_token');
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
     };
+
 
     this.tenant.getProfile(httpOptions, userid).subscribe({
       next:data =>{

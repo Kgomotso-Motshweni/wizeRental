@@ -64,11 +64,13 @@ export class LoginComponent implements OnInit {
    
     this.auth.login(user).subscribe({
       next:data => {
+        //Turn the loader on 
         this.loading = true;
         this.myData = data;
         this.userToken = this.myData.token;
         this.decodedToken = this.auth.getDecodedAccessToken(this.userToken); //returns a decoded data from token
 
+        //Extract the role from the decoded token 
         this.role = this.decodedToken.regData[0].user_role;
         localStorage.setItem('access_token', this.userToken);
         localStorage.setItem('role', this.role);
@@ -76,6 +78,9 @@ export class LoginComponent implements OnInit {
           key: 'tc', severity:'success', summary: 'Success', detail: "Successfully Logged in", life: 3000
         }); 
         this.Form.reset();
+
+        //Use the role to check which user is signed in 
+        //Route each user to specific page according to their role they chose from login 
         if(this.role == 'Landlord'){
           this.loading = false;
           this.router.navigate(['/landlord/'])

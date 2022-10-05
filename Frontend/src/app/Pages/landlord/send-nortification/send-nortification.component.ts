@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Router } from '@angular/router';
+import { LandlordService } from 'src/app/Services/landlord.service';
 
 @Component({
   selector: 'app-send-nortification',
@@ -38,11 +39,11 @@ export class SendNortificationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dash:DashboardService,
     private messageService: MessageService,
     private auth:AuthenticationService,
     private mess:NortificationsService,
-    private router:Router, ) { }
+    private router:Router,
+    private land:LandlordService ) { }
 
   ngOnInit(): void {
     this.loading = false;
@@ -69,17 +70,17 @@ export class SendNortificationComponent implements OnInit {
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;
   }
-
+ 
   //Get all Landlord property name
   getLandLordAddress(){
-    this.loading = true;
-    return this.dash.address(this.id).subscribe({
+    return this.land.address(this.id).subscribe({
       next:data => {
+        this.tenantAddress = true
         this.tenantAddress = data
         this.tenantAddress.forEach((element:any) => {
           this.address.push(element)
         });
-        this.loading = false;
+        this.loading = false;       
       }
     })
   }
@@ -88,30 +89,29 @@ export class SendNortificationComponent implements OnInit {
     use it to get all tenants from that property
   */
   caller(){
-    for(let x = 0; x<this.Form.value.address.length; x++){
+  
+    for(let x = 0; x<this.Form.value.address.length; x++){   
       this.loading = true;
-      this.dash.tenants(this.Form.value.address[x].accom_name).subscribe({
-        next:data => {
+      this.mess.getTenantsData(this.Form.value.address[x].p_name).subscribe({
+        next:(data:any) =>{
           this.rentees = data;
           this.loading = false;
-          }
         }
-      )
+      })      
+
     }
   }
 
   onSubmit(){
     this.submitted = true;
     //If form invalid don't send any data 
-    if(this.Form.invalid)
-    { 
-      this.loading = false;
+    if(this.Form.invalid){ 
       return
     }
-
     /* Extract only tenant id from an array of object(s) selected,
      send that information to the subscription
     */
+  
     for(let i=0; i<this.Form.value.recipient.length; i++){
       let user = {
         nortType: this.Form.value.nortType,
@@ -121,7 +121,7 @@ export class SendNortificationComponent implements OnInit {
       }
       this.mess.sendMessage(user, this.id).subscribe({
         next:data => {
-          this.loading = true;
+         
           this.message = data
 
           this.messageService.add({ key: 'tc', severity:'success', summary: 'Success', detail: this.message.message, life: 3000})
@@ -132,7 +132,6 @@ export class SendNortificationComponent implements OnInit {
           //turn off the loader 
           this.loading = false;
         },error: err => {
-          this.loading = false;
           //show the message if unable to add new data
           this.message = err.error.message;
           this.messageService.add({ key: 'tc', severity:'error', summary: 'Error', detail: this.message, life: 3000}) 

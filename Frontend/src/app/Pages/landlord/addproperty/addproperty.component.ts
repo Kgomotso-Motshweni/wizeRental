@@ -63,6 +63,7 @@ export class AddpropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
+    //returns a decoded token
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
     this.Form = this.formBuilder.group({
@@ -112,6 +113,9 @@ export class AddpropertyComponent implements OnInit {
   showNextStep() 
   {
     this.submitted = true;
+    if(this.Form.invalid){
+      return
+    }
 
     this.ngWizardService.next();
   }
@@ -122,11 +126,6 @@ export class AddpropertyComponent implements OnInit {
   }
   stepChanged(args: StepChangedArgs) 
   {
-    this.submitted = true;
-    if(this.Form.invalid){
-      return
-    }
-
   }
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
@@ -149,13 +148,17 @@ export class AddpropertyComponent implements OnInit {
   }
 
 
-  roomsImages(event:any) {    
+  roomsImages(event:any) {  
+    //get the images from html and target the file you just uploaded   
     const image = (event.target as any ).files[0];
+
+    //insert the image to gallery which is an array list
     this.gallery.push(image)
     
     //Show image preview
     let reader = new FileReader();
     reader.onload = (event: any) => {
+
       this.preview.push(event.target.result);
     }
       reader.readAsDataURL(image);  
@@ -166,6 +169,8 @@ export class AddpropertyComponent implements OnInit {
     if(this.Form.invalid){
       return
     }
+    //when dealing with pictures send the data through a formData
+    //append all the form values to formdata, send formdata to backend containing all your form data 
     this.formData.append('p_address', this.Form.value.address)
     this.formData.append('p_town', this.Form.value.town)
     this.formData.append('p_city', this.Form.value.city)
@@ -182,10 +187,10 @@ export class AddpropertyComponent implements OnInit {
     this.formData.append('pdf', this.pdf)
 
     //Subscribe to add new property details
-    console.log(this.gallery.length)
+    this.loading = true;
     this.land.postProperty(this.formData, this.id).subscribe({
       next:data => {
-        this.loading = true;
+       
         this.userinfor = data;
         
         //Subscribe to add new property room pictures
@@ -196,11 +201,13 @@ export class AddpropertyComponent implements OnInit {
         }
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
-        });  
+        }); 
+        this.loading = false;
       }
     })
     this.loading = false;
   }
+
   removeTask(data:any){
     console.log(this.preview);
     

@@ -27,3 +27,21 @@ textarea.input {
 .is-invalid, p-multiSelect{
     border-color: red;
 }
+
+
+label {
+    float: left;
+    margin: 5px 0px;
+}
+
+input {
+    float: right;
+    margin: 2px 0px;
+    width: 20px;
+}
+
+.emptyRoom{
+    margin: auto;
+   
+}
+

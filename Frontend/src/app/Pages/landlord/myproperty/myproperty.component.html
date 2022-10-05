@@ -40,8 +40,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let i Of myData">
-                        <td>1</td>
+                    <tr *ngFor="let i Of myData; let c = index">
+                        <td>{{c+1}}</td>
                         <td><img [src]="i.house_image" class="w-24 lg:w-36"/></td>
                         <td>{{i.p_name }}</td>
                         <td>{{i.p_address}} {{i.p_city}}</td>

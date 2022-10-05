@@ -153,12 +153,9 @@ export class MypropertyComponent implements OnInit {
     this.land.postProperty(this.formData, this.id).subscribe({
       next:data => {
  
-
         this.userData = data;
-
 
       }
     });
   }
-
 }

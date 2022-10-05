@@ -11,16 +11,18 @@ const register = async (req, res) => {
     const user_role = req.params.user_role;
     const{ firstname, lastname, email, cellno, password, imageUrl} = req.body
     try{
-        // // check :userType paramater. only accept /Landlord or /Tenant
+        // check :userType paramater. only accept /Landlord or /Tenant
         if (!(user_role == 'Landlord' || user_role == 'Tenant')) {
             return res.status(400).json({
                 message: "Invalid value in request parameter. : user_role parameter must be equal to Landlord or Tenant"
             });
         }
 
+        //Checks if usertype exist or not return the results then save them in data
         const data = await client.query(`SELECT * FROM users WHERE email= $1;`,[email]); //Check if user exist
         const user = data.rows;
 
+        //Returned results has data inside, the error message will appear 
         if(user.length != 0){
             return res.status(400).json({
                 message: "Email already there, No need to register again."
@@ -74,6 +76,7 @@ const register = async (req, res) => {
 const login =  async (req, res) => {
     const {email,password} = req.body;
     try{
+        //
         if (!(email  || password )) {
             return res.status(400).json({
                 message: "userInput Requred"
@@ -151,12 +154,13 @@ const profileUpdate = async(req, res) => {
 
     try{
         if(req.file){
+            //Send picture path to cloudinary then return the results of that picture
             const results = await cloudinary.uploader.upload(req.file.path, {
                 folder: "/images/",
             });
       
             client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
-                [firstname, lastname, cellno, results.url, id], (error, results)=>{ //Add new employee
+                [firstname, lastname, cellno, results.url, id], (error, results)=>{ //Update user information with a profile picture
                 if(error){ //checks for errors and return them 
                     return res.status(400).json({
                         message: "Unable to update user details"
@@ -166,7 +170,7 @@ const profileUpdate = async(req, res) => {
             })
         }else{
             client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, updated_at= now() WHERE userid=$4`,
-                [firstname, lastname, cellno, id], (error, results)=>{ //Add new employee
+                [firstname, lastname, cellno, id], (error, results)=>{ //Update user information without a profile picture
                 if(error){ //checks for errors and return them 
                     return res.status(400).json({
                         message: "Unable to update user details"
@@ -190,29 +194,3 @@ module.exports = {
     userProfile,
     profileUpdate
 }
-
-/*
-const profileUpdate = async(req, res) => {
-    try{
-        const id = req.params.userid;
-        const{ firstname, lastname, cellno, } = req.body
-        const image = await cloudinary.uploader.upload(req.file.path)
-
-        client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
-            [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ //Add new employee
-                if(error){ //checks for errors and return them 
-                    return res.status(400).json({
-                        message: "Unable to update user details"
-                    }) //Throw the error in the terminal
-                }
-                return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
-            }
-        )
-    }
-    catch (err) {
-        res.status(500).json({
-           error: "Database error while retrieving products", 
-        });
-    };
-}
-*/

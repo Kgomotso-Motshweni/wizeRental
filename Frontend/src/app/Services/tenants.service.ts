@@ -12,11 +12,12 @@ export class TenantsService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
 
-
+  //Tenants Apply for new accommodation
   ApplyProperty(info:any, id:any){
     return this.http.post(`${this.baseUrl}application/${id}`, info)
   }
 
+  //Gets user propfile 
   getProfile(accessToken:any,id:number):Observable<any>{
     return this.http.get(`${this.baseUrl}profile/${id}`, accessToken )
   }

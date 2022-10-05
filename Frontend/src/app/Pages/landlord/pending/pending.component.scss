@@ -29,10 +29,17 @@ h3{
     font-weight: bold;
 }
 p{
-    padding-top: 5%;
+    padding-top: 2%;
     font-size: medium;
 }
 .card{
     box-shadow: none;
     border: none;
+}
+.cardbody{
+    margin-top: 3%;
+    margin-right: 2%;
+}
+.p-errors{
+    color: red;
 }

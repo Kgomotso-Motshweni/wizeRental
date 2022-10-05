@@ -11,20 +11,23 @@ const addProperty = async(req, res) => {
             WHERE p_name = $1 AND p_address = $2`,[p_name, p_address]); //Check if user exist
         const user = data.rows;
 
+        //Checks if accommodation exists
         if(user.length != 0){
             return res.status(400).json({
                 message: "Accomodation already Exist, Add a new Property"
             });
         }
         else{
-   
             const house  = req.files['image'][0].path;
         
             const pdf  = req.files['pdf'][0].path;
-        
+            
+            //Send House image to cloudinary
             const HouseImage = await cloudinary.uploader.upload(house, {
                 folder: "/property/",
             })
+
+            //Send Pdf image to cloudinary
             const Tittle_Deep = await cloudinary.uploader.upload(pdf, {
                 folder: "/property/",
             })
@@ -50,15 +53,20 @@ const addProperty = async(req, res) => {
  
 }
 
+// ADD INTERIOR PICTURES OF THE ACCOMODATION
 const addRoomImages = async(req, res) =>{
     try{  
         const property_id = parseInt(req.params.property_id); 
         const qualification_url=[];
         let i = 0;
 
+        /* Since its multiple pictures being send to the database and cloudinary 
+        use array to get each file being uploaded then sends it to cloudinary at a time before inserting them in the database
+         */
         for(i=0; i<req.files.length; i++){
 
             qualification_url[i] = req.files[i].path;
+            
             
             const images = await cloudinary.uploader.upload(qualification_url[i], {
                 folder: "/property/",
@@ -84,7 +92,7 @@ const addRoomImages = async(req, res) =>{
     };
 }
 
-
+// GET PICTURES OF THE PROPERTY THAT THE LANDLORD ADDED
 const getMyProperties = async(req, res) =>{
     const id = parseInt(req.params.userid);
     try{  
@@ -111,9 +119,11 @@ const getMyProperties = async(req, res) =>{
     };
 }
 
+// DELETES PICTURES OF THE PROPERTY THAT THE LANDLORD ADDED
 const deleteMyProperty = async(req, res) =>{
     const id = parseInt(req.params.property_id);
     try{  
+
         await client.query(`DELETE FROM roomsimages WHERE property_id = $1`, [id]);
 
         client.query(`DELETE FROM landlordproperty WHERE property_id = $1`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order

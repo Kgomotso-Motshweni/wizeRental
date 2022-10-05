@@ -19,7 +19,7 @@ export class MyroomComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
-
+  visibleSidebar2: boolean = false;
   
   id:number = 0;
   token:any;
@@ -31,7 +31,6 @@ export class MyroomComponent implements OnInit {
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
-    private confirmationService: ConfirmationService,
     private auth:AuthenticationService,
     private router:Router,
     private formBuilder: FormBuilder,) { }
@@ -52,8 +51,7 @@ export class MyroomComponent implements OnInit {
       message: ['', Validators.required],
       issues: ['', Validators.required],
       electricity: ['', Validators.required],
-    }
-    );
+    });
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -73,11 +71,7 @@ export class MyroomComponent implements OnInit {
    logIssues(){
     this.submitted = false;
     this.dialogMessage = true;
-  
-    //Reset form every time you insert data
   }
-
-  
 
   hideDialog(){
     this.submitted = false;
@@ -86,6 +80,8 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    console.log(this.Form.value.vehicle1)
+    console.log(this.Form.value.message)
+    console.log(this.Form.value.issues)
+    console.log(this.Form.value.electricity)
   }
 }

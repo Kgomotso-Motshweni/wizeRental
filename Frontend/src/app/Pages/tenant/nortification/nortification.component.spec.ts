@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterByComponent } from './filter-by.component';
+import { NortificationComponent } from './nortification.component';
 
-describe('FilterByComponent', () => {
-  let component: FilterByComponent;
-  let fixture: ComponentFixture<FilterByComponent>;
+describe('NortificationComponent', () => {
+  let component: NortificationComponent;
+  let fixture: ComponentFixture<NortificationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterByComponent ]
+      declarations: [ NortificationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FilterByComponent);
+    fixture = TestBed.createComponent(NortificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

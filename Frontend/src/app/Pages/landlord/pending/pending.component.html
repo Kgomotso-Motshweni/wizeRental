@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 <!-- <div *ngIf="!condition; else elseBlock">   
+=======
+<p-toast position="top-right"></p-toast>
+<div *ngIf="!condition; else elseBlock">   
+>>>>>>> 06f1e329d46ac87ff39ebe93e58eaaaae1cc28d0
     <div class="container " style="margin-top:5vh;"> 
         <h4>Pending Tenants</h4>
     </div>
 
     <ng-container *ngIf="number == 0" >
+<<<<<<< HEAD
         <div class="container">
+=======
+        <div class="container ">
+>>>>>>> 06f1e329d46ac87ff39ebe93e58eaaaae1cc28d0
             <div class="flex justify-center">
                 <div class="grid sm:grid-cols-1 ">
                     <div class="card empty w-full shadow-xl">
@@ -20,8 +29,13 @@
         </div>
     </ng-container>
 
+<<<<<<< HEAD
     <ng-container *ngif="number !=0">
         <div class="container pending">
+=======
+    <ng-container *ngIf="number != 0" >
+        <div class="container justify-center pending">
+>>>>>>> 06f1e329d46ac87ff39ebe93e58eaaaae1cc28d0
             <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" >
                 <div class="card shadow-xl border" *ngFor="let i Of pending">
                     <div class="grid card-body user justify-start">
@@ -40,7 +54,11 @@
 </div>
 
 <ng-template #elseBlock >
-    <div class="container" style="margin-top:5vh;">
+    <div class="container justify-center" style="margin-top:5vh;">
+        <div class="flex form-group justify-start mb-10">
+            <button type="button" (click)="hideInsertform" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">BACK</button>
+        </div>
+
         <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
             <ng-wizard-step [title]="'Tenant Details'" [canEnter]="isValidTypeBoolean" 
                 [canExit]="isValidFunctionReturnsBoolean.bind(this)">
@@ -89,9 +107,10 @@
 
                 <div class="form-group mb-6">
                     <label class="input-group">ID: </label>
-                        <input type="text" placeholder="First Name" disabled  [(ngModel)]="pendingClients.id_doc" class="input bg-white input-bordered w-full email ">           
-                </div>
-                <div class="flex form-group justify-end">
+                    <img [src]="pendingClients.id_doc" class="w-36" /> 
+               </div>
+
+                <div class="flex form-group justify-end mb-4">
                    <button type="button"  (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
                 </div>  
             </ng-wizard-step>
@@ -128,68 +147,71 @@
 
                 <div class="form-group mb-6">
                     <label class="input-group">Unit Assign: </label>
-                        <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                    <input type="text" placeholder="Give new Tenant Room Identification" [(ngModel)]="pendingClients.unit" class="input bg-gray-50 input-bordered w-full email ">           
+                    <div class="p-errors" *ngIf="submitted && !pendingClients.unit" >Unit Assignment is required.</div>       
                 </div>
                 <div class="flex form-group justify-end">
                     <button type="button" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
                     <button type="button" (click)="showNextStep()" class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
                 </div>  
-                 
+                <div class="mt-4"></div>
             </ng-wizard-step>
 
             <ng-wizard-step [title]="'MOA'" [canEnter]="isValidTypeBoolean" 
-            [canExit]="isValidFunctionReturnsBoolean.bind(this)">
-                <span>
-                    <form >
-                        <div class="card ml-5 border-none">
-                        <div class="Header">
-                            <h3 >Set up memorandum of agreement</h3>
-                            <p>Enter the rent amount, memorandum <br>date and set the recurrence frequecy.<br>
-                                If this is a month-to-month rental, leave <br>end date empty.</p>
+            [canExit]="isValidFunctionReturnsBoolean.bind(this)">   
+                <div class="card ml-5 border-none">
+                    <div class="Header">
+                        <h3 >Set up memorandum of agreement</h3>
+                        <p>Enter the rent amount, memorandum date and set the recurrence frequecy.
+                            If this is a month-to-month rental, leave end date empty.</p>
+                    </div>
+
+                    <div class="cardbody">
+                        <div class="form-group mb-6">
+                            <label class="input-group">Amount: </label>
+                            <input type="number" placeholder="Initial Mount for the room" [(ngModel)]="pendingClients.amount"  class="input bg-gray-50 input-bordered w-full email " />    
+                            <div class="p-errors" *ngIf="submitted && !pendingClients.amount"  >Rent Amount is required.</div>       
                         </div>
-
-                        <div class="cardbody">
-                            <div class="form-group mb-6">
-                                <label class="input-group">Amount: </label>
-                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
-                            </div>
-
-                            <div class="form-group mb-6">
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="form-group ">
                                 <label class="input-group">Agreement Start Date: </label>
-                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                                <input type="date" placeholder="MOA Start Date" [(ngModel)]="pendingClients.agreementStart" class="input bg-gray-50 input-bordered w-full email " />           
+                                <div class="p-errors" *ngIf="submitted && !pendingClients.agreementStart" >Agreement Start Date is required.</div>
                             </div>
 
-                            <div class="form-group mb-6">
+                            <div class="form-group ">
                                 <label class="input-group">Agreement End Date: </label>
-                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                                <input type="date" placeholder="MOA Expiery date" [(ngModel)]="pendingClients.agreementEnd" class="input bg-gray-50 input-bordered w-full email " />           
+                                <div class="p-errors" *ngIf="submitted && !pendingClients.agreementEnd" >Agreement End Date is required.</div>
                             </div>
 
-                            <div class="form-group mb-6">
+                            <div class="form-group ">
                                 <label class="input-group">Payment Date: </label>
-                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                                <input type="date" placeholder="1st of every month" [(ngModel)]="pendingClients.paymentStart" class="input bg-gray-50 input-bordered w-full email " />  
+                                <div class="p-errors" *ngIf="submitted && !pendingClients.paymentStart" >Payment Date Start is required.</div>         
                             </div>
 
-                            <div class="form-group mb-6">
+                            <div class="form-group mb-4">
                                 <label class="input-group">Payment Date Due: </label>
-                                    <input type="text" placeholder="First Name"  class="input bg-gray-50 input-bordered w-full email ">           
+                                <input type="date" placeholder="grace period for payment due" [(ngModel)]="pendingClients.paymentEnd" class="input bg-gray-50 input-bordered w-full email " />           
+                                <div class="p-errors" *ngIf="submitted && !pendingClients.paymentEnd" >Payment Date Due is required.</div>
                             </div>
-
-                            <div class="form-group mb-6">
-                                <label class="input-group">Agreement Type: </label>
-                                <select  class="input bg-gray-50 input-bordered w-full  email" placeholder="Agreement Type... " >
-                                    <option value disabled selected hidden>Agreement Type... </option>
-                                    <option value="Month-To-Month">Month-To-Month</option>
-                                </select>
-                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-6">
+                            <label class="input-group">Agreement Type: </label>
+                            <select class="input bg-gray-50 input-bordered w-full  email" [(ngModel)]="pendingClients.PaymentType" placeholder="Agreement Type... " >
+                                <option value disabled selected hidden>Agreement Type... </option>
+                                <option value="Month-To-Month">Month-To-Month</option>
+                            </select>
+                            <div class="p-errors" *ngIf="submitted && !pendingClients.PaymentType" >Agreement Type is required.</div>
                         </div>
                     </div>
-                        <div class="form-group justify-end">
-                            <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
-                            <button type="button" (click)="showPreviousStep()" class="text-white ml-5 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
-                            <button type="button" (click)="loading = !loading" (click)="onSubmit()" class="text-white btn-primary m-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
-                        </div>  
-                    </form>
-                </span>
+                </div>
+                <div class="flex form-group justify-end mb-4">
+                    <button type="button" (click)="showPreviousStep()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                    <button type="button" (click)="loading = !loading" (click)="onSubmit()" class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+                </div>  
             </ng-wizard-step>
         </ng-wizard>     
     </div>

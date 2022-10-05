@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { ConfirmDialog} from 'primeng/confirmdialog';
 import { AuthGuard } from 'src/app/Guards/auth.guard';
 
 ///Components
@@ -28,11 +29,13 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
-import {CheckboxModule} from 'primeng/checkbox';
 import { SinglePropertyComponent } from './single-property/single-property.component'; 
+import { CheckboxModule} from 'primeng/checkbox'; 
+import { SidebarModule } from 'primeng/sidebar';
+import { NortificationComponent } from './nortification/nortification.component';
 
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent,
+  {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
@@ -49,7 +52,8 @@ const routes: Routes = [
     MyroomComponent,
     ProfileComponent,
     HomeComponent,
-    SinglePropertyComponent
+    SinglePropertyComponent,
+    NortificationComponent,
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -80,6 +84,7 @@ const routes: Routes = [
     DialogModule,
     ConfirmDialogModule,
     MessagesModule,
+    SidebarModule,
     DialogModule,
     RouterModule.forChild(routes)
   ],

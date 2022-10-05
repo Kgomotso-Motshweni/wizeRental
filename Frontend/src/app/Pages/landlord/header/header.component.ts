@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { DashboardService } from 'src/app/Services/dashboard.service';
+import { NortificationsService } from 'src/app/Services/nortifications.service';
 
 @Component({
   selector: 'app-header',
@@ -18,9 +19,10 @@ export class HeaderComponent implements OnInit {
   Full_Name:any = '';
   token:any = '';
   totalNumber: number = 0;
-  totNumTenants: any = {};
+  userInfo:any = {};
   visibleSidebar2: boolean = false;
-  constructor(private auth:AuthenticationService,private dash: DashboardService) { }
+
+  constructor(private auth:AuthenticationService,private receive:NortificationsService,) { }
 
   ngOnInit(): void {
     this.loading = false;
@@ -28,18 +30,14 @@ export class HeaderComponent implements OnInit {
     this.Full_Name = this.transform(this.token.regData[0].firstname );
     let id = this.token.regData[0].userid ;
     
-    //Pending Tenants
-    this.dash.getPendTenants(id).subscribe({
-      next:data  => {
-        this.loading = true;
-        this.totNumTenants = data;
-        this.totalNumber = this.totNumTenants.length;
-        this.loading = false;
-        }
+    this.receive.landlordReceive(id).subscribe({
+      next:data => {
+        this.userInfo = data;
+        this.totalNumber = this.userInfo.length;  
       }
-    )
+    })
   }
-   
+
   //Receive an entire string, take the first letter and transform it into uppercase 
   substring(value:any): string{
     let letter = this.transform(value.substring(0,1)) + value.substring(1); 

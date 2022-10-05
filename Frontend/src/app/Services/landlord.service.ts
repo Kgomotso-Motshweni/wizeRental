@@ -10,6 +10,7 @@ export class LandlordService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
   
+  //Gets my 
   getMyProperty(id:any){
     return this.http.get(`${this.baseUrl}getproperty/${id}`)
   }
@@ -39,16 +40,17 @@ export class LandlordService {
   }
 
   //Get All The rentees from that specific address
-   rentees(address:any){
-    return this.http.get(`${this.baseUrl}getTenants/${address}`)
+   rentees(users:any){
+    return this.http.post(`${this.baseUrl}getTenants`,users)
   }
-    // rentees(body:any){
-    //   return this.http.post(`${this.baseUrl}getTenants`,body)
-    // }
-  
-  //Get All The address for a specific landlord
 
+  //Get All The Accommodations names for a specific landlord
   address(id:any){
     return this.http.get(`${this.baseUrl}getLandAddress/${id}`)
+  }
+
+  //Creates MOA
+  createMOA(users:any){
+    return this.http.post(`${this.baseUrl}acceptNewTenant`, users)
   }
 }
