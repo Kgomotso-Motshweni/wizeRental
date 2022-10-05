@@ -5,9 +5,6 @@ import { HomeComponent } from './Pages/home/home.component';
 import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
-import { LandingComponent } from './Pages/landing/landing.component';
-import { ViewpropertyComponent } from './Pages/tenant/viewproperty/viewproperty.component';
-import { FilterByComponent } from './Components/filter-by/filter-by.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
 
 

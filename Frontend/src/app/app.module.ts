@@ -35,11 +35,6 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ToggleButtonModule} from 'primeng/togglebutton';
-import { LandingComponent } from './Pages/landing/landing.component';
-import { FilterByComponent } from './Components/filter-by/filter-by.component';
-import { ViewpropertyComponent } from './Pages/tenant/viewproperty/viewproperty.component';
-
-
 
 @NgModule({
   declarations: [

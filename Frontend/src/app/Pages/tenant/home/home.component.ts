@@ -1,14 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-<<<<<<< HEAD
-import { LandingComponent } from '../../landing/landing.component';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { LandingService } from 'src/app/Services/landing.service';
-import { HttpHeaders } from '@angular/common/http';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
-=======
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
@@ -16,7 +7,6 @@ import { MessageService } from 'primeng/api';
 import { Pending } from 'src/app/Interfaces/pending';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
->>>>>>> 5855fb8ddc911ebb99a3d7aa8dfdb867b75b9aa7
 
 
 @Component({
@@ -152,8 +142,6 @@ export class HomeComponent implements OnInit {
     this.submitted = false;
   }
 
-<<<<<<< HEAD
-=======
   hideDialog() {
     this.displayApplicationForm = false;
     this.submitted = false;
@@ -161,5 +149,4 @@ export class HomeComponent implements OnInit {
 
 
 
->>>>>>> 5855fb8ddc911ebb99a3d7aa8dfdb867b75b9aa7
 }
