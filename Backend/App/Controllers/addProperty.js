@@ -53,12 +53,16 @@ const addProperty = async(req, res) => {
  
 }
 
+// ADD INTERIOR PICTURES OF THE ACCOMODATION
 const addRoomImages = async(req, res) =>{
     try{  
         const property_id = parseInt(req.params.property_id); 
         const qualification_url=[];
         let i = 0;
 
+        /* Since its multiple pictures being send to the database and cloudinary 
+        use array to get each file being uploaded then sends it to cloudinary at a time before inserting them in the database
+         */
         for(i=0; i<req.files.length; i++){
 
             qualification_url[i] = req.files[i].path;
@@ -88,6 +92,7 @@ const addRoomImages = async(req, res) =>{
     };
 }
 
+// GET PICTURES OF THE PROPERTY THAT THE LANDLORD ADDED
 const getMyProperties = async(req, res) =>{
     const id = parseInt(req.params.userid);
     try{  
@@ -114,6 +119,7 @@ const getMyProperties = async(req, res) =>{
     };
 }
 
+// DELETES PICTURES OF THE PROPERTY THAT THE LANDLORD ADDED
 const deleteMyProperty = async(req, res) =>{
     const id = parseInt(req.params.property_id);
     try{  

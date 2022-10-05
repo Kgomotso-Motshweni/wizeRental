@@ -229,7 +229,7 @@ export class TenantsComponent implements OnInit {
       })
     }
   }
-
+//update payment using toggle
   updatePayment(index:any,status:any){
     this.rente_id = this.rentees[index].rentee_id
     const body = {

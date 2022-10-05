@@ -13,7 +13,7 @@ import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [MessageService, ConfirmationService]
+
 })
 export class HomeComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })
@@ -62,12 +62,13 @@ export class HomeComponent implements OnInit {
     private tenants:TenantsService,
     private confirmationService: ConfirmationService,) { }
 
+    //select a file
   selectThisImage(myEvent: any) {
     this.file = myEvent.target.files[0]; 
   }
 
   ngOnInit(): void {
-    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token')) //returns a decoded data from token
     let userid = this.token.regData[0].userid
     this.id = userid;
 
@@ -89,21 +90,26 @@ export class HomeComponent implements OnInit {
 
   }
 
+  //it traps errors in the form
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;
   }
 
+  //upload proccess for a file
   handleFileInput(event:any) {
     const image = (event.target as any ).files[0];
     this.file = image
   }
 
+  // submit when the details are true/when form is not blank
   onSubmit():void{
     this.submitted = true;
 
     if(this.Form.invalid){
       return
     }
+
+    //property id number
       let property_ID:any = 2;
      
       this.formData.append('property_id', property_ID);
@@ -122,31 +128,32 @@ export class HomeComponent implements OnInit {
     this.tenants.ApplyProperty(this.formData,  this.id).subscribe({
       next:data => {
         this.messageService.add({
-          key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
+          key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000 //display when data is sent successful
         }); 
       },
       error: (err) =>{
         this.messageService.add({
-          key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
+          key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000 //display when you can't send data
         }); 
       }
     })
   }
   
+  //disable button after applying
   actionMethod(){
 
   }
 
+  //shows application form after clicking apply button
   showBasicDialog() {
     this.displayApplicationForm = true;
     this.submitted = false;
   }
 
+  //hide application form
   hideDialog() {
     this.displayApplicationForm = false;
     this.submitted = false;
   }
-
-
 
 }
