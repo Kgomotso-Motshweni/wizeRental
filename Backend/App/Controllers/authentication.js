@@ -4,8 +4,7 @@ const jwt = require("jsonwebtoken");
 const randomize = require("rand-token");
 const SECRET_KEY = randomize.generate(20);
 const cloudinary = require("../Cloudinary/cloudinary");
-const multer = require("multer");
-const path = require("path");
+
 
 const register = async (req, res) => {
     const user_role = req.params.user_role;

@@ -67,6 +67,7 @@ export class SinglePropertyComponent implements OnInit {
     private service: LandingPageService,
     private confirmationService: ConfirmationService,) { }
 
+   //select a file
   selectThisImage(myEvent: any) {
     this.file = myEvent.target.files[0]; 
   }
@@ -95,14 +96,17 @@ export class SinglePropertyComponent implements OnInit {
     );
     this.getPropertyByID()
   }
+    //it traps errors in the form
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;
   }
 
+   //upload proccess for a file
   handleFileInput(event:any) {
     const image = (event.target as any ).files[0];
     this.file = image
   }
+ 
 
   getPropertyByID(){
     this.loading = true
@@ -123,13 +127,16 @@ export class SinglePropertyComponent implements OnInit {
     })
   }
 
+  // submit when the details are true/when form is not blank
   onSubmit():void{
     this.submitted = true;
 
     if(this.Form.invalid){
       return
     }
-      let property_ID:any = this.propertyID;
+    
+    //property id number
+    let property_ID:any = this.propertyID;
      
       this.formData.append('property_id', property_ID);
       this.formData.append('full_name', this.Form.value.fname + '  '+ this.Form.value.lname)
@@ -162,14 +169,18 @@ export class SinglePropertyComponent implements OnInit {
     })
   }
 
+  //disable button after applying
   actionMethod(){
   }
 
+  //shows application form after clicking apply button
   showBasicDialog() {
     this.displayApplicationForm = true;
     this.submitted = false;
   }
 
+
+  //hide application form
   hideDialog() {
     this.displayApplicationForm = false;
     this.submitted = false;

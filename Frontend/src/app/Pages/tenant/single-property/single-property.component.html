@@ -40,12 +40,14 @@
 </div>
 
 <div class="container justify-center pending mt-10">
-    <button type="btn" routerLink="/tenant"  class="text-white btn-primary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Back</button>
+    <button type="btn" routerLink="/tenant"  class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Back</button>
+      <!-- modal apply button -->
     <button type="btn" (click)="showBasicDialog()" [disabled]="clicked" (click)="actionMethod(); clicked = true;"  class="text-white btn-primary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Apply Here</button>
 </div>
 
 <p-dialog [(visible)]="displayApplicationForm" [style]="{width: '450px', background:'#F4F3EF'}" header="Application Form" [modal]="true" styleClass="p-fluid">
     <h3 class="mb-3">Applicant Information</h3>
+     <!-- Apply form details -->
     <form [formGroup]="Form">   
         <div class="grid gap-6 md:grid-cols-2">
             <div class="form-group "> 
@@ -168,6 +170,7 @@
         </div> 
 
         <div class="flex form-group mb-6 justify-end">
+             <!-- cancel and apply buttons -->
             <button type="submit" (click)="hideDialog()" class="text-white  btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "><i class="pi pi-times">Cancel</i></button>
             <button type="submit" (click)="onSubmit()" class="text-white ml-8 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"><i class="pi pi-check pi-check-circle">Apply</i>
         </button>

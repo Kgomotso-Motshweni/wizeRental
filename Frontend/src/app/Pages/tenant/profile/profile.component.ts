@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.loading = true
     let id = this.activeRoute.snapshot.params[('userid')]
     this.getProfile(id)
   }
@@ -52,10 +53,12 @@ export class ProfileComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
     };
+    this.loading = true
     this.tenants.getProfile(httpOptions, userid).subscribe({
       next:data =>{
         this.userData = data;
         this.editProduct(this.userData[0])
+        this.loading = false
       }
     })
   }
@@ -90,13 +93,13 @@ export class ProfileComponent implements OnInit {
     //Update user profile information
     this.tenants.updateProfile(this.formData, id).subscribe({
       next:data => {
-        this.loading = false;
+        this.loading = true;
         this.message = data
 
         //Reload the Page
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
         this.router.onSameUrlNavigation = 'reload'; 
-        this.loading = true
+        this.loading = false
 
         //Show Successful Message ifn there is no error
         this.messageService.add({
