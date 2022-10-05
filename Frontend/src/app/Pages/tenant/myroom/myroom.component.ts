@@ -31,7 +31,6 @@ export class MyroomComponent implements OnInit {
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
-    private confirmationService: ConfirmationService,
     private auth:AuthenticationService,
     private router:Router,
     private formBuilder: FormBuilder,) { }
@@ -87,6 +86,8 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    console.log(this.Form.value.vehicle1)
+    console.log(this.Form.value.message)
+    console.log(this.Form.value.issues)
+    console.log(this.Form.value.electricity)
   }
 }
