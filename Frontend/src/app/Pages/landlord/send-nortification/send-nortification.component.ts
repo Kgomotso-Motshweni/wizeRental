@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
-import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Router } from '@angular/router';
 import { LandlordService } from 'src/app/Services/landlord.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-send-nortification',
@@ -15,12 +14,6 @@ import { LandlordService } from 'src/app/Services/landlord.service';
   providers: [MessageService]
 })
 export class SendNortificationComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-
   Form = new FormGroup({
     nortType: new FormControl(''),
     subject: new FormControl(''),
@@ -43,10 +36,11 @@ export class SendNortificationComponent implements OnInit {
     private auth:AuthenticationService,
     private mess:NortificationsService,
     private router:Router,
-    private land:LandlordService ) { }
+    private land:LandlordService,
+    private __loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.loading = false;
+ 
 
     //Validate user form using reactive form 
     this.Form = this.formBuilder.group({
@@ -80,7 +74,7 @@ export class SendNortificationComponent implements OnInit {
         this.tenantAddress.forEach((element:any) => {
           this.address.push(element)
         });
-        this.loading = false;       
+         
       }
     })
   }
@@ -91,11 +85,11 @@ export class SendNortificationComponent implements OnInit {
   caller(){
   
     for(let x = 0; x<this.Form.value.address.length; x++){   
-      this.loading = true;
+      
       this.mess.getTenantsData(this.Form.value.address[x].p_name).subscribe({
         next:(data:any) =>{
           this.rentees = data;
-          this.loading = false;
+      
         }
       })      
 
@@ -130,7 +124,7 @@ export class SendNortificationComponent implements OnInit {
           this.router.navigate(['/landlord/tenant/'])
           
           //turn off the loader 
-          this.loading = false;
+       
         },error: err => {
           //show the message if unable to add new data
           this.message = err.error.message;

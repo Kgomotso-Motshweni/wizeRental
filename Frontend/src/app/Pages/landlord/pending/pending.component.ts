@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { Pending } from 'src/app/Interfaces/pending';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { DashboardService } from 'src/app/Services/dashboard.service';
@@ -10,6 +9,7 @@ import { LandlordService } from 'src/app/Services/landlord.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-pending',
@@ -19,12 +19,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class PendingComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-
   pending: any;
   submitted: boolean = false;
   pendingClients: Pending = new Pending;
@@ -54,11 +48,10 @@ export class PendingComponent implements OnInit {
   constructor(private dash: DashboardService, private auth:AuthenticationService,
     private ngWizardService: NgWizardService, private formBuilder: FormBuilder,
     private land:LandlordService,  private messageService: MessageService,
-    private router:Router, 
-    private route: ActivatedRoute,  ) { }
+    private router:Router, private route: ActivatedRoute, private __loader: NgxUiLoaderService  ) { }
 
   ngOnInit(): void {
-    this.loading = true;
+    this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
     this.getPending(this.id);
@@ -94,7 +87,7 @@ export class PendingComponent implements OnInit {
           this.image = this.pending[0].id_doc
           //get the length of the data 
           this.number = this.pending.length;
-          this.loading = false;
+          this.__loader.stop();
         }
       }
     )
@@ -125,9 +118,6 @@ export class PendingComponent implements OnInit {
     selected: 0,
     theme: THEME.arrows,
     toolbarSettings: {
-      //// toolbarExtraButtons: [
-      ////   { text: 'Submit', class: 'btn btn-info', event: () => { alert("Completed!!"); } }
-      //// ],
       showPreviousButton: false,
       showNextButton: false 
     }
@@ -166,14 +156,13 @@ export class PendingComponent implements OnInit {
 //////////////////// NG-Wirzad Ends here //////////////////////
 ///////////////////////////////////////////////////////////////
 
-
   declined(){
 
   }
+
   onSubmit(){
     this.submitted = true
-
-    
+    this.__loader.start();
     //Validate if the modal is empty do not submit
     if(!this.pendingClients.unit || !this.pendingClients.amount || !this.pendingClients.agreementStart 
       || !this.pendingClients.agreementEnd || !this.pendingClients.paymentStart || !this.pendingClients.paymentEnd || !this.pendingClients.PaymentType){
@@ -193,18 +182,18 @@ export class PendingComponent implements OnInit {
         payendDate: this.pendingClients.paymentEnd,
         agreementType: this.pendingClients.PaymentType
       }
-      this.loading = true;
+     
       this.land.createMOA(user).subscribe({
         next:data => {
-         
+          
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";
           this.router.navigate(['/landlord/pending'])
-          this.loading = false;
+          this.__loader.stop();
           this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
         },error: err => {
           //show the message if unable to add new data
-          this.loading = false;
+          this.__loader.stop();
           this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000}) 
         }
       })

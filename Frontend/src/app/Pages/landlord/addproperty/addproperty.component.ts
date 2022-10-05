@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { elementAt, of } from 'rxjs';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
@@ -7,6 +6,7 @@ import { LandlordService } from 'src/app/Services/landlord.service';
 import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-addproperty',
@@ -15,12 +15,7 @@ import { Router } from '@angular/router';
   providers: [MessageService]
 })
 export class AddpropertyComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-  
+
   Form = new FormGroup({
     address: new FormControl(''),
     town: new FormControl(''),
@@ -58,11 +53,12 @@ export class AddpropertyComponent implements OnInit {
     private land:LandlordService,
     private messageService: MessageService,
     private auth:AuthenticationService,
-    private router:Router ) {
+    private router:Router, 
+    private __loader: NgxUiLoaderService) {
   }
 
   ngOnInit(): void {
-    this.loading = false;
+    this.__loader.start();
     //returns a decoded token
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
@@ -83,6 +79,7 @@ export class AddpropertyComponent implements OnInit {
       tittleDeed: ['', Validators.required],
     }
     );
+    this.__loader.stop();
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -166,6 +163,7 @@ export class AddpropertyComponent implements OnInit {
 
   OnSubmit(){
     this.submitted = true;
+    this.__loader.start();
     if(this.Form.invalid){
       return
     }
@@ -187,14 +185,14 @@ export class AddpropertyComponent implements OnInit {
     this.formData.append('pdf', this.pdf)
 
     //Subscribe to add new property details
-    this.loading = true;
+  
     this.land.postProperty(this.formData, this.id).subscribe({
       next:data => {
        
         this.userinfor = data;
         
         //Subscribe to add new property room pictures
-        for(let i=1; i< this.gallery.length; i++){
+        for(let i=0; i< this.gallery.length; i++){
           //assign room images to roomImages formdata from a list
           this.RoomImmages.append('image', this.gallery[i])
           this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe()  
@@ -202,10 +200,10 @@ export class AddpropertyComponent implements OnInit {
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
         }); 
-        this.loading = false;
+        this.router.navigate(['/landlord/myproperty'])
       }
     })
-    this.loading = false;
+    this.__loader.stop();
   }
 
   removeTask(data:any){

@@ -1,6 +1,6 @@
-<div  class=" justify-center " style="margin-top:5vh">
+<div *ngIf="myNotification !=0" class=" justify-center " style="margin-top:5vh">
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
-        <div class="card decoration-white shadow-xl text-primary-content">
+        <div class="card decoration-white shadow-xl text-primary-content"  *ngFor="let i of userInfo">
             <div class="card-header h-7 ">
                 <h5>Shaka Accommodation</h5>
             </div>
@@ -15,7 +15,12 @@
     </div>
 </div>
 
-
-
-
-    
+<div *ngIf="myNotification == 0" class="container justify-center " style="margin-top:5vh">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
+        <div class="card decoration-white shadow-xl text-primary-content">
+            <div class="card-body">
+                <h5>You have 0 notifications</h5>
+            </div>
+        </div>
+    </div>
+</div>

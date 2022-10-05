@@ -1,3 +1,4 @@
+<ngx-ui-loader></ngx-ui-loader>
 <div class="drawer drawer-mobile" > 
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
     <div class="drawer-content flex flex-col">
@@ -13,11 +14,11 @@
         <label for="my-drawer-3" class="drawer-overlay"></label> 
         <ul  class="menu p-4 overflow-y-auto w-60 primary"> 
             <a routerLink='/landlord/'><img id="logo" src="../../../assets/images/landlordLogo.png"></a>
-            <li><i class="pi pi-home"><a (click)="loading = !loading" routerLink='/landlord/'>Dashboard</a></i></li>
-            <li><i class="pi pi-users"><a (click)="loading = !loading" routerLink='/landlord/tenant'>Tenants</a></i></li>
-            <li><i class="pi pi-plus" ><a (click)="loading = !loading" routerLink='/landlord/myproperty'>Add Property</a></i></li>
-            <li><i class="pi pi-clock"><a (click)="loading = !loading" routerLink='/landlord/pending'>Pending</a></i></li>
-            <li><i class="pi pi-power-off"><a (click)="loading = !loading" (click)="Logout()" >Logout</a></i></li>
+            <li><i class="pi pi-home"><a  routerLink='/landlord/'>Dashboard</a></i></li>
+            <li><i class="pi pi-users"><a  routerLink='/landlord/tenant'>Tenants</a></i></li>
+            <li><i class="pi pi-plus" ><a  routerLink='/landlord/myproperty'>Add Property</a></i></li>
+            <li><i class="pi pi-clock"><a  routerLink='/landlord/pending'>Pending</a></i></li>
+            <li><i class="pi pi-power-off"><a (click)="Logout()" >Logout</a></i></li>
         </ul>    
     </div>
 </div>  

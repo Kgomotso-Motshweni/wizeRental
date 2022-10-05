@@ -19,17 +19,7 @@
         </button>   
     </div>
 </div>
-
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>
-
-<p-sidebar [(visible)]="visibleSidebar2" position="right" style="background-color: black;" >
+<p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Tenants</h1>
     <app-nortification></app-nortification>
 </p-sidebar>

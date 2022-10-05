@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-myroom',
@@ -14,12 +14,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   providers: [MessageService, ConfirmationService]
 })
 export class MyroomComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-  visibleSidebar2: boolean = false;
   
   id:number = 0;
   token:any;
@@ -28,12 +22,13 @@ export class MyroomComponent implements OnInit {
   dialogMessage: boolean = false;
   submitted: boolean = false;
   selectedValues: string[] = [];
-
+  visibleSidebar2:boolean = false;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
     private router:Router,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: FormBuilder,
+    private __loader: NgxUiLoaderService) { }
 
     Form = new FormGroup({
       message: new FormControl(''),
@@ -43,6 +38,7 @@ export class MyroomComponent implements OnInit {
 
     
   ngOnInit(): void {
+    this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
     this.getNotifications();
@@ -63,6 +59,7 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
+        this.__loader.stop();
       }
     })
   }
@@ -80,8 +77,11 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
+    this.__loader.start();
     console.log(this.Form.value.message)
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
+
+    this.__loader.stop();
   }
 }

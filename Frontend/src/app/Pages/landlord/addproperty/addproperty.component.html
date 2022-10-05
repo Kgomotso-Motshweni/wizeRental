@@ -1,3 +1,4 @@
+<ngx-ui-loader></ngx-ui-loader>
 <p-toast position="top-right" key="tc"></p-toast>
 <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
     <ng-wizard-step [title]="'Property details'" [canEnter]="isValidTypeBoolean" 
@@ -195,12 +196,3 @@
         </div> 
     </ng-wizard-step>
 </ng-wizard>
-
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>

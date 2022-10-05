@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { DashboardService } from 'src/app/Services/dashboard.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +9,6 @@ import { NortificationsService } from 'src/app/Services/nortifications.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
 
   Full_Name:any = '';
   token:any = '';
@@ -22,10 +16,10 @@ export class HeaderComponent implements OnInit {
   userInfo:any = {};
   visibleSidebar2: boolean = false;
 
-  constructor(private auth:AuthenticationService,private receive:NortificationsService,) { }
+  constructor(private auth:AuthenticationService,private receive:NortificationsService,private __loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.loading = false;
+
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.Full_Name = this.transform(this.token.regData[0].firstname );
     let id = this.token.regData[0].userid ;

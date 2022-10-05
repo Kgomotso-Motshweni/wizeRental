@@ -6,7 +6,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Pending } from 'src/app/Interfaces/pending';
 import { TenantsService } from 'src/app/Services/tenants.service';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+
 import { LandingPageService } from 'src/app/Services/landing-page.service';
 
 @Component({
@@ -15,13 +15,6 @@ import { LandingPageService } from 'src/app/Services/landing-page.service';
   styleUrls: ['./single-property.component.scss']
 })
 export class SinglePropertyComponent implements OnInit {
-
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-
   Form = new FormGroup({
     fname: new FormControl(''),
     lname: new FormControl(''),
@@ -109,7 +102,6 @@ export class SinglePropertyComponent implements OnInit {
  
 
   getPropertyByID(){
-    this.loading = true
     this.service.getPropertiesByID(this.propertyID).subscribe({
       next: (data: any) => {
         this.property = data;
@@ -122,7 +114,6 @@ export class SinglePropertyComponent implements OnInit {
     this.service.getRoomsImages(userID).subscribe({
       next: (data: any) => {
         this.tenantProperty = data;
-        this.loading = false
       }
     })
   }

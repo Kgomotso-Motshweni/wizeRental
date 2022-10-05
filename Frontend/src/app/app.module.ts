@@ -40,6 +40,9 @@ import { LoginComponent } from './Pages/login/login.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
 
+//
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +56,7 @@ import { ViewPropertyComponent } from './Pages/view-property/view-property.compo
     ViewPropertyComponent,
   ],
   imports: [
+    
     ConfirmDialogModule,
     InputTextModule,
     MessagesModule,
