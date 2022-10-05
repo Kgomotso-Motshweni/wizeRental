@@ -1,25 +1,28 @@
+
 <div class="card1 bg-base-100 shadow-xl col-12 justify-content-center "   style="width: 100%;">
   <figure><img src="../../../../assets/images/istockphoto.jpeg" height="50" class="img-fluid w-100" alt="Shoes"/></figure>
   <div class="card-body">
     <p>Wize rentals is here to find you a 
       accommodation in a region you want at the
-      price you can afford</p>
+      price you can afford
+    </p>
   </div>
 </div>
 
 <!--search and filter-->
 <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10 pt-5" style="width:100%;" >
-
   <div class="flex search col-xl-12">
       <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
-      <div class="space1">
-      </div>
-      <br>
+        <div class="space1">
+        </div>
+          <br>
       <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
-</div>
+  </div>
 </div>
 <!--till here-->
 
+
+<!-- Property Cards  -->
 <div class="container-fluid" style="margin-top:20px;">
   <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center ml-1">
       <div class="card rounded-3 w-96 bg-base-100 shadow-xl " *ngFor="let i of tenantProperty| filter:searchItem  ; let m = index">
@@ -47,6 +50,8 @@
   </div>
 </div>
 
+
+<!-- footer -->
 <footer class="footer mt-7 footer-center p-4 border text-base-content ">
   <div>
     <p>Copyright Â© 2022 All Rights Reserved | <br>
