@@ -5,15 +5,17 @@ import { HomeComponent } from './Pages/home/home.component';
 import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
+import { LandingComponent } from './Pages/landing/landing.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
-
+import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
 
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path: 'view-property/:id', component: ViewPropertyComponent},
   {path:'landlord', component:LandlordComponent},
   {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
-  {path:'register', component:RegisterComponent, canActivate:[LoggedGuard]},
+  {path:'register', component:RegisterComponent,  canActivate:[LoggedGuard]},
   {path:'tenant', component:TenantComponent},
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];

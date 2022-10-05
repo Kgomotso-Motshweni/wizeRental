@@ -1,18 +1,73 @@
-.additional-Information{
-    font-size: x-large;
+.space{
+    width: 25px;
+    height: auto;
+    display: inline-block;
 }
 textarea.input {
     min-height: 100px;
     max-height: 100px;
 }
 
-.invalid-feedback,p-inputMask{
-    color: red;
+.buttons{
+    background-color: #E3E3E7;
+    cursor: pointer;
+    width: auto;
+    height: 50px;
+    
+    
+    // justify-content: center;
 }
-.is-invalid,p-inputMask{
-    border-color: red;
+.btn1{
+    width: 50%;
+    height: 40px;
+    padding:0.5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 40px
+   
+}
+.badge{
+    width: 50%;
+    height: 40px;
+    padding:0.5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px
+
+}
+.btn2{
+    width: 50%;
+    height: 40px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 40px
 }
 
-.email{
-    padding-left: 25px;
+.btn1:hover{
+    background-color: #55ADEA;
+    color: white;
+    border-radius: 25px;
+}
+
+.btn2:hover{
+    background-color: #55ADEA;
+    color: white;
+    border-radius: 25px;
+}
+
+.btn{
+    width: 160px;
+    color: white;
+}
+
+// card sizes
+
+.card{
+    // height: 465px;
+    width: 350px;
+}
+
+.img{
+    border-radius: 8px;
+    width: 350px;
 }

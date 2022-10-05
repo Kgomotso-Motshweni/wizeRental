@@ -63,6 +63,7 @@ export class AddpropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
+    //returns a decoded token
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
     this.Form = this.formBuilder.group({
@@ -128,7 +129,6 @@ export class AddpropertyComponent implements OnInit {
   }
   stepChanged(args: StepChangedArgs) 
   {
-
   }
 
   // 	Validation for transition from step
@@ -153,13 +153,17 @@ export class AddpropertyComponent implements OnInit {
   }
 
 
-  roomsImages(event:any) {    
+  roomsImages(event:any) {  
+    //get the images from html and target the file you just uploaded   
     const image = (event.target as any ).files[0];
+
+    //insert the image to gallery which is an array list
     this.gallery.push(image)
     
     //Show image preview
     let reader = new FileReader();
     reader.onload = (event: any) => {
+
       this.preview.push(event.target.result);
     }
       reader.readAsDataURL(image);  
@@ -172,6 +176,8 @@ export class AddpropertyComponent implements OnInit {
     if(this.Form.invalid){
       return
     }
+    //when dealing with pictures send the data through a formData
+    //append all the form values to formdata, send formdata to backend containing all your form data 
     this.formData.append('p_address', this.Form.value.address)
     this.formData.append('p_town', this.Form.value.town)
     this.formData.append('p_city', this.Form.value.city)
@@ -208,6 +214,7 @@ export class AddpropertyComponent implements OnInit {
     })
     this.loading = false;
   }
+
   removeTask(data:any){
     console.log(this.preview);
     

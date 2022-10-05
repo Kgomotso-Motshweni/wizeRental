@@ -18,22 +18,27 @@ import { TenantModule } from './Pages/tenant/tenant.module';
 
 ////////////
 //Imported PrimeNG module .
+import { BadgeModule } from "primeng/badge";
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
+import { MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule} from 'primeng/dialog';
+import { ToggleButtonModule} from 'primeng/togglebutton';
 
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
-import { DialogModule} from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
 import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { ToggleButtonModule} from 'primeng/togglebutton';
+import { LandingComponent } from './Pages/landing/landing.component';
+import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +48,16 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    LandingComponent,
     FooterComponent,
+    ViewPropertyComponent,
   ],
   imports: [
+    ConfirmDialogModule,
+    InputTextModule,
+    MessagesModule,
     InputNumberModule,
+    BadgeModule,
     InputMaskModule,
     LandlordModule,
     TenantModule,
@@ -59,12 +70,10 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     HttpClientModule,
     CalendarModule,
     Ng2SearchPipeModule,
-
     FormsModule,
     DropdownModule,
     ToastModule,
     DialogModule,
-    ButtonModule,
     ToggleButtonModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes,

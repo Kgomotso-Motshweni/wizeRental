@@ -60,9 +60,13 @@ const addRoomImages = async(req, res) =>{
         const qualification_url=[];
         let i = 0;
 
+        /* Since its multiple pictures being send to the database and cloudinary 
+        use array to get each file being uploaded then sends it to cloudinary at a time before inserting them in the database
+         */
         for(i=0; i<req.files.length; i++){
 
             qualification_url[i] = req.files[i].path;
+            
             
             const images = await cloudinary.uploader.upload(qualification_url[i], {
                 folder: "/property/",
@@ -119,6 +123,7 @@ const getMyProperties = async(req, res) =>{
 const deleteMyProperty = async(req, res) =>{
     const id = parseInt(req.params.property_id);
     try{  
+
         await client.query(`DELETE FROM roomsimages WHERE property_id = $1`, [id]);
 
         client.query(`DELETE FROM landlordproperty WHERE property_id = $1`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order

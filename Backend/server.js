@@ -12,7 +12,7 @@ var corsOptions = {
     optionsSuccessStatus: 200,
     credentials: true
   };// only allow the listerning addresses to connnect to the backend
-  
+
 app.use(express.json());  // to support JSON-encoded
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
@@ -47,14 +47,15 @@ const auth = require("./App/Routes/Authentication");
 const property = require('./App/Routes/Landlord')
 const tenant = require('./App/Routes/tenant')
 const nortify = require('./App/Routes/Nortifications')
+const public = require('./App/Routes/property')
 // const user =require('../Backend/App/Routes/rentees')
 
 app.use("/api", auth) //retrive authentication infor 
 app.use("/api", property) //retrive Landlord infor 
 app.use("/api", tenant) //retrive Tenant infor 
 app.use("/api", nortify) //retrive Tenant infor 
-
-app.listen(port, () =>{  
+app.use("/api", public) //retrive Tenant infor 
+app.listen(port, () =>{
     console.log(`Server is running on port ${port}. http://localhost:${port}`) 
  })
 

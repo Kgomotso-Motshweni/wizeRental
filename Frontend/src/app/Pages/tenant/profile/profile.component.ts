@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
-import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Userinfor } from 'src/app/Interfaces/userinfor';
 import { HttpHeaders } from '@angular/common/http';
 import { TenantsService } from 'src/app/Services/tenants.service';
@@ -34,8 +33,8 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.loading = true
     let id = this.activeRoute.snapshot.params[('userid')]
-    console.log(id)
     this.getProfile(id)
   }
 
@@ -54,14 +53,17 @@ export class ProfileComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
     };
+    this.loading = true
     this.tenants.getProfile(httpOptions, userid).subscribe({
       next:data =>{
         this.userData = data;
         this.editProduct(this.userData[0])
+        this.loading = false
       }
     })
   }
 
+  //push the data from userInfor  into  tenantInfo and crop it according to our interface/Model
   editProduct(tenantInfor: Userinfor) {
     this.tenantInfor = {...tenantInfor};
   }
@@ -88,13 +90,18 @@ export class ProfileComponent implements OnInit {
 
     let id = this.tenantInfor.userid;
 
+    //Update user profile information
     this.tenants.updateProfile(this.formData, id).subscribe({
       next:data => {
-        this.loading = false;
+        this.loading = true;
         this.message = data
+
+        //Reload the Page
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
         this.router.onSameUrlNavigation = 'reload'; 
-        this.loading = true
+        this.loading = false
+
+        //Show Successful Message ifn there is no error
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
         });

@@ -1,10 +1,12 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<!--cards for dashboard-->
 <div class="container justify-center pending">
   <div class="cards mb-6 mt-6">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
+          <!----------------------------Monthly revenue card------------------------------------------->
           <h2 class="card-title">Monthly Revenue</h2> 
           <div class="flex">
             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#55ADEA" viewBox="0 0 512 512">
@@ -24,7 +26,7 @@
         </div>
       </div>
 
-
+<!------------------------------------Total Received card------------------------------------------->
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Total Amount Received</h2> 
@@ -45,7 +47,7 @@
           </div>
         </div>
       </div>
-
+<!----------------------------Total Not Received card------------------------------------------->
       <div class="card shadow-xl border">
         <div class="grid card-body w-content user justify-start">
           <h2 class="card-title">Total Amount Not Received</h2> 
@@ -66,7 +68,7 @@
           </div>
         </div>
       </div>
-
+<!----------------------------Occupied Rooms card------------------------------------------->
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Rooms Occupied</h2> 
@@ -89,6 +91,7 @@
         </div>
       </div>
       
+      <!----------------------------available Rooms card------------------------------------------->
       <div class="card shadow-xl border">
         <div class="grid card-body w-full user justify-start">
           <h2 class="card-title">Rooms Available</h2> 
@@ -108,7 +111,7 @@
           </div>
         </div>
       </div>
-
+ <!--------------------------------Pending card------------------------------------------->
       <div class="card shadow-xl border">
         <div class="grid card-body user justify-start"> 
           <h2 class=" card-title">Pending Tenants</h2> 
@@ -134,7 +137,7 @@
     </div>
   </div> 
 </div>
-
+<!----------till here------------->
 <ngx-loading
     [show]="loading"
     [config]="{

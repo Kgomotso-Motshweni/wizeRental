@@ -1,0 +1,188 @@
+<p-toast position="top-right" key="tc"></p-toast>
+<p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card lg:card-side bg-base-100 shadow-xl m-3 p-2">
+    <figure><img [src]="data.house_image" alt="Shoes" /></figure>
+    <div class="card-body">
+        <div class="flex flex-row headers">
+            <h3 class="card-title">Accommodation info</h3>
+            <h3 class="card-title ml-2 lg:ml-14">R {{data.p_price}}</h3>
+        </div>
+       
+        <h6>{{data.p_address}}</h6>
+        <h6>{{data.p_city}} {{data.p_town}}, {{data.p_zip_code}}</h6>
+        <br>
+        <div class="flex icons flex-row">
+            <div class="flex flex-col basis-1/4">
+                <i class="fa-solid fa-bed base ml-4">{{data.p_bath}}</i>
+            </div>
+            <div class="flex flex-col basis-1/4">
+                <i class="fa-solid fa-bath ml-4" >{{data.p_bath}}</i>
+            </div>
+            <div class="flex flex-col basis-1/4">
+                <i class="fa-solid fa-car ml-4">{{data.p_bath}}</i>
+            </div>
+        </div>
+        
+        <div class="card-body shadow-xl">
+            <h4 class="mb-4">Description</h4> 
+            <p> {{data.p_description}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container rounded mt-10">
+    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+        <div class="card rounded-3 w-96 bg-base-100 shadow-xl " *ngFor="let i of tenantProperty ; let m = index">
+            <figure><img src='{{i.images}}' alt="Shoes" /></figure>
+        </div>
+    </div>
+</div>
+
+<div class="container justify-center pending mt-10">
+    <button type="btn" routerLink="/tenant"  class="text-white btn-secondary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Back</button>
+      <!-- modal apply button -->
+    <button type="btn" (click)="showBasicDialog()" [disabled]="clicked" (click)="actionMethod(); clicked = true;"  class="text-white btn-primary ml-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Apply Here</button>
+</div>
+
+<p-dialog [(visible)]="displayApplicationForm" [style]="{width: '450px', background:'#F4F3EF'}" header="Application Form" [modal]="true" styleClass="p-fluid">
+    <h3 class="mb-3">Applicant Information</h3>
+     <!-- Apply form details -->
+    <form [formGroup]="Form">   
+        <div class="grid gap-6 md:grid-cols-2">
+            <div class="form-group "> 
+                <input placeholder="First Name" type="text" formControlName="fname" pInputText id="first_name"[ngClass]="{ 'is-invalid':submitted && f['fname'].errors }"  class="input bg-gray-50 input-bordered w-full email " />
+                <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
+                    <div *ngIf="f['fname'].errors['required']">First name is required</div>
+                </div>
+            </div>
+
+
+            <div class="form-group mb-6"> 
+                <input placeholder="Last Name" type="text" formControlName="lname" pInputText id="first_name" [ngClass]="{ 'is-invalid':submitted && f['lname'].errors }" class="input bg-gray-50 input-bordered w-full email " />
+                <div *ngIf="submitted && f['lname'].errors" class="invalid-feedback">
+                    <div *ngIf="f['lname'].errors['required']">Last name is required</div>
+                </div>
+            </div>        
+        </div>
+           
+        <div class="form-group mb-6"> 
+            <input  type="text" placeholder="Email" formControlName="email" pInputText id="email" class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['email'].errors }"   />
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+            </div>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 mb-2">
+            <div class="form-group "> 
+                <p-inputMask mask="999-999-9999" formControlName="phone_num" placeholder="Phone Number" [ngClass]="{ 'is-invalid':submitted && f['phone_num'].errors }" ></p-inputMask>
+                <div *ngIf="submitted && f['phone_num'].errors" class="invalid-feedback">
+                    <div *ngIf="f['phone_num'].errors['required']">Phone Number is required</div>
+                </div>
+            </div>
+
+            <div class="form-group mb-6"> 
+                <input type="number" min="18" max="100" formControlName="age" placeholder="Age" class="input bg-gray-50 input-bordered w-full email " pInputText class="input input-bordered w-full max-w-s age "  [ngClass]="{ 'is-invalid':submitted && f['age'].errors }" />
+                <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
+                    <div *ngIf="f['age'].errors['required']">age is required</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-6"> 
+            <input type="file" min="18" max="100" (change)="handleFileInput($event)" formControlName="id_doc" placeholder="id_doc" pInputText class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['id_doc'].errors }" />
+            <div *ngIf="submitted && f['id_doc'].errors" class="invalid-feedback">
+                <div *ngIf="f['id_doc'].errors['required']">Upload ID is required</div>
+            </div>
+        </div>
+
+        <div class="form-group mb-6"> 
+            <input type="text" placeholder="Occupation" formControlName="occupation" pInputText class="input bg-gray-50 input-bordered w-full email "  [ngClass]="{ 'is-invalid':submitted && f['occupation'].errors }" >               
+            <div *ngIf="submitted && f['occupation'].errors" class="invalid-feedback">
+                <div *ngIf="f['occupation'].errors['required']">Employement Details is required</div>
+            </div>
+        </div>
+
+        <div class="form-group mb-6"> 
+            <input type="date"  min="18" max="100" formControlName="view_date" placeholder="Schedule a View Date" pInputText class="input bg-gray-50 input-bordered w-full email "  [ngClass]="{ 'is-invalid':submitted && f['view_date'].errors }" >
+            
+            <div *ngIf="submitted && f['view_date'].errors" class="invalid-feedback">
+                <div *ngIf="f['view_date'].errors['required']">Schedule a Date required</div>
+            </div>
+        </div>
+            
+        <div class="additional-Information">Additional Information</div>
+
+        <div class="wrap form-group mb-6"> 
+        
+            <label class="input-group">
+                Total Occupants
+            <select class="input bg-gray-50 input-bordered w-full email " formControlName="num_tenants" placeholder="Choose a number of Occupants"  [ngClass]="{ 'is-invalid':submitted && f['num_tenants'].errors }" >
+                <option value disabled selected hidden>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div *ngIf="submitted && f['num_tenants'].errors" class="invalid-feedback">
+                <div *ngIf="f['num_tenants'].errors['required']">total occupancy is required</div>
+            </div>
+            </label>
+        </div>
+
+        <div class="wrap form-group mb-6"> 
+            <label class="input-group">
+                Number of Pets
+            <input type="number" min="0" max="5" formControlName="num_pets" placeholder="0" class="input bg-gray-50 input-bordered w-full email " pInputText class="input input-bordered w-full max-w-s num_pets "  [ngClass]="{ 'is-invalid':submitted && f['num_pets'].errors }" >
+            <div *ngIf="submitted && f['num_pets'].errors" class="invalid-feedback">
+                <div *ngIf="f['num_pets'].errors['required']">Number of pets is required</div>
+            </div>
+            </label>
+        </div>
+           
+        <div class="wrap form-group mb-6"> 
+            <label class="input-group">
+                Pets Description
+            <textarea type="text"  formControlName="ped_desc" placeholder="" pInputText class="input bg-gray-50 input-bordered w-full email " [ngClass]="{ 'is-invalid':submitted && f['ped_desc'].errors }" >
+            </textarea>
+            <div *ngIf="submitted && f['ped_desc'].errors" class="invalid-feedback">
+                <div *ngIf="f['ped_desc'].errors['required']">Pets Description is required</div>
+            </div>
+            </label>
+        </div>
+       
+        
+
+        <div class="wrap form-group mb-6"> 
+            <label class="input-group">
+                Smokes Options
+            <select class="input input-bordered w-full max-w-s department " class="input bg-gray-50 input-bordered w-full email "  formControlName="smoke" placeholder="Choose whether you smoke or not" [ngClass]="{ 'is-invalid':submitted && f['smoke'].errors }" >
+            <option value disabled selected hidden>Choose Below...</option>
+            <option value="NO">No</option>
+            <option value="YES">Yes</option>
+            </select>
+            <div *ngIf="submitted && f['smoke'].errors" class="invalid-feedback">
+                <div *ngIf="f['smoke'].errors['required']">smoke is required</div>
+            </div>
+            </label>
+        </div> 
+
+        <div class="flex form-group mb-6 justify-end">
+             <!-- cancel and apply buttons -->
+            <button type="submit" (click)="hideDialog()" class="text-white  btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "><i class="pi pi-times">Cancel</i></button>
+            <button type="submit" (click)="onSubmit()" class="text-white ml-8 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"><i class="pi pi-check pi-check-circle">Apply</i>
+        </button>
+        </div>
+    </form>
+</p-dialog>
+
+<ngx-loading
+    [show]="loading"
+    [config]="{
+    animationType: ngxLoadingAnimationTypes.threeBounce,
+    primaryColour: '#ffffff', secondaryColour: '#ffffff',
+    backdropBorderRadius: '3px'
+    }">
+</ngx-loading>

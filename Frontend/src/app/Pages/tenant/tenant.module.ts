@@ -29,7 +29,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
-import {CheckboxModule} from 'primeng/checkbox'; 
+import { SinglePropertyComponent } from './single-property/single-property.component'; 
+import { CheckboxModule} from 'primeng/checkbox'; 
 import { SidebarModule } from 'primeng/sidebar';
 import { NortificationComponent } from './nortification/nortification.component';
 
@@ -38,7 +39,7 @@ const routes: Routes = [
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
-    {path:'home',component:HomeComponent},
+    {path: 'view-property/:id', component: SinglePropertyComponent},
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
 
@@ -51,6 +52,7 @@ const routes: Routes = [
     MyroomComponent,
     ProfileComponent,
     HomeComponent,
+    SinglePropertyComponent,
     NortificationComponent,
   ],
   imports: [
