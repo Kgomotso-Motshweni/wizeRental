@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-myroom',
@@ -20,6 +21,16 @@ export class MyroomComponent implements OnInit {
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
   visibleSidebar2: boolean = false;
+
+  name:any = "search";
+propertytype: any
+ properties:any;
+ property:any;
+ searchItem:any;
+ condition: boolean = false;
+ tenantAddress:any;
+ form!: FormGroup;
+ filterItem:any;
   
   id:number = 0;
   token:any;
