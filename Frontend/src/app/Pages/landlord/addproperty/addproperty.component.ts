@@ -96,6 +96,8 @@ export class AddpropertyComponent implements OnInit {
     hidden: STEP_STATE.hidden
   };
 
+
+  // The ng-wizard tabs
   config: NgWizardConfig = {
     selected: 0,
     theme: THEME.arrows,
@@ -105,18 +107,19 @@ export class AddpropertyComponent implements OnInit {
     }
   };
   
+
   showPreviousStep() 
   {
     this.ngWizardService.previous();
   }
 
+  // Allows submission if the form is valid
   showNextStep() 
   {
     this.submitted = true;
     if(this.Form.invalid){
       return
     }
-
     this.ngWizardService.next();
   }
 
@@ -127,6 +130,8 @@ export class AddpropertyComponent implements OnInit {
   stepChanged(args: StepChangedArgs) 
   {
   }
+
+  // 	Validation for transition from step
   isValidTypeBoolean: boolean = true;
   isValidFunctionReturnsBoolean(args: StepValidationArgs) 
   {
@@ -164,6 +169,8 @@ export class AddpropertyComponent implements OnInit {
       reader.readAsDataURL(image);  
   }
 
+
+  // Submits the form  
   OnSubmit(){
     this.submitted = true;
     if(this.Form.invalid){
