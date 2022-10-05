@@ -44,12 +44,18 @@ propertytype: any
     private messageService: MessageService,  
     private auth:AuthenticationService,
     private router:Router,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: FormBuilder,
+    private service:MyroomComponent,
+    private route: ActivatedRoute,) { }
 
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
-      electricity: new FormControl('')
+      electricity: new FormControl(''),
+      address : new FormControl(''),
+      propertytype : new FormControl(''),
+      price : new FormControl(''),
+      status : new FormControl('')
     });
 
     
@@ -62,6 +68,10 @@ propertytype: any
       message: ['', Validators.required],
       issues: ['', Validators.required],
       electricity: ['', Validators.required],
+      address:['', Validators.required],
+      propertytype: ['', Validators.required],
+      price: ['', Validators.required],
+      status: ['', Validators.required]
     });
   }
 

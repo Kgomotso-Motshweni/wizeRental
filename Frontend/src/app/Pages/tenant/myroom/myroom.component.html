@@ -72,7 +72,7 @@
    <form [formGroup]="Form">
         <div class="form-group mb-6">
             <label for="issue1"> Water </label><br>
-            <input type="checkbox" formControlName="issues" formid="issue1" name="issue1" value="Water">
+            <input type="checkbox" formControlName="issues" formid="issue1" name="issue1" value="Water" [ngClass]="{ 'is-invalid':submitted && f['message'].errors }">
             <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
                 <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
@@ -127,49 +127,6 @@
     </form>
 </p-dialog> 
 
-
-<div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-5 mr-2 gap-5">
-
-      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-5 justify-center" style="width: 100%;">
-
-<div class="form-group mb-6">
-    <label ></label>
-    <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
-        <option value disabled selected hidden>All</option>
-        <option *ngFor="let i of propertytype" value="commune" >commune</option>
-    </select>
-  </div>
-      </div>
-</div>
-
-<div class="flex prop ml-5 justify-center md:prop-cols-1 rounded"  >
-    <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
-    <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index " >
-      
-    <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
-      <!-- {{i.house_image}} -->
-      <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
-      <div class="card-body">
-          <h6>{{i.p_name}} accommodations</h6>
-          <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}</h6>
-          <div class="icons">
-         
-          <i class="fa-solid fa-bed"></i><h6>{{i.p_bedroom}} rooms </h6>
-          <div class="space">
-          </div>
-          <i class="fas fa-bath"></i><h6>{{i.p_bath}} bathrooms</h6>
-      
-      </div>
-      <h6>{{i.p_propertytype}}</h6>
-      <h4>R{{i.p_price}}/Month</h4>
-      </div>
-    </div>
-    <br>
-</div>
-
-</div>
-  </div>
-
 <ngx-loading
     [show]="loading"
     [config]="{
@@ -178,5 +135,55 @@
     backdropBorderRadius: '3px'
     }">
 </ngx-loading>
+
+<div *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-5 mr-2 gap-5">
+
+    <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-5 justify-center"
+        style="width: 100%;">
+
+        <div class="form-group mb-6">
+            <label></label>
+            <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email"
+                placeholder="Select User Role">
+                <option value disabled selected hidden>All</option>
+                <option *ngFor="let i of propertytype" value="commune">commune</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="flex prop ml-5 justify-center md:prop-cols-1 rounded">
+    <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center"
+        style="width: 100%;">
+        <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index ">
+
+            <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10"
+                routerLink="/view/{{i.property_id}}">
+                <!-- {{i.house_image}} -->
+                <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
+                <div class="card-body">
+                    <h6>{{i.p_name}} accommodations</h6>
+                    <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}</h6>
+                    <div class="icons">
+
+                        <i class="fa-solid fa-bed"></i>
+                        <h6>{{i.address}} Address </h6>
+                        <div class="space">
+                        </div>
+                        <i class="fas fa-bath"></i>
+                        <h6>{{i.propertytype}} PropertyType</h6>
+
+                    </div>
+                    <h6>{{i.price}} Price</h6>
+                    <h4>R{{i.status}}Status</h4>
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+</div>
+
+
 
 
