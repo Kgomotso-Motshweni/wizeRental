@@ -91,13 +91,14 @@ export class SendNortificationComponent implements OnInit {
   caller(){
   
     for(let x = 0; x<this.Form.value.address.length; x++){   
-      this.loading = true;      
+      this.loading = true;
       this.mess.getTenantsData(this.Form.value.address[x].p_name).subscribe({
-        next:data =>{
+        next:(data:any) =>{
           this.rentees = data;
           this.loading = false;
         }
-     })
+      })      
+
     }
   }
 

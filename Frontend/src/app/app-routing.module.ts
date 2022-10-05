@@ -8,7 +8,6 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
 
 
-
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'landlord', component:LandlordComponent},
