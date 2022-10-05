@@ -19,7 +19,7 @@ export class NortificationComponent implements OnInit {
   id: any;
   myNotification: any;
   totalNumber: any;
-  constructor(private receive:NortificationsService, private notif:NortificationsService,private auth:AuthenticationService) {
+  constructor(private notif:NortificationsService, private auth:AuthenticationService) {
  
    }
 
@@ -27,19 +27,12 @@ export class NortificationComponent implements OnInit {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
 
-
-
     this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
-
-        console.log("The tenant ",data)
-
         this.totalNumber = this.myNotification.length
-       
       }
     })
   }
   
-
 }

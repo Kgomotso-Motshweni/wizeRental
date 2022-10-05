@@ -1,5 +1,5 @@
-import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +7,15 @@ import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('ngxLoading', { static: false })
+  ngxLoadingComponent!: NgxLoadingComponent;
+  showingTemplate = false;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = false;
+  
   constructor() { }
-  ngOnInit(): void {}
-
+ 
+  ngOnInit(): void {
+  
+  }
 }

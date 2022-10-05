@@ -23,13 +23,10 @@ export class NortificationComponent implements OnInit {
   constructor(private receive:NortificationsService, private auth:AuthenticationService,) {
    }
 
-   
-
   ngOnInit(): void {
     this.loading = false;
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     let id = this.token.regData[0].userid ;
-
     this. notification(id)
   }
   
@@ -37,8 +34,6 @@ export class NortificationComponent implements OnInit {
     this.receive.landlordReceive(userId).subscribe({
       next:data => {
         this.userInfo = data;
-        console.log(data);
-        
       }
     })
   }

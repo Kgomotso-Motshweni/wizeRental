@@ -30,7 +30,7 @@ export class TenantComponent implements OnInit {
   userData: any = {};
 
   ngOnInit(): void {
-    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))    
     this.userid = this.token.regData[0].userid
     this.getProfile(this.userid)
   }

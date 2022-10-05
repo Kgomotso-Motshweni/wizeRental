@@ -33,12 +33,14 @@ import { SidebarModule } from 'primeng/sidebar';
 import { NortificationComponent } from './nortification/nortification.component';
 
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent,
+  {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
+    {path:'home',component:HomeComponent},
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
+
   ]},
 ]
 

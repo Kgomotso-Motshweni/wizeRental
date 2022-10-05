@@ -1,5 +1,28 @@
 const client = require("../Config/db.config");
 
+
+const FilterTenants = async(req, res) => {
+    const p_name = req.params.p_name;
+    try{
+        client.query(`SELECT r.full_name, r.tenant_id
+            FROM rentees r
+            INNER JOIN landlordproperty l ON r.property_id = l.property_id
+            INNER JOIN users s ON l.landlord_id = s.userid
+            AND l.p_name = $1`,[p_name],(error, results) => {
+            if(error){
+                return res.status(400).json({
+                   message: "Unable to retrieve all tenants per accommodation"
+                });
+            }
+            return res.status(200).json(results.rows); //Return a status 200 if there is no error
+        })
+    }catch{
+        res.status(500).json({
+            error: "Database error when filtering tenants per accomodation", //Database connection error
+        });
+    } 
+}
+
 const getMyTenatsAndProperties = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
@@ -116,6 +139,7 @@ module.exports = {
     sendToSpecificUser,
     landlordReceive,
     tenantReceive,
-    tenantSend
+    tenantSend,
+    FilterTenants
 }
 

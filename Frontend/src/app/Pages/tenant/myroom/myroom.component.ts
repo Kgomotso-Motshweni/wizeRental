@@ -64,7 +64,6 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
-        console.log(data)
       }
     })
   }
@@ -73,11 +72,7 @@ export class MyroomComponent implements OnInit {
    logIssues(){
     this.submitted = false;
     this.dialogMessage = true;
-  
-    //Reset form every time you insert data
   }
-
-  
 
   hideDialog(){
     this.submitted = false;

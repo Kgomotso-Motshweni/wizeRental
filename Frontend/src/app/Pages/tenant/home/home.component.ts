@@ -2,14 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import {InputTextModule} from 'primeng/inputtext';
 import { Pending } from 'src/app/Interfaces/pending';
-import { retry } from 'rxjs';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+
 
 @Component({
   selector: 'app-home',
@@ -121,21 +119,20 @@ export class HomeComponent implements OnInit {
       this.formData.append('ped_desc', this.Form.value.ped_desc)
       this.formData.append('smoke', this.Form.value.smoke)
 
-    // this.tenants.ApplyProperty(this.formData,  this.id).subscribe({
-    //   next:data => {
-    //     this.messageService.add({
-    //       key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
-    //     }); 
-    //   },
-    //   error: (err) =>{
-    //     this.messageService.add({
-    //       key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
-    //     }); 
-    //   }
-    // })
+    this.tenants.ApplyProperty(this.formData,  this.id).subscribe({
+      next:data => {
+        this.messageService.add({
+          key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
+        }); 
+      },
+      error: (err) =>{
+        this.messageService.add({
+          key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
+        }); 
+      }
+    })
   }
-
-
+  
   actionMethod(){
 
   }

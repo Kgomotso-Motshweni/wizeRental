@@ -90,7 +90,6 @@ export class RegisterComponent implements OnInit {
       imageUrl: "https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png"
     }
 
-    console.log(user)
     this.auth.register(user, user_role).subscribe({
       next:data => {
         this.loading = true;

@@ -9,6 +9,10 @@ export class NortificationsService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
+  //Filter sending tenants
+  getTenantsData(id:any){
+    return this.http.get(`${this.baseUrl}filterTenants/${id}`)
+  }
 
   //Landlord send Messages to specific user
   sendMessage(message:any, id:number){
