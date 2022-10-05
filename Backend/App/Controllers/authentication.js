@@ -11,7 +11,7 @@ const register = async (req, res) => {
     const user_role = req.params.user_role;
     const{ firstname, lastname, email, cellno, password, imageUrl} = req.body
     try{
-        // // check :userType paramater. only accept /Landlord or /Tenant
+        // check :userType paramater. only accept /Landlord or /Tenant
         if (!(user_role == 'Landlord' || user_role == 'Tenant')) {
             return res.status(400).json({
                 message: "Invalid value in request parameter. : user_role parameter must be equal to Landlord or Tenant"
@@ -190,29 +190,3 @@ module.exports = {
     userProfile,
     profileUpdate
 }
-
-/*
-const profileUpdate = async(req, res) => {
-    try{
-        const id = req.params.userid;
-        const{ firstname, lastname, cellno, } = req.body
-        const image = await cloudinary.uploader.upload(req.file.path)
-
-        client.query(`UPDATE users SET firstname=$1, lastname =$2, cellno=$3, imageUrl=$4, updated_at= now()  WHERE userid=$5`,
-            [firstname, lastname, cellno, image.secure_url, id], (error, results)=>{ //Add new employee
-                if(error){ //checks for errors and return them 
-                    return res.status(400).json({
-                        message: "Unable to update user details"
-                    }) //Throw the error in the terminal
-                }
-                return res.status(200).send({ message: 'User updated successfully '}); //Return a status 200 if there is no error
-            }
-        )
-    }
-    catch (err) {
-        res.status(500).json({
-           error: "Database error while retrieving products", 
-        });
-    };
-}
-*/

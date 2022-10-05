@@ -16,6 +16,7 @@ export class TenantComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
+  
 
   constructor(
     public auth:AuthenticationService,  
@@ -29,11 +30,9 @@ export class TenantComponent implements OnInit {
   userData: any = {};
 
   ngOnInit(): void {
-    // this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
-    // console.log(this.token);
-    
-    // this.userid = this.token.regData[0].userid
-    // this.getProfile(this.userid)
+    this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))    
+    this.userid = this.token.regData[0].userid
+    this.getProfile(this.userid)
   }
 
   getProfile(userid:any){

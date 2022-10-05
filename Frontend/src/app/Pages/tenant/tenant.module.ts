@@ -30,9 +30,11 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox'; 
+import { SidebarModule } from 'primeng/sidebar';
+import { NortificationComponent } from './nortification/nortification.component';
 
 const routes: Routes = [
-  {path:'tenant', component: TenantComponent,
+  {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
@@ -48,7 +50,8 @@ const routes: Routes = [
     TenantComponent,
     MyroomComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    NortificationComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -80,6 +83,7 @@ const routes: Routes = [
     DialogModule,
     ConfirmDialogModule,
     MessagesModule,
+    SidebarModule,
     DialogModule,
     RouterModule.forChild(routes)
   ],

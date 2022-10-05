@@ -11,20 +11,23 @@ const addProperty = async(req, res) => {
             WHERE p_name = $1 AND p_address = $2`,[p_name, p_address]); //Check if user exist
         const user = data.rows;
 
+        //Checks if accommodation exists
         if(user.length != 0){
             return res.status(400).json({
                 message: "Accomodation already Exist, Add a new Property"
             });
         }
         else{
-   
             const house  = req.files['image'][0].path;
         
             const pdf  = req.files['pdf'][0].path;
-        
+            
+            //Send House image to cloudinary
             const HouseImage = await cloudinary.uploader.upload(house, {
                 folder: "/property/",
             })
+
+            //Send Pdf image to cloudinary
             const Tittle_Deep = await cloudinary.uploader.upload(pdf, {
                 folder: "/property/",
             })

@@ -3,54 +3,39 @@ const upload  = require("../Middlewares/fileUpload");
 const multiplePictures = upload.fields([{name:"image", maxCount:1}, {name:"pdf", maxCount:1}])
 const router = express.Router();
 
-
-
 const landlord = require("../Controllers/addProperty");
-const get_rentees  = require('../Controllers/get_rentees');
 const get_tenants  = require('../Controllers/get_tenants');
 const pending = require('../Controllers/pending')
-const middleware = require("../Middlewares/userauth");
 const get_property = require("../Controllers/get_property");
 const delete_rentee = require("../Controllers/delete_rentee");
 const update_payment = require("../Controllers/update_payment");
+const moa = require("../Controllers/createMOA")
 
-const {property} = require('../Controllers/property')
-const {getProp} = require('../Controllers/getProp')
-const {filter} = require('../Controllers/filter')
-
-
+//Add Property Details
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
 router.post('/add_rooms/:property_id', upload.array("image", 2), landlord.addRoomImages);
+
+//Get and delete My Properties
 router.get('/getproperty/:userid', landlord.getMyProperties);
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty)
+router.get('/getproperties/:id',get_property);
+
+//Delete, update and get Rentees
 router.delete('/deleteRentee/:id',delete_rentee)
 router.get('/getRentees/:id',get_rentees)
-// router.get('/getPending/:id',get_pending)
-router.get('/getproperties/:id',get_property)
 router.put('/updatePayment',update_payment)
-
-
-
-
-router.get('/getByProperty/:id',getProp);
-router.get('/getproperty',property);
-router.get('/filtered',filter);
-
-
 router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
-router.get('/getTenants/:address',get_tenants.tenantsFromSpecifiAddress);
-// router.get('/getLandAddress/:id', get_rentees.getLandlordRes);
-// router.get('/getRentees/:address', get_rentees.tenantsFromSpecifiAddress);
+router.post('/getTenants',get_tenants.tenantsFromSpecifiAddress);
+router.get('/getPayment',payment_status)
 
-
-// router.post('/getTenants',get_tenants.tenantsFromSpecifiAddress); ///
+//Delete My Properties
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty);
+
+//View Pending tenants 
 router.get('/getPending/:userid', pending.getPendingTenants);
 router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 
+//Create MOA for a tenant
+router.post('/acceptNewTenant', moa.CreateMOA)
 
-router.get('/getproperties/:id',get_property);
-
-// router.patch('/update/:userid', upload.single("image"),auth.profileUpdate);
-// router.post('/file',upload.single("image"), auth.fileUpload);
 module.exports = router;

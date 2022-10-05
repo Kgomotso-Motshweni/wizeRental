@@ -19,7 +19,7 @@ export class MyroomComponent implements OnInit {
   showingTemplate = false;
   public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   public loading = false;
-
+  visibleSidebar2: boolean = false;
   
   id:number = 0;
   token:any;
@@ -65,7 +65,6 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
-        console.log(data)
       }
     })
   }
@@ -74,11 +73,7 @@ export class MyroomComponent implements OnInit {
    logIssues(){
     this.submitted = false;
     this.dialogMessage = true;
-  
-    //Reset form every time you insert data
   }
-
-  
 
   hideDialog(){
     this.submitted = false;
@@ -87,6 +82,5 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    console.log(this.Form.value.vehicle1)
   }
 }
