@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
-import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Userinfor } from 'src/app/Interfaces/userinfor';
 import { HttpHeaders } from '@angular/common/http';
 import { TenantsService } from 'src/app/Services/tenants.service';
@@ -35,7 +34,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.activeRoute.snapshot.params[('userid')]
-    console.log(id)
     this.getProfile(id)
   }
 

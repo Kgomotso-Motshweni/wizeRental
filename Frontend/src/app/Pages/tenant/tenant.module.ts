@@ -36,7 +36,7 @@ const routes: Routes = [
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
-    {path:'home',component:HomeComponent},
+    {path: 'view-property/:id', component: SinglePropertyComponent},
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
 

@@ -16,13 +16,9 @@ export class HomeComponent implements OnInit {
 
   searchItem:any;
   tenantProperty:any
-
+  
   // filter vars
   condition: boolean = false;
-
-
-
-
 
   constructor(private service: LandingPageService,) { }
 
@@ -46,7 +42,6 @@ export class HomeComponent implements OnInit {
     this.service.getProperties().subscribe({
       next: (data: any) => {
           this.tenantProperty = data;
-          console.log(data)
         }
       })
   }

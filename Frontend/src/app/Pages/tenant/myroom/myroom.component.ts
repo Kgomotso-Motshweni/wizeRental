@@ -65,7 +65,6 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
-        console.log(data)
       }
     })
   }
