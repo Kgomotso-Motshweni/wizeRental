@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { ConfirmDialog} from 'primeng/confirmdialog';
 import { AuthGuard } from 'src/app/Guards/auth.guard';
 
 ///Components
