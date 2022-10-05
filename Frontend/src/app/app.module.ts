@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -6,7 +6,6 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {DropdownModule} from 'primeng/dropdown';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
@@ -46,14 +45,12 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     RegisterComponent,
     FooterComponent,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     InputNumberModule,
     InputMaskModule,
     LandlordModule,
     TenantModule,
     BrowserModule,
-    ConfirmDialogModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -80,8 +77,7 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     }),
   ],
   providers: [MessageService],
-  bootstrap: [AppComponent],
-  
+  bootstrap: [AppComponent]
 })
 
 export class AppModule { }

@@ -53,7 +53,6 @@ const routes: Routes = [
     HomeComponent,
     NortificationComponent,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     Ng2SearchPipeModule,
     ButtonModule,
