@@ -62,6 +62,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  //push the data from userInfor  into  tenantInfo and crop it according to our interface/Model
   editProduct(tenantInfor: Userinfor) {
     this.tenantInfor = {...tenantInfor};
   }
@@ -88,13 +89,18 @@ export class ProfileComponent implements OnInit {
 
     let id = this.tenantInfor.userid;
 
+    //Update user profile information
     this.tenants.updateProfile(this.formData, id).subscribe({
       next:data => {
         this.loading = false;
         this.message = data
+
+        //Reload the Page
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
         this.router.onSameUrlNavigation = 'reload'; 
         this.loading = true
+
+        //Show Successful Message ifn there is no error
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
         });

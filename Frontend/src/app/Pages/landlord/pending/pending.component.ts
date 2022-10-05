@@ -92,6 +92,7 @@ export class PendingComponent implements OnInit {
       next:data  => {
           this.pending = data;
           this.image = this.pending[0].id_doc
+          //get the length of the data 
           this.number = this.pending.length;
           this.loading = false;
         }
@@ -110,7 +111,8 @@ export class PendingComponent implements OnInit {
     this.condition = true;
     this.pendingClients = {...details}
   }
-
+/////////////////////////////////////////////
+///////////Below Belong to NG-WIZARD //////////////
 
   stepStates = {
     normal: STEP_STATE.normal,
@@ -160,6 +162,10 @@ export class PendingComponent implements OnInit {
   {
     return of(true);
   }
+
+//////////////////// NG-Wirzad Ends here //////////////////////
+///////////////////////////////////////////////////////////////
+
 
   declined(){
 

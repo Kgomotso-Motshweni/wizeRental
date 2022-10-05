@@ -28,7 +28,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
-import {CheckboxModule} from 'primeng/checkbox'; 
+import { CheckboxModule} from 'primeng/checkbox'; 
 import { SidebarModule } from 'primeng/sidebar';
 import { NortificationComponent } from './nortification/nortification.component';
 

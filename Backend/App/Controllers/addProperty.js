@@ -63,6 +63,7 @@ const addRoomImages = async(req, res) =>{
 
             qualification_url[i] = req.files[i].path;
             
+            
             const images = await cloudinary.uploader.upload(qualification_url[i], {
                 folder: "/property/",
             });
@@ -86,7 +87,6 @@ const addRoomImages = async(req, res) =>{
         });
     };
 }
-
 
 const getMyProperties = async(req, res) =>{
     const id = parseInt(req.params.userid);
@@ -117,6 +117,7 @@ const getMyProperties = async(req, res) =>{
 const deleteMyProperty = async(req, res) =>{
     const id = parseInt(req.params.property_id);
     try{  
+
         await client.query(`DELETE FROM roomsimages WHERE property_id = $1`, [id]);
 
         client.query(`DELETE FROM landlordproperty WHERE property_id = $1`,[id], (error, results) =>{ //returns all orders  in the database from product list and ascending order

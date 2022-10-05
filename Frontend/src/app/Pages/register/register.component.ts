@@ -93,6 +93,7 @@ export class RegisterComponent implements OnInit {
     this.auth.register(user, user_role).subscribe({
       next:data => {
         this.loading = true;
+        //Reset the form after successful register before routing to login
         this.Form.reset();
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Registration Sucessfull. Let's start working", life: 3000
@@ -113,10 +114,12 @@ export class RegisterComponent implements OnInit {
     this.check = true;
   }
  
+  //Show the dialog for terms and Conditions 
   showResponsiveDialog() {
     this.ViewDialog = true;
   }
 
+  //Hide The dialog for terms and condition
   hideDialog() {
     this.ViewDialog = false
   }
