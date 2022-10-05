@@ -2,7 +2,7 @@
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 
-
+<!--show these cards if no tenants-->
 <ng-container *ngIf="number == 0" >
   <div class="container">
       <div class="flex justify-center">
@@ -20,7 +20,9 @@
       </div>
   </div>
 </ng-container>
+<!--till here-->
 
+<!--else these-->
 <ng-container *ngIf="number !== 0" >
 <div class=" justify-center pending">
   <div class="mb-6 mt-6">
@@ -62,7 +64,7 @@
       </div>
     </div>
   </div>
-  <!--------------------------------------------search bar and button-------------------------------->
+  <!--------------------------------------------search bar, send notification and Filter-------------------------------->
    
       <div class="form-group mb-6 mt-6">
         <input type="text" placeholder="Search Tenant" class="input bg-gray-50 input-bordered w-full lg:w-1/2 email" [(ngModel)]="searchTenant"/>
@@ -149,7 +151,7 @@
   </div>
 </div>
 </ng-container>
-
+<!--till here-->
 
 <ngx-loading
     [show]="loading"
