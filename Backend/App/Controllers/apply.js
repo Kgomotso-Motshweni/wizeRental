@@ -7,7 +7,7 @@ const applyRoom = async(req, res) => {
     const{ property_id, full_name, email, phone_num, age, occupation, view_date, num_tenants, num_pets, ped_desc, smoke } = req.body
     try{
         const id_document = await cloudinary.uploader.upload(req.file.path, {
-            folder: "/images/",
+            folder: "/images/", 
         });
 
         const data = await client.query(`SELECT * FROM applicationform WHERE full_name = $1`,[full_name]); //Check if user exist

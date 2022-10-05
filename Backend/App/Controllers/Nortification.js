@@ -48,7 +48,7 @@ const getMyTenatsAndProperties = async(req, res ) => {
 /////////////////////////////////////////////////////////////////////////////////////////////
 //CHATS
 
-//LANDLORD SEND MESSAGES TO SPECIFIC TENANT(S) TO A SPECIFIC ACCOMMODATION
+// A LANDLORD SENDS MESSAGES TO SPECIFIC TENANTS AT A SPECIFIC ACCOMMODATION.
 const sendToSpecificUser = async(req, res ) => {
     const id = parseInt(req.params.id);
     const {nortType, subject, recipient, message} = req.body;
