@@ -82,6 +82,5 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    console.log(this.Form.value.vehicle1)
   }
 }

@@ -34,8 +34,6 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ToggleButtonModule} from 'primeng/togglebutton';
-import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
-
 
 @NgModule({
   declarations: [
@@ -45,7 +43,6 @@ import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.compone
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ViewpropertyComponent,
     FooterComponent,
   ],
   imports: [

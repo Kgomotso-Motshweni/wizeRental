@@ -120,8 +120,7 @@ export class TenantsComponent implements OnInit {
             //show the message if unable to add new data
             this.message = err.error.message;
             this.loading = false
-            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000}) 
-           
+            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000})  
           }
         });
        },

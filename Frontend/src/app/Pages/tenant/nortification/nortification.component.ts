@@ -29,7 +29,6 @@ export class NortificationComponent implements OnInit {
 
     this.notif.tenantReceive(this.id).subscribe({
       next:data => {
-        
         this.myNotification = data
         this.totalNumber = this.myNotification.length
       }

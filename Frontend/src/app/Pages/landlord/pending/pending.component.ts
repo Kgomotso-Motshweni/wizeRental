@@ -40,7 +40,6 @@ export class PendingComponent implements OnInit {
     zipCode: new FormControl(''),
     unitNumber: new FormControl(''),
     accomName: new FormControl(''),
-
     fullName: new FormControl(''),
     email: new FormControl(''),
     contact: new FormControl(''),
@@ -93,7 +92,6 @@ export class PendingComponent implements OnInit {
       next:data  => {
           this.pending = data;
           this.image = this.pending[0].id_doc
-          console.log(this.image)
           this.number = this.pending.length;
           this.loading = false;
         }
@@ -189,7 +187,6 @@ export class PendingComponent implements OnInit {
         payendDate: this.pendingClients.paymentEnd,
         agreementType: this.pendingClients.PaymentType
       }
-      console.log(user)
       this.loading = true;
       this.land.createMOA(user).subscribe({
         next:data => {
