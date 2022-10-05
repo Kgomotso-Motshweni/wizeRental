@@ -34,8 +34,6 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ToggleButtonModule} from 'primeng/togglebutton';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
