@@ -8,6 +8,7 @@ import { Pending } from 'src/app/Interfaces/pending';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

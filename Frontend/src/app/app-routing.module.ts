@@ -5,6 +5,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { LandlordComponent } from './Pages/landlord/landlord.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
+import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
 
 
@@ -12,8 +13,8 @@ import { TenantComponent } from './Pages/tenant/tenant.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'landlord', component:LandlordComponent},
-  {path:'login', component:LoginComponent, },
-  {path:'register', component:RegisterComponent, },
+  {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
+  {path:'register', component:RegisterComponent, canActivate:[LoggedGuard]},
   {path:'tenant', component:TenantComponent},
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];

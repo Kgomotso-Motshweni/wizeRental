@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LandlordModule } from './Pages/landlord/landlord.module';
 import { TenantModule } from './Pages/tenant/tenant.module';
+
 
 ////////////
 //Imported PrimeNG module .
@@ -33,6 +34,8 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ToggleButtonModule} from 'primeng/togglebutton';
+import { ViewpropertyComponent } from './Pages/viewproperty/viewproperty.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ViewpropertyComponent,
     FooterComponent,
   ],
   imports: [
@@ -57,6 +61,8 @@ import { ToggleButtonModule} from 'primeng/togglebutton';
     FileUploadModule,
     HttpClientModule,
     CalendarModule,
+    Ng2SearchPipeModule,
+
     FormsModule,
     DropdownModule,
     ToastModule,
