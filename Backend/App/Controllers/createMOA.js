@@ -13,7 +13,7 @@ const CreateMOA = async(req, res ) => {
         await client.query(`INSERT INTO MOA (rentee_id, amount, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType)
             VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ])
 
-        
+        await client.query(`Select * from rentees`) 
         
         //Delete the pending tenant from pending table 
         await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error, results) => {
@@ -32,6 +32,23 @@ const CreateMOA = async(req, res ) => {
         });
     } 
 }
+
+const getMOA= async (req, res) => {
+    try {
+        await client.query(`Select * from moa`,(err,result) => {
+            if (err) {
+                return res.status(500).json({
+                  message: "Database error",
+                });
+            }
+            return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
+        error: "Database error while creating post!", //Database connection error
+      });
+    }
+};
 
 module.exports = {
     CreateMOA
