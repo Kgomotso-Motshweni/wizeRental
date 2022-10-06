@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   name: any
   category: any
 
-  
+
   // filter vars
   condition: boolean = false;
   // name = new FormControl('');

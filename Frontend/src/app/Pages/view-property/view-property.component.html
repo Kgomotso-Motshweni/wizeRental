@@ -3,13 +3,12 @@
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="card lg:card-side bg-base-100 shadow-xl m-3 p-2">
-    <figure><img [src]="data.house_image" alt="Shoes" /></figure>
+    <figure><img class="img" [src]="data.house_image" alt="Shoes" style="height: 396.33px;"/></figure>
     <div class="card-body">
         <div class="flex flex-row headers">
             <h3 class="card-title">Accommodation info</h3>
-            <h3 class="card-title ml-2 lg:ml-14">R {{data.p_price}}</h3>
         </div>
-       
+        <h3 class="card-title">R {{data.p_price}} /Month</h3>
         <h6>{{data.p_address}}</h6>
         <h6>{{data.p_city}} {{data.p_town}}, {{data.p_zip_code}}</h6>
         <br>
@@ -32,10 +31,10 @@
     </div>
 </div>
 
-<div class="container rounded mt-10">
+<div class="container rounded mt-10 pt-3">
     <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
         <div class="card rounded-3 w-96 bg-base-100 shadow-xl " *ngFor="let i of tenantProperty ; let m = index">
-            <figure><img src='{{i.images}}' alt="Shoes" /></figure>
+            <figure><img src='{{i.images}}' alt="Shoes"  /></figure>
         </div>
     </div>
 </div>
