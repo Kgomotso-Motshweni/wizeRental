@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { MessageService } from 'primeng/api';
 import { Pending } from 'src/app/Interfaces/pending';
 import { TenantsService } from 'src/app/Services/tenants.service';
-
 import { LandingPageService } from 'src/app/Services/landing-page.service';
+
 
 @Component({
   selector: 'app-single-property',
@@ -58,7 +58,7 @@ export class SinglePropertyComponent implements OnInit {
     private messageService: MessageService,
     private tenants:TenantsService,
     private service: LandingPageService,
-    private confirmationService: ConfirmationService,) { }
+    private __loader: NgxUiLoaderService) { }
 
    //select a file
   selectThisImage(myEvent: any) {
@@ -66,6 +66,7 @@ export class SinglePropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     let userid = this.token.regData[0].userid
     this.id = userid;
@@ -116,6 +117,7 @@ export class SinglePropertyComponent implements OnInit {
         this.tenantProperty = data;
       }
     })
+    this.__loader.stop();
   }
 
   // submit when the details are true/when form is not blank
@@ -141,16 +143,18 @@ export class SinglePropertyComponent implements OnInit {
       this.formData.append('num_pets', this.Form.value.num_pets)
       this.formData.append('ped_desc', this.Form.value.ped_desc)
       this.formData.append('smoke', this.Form.value.smoke)
-
       
+    this.__loader.start();
     this.tenants.ApplyProperty(this.formData,  this.id).subscribe({
       next:data => {
         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
         this.router.onSameUrlNavigation = "reload";
         this.displayApplicationForm = false;
+        this.__loader.stop();
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
-        }); 
+        });
+
       },
       error: (err) =>{
         this.messageService.add({

@@ -17,11 +17,9 @@ export class HomeComponent implements OnInit {
     this.__loader.start();
     this.getProperty();
   }
-
   filter(){
 
   }
-
   // function that gets property
   getProperty(){
     this.service.getProperties().subscribe({
