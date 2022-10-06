@@ -157,6 +157,7 @@ export class SinglePropertyComponent implements OnInit {
 
       },
       error: (err) =>{
+        this.__loader.stop();
         this.messageService.add({
           key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
         }); 
