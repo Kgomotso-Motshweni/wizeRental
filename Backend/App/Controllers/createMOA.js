@@ -45,11 +45,31 @@ const getMOA= async (req, res) => {
         });
     } catch (err) {
       res.status(500).json({
+        error: "Database error while getting the Moa", //Database connection error
+      });
+    }
+};
+
+const getPropertyByID= async (req, res) => {
+    const id = parseInt(req.params.id)
+    try {
+        await client.query(`SELECT * FROM landlordProperty WHERE property_id = $1`,[id], (err,result) => {
+            if (err) {
+                return res.status(500).json({
+                  message: "Database error",
+                });
+            }
+            return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
         error: "Database error while creating post!", //Database connection error
       });
     }
 };
 
 module.exports = {
-    CreateMOA
+    CreateMOA,
+    getMOA,
+    getPropertyByID,
 }

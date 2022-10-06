@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
+import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -28,11 +29,15 @@ export class MyroomComponent implements OnInit {
   myNotification: any 
   dialogMessage: boolean = false;
   submitted: boolean = false;
+  data:any;
+  property:any;
+  propertyID: any;
   selectedValues: string[] = [];
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
+    private service:TenantsService,
     private router:Router,
     private formBuilder: FormBuilder,) { }
 
@@ -67,6 +72,15 @@ export class MyroomComponent implements OnInit {
       }
     })
   }
+
+  // getPropertyByID(){
+  //   this.service.getPropertyByID(this.propertyID).subscribe({
+  //     next:data => {
+  //       this.property = data; 
+  //       console.log(this.data) 
+  //     }
+  //   })
+  // }
 
    //Open a modal for log issues
    logIssues(){

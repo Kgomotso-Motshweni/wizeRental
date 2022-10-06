@@ -107,7 +107,6 @@ export class SinglePropertyComponent implements OnInit {
     this.file = image
   }
  
-
   getPropertyByID(){
     this.loading = true
     this.service.getPropertiesByID(this.propertyID).subscribe({

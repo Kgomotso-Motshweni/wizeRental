@@ -27,11 +27,9 @@ export class TenantsService {
     return this.http.patch(`${this.baseUrl}update/${id}`, user)
   }
 
-// Get MOA
-CreateMOA(user:any, id:any)
-{
-  return this.http.post(`${this.baseUrl}update/${id}`, user)
-}
-  
-  
+  getPropertyByID(id:any)
+  {
+    return this.http.get(`${this.baseUrl}getPropertyByID/${id}`)
+  }
+
 }
