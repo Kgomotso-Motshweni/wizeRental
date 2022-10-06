@@ -44,8 +44,8 @@
 <div class="emptyRoom">
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
-            <div class="card empty w-full shadow-xl"*ngFor="let i of property">
-                <div class="card-body"  >
+            <div class="card empty w-full shadow-xl">
+                <div *ngFor="let i of property" class="card-body"  >
                     <h2 class="card-title">My Room</h2>
                     <div>
                        <p>{{i.p_address}}</p>  
