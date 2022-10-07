@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
+import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -38,11 +39,15 @@ propertytype: any
   myNotification: any 
   dialogMessage: boolean = false;
   submitted: boolean = false;
+  data:any;
+  // property:any;
+  propertyID: any;
   selectedValues: string[] = [];
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
+    private service:TenantsService,
     private router:Router,
     private formBuilder: FormBuilder,
   ) { }
@@ -76,12 +81,15 @@ propertytype: any
       // status: ['', Validators.required]
     });
 
-    // const propertyType = {
-    //   no1:"Commune",
-    //   no2:"Studio",
-    //   no3:"Backroom"
-    // }
-    // this.propertytype = propertyType;
+// get the rentees
+      this.service.getPropertyByID(this.propertyID).subscribe({
+        next:data => {
+          this.property = data; 
+          console.log(this.data) 
+        }
+      })
+    
+
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -114,8 +122,10 @@ propertytype: any
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
   }
-}
 
-// function no1(no1: any) {
-//   throw new Error('Function not implemented.');
-// }
+}
+  
+ 
+
+
+

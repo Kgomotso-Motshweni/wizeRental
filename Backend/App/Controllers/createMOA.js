@@ -12,6 +12,8 @@ const CreateMOA = async(req, res ) => {
         //Insert moa details using rentees_id returned from the above 
         await client.query(`INSERT INTO MOA (rentee_id, amount, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType)
             VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ])
+
+        await client.query(`Select * from rentees`) 
         
         //Delete the pending tenant from pending table 
         await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error, results) => {
@@ -31,6 +33,49 @@ const CreateMOA = async(req, res ) => {
     } 
 }
 
+const getMOA= async (req, res) => {
+    try {
+        await client.query(`Select * from moa`,(err,result) => {
+            if (err) {
+                return res.status(500).json({
+                  message: "Database error",
+                });
+            }
+            return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
+        error: "Database error while getting the Moa", //Database connection error
+      });
+    }
+};
+
+const getPropertyByID= async (req, res) => {
+    const id = parseInt(req.params.id)
+    try {
+        await client.query(`SELECT * FROM rentees a
+        INNER JOIN MOA r ON r.rentee_id = a.rentee_id
+        INNER JOIN landlordproperty l ON a.property_id = l.property_id
+        INNER JOIN users u ON l.landlord_id = u.userid
+        WHERE u.userid = $1 `,[id],
+        (err,result) => {
+            if (err) {
+                return res.status(500).json({
+                  message: "Database error",
+                });
+            }
+            return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
+        error: "Database error while creating post!", //Database connection error
+      });
+    }
+
+};
+
 module.exports = {
-    CreateMOA
+    CreateMOA,
+    getMOA,
+    getPropertyByID
 }

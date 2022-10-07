@@ -36,6 +36,10 @@ router.get('/getPending/:userid', pending.getPendingTenants);
 router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 
 //Create MOA for a tenant
-router.post('/acceptNewTenant', moa.CreateMOA)
+router.post('/acceptNewTenant', moa.CreateMOA);
+router.get('/getNewTenant', moa.getMOA);
+router.get('/getPropertyByID/:id',moa.getPropertyByID);
+
+
 
 module.exports = router;
