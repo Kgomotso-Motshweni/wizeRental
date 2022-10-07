@@ -58,6 +58,16 @@ export class MyroomComponent implements OnInit {
       issues: ['', Validators.required],
       electricity: ['', Validators.required],
     });
+
+// get the rentees
+      this.service.getPropertyByID(this.propertyID).subscribe({
+        next:data => {
+          this.property = data; 
+          console.log(this.data) 
+        }
+      })
+    
+
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -72,15 +82,6 @@ export class MyroomComponent implements OnInit {
       }
     })
   }
-
-  // getPropertyByID(){
-  //   this.service.getPropertyByID(this.propertyID).subscribe({
-  //     next:data => {
-  //       this.property = data; 
-  //       console.log(this.data) 
-  //     }
-  //   })
-  // }
 
    //Open a modal for log issues
    logIssues(){

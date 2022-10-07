@@ -41,4 +41,5 @@ router.get('/getNewTenant', moa.getMOA);
 router.get('/getPropertyByID/:id',moa.getPropertyByID);
 
 
+
 module.exports = router;

@@ -27,9 +27,15 @@ export class TenantsService {
     return this.http.patch(`${this.baseUrl}update/${id}`, user)
   }
 
+  // getPropertyByID(id:any)
+  // {
+  //   return this.http.get(`${this.baseUrl}getPropertyByID/${id}`)
+  // }
+
+
   getPropertyByID(id:any)
   {
-    return this.http.get(`${this.baseUrl}getPropertyByID/${id}`)
+    return this.http.get("http://localhost:8080/api/getPropertyByID/1")
   }
 
 }

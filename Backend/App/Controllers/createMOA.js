@@ -53,7 +53,12 @@ const getMOA= async (req, res) => {
 const getPropertyByID= async (req, res) => {
     const id = parseInt(req.params.id)
     try {
-        await client.query(`SELECT * FROM landlordProperty WHERE property_id = $1`,[id], (err,result) => {
+        await client.query(`SELECT * FROM rentees a
+        INNER JOIN MOA r ON r.rentee_id = a.rentee_id
+        INNER JOIN landlordproperty l ON a.property_id = l.property_id
+        INNER JOIN users u ON l.landlord_id = u.userid
+        WHERE u.userid = $1 `,[id],
+        (err,result) => {
             if (err) {
                 return res.status(500).json({
                   message: "Database error",
@@ -66,10 +71,11 @@ const getPropertyByID= async (req, res) => {
         error: "Database error while creating post!", //Database connection error
       });
     }
+
 };
 
 module.exports = {
     CreateMOA,
     getMOA,
-    getPropertyByID,
+    getPropertyByID
 }
