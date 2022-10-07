@@ -7,6 +7,8 @@ import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LandingPageService } from 'src/app/Services/landing-page.service';
+
 
 
 @Component({
@@ -23,8 +25,8 @@ export class MyroomComponent implements OnInit {
   public loading = false;
   visibleSidebar2: boolean = false;
 
-  name:any = "search";
-propertytype: any
+ name:any = "search";
+ propertytype: any;
  properties:any;
  property:any;
  searchItem:any;
@@ -32,6 +34,7 @@ propertytype: any
  tenantAddress:any;
  form!: FormGroup;
  filterItem:any;
+ getRoomImages:any;
   
   id:number = 0;
   token:any;
@@ -50,19 +53,18 @@ propertytype: any
     private service:TenantsService,
     private router:Router,
     private formBuilder: FormBuilder,
+    private services:LandingPageService,
+    private activeRoute:ActivatedRoute,
   ) { }
-
-  // private service:MyroomComponent,
-  // private route: ActivatedRoute,
 
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
       electricity: new FormControl(''),
-      // address : new FormControl(''),
-      // propertytype : new FormControl(''),
-      // price : new FormControl(''),
-      // status : new FormControl('')
+      accName: new FormControl(''),
+      address: new FormControl(''),
+      rooms: new FormControl(''),
+    
     });
 
     
@@ -89,6 +91,9 @@ propertytype: any
         }
       })
     
+   
+      
+      
 
   }
 
@@ -122,6 +127,7 @@ propertytype: any
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
   }
+
 
 }
   

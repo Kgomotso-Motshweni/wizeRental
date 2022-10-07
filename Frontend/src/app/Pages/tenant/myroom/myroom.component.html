@@ -46,13 +46,15 @@
             <div class="card empty w-full shadow-xl"*ngFor="let i of property">
                 <div class="card-body"  >
                     <div>
+                        <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
+                        <br>
                        <p>{{i.p_address}}</p>  
                          <p>{{i.p_city}}</p> 
                          <p>{{i.p_town}}</p>   
                          <p>{{i.p_zip_code}}</p>  
                          <p>{{i.p_propertytype}}</p> 
                          <p>{{i.paymentstatus}}</p> 
-                         <p>Sign memorandum </p>     
+                         <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>     
                     </div>
                 </div>
             </div>
@@ -149,37 +151,32 @@
     </div>
 </div>
 
-<div class="flex prop ml-5 justify-center md:prop-cols-1 rounded">
+<!-- <div class="flex prop ml-5 justify-center md:prop-cols-1 rounded">
     <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center"
         style="width: 100%;">
         <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index ">
 
-            <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10"
-                routerLink="/view/{{i.property_id}}">
-                <!-- {{i.house_image}} -->
+            <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10">
                 <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
                 <div class="card-body">
-                    <h6>{{i.p_name}} accommodations</h6>
                     <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}</h6>
-                    <div class="icons">
-
-                        <i class="fa-solid fa-bed"></i>
-                        <h6>{{i.address}} Address </h6>
-                        <div class="space">
-                        </div>
-                        <i class="fas fa-bath"></i>
+                        <h6>{{i.address}} </h6>
                         <h6>{{i.propertytype}} PropertyType</h6>
-
-                    </div>
                     <h6>{{i.price}} Price</h6>
-                    <h4>R{{i.status}}Status</h4>
+                    <h4>{{i.status}}Status</h4>
+                    <div class="space">
+                    </div>
+                    <h4 routerLink="/profile" class="text-primary">{{i.status}}Sign lease
+                        <i class="pi pi-book"></i>
+                    </h4>
+                    
                 </div>
             </div>
             <br>
         </div>
 
     </div>
-</div>
+</div> -->
 
 
 
