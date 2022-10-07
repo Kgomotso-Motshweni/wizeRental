@@ -28,6 +28,7 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule} from 'primeng/dialog';
 import { ToggleButtonModule} from 'primeng/togglebutton';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 //Components
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ import { ViewPropertyComponent } from './Pages/view-property/view-property.compo
   ],
   imports: [
     ConfirmDialogModule,
+    SelectButtonModule,
     InputTextModule,
     MessagesModule,
     InputNumberModule,

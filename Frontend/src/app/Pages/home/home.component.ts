@@ -22,6 +22,9 @@ export class HomeComponent implements OnInit {
   tenantProperty:any
   name: any
   category: any
+  
+  stateOptions: any;
+  value1: string = "off";
 
 
   // filter vars
@@ -57,6 +60,8 @@ export class HomeComponent implements OnInit {
 
   // function for getting all the properties 
   ngOnInit(): void {
+    this.stateOptions = [{label: 'To Rent', value: 'off'}, {label: 'To Advertise', value: 'on'}];
+
     this.loading =true
     this.getProperty();
   }

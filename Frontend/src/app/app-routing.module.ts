@@ -14,8 +14,8 @@ const routes: Routes = [
   {path:'', component:HomeComponent},
   {path: 'view-property/:id', component: ViewPropertyComponent},
   {path:'landlord', component:LandlordComponent},
-  {path:'login', component:LoginComponent, canActivate:[LoggedGuard]},
-  {path:'register', component:RegisterComponent,  canActivate:[LoggedGuard]},
+  {path:'login', component:LoginComponent, },
+  {path:'register', component:RegisterComponent,},
   {path:'tenant', component:TenantComponent},
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];

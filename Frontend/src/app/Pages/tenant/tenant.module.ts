@@ -39,7 +39,7 @@ const routes: Routes = [
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
-    {path: 'view-property/:id', component: SinglePropertyComponent},
+    {path: 'single-property/:id', component: SinglePropertyComponent},
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
 

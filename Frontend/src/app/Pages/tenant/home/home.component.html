@@ -59,7 +59,7 @@
     
   <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
     <!-- {{i.house_image}} -->
-    <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
+    <figure><img class="img" routerLink='/tenant/single-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>
     <div class="card-body">
       <h6>{{i.p_name}} accommodations</h6>
       <h4>{{i.p_address}}, {{i.p_city}}</h4>
