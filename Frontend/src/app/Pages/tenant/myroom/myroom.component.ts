@@ -9,14 +9,13 @@ import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
 
-
-
 @Component({
   selector: 'app-myroom',
   templateUrl: './myroom.component.html',
   styleUrls: ['./myroom.component.scss'],
   providers: [MessageService, ConfirmationService]
 })
+
 export class MyroomComponent implements OnInit {
   @ViewChild('ngxLoading', { static: false })
   ngxLoadingComponent!: NgxLoadingComponent;
@@ -35,7 +34,7 @@ export class MyroomComponent implements OnInit {
  form!: FormGroup;
  filterItem:any;
  getRoomImages:any;
-  
+ emptyRoom: number = 1
   id:number = 0;
   token:any;
   totalNumber: number = 0;

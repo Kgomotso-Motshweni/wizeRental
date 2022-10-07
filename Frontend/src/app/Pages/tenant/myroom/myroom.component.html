@@ -25,7 +25,7 @@
 </div>
 
 
-<div class="emptyRoom"  >
+<div  *ngIf="emptyRoom == 0" class="emptyRoom"  >
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl">
@@ -40,7 +40,22 @@
     </div>
 </div>
 
-<div class="emptyRoom">
+<div  *ngIf="emptyRoom != 0" class="emptyRoom"  >
+    <div class="flex justify-center">
+        <div class="grid sm:grid-cols-1 ">
+            <div class="card empty w-full shadow-xl">
+                <div class="card-body" >
+                    <h2 class="card-title">My Room</h2>
+                    <div>
+                        <h5>You have data</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="emptyRoom">
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl"*ngFor="let i of property">
@@ -48,19 +63,19 @@
                     <div>
                         <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
                         <br>
-                       <p>{{i.p_address}}</p>  
-                         <p>{{i.p_city}}</p> 
-                         <p>{{i.p_town}}</p>   
-                         <p>{{i.p_zip_code}}</p>  
-                         <p>{{i.p_propertytype}}</p> 
-                         <p>{{i.paymentstatus}}</p> 
+                       <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
+                         <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
+                         <p>PropertyType: {{i.p_propertytype}}</p> 
+                         <p>R      {{i.rent}}</p> 
+                         <p>Status:    {{i.paymentstatus}}</p>
+                         <br> 
                          <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>     
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>
