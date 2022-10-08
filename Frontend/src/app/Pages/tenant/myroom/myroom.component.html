@@ -25,6 +25,41 @@
 </div>
 
 
+
+<!-- The button to open modal -->
+<label for="my-modal-5" class="btn modal-button">Moa</label>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal-5" class="modal-toggle" />
+<div class="modal" >
+  <div *ngFor="let i of mymoa"class="modal-box w-11/12 max-w-5xl" >
+    <label for="Water">Date</label>
+    <p><input type="text" /></p>
+   <p>Agreement between <input type="text" />, Owner(s), and {{i.amount}} />
+<p>, Tenant(s), for dwelling located at <input type="text"/> Location.
+   </p>
+   <p> Tenant(s) agree to rent this dwelling on a month-to-month basis for R <input type="text" /> </p>
+   per month, payable on the <input type="text" />day of the calender month.
+   Only the following <input type="text" /> persons and pets are to live in this dwelling.therefore and in consideration of the mutual promises and agreements 
+   contained herein, the Tenant agrees to memorandum the premises from the Landlord under the following.
+   
+   <p>TENANTS AGREE TO THE FOLLOWING:</p><br>
+   <p>
+    To keep the yards clean. Not to repair motor vehicles in the premises 
+    To pay rent on time and by cash 
+    To pay for repairs of all damage, they or thir guests have caused.
+    Have no visitors stay for no more than 3 weeks
+   </p>
+
+   <p>Tenants hereby acknoledge that they have read this Agreement, understand it agree to it and have been given a copy.</p><br>
+   <p>Signatures:</p><br>
+   <p>Landlord: <input type="text" /></p><br>
+   <p>Date: <input type="text" /></p><br> 
+   <p>Tenant: <input type="text" /></p><br> 
+   <p>Date: <input type="text" /></p><br>
+</div>
+</div>
+
 <div class="emptyRoom"  >
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
@@ -134,3 +169,30 @@
 </ngx-loading>
 
 
+
+<!-- <p>Agreement between _______________________, Owner(s), and ______________________________
+    _____________________, Tenant(s), for dwelling located at __________________________________
+    _________________ Location.
+    
+    Tenant(s) agree to rent this dwelling on a month-to-month basis for R________________ per month, payable on the _________________ day of the calender month.
+    
+    Only the following _____________________________ persons and ___________________________________
+    pets are to live in this dwelling.therefore and in consideration of the mutual promises and agreements 
+    contained herein, the Tenant agrees to memorandum the premises from the Landlord under the following.
+    
+    TENANTS AGREER TO THE FOLLOWING:
+    To keep the yards clean.
+    Not to repair motor vehicles in the premises 
+    To pay rent on time and by cash 
+    To pay for repairs of all damage, they or thir guests have caused.
+    Have no visitors stay for no more than 3 weeks
+    
+    Tenants hereby acknoledge that they have read this Agreement, understand it agree to it and have been given a copy.
+    
+    Signatures:
+    Owner’s____________________________________.
+    Date: ______________________________________.
+    
+    Tenant:_____________________________________.
+    Date:_______________________________________.
+       </p> -->

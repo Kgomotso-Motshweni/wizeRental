@@ -29,6 +29,7 @@ export class MyroomComponent implements OnInit {
   myNotification: any 
   dialogMessage: boolean = false;
   submitted: boolean = false;
+  mymoa:any;
   data:any;
   property:any;
   propertyID: any;
@@ -79,6 +80,15 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
+      }
+    })
+  }
+
+  getNewTenant(){
+    return this.service.getMoa(this.id).subscribe({
+      next:data => {
+        this.mymoa = data
+
       }
     })
   }
