@@ -45,6 +45,7 @@ export class MyroomComponent implements OnInit {
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
+      moa: new FormControl(''),
       electricity: new FormControl('')
     });
 
@@ -67,7 +68,6 @@ export class MyroomComponent implements OnInit {
           console.log(this.data) 
         }
       })
-    
 
   }
 
@@ -88,7 +88,7 @@ export class MyroomComponent implements OnInit {
     return this.service.getMoa(this.id).subscribe({
       next:data => {
         this.mymoa = data
-
+        console.log(this.data)
       }
     })
   }
