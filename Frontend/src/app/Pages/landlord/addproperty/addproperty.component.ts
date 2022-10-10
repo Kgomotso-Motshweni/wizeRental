@@ -114,9 +114,9 @@ export class AddpropertyComponent implements OnInit {
   showNextStep() 
   {
     this.submitted = true;
-    if(this.Form.invalid){
-      return
-    }
+    // if(this.Form.invalid){
+    //   return
+    // }
     this.ngWizardService.next();
   }
 

@@ -5,7 +5,6 @@ import { Payment } from '../../../Interfaces/payment';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { FormControl, FormGroup, } from '@angular/forms';
 import { ConfirmationService, MessageService} from 'primeng/api';
-import { delay } from 'rxjs';
 import { LandlordService } from 'src/app/Services/landlord.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 

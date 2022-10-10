@@ -1,5 +1,6 @@
 <ngx-ui-loader></ngx-ui-loader>
 <p-toast position="top-right" key="tc"></p-toast>
+<div class="main">
 <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
     <ng-wizard-step [title]="'Property details'" [canEnter]="isValidTypeBoolean" 
         [canExit]="isValidFunctionReturnsBoolean.bind(this)">
@@ -196,3 +197,4 @@
         </div> 
     </ng-wizard-step>
 </ng-wizard>
+</div>

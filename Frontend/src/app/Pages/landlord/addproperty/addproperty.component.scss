@@ -15,13 +15,16 @@ textarea.input {
 }
 .images .body{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
-.addedImages{
-    height: 100px;
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 150px;
+    height: 150px;
 }
-.uploader{
-    width: 100%;
-    height: 100%;
+.main{
+    background: white;
 }
 @media screen and (max-width: 768px){
     .ng-wizard-theme-arrows>ul.step-anchor {

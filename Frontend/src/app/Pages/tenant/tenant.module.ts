@@ -1,18 +1,23 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-import { ConfirmDialog} from 'primeng/confirmdialog';
-import { AuthGuard } from 'src/app/Guards/auth.guard';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+
+// AuthGuards
+import { AuthGuard } from 'src/app/Guards/auth.guard';
+
 ///Components
 import { TenantComponent } from './tenant.component';
+import { MyroomComponent } from './myroom/myroom.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
+import { NortificationComponent } from './nortification/nortification.component';
+import { SinglePropertyComponent } from './single-property/single-property.component'; 
 
 //Primeng Imports
 //primeNG 
-import { ButtonModule } from "primeng/button";
 import { BadgeModule } from "primeng/badge";
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -20,19 +25,10 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MyroomComponent } from './myroom/myroom.component';
-import { ProfileComponent } from './profile/profile.component';
-import { HomeComponent } from './home/home.component';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
-import { AvatarModule } from 'primeng/avatar';
-import { AvatarGroupModule } from 'primeng/avatargroup';
-import { ImageModule} from 'primeng/image';
 import { DialogModule} from 'primeng/dialog';
-import { SinglePropertyComponent } from './single-property/single-property.component'; 
-import { CheckboxModule} from 'primeng/checkbox'; 
 import { SidebarModule } from 'primeng/sidebar';
-import { NortificationComponent } from './nortification/nortification.component';
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
@@ -57,8 +53,6 @@ const routes: Routes = [
   ],
   imports: [
     Ng2SearchPipeModule,
-    ButtonModule,
-    NgxUiLoaderModule,
     BadgeModule,
     //loader
     NgxUiLoaderModule.forRoot({
@@ -89,19 +83,13 @@ const routes: Routes = [
 			blur: 15,
 			gap: 10,
     }),
-    ToastModule,
     FormsModule,
-    ImageModule,
-    CheckboxModule,
-    AvatarModule,
-    AvatarGroupModule,
     InputMaskModule,
     InputNumberModule,
     InputTextModule,
     ReactiveFormsModule,
     CommonModule,
     ToastModule,
-    DialogModule,
     ConfirmDialogModule,
     MessagesModule,
     SidebarModule,

@@ -1,13 +1,9 @@
+//Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
-//Model for search and pagination
-import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
 //Components
 import { LandlordComponent } from './landlord.component';
@@ -21,32 +17,22 @@ import { MypropertyComponent } from './myproperty/myproperty.component';
 import { FooterComponent } from './footer/footer.component';
 import { SendNortificationComponent } from './send-nortification/send-nortification.component';
 
-
 //Guards
 import { AuthGuard } from 'src/app/Guards/auth.guard';
-//Primeng Imports
 
-import { TableModule } from 'primeng/table';
+//Primeng Imports
 import { ToastModule } from 'primeng/toast';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
-import { ProgressBarModule } from 'primeng/progressbar';
 import { InputMaskModule } from 'primeng/inputmask';
-import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import { MessagesModule } from 'primeng/messages';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { CardModule, } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';;
 import { SidebarModule } from 'primeng/sidebar';
-import { PaginatorModule } from 'primeng/paginator';
-import {TabViewModule} from 'primeng/tabview';
 import { MultiSelectModule } from 'primeng/multiselect';
-import {BadgeModule} from 'primeng/badge';
+import { BadgeModule} from 'primeng/badge';
 
-//NgWizard Imports
+//NgWizard Imports and ngxloader
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
@@ -114,28 +100,16 @@ const routes: Routes = [
     BadgeModule,
     //ng-wizard
     NgWizardModule.forRoot(ngWizardConfig),
-    //loader
     FormsModule,
     InputMaskModule,
     SidebarModule,
     ReactiveFormsModule,
     InputNumberModule,
     CommonModule,
-    TableModule,
-    CardModule,
     ToastModule,
-    PaginatorModule,
 		DialogModule,
-		DropdownModule,
-		ButtonModule,
-    ProgressBarModule,
-    InputTextModule,
     ConfirmDialogModule,
-    MessagesModule,
-    TabViewModule,
-
     RouterModule.forChild(routes),
-    ReactiveFormsModule
   ],
   providers: [ MessageService, ConfirmationService],
 

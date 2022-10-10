@@ -42,7 +42,7 @@
 </div>
  
 <ng-template #elseBlock >
-   <div class="container justify-center" style="margin-top:5vh;">
+   <div class="justify-center" style="margin-top:5vh; background: white;">
        <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
            <ng-wizard-step [title]="'Tenant Details'" [canEnter]="isValidTypeBoolean"
                [canExit]="isValidFunctionReturnsBoolean.bind(this)">
