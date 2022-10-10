@@ -163,15 +163,26 @@ img{
 // card sizes
 
 .card{
-    // height: 465px;
-    width: 350px;
+    height: 465px;
+    width: 340px;
 }
 
 .img{
     border-radius: 8px;
-    width: 350px;
+    width: 400px;
+    height: 250px;
+}
+
+.card-body{
+    height: 0%;
 }
 
 .card1{
     margin-top: -43px;
+}
+
+.icons{
+    text-align: center;
+    justify-content: center;
+    margin-top: -3%;
 }

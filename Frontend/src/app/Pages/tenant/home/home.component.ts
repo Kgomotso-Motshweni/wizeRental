@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   searchItem:any;
   constructor(private service: LandingPageService, private __loader: NgxUiLoaderService) { }
 
+  // loader and calling the getproperty function.
   ngOnInit(): void {
     this.__loader.start();
     this.getProperty();

@@ -21,11 +21,14 @@ export class ViewPropertyComponent implements OnInit {
     private __loader: NgxUiLoaderService
   ) { }
 
+
+
   ngOnInit(): void {
-    this.propertyID =  this.activeRoute.snapshot.params['id']
+    this.propertyID =  this.activeRoute.snapshot.params['id'] //getting the current snapshot of this route at a particular moment in time.  
     this.getPropertyByID()
   }
 
+  // get the property details by property id
   getPropertyByID(){
     this.__loader.start();
     this.service.getPropertiesByID(this.propertyID).subscribe({
@@ -37,6 +40,7 @@ export class ViewPropertyComponent implements OnInit {
     })
   }
 
+  // getting images for the enterior part of the accomodation
   getRoomImages(userID:number){
     this.service.getRoomsImages(userID).subscribe({
       next: (data: any) => {

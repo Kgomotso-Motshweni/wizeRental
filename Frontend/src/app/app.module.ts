@@ -19,6 +19,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule} from 'primeng/dialog';
 import { ToggleButtonModule} from 'primeng/togglebutton';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 //Components
 import { AppComponent } from './app.component';

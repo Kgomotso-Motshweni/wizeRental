@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner&family=Pacifico&family=Roboto:ital,wght@0,400;1,300&family=Splash&display=swap');
+
 .space{
     width: 25px;
     height: auto;
@@ -6,6 +9,15 @@
 textarea.input {
     min-height: 100px;
     max-height: 100px;
+}
+.space1{
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}
+img{
+    width: 100%;
+    height: 400px;
 }
 
 .buttons{
@@ -27,7 +39,7 @@ textarea.input {
    
 }
 .badge{
-    width: 50%;
+    width:100%;
     height: 40px;
     padding:0.5px;
     border-style: solid;
@@ -63,11 +75,28 @@ textarea.input {
 // card sizes
 
 .card{
-    // height: 465px;
-    width: 350px;
+    height: 465px;
+    width: 340px;
 }
 
 .img{
     border-radius: 8px;
-    width: 350px;
+    width: 400px;
+    height: 250px;
 }
+.card1{
+    margin-top: -43px;
+}
+// .toggle{
+//     width: %;
+// }
+.icons{
+    text-align: center;
+    justify-content: center;
+    margin-top: -3%;
+}
+
+.card-body{
+    height: 0%;
+}
+
