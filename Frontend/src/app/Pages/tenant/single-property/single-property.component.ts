@@ -107,7 +107,7 @@ export class SinglePropertyComponent implements OnInit {
     this.file = image
   }
  
-
+// get the property details by property id
   getPropertyByID(){
     this.loading = true
     this.service.getPropertiesByID(this.propertyID).subscribe({
@@ -118,6 +118,8 @@ export class SinglePropertyComponent implements OnInit {
       }
     })
   }
+
+   // getting images for the enterior part of the accomodation
   getRoomImages(userID:number){
     this.service.getRoomsImages(userID).subscribe({
       next: (data: any) => {
