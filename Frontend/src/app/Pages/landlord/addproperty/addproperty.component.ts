@@ -45,6 +45,7 @@ export class AddpropertyComponent implements OnInit {
   token:any = '';
   id:number = 0;
   img:any;
+  exist:boolean = false;
   previewVisible: boolean = false;
 
   constructor(
@@ -154,16 +155,47 @@ export class AddpropertyComponent implements OnInit {
     //get the images from html and target the file you just uploaded   
     const image = (event.target as any ).files[0];
 
-    //insert the image to gallery which is an array list
-    this.gallery.push(image)
-    
-    //Show image preview
-    let reader = new FileReader();
-    reader.onload = (event: any) => {
+    if(!this.gallery.includes(image)){
+      this.gallery.push(image)
+      console.log(this.exist);
 
-      this.preview.push(event.target.result);
+    }else if(this.gallery.includes(image)){
+      console.log(this.gallery.length);
     }
-      reader.readAsDataURL(image);  
+
+   
+    
+   
+ 
+  
+    
+    
+
+
+
+    
+    
+    
+    // //insert the image to gallery which is an array list
+    // const position = this.gallery.includes(image)
+    // this.gallery.push(image)
+    // console.log(position);
+
+    // if(position == true){
+    //   this.messageService.add({
+    //     key: 'tc', severity:'error', summary: 'Error', detail: "Image Already Added", life: 3000
+    //   }); 
+    // }else if(position == false){
+    //   //Add image to arraylist Gallery
+   
+    //   //Show image preview
+    //   let reader = new FileReader();
+    //   reader.onload = (event: any) => {
+
+    //     this.preview.push(event.target.result);
+    //   }
+    //     reader.readAsDataURL(image);  
+    // }
   }
 
 
@@ -213,9 +245,10 @@ export class AddpropertyComponent implements OnInit {
     this.__loader.stop();
   }
 
-  removeTask(data:any){
-    console.log(this.preview);
-    
+  removeImage(data:any){
+    let post = this.preview.indexOf(data)
+
+    console.log(post);
   }
 
   declined(){
