@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
 
 @Component({
@@ -9,12 +9,6 @@ import { LandingPageService } from 'src/app/Services/landing-page.service';
   styleUrls: ['./view-property.component.scss']
 })
 export class ViewPropertyComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-
   data:any;
   property:any
   propertyID: any;
@@ -24,6 +18,7 @@ export class ViewPropertyComponent implements OnInit {
     private router:Router,
     private activeRoute:ActivatedRoute,
     private service: LandingPageService,
+    private __loader: NgxUiLoaderService
   ) { }
 
 
@@ -35,7 +30,7 @@ export class ViewPropertyComponent implements OnInit {
 
   // get the property details by property id
   getPropertyByID(){
-    this.loading = true
+    this.__loader.start();
     this.service.getPropertiesByID(this.propertyID).subscribe({
       next: (data: any) => {
         this.property = data;
@@ -50,7 +45,7 @@ export class ViewPropertyComponent implements OnInit {
     this.service.getRoomsImages(userID).subscribe({
       next: (data: any) => {
         this.tenantProperty = data;
-        this.loading = false
+        this.__loader.stop();
       }
     })
   }

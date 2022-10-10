@@ -1,3 +1,4 @@
+<ngx-ui-loader></ngx-ui-loader>
 <p-toast position="top-right" key="tc"></p-toast>
 <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
     <ng-wizard-step [title]="'Property details'" [canEnter]="isValidTypeBoolean" 
@@ -161,8 +162,8 @@
                 <button type="button"  (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
              </div> 
         </form> 
-
     </ng-wizard-step>
+    
     <ng-wizard-step [title]="'Images'" [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
         <div class="container images">
             <div class="addedImages mt-5 justify-center" >
@@ -195,12 +196,3 @@
         </div> 
     </ng-wizard-step>
 </ng-wizard>
-
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>

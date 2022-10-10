@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-home',
@@ -9,34 +9,24 @@ import { LandingPageService } from 'src/app/Services/landing-page.service';
   providers: []
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-
   tenantProperty:any
   searchItem:any;
-  constructor(private service: LandingPageService,) { }
+  constructor(private service: LandingPageService, private __loader: NgxUiLoaderService) { }
 
   // loader and calling the getproperty function.
   ngOnInit(): void {
-    this.loading =true
-   this.getProperty();
+    this.__loader.start();
+    this.getProperty();
   }
-
   filter(){
 
   }
-
   // function that gets property
   getProperty(){
-    this.loading = true
     this.service.getProperties().subscribe({
       next: (data: any) => {
-        this.loading = true
           this.tenantProperty = data;
-          this.loading = false
+          this.__loader.stop();
         }
       }
     )

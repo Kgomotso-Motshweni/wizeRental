@@ -14,4 +14,5 @@ module.exports = multer({
         }
         cb(null, true);
     },
+    limits:{fileSize:2084 * 2084}, //increase filesize to accommodate large pictures
 });

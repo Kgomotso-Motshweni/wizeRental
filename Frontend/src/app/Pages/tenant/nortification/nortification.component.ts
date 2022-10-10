@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import {NortificationsService} from 'src/app/Services/nortifications.service';
 
@@ -9,12 +8,7 @@ import {NortificationsService} from 'src/app/Services/nortifications.service';
   styleUrls: ['./nortification.component.scss']
 })
 export class NortificationComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
 
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
   token: any;
   id: any;
   myNotification: any;

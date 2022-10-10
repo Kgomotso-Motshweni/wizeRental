@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
   // name = new FormControl('');
   // category = new FormControl(''); 
 
-  constructor(private service: LandingPageService,) { }
+  constructor(private service: LandingPageService, private __loader: NgxUiLoaderService) { }
 
 
   // if statement for the filter button
@@ -60,15 +61,14 @@ export class HomeComponent implements OnInit {
 
   // function for getting all the properties 
   ngOnInit(): void {
-    this.stateOptions = [{label: 'To Rent', value: 'off'}, {label: 'To Advertise', value: 'on'}];
-
-    this.loading =true
+    this.__loader.start();
     this.getProperty();
   }
   getProperty(){
     this.service.getProperties().subscribe({
       next: (data: any) => {
           this.tenantProperty = data;
+          this.__loader.stop();
         }
       })
   }
