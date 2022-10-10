@@ -1,14 +1,14 @@
 
-const ten = require("../Config/db.config");
+const tent = require("../Config/db.config");
 
 
 //payment status Function
 
-module.exports = payment_status= async (req, res) => {
+module.exports = tenant_status= async (req, res) => {
   const {tenant_id,status} = req.body
   try {
         //get all post form the database
-        const data = await ten.query(
+        const data = await tent.query(
           `UPDATE tenants
           SET status = $2
           WHERE tenant_id = $1;`,[tenant_id,status],
@@ -17,7 +17,7 @@ module.exports = payment_status= async (req, res) => {
            //If tenant is not accepted
               console.error(err);
               return res.status(500).json({
-                error: "Database error",
+                error: "Declined",
               });
             } else {
               res
