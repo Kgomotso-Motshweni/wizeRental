@@ -39,11 +39,7 @@ const routes: Routes = [
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
-<<<<<<< HEAD
-    {path: 'single-property/:id', component: SinglePropertyComponent},
-=======
     {path: 'viewproperty/:id', component: SinglePropertyComponent},
->>>>>>> 30205221e4537e4b4aa3bc1ef31600be9b0c3e76
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
 
