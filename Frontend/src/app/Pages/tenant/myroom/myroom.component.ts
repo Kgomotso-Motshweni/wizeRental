@@ -63,6 +63,9 @@ export class MyroomComponent implements OnInit {
       accName: new FormControl(''),
       address: new FormControl(''),
       rooms: new FormControl(''),
+      propertyType: new FormControl(''),
+      price: new FormControl(''),
+      status: new FormControl('')
     
     });
 
@@ -108,6 +111,7 @@ export class MyroomComponent implements OnInit {
       }
     })
   }
+
 
    //Open a modal for log issues
    logIssues(){
