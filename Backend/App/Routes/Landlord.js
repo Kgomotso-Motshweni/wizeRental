@@ -10,6 +10,7 @@ const get_property = require("../Controllers/get_property");
 const delete_rentee = require("../Controllers/delete_rentee");
 const update_payment = require("../Controllers/update_payment");
 const moa = require("../Controllers/createMOA")
+const tenant_status = require("../Controllers/tenantStatus")
 
 //Add Property Details
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
@@ -27,6 +28,7 @@ router.put('/updatePayment',update_payment)
 router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
 router.post('/getTenants',get_tenants.tenantsFromSpecifiAddress);
 router.get('/getPayment',payment_status)
+router.get('/getStatus/:id',tenant_status)
 
 //Delete My Properties
 router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty);

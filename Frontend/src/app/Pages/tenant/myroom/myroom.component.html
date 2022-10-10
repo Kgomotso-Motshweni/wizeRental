@@ -129,6 +129,7 @@
                 [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             </textarea>        
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                
                 <div *ngIf="f['message'].errors['required']">message is required</div>
             </div>
         </div>
