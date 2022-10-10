@@ -202,8 +202,8 @@ export class AddpropertyComponent implements OnInit {
         for(let i=0; i< this.gallery.length; i++){
           //assign room images to roomImages formdata from a list
           this.RoomImmages.append('image', this.gallery[i])
-          this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe()  
         }
+        this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe() 
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
         }); 
