@@ -7,7 +7,7 @@ import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import{fabric} from 'fabric';
 
 @Component({
   selector: 'app-myroom',
@@ -34,6 +34,8 @@ export class MyroomComponent implements OnInit {
   property:any;
   propertyID: any;
   selectedValues: string[] = [];
+  canvas:any;
+  
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
@@ -47,6 +49,7 @@ export class MyroomComponent implements OnInit {
       issues: new FormControl(''),
       moa: new FormControl(''),
       electricity: new FormControl('')
+
     });
 
     
@@ -69,7 +72,18 @@ export class MyroomComponent implements OnInit {
         }
       })
 
+      this.canvas = new fabric.Canvas('canvas',{
+        isDrawingMode:true
+      })
+
   }
+
+// canvas 
+// canvas1 = new fabric.Canvas("canvasClass");
+  // save(){
+  //   window.open(this.canvas1.toDataURL( 'jpeg'));
+  //   console.log("This is the image URL",this.canvas1)
+  //  }
 
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
