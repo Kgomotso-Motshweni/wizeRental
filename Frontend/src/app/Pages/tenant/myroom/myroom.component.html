@@ -34,14 +34,14 @@
 <div class="modal" >
   <div class="modal-box w-11/12 max-w-5xl" >
     <h2 class="card-title">Rental Agreement</h2><br>
-    <label for="Water">Date</label>
+    <label for="date">On the {{moa_data.agreestartdate}} </label>
     <p></p>
-   <p>Agreement between <input type="text" />, Owner(s), and <input type="text"  />
-<p>, Tenant(s), for dwelling located at <input type="text"/> Location.
+   <p>Agreement between {{moa_data.firstname}} {{moa_data.lastname}} Owner(s), and {{landlordName.firstname}} {{landlordName.lastname}}
+<p>, Tenant(s), for dwelling located at {{moa_data.p_name}} Location.
    </p>
-   <p> Tenant(s) agree to rent this dwelling on a month-to-month basis for R <input type="text" /> </p>
-   per month, payable on the <input type="text" />day of the calender month.
-   Only the following <input type="text" /> persons and pets are to live in this dwelling.therefore and in consideration of the mutual promises and agreements 
+   <p> Tenant(s) agree to rent this dwelling on a month-to-month basis for R {{moa_data.amount}}</p>
+   per month, payable on the {{moa_data.paystartdate}}day of the calender month.
+   Therefore and in consideration of the mutual promises and agreements 
    contained herein, the Tenant agrees to memorandum the premises from the Landlord under the following.
    
    <p>TENANTS AGREE TO THE FOLLOWING:</p><br>
@@ -54,17 +54,19 @@
 
    <p>Tenants hereby acknoledge that they have read this Agreement, understand it agree to it and have been given a copy.</p><br>
    
-   <p>Tenant: sign here:</p><br>
+   <p>Tenant: sign here: </p><br>
    
    <!-- <canvas height="80" id="canvas" ></canvas> -->
    <canvas id="canvas"  width="300px">
+    
 
     <input type="text" placeholder="Type here" class="input w-full max-w-xs" />
-   </canvas>
+   </canvas><br>
+   <p>    <button type="submit" (click)="drawClear()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-red-800">Clear signature</button></p>
    <div class="form-group flex justify-end">
+
     <label for="my-modal-5" class="btn" class =" text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Close</label>
     <button type="submit" (click)="save()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</button>
-    <button type="submit" (click)="drawClear()" class="btn btn-danger">Clear signature</button>
 </div>
 </div>
 </div>

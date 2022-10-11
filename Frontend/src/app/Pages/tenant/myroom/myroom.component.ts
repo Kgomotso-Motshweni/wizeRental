@@ -8,6 +8,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{fabric} from 'fabric';
+import { thru } from 'cypress/types/lodash';
 
 @Component({
   selector: 'app-myroom',
@@ -35,7 +36,9 @@ export class MyroomComponent implements OnInit {
   propertyID: any;
   selectedValues: string[] = [];
   canvas:any;
-  
+  moa_data:any
+  landId:any
+  landlordName :any;
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
@@ -64,10 +67,30 @@ export class MyroomComponent implements OnInit {
       electricity: ['', Validators.required],
     });
 
+    //get MOA
+    this.service.getMoa(5).subscribe({next:moa =>{
+     this.moa_data = moa
+
+     
+      // console.table(moa)
+      this.landId =this.moa_data[0].landlord_id
+      // console.log(this.landId)
+
+      this.service.getLandlordName(this.landId).subscribe((name)=>{
+        console.log(name)
+        this.landlordName = name
+      })
+
+
+    }})
+
+
+
 // get the rentees
       this.service.getPropertyByID(this.propertyID).subscribe({
         next:data => {
           this.property = data; 
+          
           console.log(this.data) 
         }
       })

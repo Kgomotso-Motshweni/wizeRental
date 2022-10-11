@@ -35,7 +35,35 @@ const CreateMOA = async(req, res ) => {
 
 const getMOA= async (req, res) => {
     try {
-        await client.query(`Select * from moa`,(err,result) => {
+        const id = parseInt(req.params.id)
+        await client.query(`SELECT m.amount,m.agreestartdate,m.agreeenddate, m.paystartdate, m.payenddate,m.agreementtype,p.p_name, u.firstname, u.lastname, p.landlord_id
+        from moa m
+        INNER JOIN applicationform a on a.tenant_id = m.rentee_id
+        INNER JOIN landlordproperty p on p.property_id = a.property_id
+        INNER JOIN users u ON m.rentee_id = u.userid
+        WHERE u.userid = $1`,[id],(err,result) => {
+            if (err) {
+                return res.status(500).json({
+                  message: "Database error",
+                });
+            }
+            return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
+        error: "Database error while getting the Moa", //Database connection error
+      });
+    }
+};
+
+const getLandlordName= async (req, res) => {
+    try {
+        const id = parseInt(req.params.id)
+        await client.query(`SELECT u.firstname,u.lastname
+        from  users u
+        INNER JOIN landlordproperty p on p.landlord_id = u.userid
+		where userid = $1
+		group by u.firstname,u.lastname`,[id],(err,result) => {
             if (err) {
                 return res.status(500).json({
                   message: "Database error",
@@ -77,5 +105,6 @@ const getPropertyByID= async (req, res) => {
 module.exports = {
     CreateMOA,
     getMOA,
+    getLandlordName,
     getPropertyByID
 }

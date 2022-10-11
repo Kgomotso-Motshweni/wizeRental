@@ -28,9 +28,13 @@ export class TenantsService {
   }
 
   getMoa(id:any){
-    return this.http.get("localhost:8080/api/getNewTenant")
+    return this.http.get(`${this.baseUrl}getMOA/${id}`)
   }
   
+  getLandlordName(id:any){
+    return this.http.get(`${this.baseUrl}getLandlordName/${id}`)
+  }
+
 
   getPropertyByID(id:any)
   {
