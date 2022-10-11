@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TenantsService {
+  getProperties() {
+    throw new Error('Method not implemented.');
+  }
   tenantReceive(id: number) {
     throw new Error('Method not implemented.');
   }

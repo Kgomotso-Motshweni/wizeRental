@@ -8,6 +8,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 @Component({
@@ -30,13 +31,17 @@ export class MyroomComponent implements OnInit {
  properties:any;
  property:any;
  searchItem:any;
+
+ tenantProperty:any
+
+ 
  
  condition: boolean = false;
  tenantAddress:any;
  form!: FormGroup;
  filterItem:any;
  getRoomImages:any;
- emptyRoom: any;
+ emptyRoom: number = 1;
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -47,8 +52,7 @@ export class MyroomComponent implements OnInit {
   // property:any;
   propertyID: any;
   selectedValues: string[] = [];
-  private __loader: any;
-  // visibleSidebar2:boolean = false;
+  // private __loader: any;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
@@ -57,6 +61,7 @@ export class MyroomComponent implements OnInit {
     private formBuilder: FormBuilder,
     private services:LandingPageService,
     private activeRoute:ActivatedRoute,
+    private __loader: NgxUiLoaderService,
     
   ) { }
 
@@ -79,13 +84,17 @@ export class MyroomComponent implements OnInit {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
     this.getNotifications();
+    // this.getProperty();
+    // this.getDetails();
 
-    this.notif.tenantReceive(this.id).subscribe({
-      next:data => {
-        this.myNotification = data
-        this.totalNumber = this.myNotification.length
-      }
-    })
+
+
+    // this.notif.tenantReceive(this.id).subscribe({
+    //   next:data => {
+    //     this.myNotification = data
+    //     this.totalNumber = this.myNotification.length
+    //   }
+    // })
 
 
 
@@ -105,8 +114,8 @@ export class MyroomComponent implements OnInit {
 // get the rentees
       this.service.getPropertyByID(this.propertyID).subscribe({
         next:data => {
-          this.property = data; 
-          console.log(this.data) 
+          this.property = data;
+          console.log("rentees",this.data) 
         }
       })
     
@@ -125,6 +134,27 @@ export class MyroomComponent implements OnInit {
       }
     })
   }
+
+    // function that gets property
+    // getProperty(){
+    //   this.service.getProperties().subscribe({
+    //     next: (data: any) => {
+    //         this.tenantProperty = data;
+    //         this.__loader.stop();
+    //       }
+    //     }
+    //   )
+    // }
+
+  // getDetails(){
+  //   return this.service.tenantReceive(this.id).({
+  //     next:(data: number) => {
+  //       this.emptyRoom = data
+  //       this.totalNumber = this.emptyRoom
+  //       this.__loader.stop();
+  //     }
+  //   })
+  // }
 
 
    //Open a modal for log issues
