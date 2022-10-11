@@ -5,9 +5,10 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api'; 
+import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
+
 
 @Component({
   selector: 'app-myroom',
@@ -29,12 +30,13 @@ export class MyroomComponent implements OnInit {
  properties:any;
  property:any;
  searchItem:any;
+ 
  condition: boolean = false;
  tenantAddress:any;
  form!: FormGroup;
  filterItem:any;
  getRoomImages:any;
- emptyRoom: number = 1
+ emptyRoom: any;
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -55,6 +57,7 @@ export class MyroomComponent implements OnInit {
     private formBuilder: FormBuilder,
     private services:LandingPageService,
     private activeRoute:ActivatedRoute,
+    
   ) { }
 
     Form = new FormGroup({
@@ -77,6 +80,18 @@ export class MyroomComponent implements OnInit {
     this.id = this.token.regData[0].userid
     this.getNotifications();
 
+    this.notif.tenantReceive(this.id).subscribe({
+      next:data => {
+        this.myNotification = data
+        this.totalNumber = this.myNotification.length
+      }
+    })
+
+
+
+
+ 
+
     this.Form = this.formBuilder.group({
       message: ['', Validators.required],
       issues: ['', Validators.required],
@@ -95,10 +110,6 @@ export class MyroomComponent implements OnInit {
         }
       })
     
-   
-      
-      
-
   }
 
   get f():{ [key: string]: AbstractControl }{

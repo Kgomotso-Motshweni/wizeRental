@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TenantsService {
+  tenantReceive(id: number) {
+    throw new Error('Method not implemented.');
+  }
 
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }

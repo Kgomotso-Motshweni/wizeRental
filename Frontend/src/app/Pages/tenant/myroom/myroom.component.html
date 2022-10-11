@@ -25,7 +25,22 @@
     </div>
 </div>
 
-<div *ngIf="myNotification == 0" class="emptyRoom container justify-center " style="margin-top:5vh">
+<!-- <div *ngIf="myNotification !=0" class=" justify-center " style="margin-top:5vh">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of myNotification">
+        <div class="card decoration-white shadow-xl text-primary-content" >
+            <div class="card-header h-7" >
+                <h5>{{i.p_name}}</h5>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">{{i.notif_type}}</h2>
+                <p>{{i.subject}}</p>
+                <i class="pi pi-clock"> {{i.created_at | date: 'dd/MMM/yyyy'}}</i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="myNotification == 0" class="container justify-center " style="margin-top:5vh">
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
         <div class="card decoration-white shadow-xl text-primary-content">
             <div class="card-body">
@@ -33,14 +48,22 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div *ngIf="emptyRoom == 0" class=" container justify-center " style="margin-top:5vh">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
+        <div class="card decoration-white shadow-xl text-primary-content">
+            <div class="card-body">
+                <h5 style="text-align: centre;">Once you have been accepted you will see your room details here!!!!</h5>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div *ngIf="myNotification !=0" class="emptyRoom justify-center " style="margin-top:5vh">
+<div *ngIf="emptyRoom !=0" class=" justify-center " style="margin-top:5vh">
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of property">
         <div class="card decoration-white shadow-xl text-primary-content" >
-            <div class="card-header h-7" >
-                
-            </div>
+
             <div class="card-body">
                 <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
                 <br>
@@ -50,11 +73,12 @@
                  <p>R      {{i.rent}}</p> 
                  <p>Status:    {{i.paymentstatus}}</p>
                  <br> 
-                 <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>     
+                 <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
