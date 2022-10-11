@@ -20,4 +20,15 @@ export class LandingPageService {
   getRoomsImages(id:any){
     return this.http.get(`${this.baseUrl}getRoomsImages/${id}`)
   }
+
+  // services for filter
+  getpname(){
+    return this.http.get(`${this.baseUrl}filtername`)
+  }
+  getptown(){
+    return this.http.get(`${this.baseUrl}filtertown`)
+  }
+  getproptype(){
+    return this.http.get(`${this.baseUrl}filterpropertytype`)
+  }
 }

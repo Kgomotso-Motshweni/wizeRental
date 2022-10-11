@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarModule} from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
+import {FormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
@@ -29,6 +29,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule} from 'primeng/dialog';
 import { ToggleButtonModule} from 'primeng/togglebutton';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import { GenericListFilterModule } from 'generic-list-filter';
 
 //Components
 import { AppComponent } from './app.component';
@@ -59,6 +60,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
   imports: [
     
     ConfirmDialogModule,
+    GenericListFilterModule,
     NgxUiLoaderModule,
     SelectButtonModule,
     InputTextModule,
