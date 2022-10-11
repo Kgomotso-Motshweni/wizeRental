@@ -1,9 +1,10 @@
+<ngx-ui-loader></ngx-ui-loader>
 <p-toast position="top-right" ></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="container mx-auto mb-5" style="margin-top: 8vh;">
     <div class="flex justify-end">
         <div class="form-group addproperty">
-            <button type="btn" (click)="loading = !loading" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800" [routerLink]="['/landlord/addproperty']"  >Add New Property</button>
+            <button type="btn" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800" [routerLink]="['/landlord/addproperty']"  >Add New Property</button>
         </div> 
     </div>
 </div>
@@ -42,11 +43,11 @@
                 <tbody>
                     <tr *ngFor="let i Of myData; let c = index">
                         <td>{{c+1}}</td>
-                        <td><img [src]="i.house_image" class="w-24 lg:w-36"/></td>
+                        <td><img [src]="i.house_image" class="lg:w-36 lg:h-36"/></td>
                         <td>{{i.p_name }}</td>
                         <td>{{i.p_address}} {{i.p_city}}</td>
                         <td>
-                            <a (click)="deleteProduct(i)"  type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
+                            <a (click)="deleteProduct(i)" type="button" class="button btn-danger focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium" >
                                 <i class="fa fa-trash fa-lg"></i> Delete
                             </a>
                         </td>
@@ -57,11 +58,3 @@
     </div>
 </ng-container> 
 
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>

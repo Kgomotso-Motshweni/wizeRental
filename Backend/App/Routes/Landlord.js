@@ -13,7 +13,7 @@ const moa = require("../Controllers/createMOA")
 
 //Add Property Details
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
-router.post('/add_rooms/:property_id', upload.array("image", 2), landlord.addRoomImages);
+router.post('/add_rooms/:property_id', upload.array("image", 5), landlord.addRoomImages);
 
 //Get and delete My Properties
 router.get('/getproperty/:userid', landlord.getMyProperties);

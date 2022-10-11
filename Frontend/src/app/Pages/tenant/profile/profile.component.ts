@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Userinfor } from 'src/app/Interfaces/userinfor';
 import { HttpHeaders } from '@angular/common/http';
 import { TenantsService } from 'src/app/Services/tenants.service';
@@ -12,11 +12,6 @@ import { TenantsService } from 'src/app/Services/tenants.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
 
   submitted = false; //bpplean
   userData: any = {};
@@ -30,10 +25,11 @@ export class ProfileComponent implements OnInit {
     private tenants:TenantsService,
     private router:Router,
     private activeRoute:ActivatedRoute,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private __loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.loading = true
+    this.__loader.start();
     let id = this.activeRoute.snapshot.params[('userid')]
     this.getProfile(id)
   }
@@ -53,12 +49,12 @@ export class ProfileComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': `${userToken}`})
     };
-    this.loading = true
+ 
     this.tenants.getProfile(httpOptions, userid).subscribe({
       next:data =>{
         this.userData = data;
         this.editProduct(this.userData[0])
-        this.loading = false
+        this.__loader.stop();
       }
     })
   }
@@ -82,7 +78,7 @@ export class ProfileComponent implements OnInit {
 
   onSubmit():void{
     this.submitted = true;// submit when the details are true/when form is not blank
-    
+    this.__loader.start();
     this.formData.append('firstname', this.tenantInfor.firstname)
     this.formData.append('lastname', this.tenantInfor.lastname)
     this.formData.append('cellno', this.tenantInfor.cellno)
@@ -93,21 +89,22 @@ export class ProfileComponent implements OnInit {
     //Update user profile information
     this.tenants.updateProfile(this.formData, id).subscribe({
       next:data => {
-        this.loading = true;
+    
         this.message = data
 
         //Reload the Page
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
         this.router.onSameUrlNavigation = 'reload'; 
-        this.loading = false
+    
 
         //Show Successful Message ifn there is no error
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail:  this.message.message, life: 3000
         });
+        this.__loader.stop();
       },
       error: err => {
-        this.loading = false;
+        this.__loader.stop();
         this.messageService.add({
           key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
         });  

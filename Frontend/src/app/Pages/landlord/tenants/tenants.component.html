@@ -1,3 +1,4 @@
+<ngx-ui-loader></ngx-ui-loader>
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
@@ -83,7 +84,7 @@
         </form>
 
         <div class=" search justify-end sendNotification">
-          <button type="submit" (click)="loading = !loading" routerLink='/landlord/sendNortification'
+          <button type="submit" routerLink='/landlord/sendNortification'
             class="text-white btn-secondary mt-4 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-secondary dark:hover:btn-secondary dark:focus:ring-blue-800">Send
             Notification</button>
         </div>
@@ -152,16 +153,4 @@
 </div>
 </ng-container>
 <!--till here-->
-
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>
-
-
-
 

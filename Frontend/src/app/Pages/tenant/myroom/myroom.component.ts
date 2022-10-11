@@ -45,7 +45,8 @@ export class MyroomComponent implements OnInit {
   // property:any;
   propertyID: any;
   selectedValues: string[] = [];
-
+  private __loader: any;
+  // visibleSidebar2:boolean = false;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
@@ -71,6 +72,7 @@ export class MyroomComponent implements OnInit {
 
     
   ngOnInit(): void {
+    this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
     this.getNotifications();
@@ -108,6 +110,7 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
+        this.__loader.stop();
       }
     })
   }
@@ -126,9 +129,12 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
+    this.__loader.start();
     console.log(this.Form.value.message)
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
+
+    this.__loader.stop();
   }
 
 

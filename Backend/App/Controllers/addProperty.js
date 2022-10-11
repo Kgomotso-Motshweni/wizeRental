@@ -57,32 +57,28 @@ const addProperty = async(req, res) => {
 const addRoomImages = async(req, res) =>{
     try{  
         const property_id = parseInt(req.params.property_id); 
-        const qualification_url=[];
-        let i = 0;
+        const files = req.files
 
         /* Since its multiple pictures being send to the database and cloudinary 
-        use array to get each file being uploaded then sends it to cloudinary at a time before inserting them in the database
-         */
-        for(i=0; i<req.files.length; i++){
-
-            qualification_url[i] = req.files[i].path;
-            
-            
-            const images = await cloudinary.uploader.upload(qualification_url[i], {
+            use array to get each file being uploaded then sends it to cloudinary at a time before inserting them in the database
+        */
+        for (const file of files) {
+            const {path} = file //Extracting path from file on each file(image uploaded)
+            const images = await cloudinary.uploader.upload(path, {
                 folder: "/property/",
             });
-
-            client.query(`INSERT INTO RoomsImages (property_id, images) VALUES ($1, $2)`, 
+            await client.query(`INSERT INTO RoomsImages (property_id, images) VALUES ($1, $2)`, 
                 [property_id, images.url], (error, results) => {
                     if(error){ //checks for errors and return them 
                         return res.status(400).json({
                             message: "Unable to add property images"
                         })//Throw t //Throw the error in the terminal
                     }
-                    res.status(200).send({message:"image rooms successfully uploaded"}) //Return a status 200 if there is no error
                 }
-            )
-        }        
+            ) 
+            fs.unlinkSync(path)    
+        }
+        res.status(200).send({message:"image rooms successfully uploaded"}) //Return a status 200 if there is no error     
     }
     catch (err) {
         console.log(err);

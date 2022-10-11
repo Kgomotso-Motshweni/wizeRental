@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent} from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {ConfirmationService, MessageService} from 'primeng/api';
-import { delay } from 'rxjs';
+import { FormControl, FormGroup, } from '@angular/forms';
+import { ConfirmationService, MessageService} from 'primeng/api';
 import { LandlordService } from 'src/app/Services/landlord.service';
-
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-tenants',
@@ -16,11 +14,6 @@ import { LandlordService } from 'src/app/Services/landlord.service';
   styleUrls: ['./tenants.component.scss']
 })
 export class TenantsComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
 
   countTenants : number =0;
   rentees: Array<Payment> = [];
@@ -48,17 +41,15 @@ export class TenantsComponent implements OnInit {
   numroomsA: number =0;
   number: number = 0;
 
-  constructor(private dash:DashboardService,
-    private router:Router, 
-    private route: ActivatedRoute,
+  constructor(private dash:DashboardService, private router:Router, private route: ActivatedRoute,
     private confirmationService: ConfirmationService, private messageService: MessageService,
-    private auth:AuthenticationService,private land:LandlordService) { }
+    private auth:AuthenticationService,private land:LandlordService, private __loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
     /* Returns a decode token that has user information 
       and only save the id of that user in a variable called id
     */
-    this.loading = true
+    this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
     this.getLandLordAddress();
@@ -89,7 +80,8 @@ export class TenantsComponent implements OnInit {
           }
         }
         this.countTenants = this.rentees.length;
-        this.loading = false;
+  
+        this.__loader.stop();
       })
     }
 
@@ -108,18 +100,18 @@ export class TenantsComponent implements OnInit {
       accept: () => {
         this.dash.deleteRentee(details).subscribe({
           next:data =>{
-            this.loading = true
+        
             this.message = data
             //Route back to the current page,  this helps in refreshing data
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
             this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
-            this.loading = false
+        
             this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
           },error: err => {
             //show the message if unable to add new data
             this.message = err.error.message;
-            this.loading = false
+         
             this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000})  
           }
         });
@@ -135,18 +127,16 @@ export class TenantsComponent implements OnInit {
   //Get all Landlord property addresses  
   getLandLordAddress(){
     return this.land.address(this.id).subscribe({
-      next:data => {
-        this.loading = true
+      next:data => { 
         this.tenantAddress = data
         this.number = this.tenantAddress.length
-        this.loading = false
       }
     })
   }
   
   caller(){
     this.attempts = 1;
-
+    this.__loader.start();
     this.totAmnt  = 0;
     this.numroomsO  =0;
     this.totPaid  = 0;
@@ -157,7 +147,7 @@ export class TenantsComponent implements OnInit {
       let userData = {
         id: this.id
       }
-      this.loading = true
+ 
       this.land.rentees(userData).subscribe((rentee:any)=>{
         //console.log(rentee)
         this.rentees = rentee;
@@ -184,8 +174,7 @@ export class TenantsComponent implements OnInit {
           
 
         this.countTenants = this.rentees.length;
-        this.loading = false
-
+     
       })
     }else{
 
@@ -194,7 +183,7 @@ export class TenantsComponent implements OnInit {
         p_name: this.Form.value.usertype
       }
 
-      this.loading = true
+   
       this.land.rentees(userData).subscribe((rentee:any)=>{
       // console.log(rentee)
 
@@ -225,9 +214,10 @@ export class TenantsComponent implements OnInit {
           }
         }
         this.countTenants = this.rentees.length;
-        this.loading = false
+    
       })
     }
+    this.__loader.stop();
   }
 //update payment using toggle
   updatePayment(index:any,status:any){
@@ -236,13 +226,12 @@ export class TenantsComponent implements OnInit {
       "rentee_id":this.rente_id,
       "paymentStatus":status
     }
-  
-    this.loading = true
+    
     this.land.updatePayment(body).subscribe(()=>{
       this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(['/landlord/tenant'])
-      this.loading = false
+      
     })
   }
 }

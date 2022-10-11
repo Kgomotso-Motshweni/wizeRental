@@ -1,5 +1,5 @@
+<ngx-ui-loader></ngx-ui-loader>
 <p-toast position="top-right" key="tc"></p-toast>
-
 <section class="gradient-custom">
     <div class="md:container md:mx-auto">
         <div class="flex justify-center">
@@ -55,10 +55,10 @@
                                 
                         <div class="form-group mt-4 flex" >
                             <div class="buttons" >
-                                <button (click)="loading = !loading" type="submit" (click)="onSubmit()" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Save</button>
+                                <button type="submit" (click)="onSubmit()" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-primary">Save</button>
                             </div>
                             <div class="buttons">
-                                <button (click)="loading = !loading" routerLink="/tenant/" class="group relative ml-4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-secondary">Cancel</button>
+                                <button  routerLink="/tenant/" class="group relative ml-4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  btn-secondary">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -67,12 +67,4 @@
         </div>
     </div>
  </section> 
- <ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>
 
