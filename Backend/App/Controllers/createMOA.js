@@ -36,7 +36,7 @@ const CreateMOA = async(req, res ) => {
 const getMOA= async (req, res) => {
     try {
         const id = parseInt(req.params.id)
-        await client.query(`SELECT m.amount,m.agreestartdate,m.agreeenddate, m.paystartdate, m.payenddate,m.agreementtype,p.p_name, u.firstname, u.lastname, p.landlord_id
+        await client.query(`SELECT  m.moa,m.amount,m.agreestartdate,m.agreeenddate, m.paystartdate, m.payenddate,m.agreementtype,p.p_name, u.firstname, u.lastname, p.landlord_id
         from moa m
         INNER JOIN applicationform a on a.tenant_id = m.rentee_id
         INNER JOIN landlordproperty p on p.property_id = a.property_id
@@ -56,6 +56,10 @@ const getMOA= async (req, res) => {
     }
 };
 
+
+
+
+
 const getLandlordName= async (req, res) => {
     try {
         const id = parseInt(req.params.id)
@@ -70,6 +74,30 @@ const getLandlordName= async (req, res) => {
                 });
             }
             return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
+        error: "Database error while getting the Moa", //Database connection error
+      });
+    }
+};
+
+
+
+const updateSignature= async (req, res) => {
+    try {
+        // const id = parseInt(req.params.id)
+        const {moa,signature} = req.body
+        // let status = 'UnSigned'
+        // await client.query(`Update rentees set moa_status = $1 where rentee_id = $2`, [status, id])
+        await client.query(`Update moa set signature = $2
+        WHERE moa = $1`,[moa,signature],(err) => {
+            if (err) {
+                return res.status(500).json({dd
+                  message: "Database error",
+                });
+            }
+            return res.status(200).json({message:'succesfully'})
         });
     } catch (err) {
       res.status(500).json({
@@ -106,5 +134,6 @@ module.exports = {
     CreateMOA,
     getMOA,
     getLandlordName,
-    getPropertyByID
+    getPropertyByID,
+    updateSignature
 }

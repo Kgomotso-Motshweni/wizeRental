@@ -39,6 +39,7 @@ export class MyroomComponent implements OnInit {
   moa_data:any
   landId:any
   landlordName :any;
+  moa_id: any;
 
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
@@ -67,15 +68,14 @@ export class MyroomComponent implements OnInit {
       electricity: ['', Validators.required],
     });
 
-    //get MOA
+    //get MOA, the landlord name
     this.service.getMoa(5).subscribe({next:moa =>{
      this.moa_data = moa
 
      
-      // console.table(moa)
+      console.table(moa)
       this.landId =this.moa_data[0].landlord_id
-      // console.log(this.landId)
-
+     
       this.service.getLandlordName(this.landId).subscribe((name)=>{
         console.log(name)
         this.landlordName = name
@@ -86,7 +86,7 @@ export class MyroomComponent implements OnInit {
 
 
 
-// get the rentees
+// get the rentees (deleteee)
       this.service.getPropertyByID(this.propertyID).subscribe({
         next:data => {
           this.property = data; 
@@ -94,28 +94,27 @@ export class MyroomComponent implements OnInit {
           console.log(this.data) 
         }
       })
-
+//for drawing the signature
       this.canvas = new fabric.Canvas('canvas',{
         isDrawingMode:true
       })
 
   }
+// saving the id (to the signature column)
+  save(id:any){
 
-// canvas 
-// canvas1 = new fabric.Canvas("canvasClass");
-  // save(){
-  //   window.open(this.canvas1.toDataURL( 'jpeg'));
-  //   console.log("This is the image URL",this.canvas1)
-  //  }
-
-  save(){
-
-
-
-
-
+    this.moa_id = id;
+    console.log("my id",this.moa_id)
      const base64 = this.canvas.toDataURL('image/png',0.5);
      console.log("testing",base64);
+
+      const moaData ={
+        moa:this.moa_id,
+        signature:base64
+      }
+
+      console.log(moaData)
+
      }
 
   drawClear(){
