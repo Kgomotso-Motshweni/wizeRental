@@ -34,6 +34,7 @@ import { ViewPropertyComponent } from './Pages/view-property/view-property.compo
 
 //ngx loader
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { GenericListFilterModule } from 'generic-list-filter';// <-- import the module
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     ViewPropertyComponent,
   ],
   imports: [
+    GenericListFilterModule,
     ConfirmDialogModule,
     MessagesModule,
     InputNumberModule,

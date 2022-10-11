@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,17 @@ export class LandingPageService {
 
   getRoomsImages(id:any){
     return this.http.get(`${this.baseUrl}getRoomsImages/${id}`)
+  }
+
+  getFilterDataTown(){
+    return this.http.get(`${this.baseUrl}filterTown`)
+  }
+
+  getFilterDataName(){
+    return this.http.get(`${this.baseUrl}filterName`)
+  }
+
+  getFilterDataProperty(){
+    return this.http.get(`${this.baseUrl}filterProperty`)
   }
 }

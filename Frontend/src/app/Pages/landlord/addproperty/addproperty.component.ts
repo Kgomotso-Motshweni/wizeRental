@@ -46,6 +46,7 @@ export class AddpropertyComponent implements OnInit {
   id:number = 0;
   img:any;
   exist:boolean = false;
+  position:number = 0;
   previewVisible: boolean = false;
 
   constructor(
@@ -144,59 +145,40 @@ export class AddpropertyComponent implements OnInit {
     const image = (event.target as any ).files[0];
     this.file = image
   }
-
   proofOfOnwership(event:any) {
     const image = (event.target as any ).files[0];
     this.pdf = image
   }
 
-
+  
+   index = 0;
   roomsImages(event:any) {  
     //get the images from html and target the file you just uploaded   
     const image = (event.target as any ).files[0];
 
-    if(!this.gallery.includes(image)){
+    
+
+console.log(this.gallery.some(element => element.name == image.name));
+
+      
+    if (!this.gallery.some(element => element.name == image.name)) {
       this.gallery.push(image)
-      console.log(this.exist);
+      //Show image preview
+      let reader = new FileReader();
+      reader.onload = (event: any) => {
 
-    }else if(this.gallery.includes(image)){
-      console.log(this.gallery.length);
-    }
+        this.preview.push(event.target.result);
+      }
+      reader.readAsDataURL(image);  
+     
+    }else{
+      this.messageService.add({
+        key: 'tc', severity:'error', summary: 'Error', detail: "Image Already Added", life: 3000
+      });
+    } 
 
-   
-    
-   
- 
-  
-    
-    
-
-
-
-    
-    
-    
-    // //insert the image to gallery which is an array list
-    // const position = this.gallery.includes(image)
-    // this.gallery.push(image)
-    // console.log(position);
-
-    // if(position == true){
-    //   this.messageService.add({
-    //     key: 'tc', severity:'error', summary: 'Error', detail: "Image Already Added", life: 3000
-    //   }); 
-    // }else if(position == false){
-    //   //Add image to arraylist Gallery
-   
-    //   //Show image preview
-    //   let reader = new FileReader();
-    //   reader.onload = (event: any) => {
-
-    //     this.preview.push(event.target.result);
-    //   }
-    //     reader.readAsDataURL(image);  
-    // }
   }
+
 
 
   // Submits the form  
@@ -245,12 +227,15 @@ export class AddpropertyComponent implements OnInit {
     this.__loader.stop();
   }
 
+  //Removes a picture from preview and gallery 
   removeImage(data:any){
-    let post = this.preview.indexOf(data)
-
-    console.log(post);
+    //finds the position of a picture
+    let post = this.preview.indexOf(data)    
+    this.preview.splice(post,1)
+    this.gallery.splice(post,1)
   }
 
+  //redirect to this page if a tenant his application has been declined
   declined(){
     this.router.navigate(['/landlord/myproperty'])
   }

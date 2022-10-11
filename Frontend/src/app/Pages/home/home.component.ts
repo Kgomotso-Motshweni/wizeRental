@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
-import { Pipe, PipeTransform } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +8,26 @@ import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  filterList = {
+    country : ['India', 'USA', 'Japan', 'Australia'],
+    sector: ['IT', 'Agriculture', 'Medical']
+    //here you can add as many filters as you want.
+    };  
 
+    //put this function in your ts file.
+  filterChange(appliedfilters: any) {
+    console.log(appliedfilters);
+    /*let you have selected India as country and IT sector.
 
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
+    you will get an object here i.e.
 
+   { appliedFilterValues: {country: "India",sector: "IT"}
+   isFilter: true
+   }
+    */
+    
+    //now do your awesome filtering work here.
+}
   searchItem:any;
   tenantProperty:any
   name: any

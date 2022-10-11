@@ -1,17 +1,15 @@
-
-
 <!-- nav-bar -->
 <app-nav-bar></app-nav-bar>
 
 <!------------------------------- content ---------------------------->
 <div class="card1 bg-base-100 shadow-xl col-12 justify-content-center"   style="width: 100%;">
-    <figure><img src="../../../assets/images/istockphoto.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
-    <div class="card-body justify-center">
-      <p>Wize rentals is here to find you a 
-        accommodation in a region you want at the
-        price you can afford</p>
-    </div>
+  <figure><img src="../../../assets/images/istockphoto.jpeg" class="img-fluid w-100" alt="Shoes"/></figure>
+  <div class="card-body justify-center">
+    <p>Wize rentals is here to find you a 
+      accommodation in a region you want at the
+      price you can afford</p>
   </div>
+</div>
 
   <!-- <div class="card lg:card-side bg-base-100 shadow-xl m-3 p-2 justify-content-center" style="width: 98%;">
     <figure><img src="../../../assets/images/tierra-mallorca-rgJ1J8SDEAY-unsplash.jpg" alt="Shoes" /></figure>
@@ -31,53 +29,51 @@
 
 <!-------------------------------- search/filter/toggle ------------------------------>
 <!-- <div class="container-fluid pt-5 m-2 col-sm-12 col-xl-2 col-md-6" > -->
-  <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
+<div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
   
-<!------------------------------------- toggle  ------------------------------------>
-<div class="badge badge-primary badge-outline ml-2 mt-5">What do you need?</div>
+  <!------------------------------------- toggle  ------------------------------------>
+  <div class="badge badge-primary badge-outline ml-2 mt-5">What do you need?</div>
   <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
     <!-- /tenant/home -->
     <button class="btn1 " routerLink="/login" style="width:50%;">To Rent</button>
     <button class="btn2 " routerLink="/login" style="width:50%;">To Advertise</button>
   </div>
 
-<!------------------------------------ search --------------------------------------->
+  <!------------------------------- search --------------------------------------->
   <br>
   <div class="flex search col-xl-12">
-        <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
-      <div class="space1">
-    </div>
-    <br>
-    <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
-   
-  </div>
+    <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
+  <div class="space1"></div>
+  
+  <br>
+  <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>   
+</div>
 
 
-<!-- filter by -->
-
+<!-- filter by
 <div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-5 mr-2 gap-5">
 
-    <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 m-3 gap-5"> -->
+    <!-- <div  class="filter col-md-10 mx-auto bg-light shadow pt-3 pl-3 m-3 gap-5"> 
       <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-5 justify-center" style="width: 100%;">
 
         
-          <!-- <form [formGroup]="Form"> -->
+          <!-- <form [formGroup]="Form"> 
             <div class="form-group mb-6">
               <label ></label>
               <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
                   <option value disabled selected hidden>All</option>
                   <!-- <option value="backroom">Backroom</option>
-                  <option value="commune" >Commune</option> -->
+                  <option value="commune" >Commune</option> 
                   <option *ngFor="let i of propertytype" value="commune" >commune</option>
               </select>
             </div>
-          <!-- </form> -->
+          <!-- </form>
           <div class="form-group mb-6">
             <label ></label>
             <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
                 <option value disabled selected hidden>All</option>
                 <!-- <option value="backroom">Backroom</option>
-                <option value="commune" >Commune</option> -->
+                <option value="commune" >Commune</option> 
                 <option *ngFor="let i of propertytype" value="commune" >commune</option>
             </select>
           </div>
@@ -90,7 +86,7 @@
         <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
             <option value disabled selected hidden>All</option>
             <!-- <option value="backroom">Backroom</option>
-            <option value="commune" >Commune</option> -->
+            <option value="commune" >Commune</option>
             <option *ngFor="let i of propertytype" value="commune" >commune</option>
         </select>
       </div>
@@ -100,7 +96,7 @@
         <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email" placeholder="Select User Role" >
             <option value disabled selected hidden>All</option>
             <!-- <option value="backroom">Backroom</option>
-            <option value="commune" >Commune</option> -->
+            <option value="commune" >Commune</option>
             <option *ngFor="let i of propertytype" value="commune" >commune</option>
         </select>
       </div>
@@ -109,10 +105,10 @@
         <div class="modal-action">
           <button class="btn m-1 btn-primary" name="filterItem" [(ngModel)]="filterItem">filter</button>
         </div>
-      <!-- </div>  -->
-      <!-- endof filter -->
-      <!-- (click)="filterby()" -->
-</div>
+      <!-- </div> 
+      <!-- endof filter
+      <!-- (click)="filterby()"
+</div> -->
 
 
 <!-- <form [formGroup]="Form">
@@ -130,46 +126,24 @@
 <!-- <tr *ngFor="let item of array | search: [name.value, category.value]: ['name', 'catName'] ;"> -->
 
 <!--------------------------------------- ng for (properties)------------------------------------------------>
-    <div class="flex prop ml-5 justify-center md:prop-cols-1 rounded"  >
-      <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
-      <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index " >
-        
+<div class="flex prop ml-5 justify-center md:prop-cols-1 rounded"  >
+  <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-3  gap-10 justify-center" style="width: 100%;">
+    <div *ngFor="let i of property | filter:searchItem |filter:filterItem ;let x = index " >    
       <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" routerLink="/view/{{i.property_id}}">
         <!-- {{i.house_image}} -->
         <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
         <div class="card-body">
-            <h6>{{i.p_name}} accommodations</h6>
-            <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}</h6>
-            <div class="icons">
-           
+          <h6>{{i.p_name}} accommodations</h6>
+          <h6>{{i.p_address}}<br>{{i.p_city}}<br>{{i.p_town}}</h6>
+          <div class="icons">
             <i class="fa-solid fa-bed"></i><h6>{{i.p_bedroom}} rooms </h6>
-            <div class="space">
-            </div>
+            <div class="space"></div>
             <i class="fas fa-bath"></i><h6>{{i.p_bath}} bathrooms</h6>
-        
-        </div>
-        <h6>{{i.p_propertytype}}</h6>
-        <h4>R{{i.p_price}}/Month</h4>
+          </div>
+          <h6>{{i.p_propertytype}}</h6>
+          <h4>R{{i.p_price}}/Month</h4>
         </div>
       </div>
-      <br>
-  </div>
-
-  </div>
     </div>
-
-<!-- 
-  <label for="name">Name </label>
-<input type="text" id="name" [formControl]="name"/>
-<label for="cat">Category </label>
-<input type="text" id="cat" [formControl]="category"/>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Category</th>
-  </tr>
-  <tr *ngFor="let item of array | search: [name.value, category.value]: ['name', 'catName'] ;">
-    <td>{{item.name}}</td>
-    <td>{{item.catName}}</td>
-  </tr>
-</table> -->
+  </div>
+</div>

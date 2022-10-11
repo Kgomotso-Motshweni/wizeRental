@@ -8,7 +8,7 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { LandingComponent } from './Pages/landing/landing.component';
 import { TenantComponent } from './Pages/tenant/tenant.component';
 import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
-
+import { EditorComponent } from './Models/editor/editor.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -17,6 +17,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent, },
   {path:'register', component:RegisterComponent,},
   {path:'tenant', component:TenantComponent},
+  {path:'models', component:EditorComponent},
   {path:'', redirectTo:"/", pathMatch:"full"},
 ];
 
