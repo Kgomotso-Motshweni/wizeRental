@@ -85,6 +85,11 @@ export class MyroomComponent implements OnInit {
   //   console.log("This is the image URL",this.canvas1)
   //  }
 
+  save(){
+     const base64 = this.canvas.toDataURL('image/png',0.5);
+     console.log("testing",base64);
+     }
+
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
   }
