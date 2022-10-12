@@ -83,13 +83,12 @@ const getLandlordName= async (req, res) => {
 };
 
 
-
+// Update the signature and update the "signed" in the rentees table
 const updateSignature= async (req, res) => {
     try {
         
         const {moa,signature,id} = req.body
-        // let status = 'UnSigned'
-        // await client.query(`Update rentees set moa_status = $1 where rentee_id = $2`, [status, id])
+       
         await client.query(`Update moa set signature = $2
         WHERE moa = $1`,[moa,signature],(err) => {
             if (err) {
