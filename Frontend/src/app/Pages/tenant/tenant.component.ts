@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { HttpHeaders } from '@angular/common/http';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
-import { NgxLoadingComponent } from 'ngx-loading';
 import { TenantsService } from 'src/app/Services/tenants.service';
 
 @Component({
@@ -11,17 +9,9 @@ import { TenantsService } from 'src/app/Services/tenants.service';
   styleUrls: ['./tenant.component.scss']
 })
 export class TenantComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-  
-
   constructor(
     public auth:AuthenticationService,  
-    private tenant:TenantsService 
-  ) { }
+    private tenant:TenantsService ,) { }
   
   Full_Name:any = '';
   token:any = '';
@@ -30,6 +20,7 @@ export class TenantComponent implements OnInit {
   userData: any = {};
 
   ngOnInit(): void {
+
     //Returns decoded user data from a token 
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))  
     

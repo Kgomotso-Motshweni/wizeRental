@@ -44,7 +44,7 @@ export class AuthenticationService {
   
   //Create a logout 
   doLogout() {
-    let removeToken = localStorage.removeItem('access_token');
+    let removeToken = localStorage.clear();
     if (removeToken == null) {
       this.router.navigate(['/']);
     }

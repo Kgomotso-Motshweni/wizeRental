@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
@@ -6,7 +6,8 @@ import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import{fabric} from 'fabric';
+import{ fabric } from 'fabric';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-myroom',
@@ -40,7 +41,8 @@ export class MyroomComponent implements OnInit {
     private auth:AuthenticationService,
     private service:TenantsService,
     private router:Router,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: FormBuilder,
+    private __loader: NgxUiLoaderService) { }
 
     Form = new FormGroup({
       message: new FormControl(''),
@@ -52,6 +54,7 @@ export class MyroomComponent implements OnInit {
 
     
   ngOnInit(): void {
+    this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
     this.getNotifications();
@@ -125,9 +128,7 @@ export class MyroomComponent implements OnInit {
     return this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
-        this.totalNumber = this.myNotification.length
-        console.log(data);
-        
+        this.totalNumber = this.myNotification.length      
       }
     })
   }
@@ -145,9 +146,12 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
+    this.__loader.start();
     console.log(this.Form.value.message)
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
+
+    this.__loader.stop();
   }
 }
   

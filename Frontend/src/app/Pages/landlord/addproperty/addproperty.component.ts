@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgxLoadingComponent, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { elementAt, of } from 'rxjs';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
@@ -7,6 +6,7 @@ import { LandlordService } from 'src/app/Services/landlord.service';
 import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-addproperty',
@@ -15,12 +15,7 @@ import { Router } from '@angular/router';
   providers: [MessageService]
 })
 export class AddpropertyComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-  
+
   Form = new FormGroup({
     address: new FormControl(''),
     town: new FormControl(''),
@@ -50,6 +45,7 @@ export class AddpropertyComponent implements OnInit {
   token:any = '';
   id:number = 0;
   img:any;
+  exist:boolean = false;
   previewVisible: boolean = false;
 
   constructor(
@@ -58,11 +54,12 @@ export class AddpropertyComponent implements OnInit {
     private land:LandlordService,
     private messageService: MessageService,
     private auth:AuthenticationService,
-    private router:Router ) {
+    private router:Router, 
+    private __loader: NgxUiLoaderService) {
   }
 
   ngOnInit(): void {
-    this.loading = false;
+    this.__loader.start();
     //returns a decoded token
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid;
@@ -83,6 +80,7 @@ export class AddpropertyComponent implements OnInit {
       tittleDeed: ['', Validators.required],
     }
     );
+    this.__loader.stop();
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -117,9 +115,9 @@ export class AddpropertyComponent implements OnInit {
   showNextStep() 
   {
     this.submitted = true;
-    if(this.Form.invalid){
-      return
-    }
+    // if(this.Form.invalid){
+    //   return
+    // }
     this.ngWizardService.next();
   }
 
@@ -157,22 +155,54 @@ export class AddpropertyComponent implements OnInit {
     //get the images from html and target the file you just uploaded   
     const image = (event.target as any ).files[0];
 
-    //insert the image to gallery which is an array list
-    this.gallery.push(image)
-    
-    //Show image preview
-    let reader = new FileReader();
-    reader.onload = (event: any) => {
+    if(!this.gallery.includes(image)){
+      this.gallery.push(image)
+      console.log(this.exist);
 
-      this.preview.push(event.target.result);
+    }else if(this.gallery.includes(image)){
+      console.log(this.gallery.length);
     }
-      reader.readAsDataURL(image);  
+
+   
+    
+   
+ 
+  
+    
+    
+
+
+
+    
+    
+    
+    // //insert the image to gallery which is an array list
+    // const position = this.gallery.includes(image)
+    // this.gallery.push(image)
+    // console.log(position);
+
+    // if(position == true){
+    //   this.messageService.add({
+    //     key: 'tc', severity:'error', summary: 'Error', detail: "Image Already Added", life: 3000
+    //   }); 
+    // }else if(position == false){
+    //   //Add image to arraylist Gallery
+   
+    //   //Show image preview
+    //   let reader = new FileReader();
+    //   reader.onload = (event: any) => {
+
+    //     this.preview.push(event.target.result);
+    //   }
+    //     reader.readAsDataURL(image);  
+    // }
   }
 
 
   // Submits the form  
   OnSubmit(){
     this.submitted = true;
+    this.__loader.start();
     if(this.Form.invalid){
       return
     }
@@ -194,30 +224,31 @@ export class AddpropertyComponent implements OnInit {
     this.formData.append('pdf', this.pdf)
 
     //Subscribe to add new property details
-    this.loading = true;
+  
     this.land.postProperty(this.formData, this.id).subscribe({
       next:data => {
        
         this.userinfor = data;
         
         //Subscribe to add new property room pictures
-        for(let i=1; i< this.gallery.length; i++){
+        for(let i=0; i< this.gallery.length; i++){
           //assign room images to roomImages formdata from a list
           this.RoomImmages.append('image', this.gallery[i])
-          this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe()  
         }
+        this.land.AddRooms(this.RoomImmages, this.userinfor.results).subscribe() 
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Property Successfully Added", life: 3000
         }); 
-        this.loading = false;
+        this.router.navigate(['/landlord/myproperty'])
       }
     })
-    this.loading = false;
+    this.__loader.stop();
   }
 
-  removeTask(data:any){
-    console.log(this.preview);
-    
+  removeImage(data:any){
+    let post = this.preview.indexOf(data)
+
+    console.log(post);
   }
 
   declined(){

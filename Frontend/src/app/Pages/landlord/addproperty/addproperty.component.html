@@ -1,4 +1,6 @@
+<ngx-ui-loader></ngx-ui-loader>
 <p-toast position="top-right" key="tc"></p-toast>
+<div class="main">
 <ng-wizard [config]="config" (stepChanged)="stepChanged($event)" >
     <ng-wizard-step [title]="'Property details'" [canEnter]="isValidTypeBoolean" 
         [canExit]="isValidFunctionReturnsBoolean.bind(this)">
@@ -161,25 +163,27 @@
                 <button type="button"  (click)="showNextStep()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Save & Continue</button>
              </div> 
         </form> 
-
     </ng-wizard-step>
+    
     <ng-wizard-step [title]="'Images'" [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
         <div class="container images">
             <div class="addedImages mt-5 justify-center" >
                 <div class="flex card-profile-image justify-start">
-                    <div  *ngFor="let i of preview" class="grid gap-1 grid-cols-1">
-                        <a (click)="removeTask(i)"><img [src]="i" class="w-36 ml-2" /></a>
+                    <div *ngFor="let i of preview" class="grid gap-1 grid-cols-1">
+                       
+                        <a (click)="removeImage(i)"><i class="fa-regular fa-circle-xmark"></i><img [src]="i" class="w-36 ml-2" /></a>
                     </div> 
-                 </div>
+                </div>
             </div>
 
             <div class="map">
-                <div class="inputs mt-10">
+                <div *ngIf="preview.length < 5" class="inputs mt-10">
                     <input (change)="roomsImages($event)"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Upload inside property pictures only 2">
                 </div>
                 <div class="body">
                     <h1 >Image upload rules : </h1>
-                    <li>Maximum of 2 picture</li>
+                    <li>Maximum of 5 picture</li>
+                    <li>Once you have choosen 5 pictures the upload button will disapear</li>
                     <li>Acceptable image format JPG and PNG</li>
                     <li>Maximum image file size 10mb.</li>
                     <li>No Duplicate images</li>
@@ -188,19 +192,12 @@
         </div>     
         <div class="flex form-group justify-end mb-2"> 
             <div class="grid gap-6 md:grid-cols-3 grid-cols-2">
-                <button type="button"  (click)="declined()"  class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Declined</button>
-                <button type="button"  (click)="showPreviousStep()" class="text-white ml-2 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
-                <button type="button"  (click)="OnSubmit()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
+                <button type="button" (click)="declined()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Cancel</button>
+                <button type="button" (click)="showPreviousStep()" class="text-white ml-2 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Previous</button>
+                <button type="button" (click)="OnSubmit()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Submit</button>
             </div> 
         </div> 
     </ng-wizard-step>
 </ng-wizard>
+</div>
 
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>

@@ -5,7 +5,7 @@
             <div class="md:card text-center header ">
                 <div class="card-body rounded-md">
                     <div class="text-center lg:pt-16">
-                        <a (click)="loading = !loading" routerLink="/"><img class="image lg:w-80 lg:h-72 w-40 h-24" src="../../../assets/images/unknown.png"></a>
+                        <a routerLink="/"><img class="image lg:w-80 lg:h-72 w-40 h-24" src="../../../assets/images/unknown.png"></a>
                         <h1 class="text-primary md:text-2xl text-xs mt-2 mb-3">REGISTER!</h1>
                     </div>
                 </div>
@@ -90,14 +90,14 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" (click)="loading = !loading" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Register</button>
+                            <button type="submit" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Register</button>
                         </div>
                     </form>
 
                     <div class="form-group mt-4">
                         <P class = "Already">
                             Already have an account? Click
-                            <a routerLink="/login"  (click)="loading = !loading" class="reg" >here</a> to log in
+                            <a routerLink="/login" class="reg" >here</a> to log in
                         </P>
                     </div>
                 </div>
@@ -106,15 +106,6 @@
         
     </div>
 </section> 
-
-<ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading>
 
 <p-dialog header="terms and conditions" [(visible)]="ViewDialog" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <p>If this Agreement conflicts with the TNC Agreement, this Agreement will prevail to such extent as this Agreement may be more favourable to the Writer. This Agreement will not be affected by any future amendment or expiry of the TNC Agreement, except that any increases to the financial terms payable under the TNC Agreement will apply to any payment due under this Agreement after the date of the increase. For the sake of clarity, the increase will not apply to payments that have already been made. This Agreement is in the form provided under the minimum terms of the TNC Agreement and any divergences from that form that are agreed between the parties are set out in Schedule 2 and/or listed by clause number in Schedule 2 for ease of reference.

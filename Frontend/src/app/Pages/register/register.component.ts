@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { MustMatch } from './confirmPassword/validation';
 import { ConfirmationService } from 'primeng/api';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-register',
@@ -14,11 +14,6 @@ import { ConfirmationService } from 'primeng/api';
   providers: [MessageService, ConfirmationService]
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
 
   Form = new FormGroup({
     usertype: new FormControl(''),
@@ -38,10 +33,11 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     public auth:AuthenticationService, 
     private router:Router,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private __loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.loading = false;
+    this.__loader.stop();
     this.Form = this.formBuilder.group({
       usertype: ['', Validators.required],
       fname: ['', Validators.required],
@@ -76,7 +72,7 @@ export class RegisterComponent implements OnInit {
 
     if(this.Form.invalid)
     { 
-      this.loading = false;
+      this.__loader.stop();
       return
     }
     let user_role = this.Form.value.usertype;
@@ -92,17 +88,17 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(user, user_role).subscribe({
       next:data => {
-        this.loading = true;
+        this.__loader.start();
         //Reset the form after successful register before routing to login
         this.Form.reset();
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Registration Sucessfull. Let's start working", life: 3000
         });  
-        this.loading = false;
+        this.__loader.stop();
         this.router.navigate(['/login'])
       },
       error: err => {
-        this.loading = false;
+        this.__loader.stop();
         this.messageService.add({
           key: 'tc', severity:'error', summary: 'Error', detail: err.error.message, life: 3000
         });  
