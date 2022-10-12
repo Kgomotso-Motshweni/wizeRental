@@ -41,7 +41,7 @@ export class MyroomComponent implements OnInit {
  form!: FormGroup;
  filterItem:any;
  getRoomImages:any;
- emptyRoom: number = 0;
+ emptyRoom: number = 1;
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -178,16 +178,16 @@ export class MyroomComponent implements OnInit {
 
     this.__loader.stop();
   }
+  
 
-  // getRoomById(){
-  //   this.service.getProperties().subscribe({
-  //     next: (data: any) => {
-  //       this.__loader.start();
-  //       this.getRoomById = data;
-  //       this.__loader.stop();
-  //     }
-  //   })
-  // }
+  getRoomById(){
+    this.service.getRoom().subscribe({
+      next: (data: any) => {
+        this.getRoomById = data;
+        this.__loader.stop();
+      }
+    })
+  }
 
 
 }

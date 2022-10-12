@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TenantsService {
+  getTenantRoom() {
+    throw new Error('Method not implemented.');
+  }
   getProperties() {
     throw new Error('Method not implemented.');
   }
@@ -38,7 +41,8 @@ export class TenantsService {
     return this.http.get(`${this.baseUrl}getPropertyByID/${id}`)
   }
 
-
- 
+  getRoom(){
+    return this.http.get(`${this.baseUrl}getRoomById/`)
+  }
 
 }
