@@ -26,7 +26,7 @@ const getRoomById= async (req, res) => {
       FROM landlordproperty p 
       INNER JOIN rentees r on p.property_id = r.property_id 
       INNER JOIN users u ON r.tenant_id = u.userid 
-      WHERE u.userid = 5`,[id], (err,result) => {
+      WHERE u.userid = $1`,[id], (err,result) => {
           if (err) {
               return res.status(500).json({
                 message: "Database error",

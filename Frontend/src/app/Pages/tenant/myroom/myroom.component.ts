@@ -41,7 +41,7 @@ export class MyroomComponent implements OnInit {
  form!: FormGroup;
  filterItem:any;
  getRoomImages:any;
- emptyRoom: number = 1;
+ emptyRoom: number = 0;
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -112,13 +112,24 @@ export class MyroomComponent implements OnInit {
     });
 
 // get the rentees
-      this.service.getPropertyByID(this.propertyID).subscribe({
-        next:data => {
-          this.property = data;
-          this.emptyRoom = this.property.length
-          console.log("rentees",data) 
-        }
-      })
+      // this.service.getPropertyByID(this.propertyID).subscribe({
+      //   next:data => {
+      //     this.property = data;
+      //     this.emptyRoom = this.property.length
+      //     console.log(data) 
+      //   }
+      // })
+
+
+     
+        this.service.getRoom(this.id).subscribe({
+          next: (data: any) => {
+            this.property = data;
+            this.emptyRoom = this.property.length
+            this.__loader.stop();
+          }
+        })
+      
     
   }
 
@@ -180,14 +191,7 @@ export class MyroomComponent implements OnInit {
   }
   
 
-  getRoomById(){
-    this.service.getRoom().subscribe({
-      next: (data: any) => {
-        this.getRoomById = data;
-        this.__loader.stop();
-      }
-    })
-  }
+  
 
 
 }
