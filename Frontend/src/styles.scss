@@ -28,3 +28,27 @@ body {
     }
     /* ... */
 }
+
+.app-btn {
+    height: 32px;
+    width: 110px;
+    background: #55ADEA; 
+    border: none;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.side-bar-wrapper{
+    width: 200px;
+}
+.filter-position-modal{
+justify-items: end;
+}
+.modalbody {
+    top:0%;
+    position: absolute;
+}
+.fa-filter:before {
+    color: #55ADEA;
+}

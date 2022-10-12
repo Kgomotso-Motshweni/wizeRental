@@ -2,6 +2,8 @@
 <p-toast position="top-right" key="tc"></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
+
+<!-- view property pictures and deatils -->
 <div class="card lg:card-side bg-base-100 shadow-xl m-3 p-2">
     <figure><img class="img" [src]="data.house_image" alt="Shoes" style="height: 396.33px;"/></figure>
     <div class="card-body">
@@ -23,7 +25,6 @@
                 <i class="fa-solid fa-car ">{{data.p_bath}}</i>
             </div>
         </div>
-        
         <div class="card-body shadow-xl">
             <h4 class="mb-4">Description</h4> 
             <p> {{data.p_description}}</p>

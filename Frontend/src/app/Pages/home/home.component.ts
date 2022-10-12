@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild,Input,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
-import { Pipe, PipeTransform } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 
 
 @Component({
@@ -12,88 +9,117 @@ import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-
-  @Input() list: any;
-  @Output() onFilterChange = new EventEmitter();
-
-  filterList = {
-    country : ['JHB', 'USA', 'Japan', 'Australia'],
-    sector: ['IT', 'Agriculture', 'Medical'],
-    
-    //here you can add as many filters as you want.
-    }; 
-
-    //put this function in your ts file.
-   filterChange(appliedfilters:any) {
-    console.log(appliedfilters);
-    /*let you have selected India as country and IT sector.
-
-    you will get an object here i.e.
-
-   { appliedFilterValues: {country: "India",sector: "IT"}
-   isFilter: true
-   }
-    */
-    
-    //now do your awesome filtering work here.
-  }
 
   searchItem:any;
-  tenantProperty:any
-  name: any
-  category: any
-  
+  tenantProperty:any  
   stateOptions: any;
-  value1: string = "off";
 
+  // filter
+  name:any
+  town:any
+  accommodationType:any
+  copyData:any;
+  filterproperty:any;
+  filtertown:any;
+  filtername:any;
+  townList: Array<any> = [];
+  property: Array<any> = [];
+  nameList: Array<any> = [];
+  filteringDataList:Array<any>=[]
 
-  // filter vars
-  condition: boolean = false;
-  // name = new FormControl('');
-  // category = new FormControl(''); 
 
   constructor(private service: LandingPageService, private __loader: NgxUiLoaderService) { }
-
-
-  // if statement for the filter button
-  filter(){
-    if(this.condition ==true){
-      this.condition= false
-    }else{
-      this.condition=true
-    }
-   
-  } 
-// trying filter
-  transform(value: any[], prop: string) {
-    if (!Array.isArray(value) || value.length === 0 || !prop) { 
-      return value;
-    }
-    // Here we sort the items based on passed `property`
-    value.sort((a, b) => b[prop] - a[prop]);
-    const max = value[0][prop];
-    const min = value[value.length - 1][prop];
-
-    return [max, min];
-  }
 
 
   // function for getting all the properties 
   ngOnInit(): void {
     this.__loader.start();
     this.getProperty();
+    this.FilterTown();
+    this.FilterProperty()
+    this.Filtername()
+
+
   }
+
   getProperty(){
     this.service.getProperties().subscribe({
       next: (data: any) => {
           this.tenantProperty = data;
+           //Making a duplicate
+        this.copyData = this.tenantProperty
           this.__loader.stop();
         }
       })
   }
-}
+
+
+  // filtering
+
+  FilterTown(){
+    return this.service.getptown().subscribe({
+      next: (data: any) => {
+        this.filtertown = data;
+        this.filtertown.forEach((element:any) => {
+          this.townList.push(element.p_town)          
+        });         
+      }
+    })
+  }
+
+  FilterProperty(){
+    return this.service.getproptype().subscribe({
+      next: (data: any) => {
+        this.filterproperty = data;        
+        this.filterproperty.forEach((element:any) => {
+          this.property.push(element.p_propertytype)
+        });        
+      }
+    })
+  }
+
+  Filtername(){
+    return this.service.getpname().subscribe({
+      next: (data: any) => {
+        this.filtername = data;
+        this.filtername.forEach((element:any) => {
+          this.nameList.push(element.p_name)       
+        });           
+      }
+    })
+  }
+
+
+  filterList = {
+    town: this.townList,
+    property_Name: this.nameList,
+    property_Type: this.property
+  }; 
+
+    //put this function in your ts file.
+    filterChange(appliedfilters: any) 
+    {
+      this.tenantProperty = this.copyData
+      
+      this.town = appliedfilters.appliedFilterValues.town
+      this.name = appliedfilters.appliedFilterValues.property_Name
+      this.accommodationType =  appliedfilters.appliedFilterValues.property_Type
+  
+      if(this.town){
+        this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_town == this.town)
+      }
+  
+      if(this.name){
+        this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_name == this.name)
+      }
+      
+      if(this.accommodationType){
+        this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_propertytype == this.accommodationType)
+      }
+    }
+  }
+  
+
+
+
+

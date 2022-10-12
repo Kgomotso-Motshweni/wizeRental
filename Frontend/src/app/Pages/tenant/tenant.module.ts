@@ -33,6 +33,8 @@ import { SinglePropertyComponent } from './single-property/single-property.compo
 import { CheckboxModule} from 'primeng/checkbox'; 
 import { SidebarModule } from 'primeng/sidebar';
 import { NortificationComponent } from './nortification/nortification.component';
+import { GenericListFilterModule } from 'generic-list-filter';
+
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
@@ -60,6 +62,7 @@ const routes: Routes = [
     ButtonModule,
     NgxUiLoaderModule,
     BadgeModule,
+    GenericListFilterModule,
     //loader
     NgxUiLoaderModule.forRoot({
 			overlayColor: "rgba(0,0,0,0.85)",
