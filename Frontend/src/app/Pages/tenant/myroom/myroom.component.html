@@ -25,30 +25,8 @@
     </div>
 </div>
 
-<!-- <div *ngIf="myNotification !=0" class=" justify-center " style="margin-top:5vh">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of myNotification">
-        <div class="card decoration-white shadow-xl text-primary-content" >
-            <div class="card-header h-7" >
-                <h5>{{i.p_name}}</h5>
-            </div>
-            <div class="card-body">
-                <h2 class="card-title">{{i.notif_type}}</h2>
-                <p>{{i.subject}}</p>
-                <i class="pi pi-clock"> {{i.created_at | date: 'dd/MMM/yyyy'}}</i>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div *ngIf="myNotification == 0" class="container justify-center " style="margin-top:5vh">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
-        <div class="card decoration-white shadow-xl text-primary-content">
-            <div class="card-body">
-                <h5>You have 0 notifications</h5>
-            </div>
-        </div>
-    </div>
-</div> -->
+
 
 <div *ngIf="emptyRoom == 0" class=" container justify-center " style="margin-top:5vh">
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
@@ -82,27 +60,6 @@
 
 
 
-<!-- <div class="emptyRoom">
-    <div class="flex justify-center">
-        <div class="grid sm:grid-cols-1 ">
-            <div class="card empty w-full shadow-xl"*ngFor="let i of property">
-                <div class="card-body"  >
-                    <div>
-                        <figure><img class="img" src="{{i.house_image}}" alt="Shoes" /></figure>
-                        <br>
-                       <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
-                         <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
-                         <p>PropertyType: {{i.p_propertytype}}</p> 
-                         <p>R      {{i.rent}}</p> 
-                         <p>Status:    {{i.paymentstatus}}</p>
-                         <br> 
-                         <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>     
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>
@@ -169,30 +126,7 @@
     </form>
 </p-dialog> 
 
-<!-- <ngx-loading
-    [show]="loading"
-    [config]="{
-    animationType: ngxLoadingAnimationTypes.threeBounce,
-    primaryColour: '#ffffff', secondaryColour: '#ffffff',
-    backdropBorderRadius: '3px'
-    }">
-</ngx-loading> -->
 
-<!-- <div *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 ml-5 mr-2 gap-5">
-
-    <div class="grid m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-5 justify-center"
-        style="width: 100%;">
-
-        <div class="form-group mb-6">
-            <label></label>
-            <select formControlName="usertype" class="input bg-gray-50 input-bordered w-64  email"
-                placeholder="Select User Role">
-                <option value disabled selected hidden>All</option>
-                <option *ngFor="let i of propertytype" value="commune">commune</option>
-            </select>
-        </div>
-    </div>
-</div> -->
 
 
 

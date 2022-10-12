@@ -116,7 +116,7 @@ export class MyroomComponent implements OnInit {
         next:data => {
           this.property = data;
           this.emptyRoom = this.property.length
-          console.log("rentees",this.data) 
+          console.log("rentees",data) 
         }
       })
     
@@ -177,6 +177,10 @@ export class MyroomComponent implements OnInit {
     console.log(this.Form.value.electricity)
 
     this.__loader.stop();
+  }
+
+  getRoomById(){
+    
   }
 
 
