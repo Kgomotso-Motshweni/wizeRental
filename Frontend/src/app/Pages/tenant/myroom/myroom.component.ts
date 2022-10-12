@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { TenantsService } from 'src/app/Services/tenants.service';
@@ -8,7 +7,6 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{fabric} from 'fabric';
-import { thru } from 'cypress/types/lodash';
 
 @Component({
   selector: 'app-myroom',
@@ -17,18 +15,14 @@ import { thru } from 'cypress/types/lodash';
   providers: [MessageService, ConfirmationService]
 })
 export class MyroomComponent implements OnInit {
-  @ViewChild('ngxLoading', { static: false })
-  ngxLoadingComponent!: NgxLoadingComponent;
-  showingTemplate = false;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public loading = false;
-  visibleSidebar2: boolean = false;
-  
+
   id:number = 0;
   token:any;
   totalNumber: number = 0;
   myNotification: any 
   dialogMessage: boolean = false;
+  SignMOA:boolean = false;
+  visibleSidebar2:boolean = false
   submitted: boolean = false;
   mymoa:any;
   data:any;
@@ -61,6 +55,7 @@ export class MyroomComponent implements OnInit {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
     this.getNotifications();
+    this.getMoaData();
 
     this.Form = this.formBuilder.group({
       message: ['', Validators.required],
@@ -68,64 +63,55 @@ export class MyroomComponent implements OnInit {
       electricity: ['', Validators.required],
     });
 
-
-    //get MOA, the landlord name
-    this.service.getMoa(5).subscribe((moa)=>{
-
-     this.moa_data = moa
-
-     console.table(this.moa_data)
-      
-      this.landId =this.moa_data[0].landlord_id
-      this.service.getLandlordName(this.landId).subscribe((name)=>{
-      this.landlordName = name
-      console.log(this.landlordName)
+ 
+    //for drawing the signature
+    this.canvas = new fabric.Canvas('canvas',{
+      isDrawingMode:true
     })
-   
-    })
-
-   
-
-   
-   
-   
-
-
-// get the rentees (deleteee)
-      this.service.getPropertyByID(this.propertyID).subscribe({
-        next:data => {
-          this.property = data; 
-          
-          console.log(this.data) 
-        }
-      })
-//for drawing the signature
-      this.canvas = new fabric.Canvas('canvas',{
-        isDrawingMode:true
-      })
-
   }
 
-
-  
-// saving the id (to the signature column)
-  save(id:any){
-
-    this.moa_id = id;
-    console.log("my id",this.moa_id)
-     const base64 = this.canvas.toDataURL('image/png',0.5);
-     console.log("testing",base64);
-
-      const moaData ={
-        moa:this.moa_id,
-        signature:base64,
-        id:5
+  //Get Moa Details
+  getMoaData(){
+    this.service.getMoa(this.id).subscribe({
+      next:data => {
+        this.mymoa = data  
+        this.mymoa = this.mymoa[0]    
       }
+    })
+  }
 
-      this.service.updateSignature(moaData).subscribe(()=>{
+  sign(){
+    this.SignMOA = true;
+  }
 
-      })
-     }
+  hidesign(){
+    this.SignMOA = false;
+  }
+
+  // saving the id (to the signature column)
+  save(id:any){
+    this.moa_id = id;
+    const base64 = this.canvas.toDataURL('image/png',0.5);
+    const moaData ={
+      moa:this.moa_id,
+      signature:base64,
+      id:this.id 
+    }
+    
+    this.service.updateSignature(moaData).subscribe({
+      next:data => {
+        this.SignMOA = false;
+        this.messageService.add({
+          severity:'success', summary: 'Success', detail: "Moa Signed", life: 3000
+        });
+      },
+      error:err=>{
+        this.messageService.add({
+           severity:'error', summary: 'Error', detail: err.error.message, life: 3000
+        });
+      }
+    })
+  }
 
   drawClear(){
     this.canvas.clear();
@@ -140,15 +126,8 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.myNotification = data
         this.totalNumber = this.myNotification.length
-      }
-    })
-  }
-
-  getNewTenant(){
-    return this.service.getMoa(this.id).subscribe({
-      next:data => {
-        this.mymoa = data
-        console.log(this.data)
+        console.log(data);
+        
       }
     })
   }
@@ -170,7 +149,6 @@ export class MyroomComponent implements OnInit {
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
   }
-
 }
   
  

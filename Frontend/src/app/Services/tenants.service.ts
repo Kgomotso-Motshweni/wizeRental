@@ -38,14 +38,5 @@ export class TenantsService {
   }
 
 
-  getLandlordName(id:any){
-    return this.http.get(`${this.baseUrl}getLandlordName/${id}`)
-  }
-
-
-  getPropertyByID(id:any)
-  {
-    return this.http.get("http://localhost:8080/api/getPropertyByID/1")
-  }
 
 }

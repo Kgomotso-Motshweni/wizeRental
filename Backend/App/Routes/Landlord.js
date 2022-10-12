@@ -37,13 +37,6 @@ router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 
 //Create MOA for a tenant
 router.post('/acceptNewTenant', moa.CreateMOA);
-router.get('/getMOA/:id', moa.getMOA);
-router.get('/getLandlordName/:id',moa.getLandlordName)
-
-
-router.post('/updateSignature',moa.updateSignature)
-
-router.get('/getPropertyByID/:id',moa.getPropertyByID);
 
 
 
