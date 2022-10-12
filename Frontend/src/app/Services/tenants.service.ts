@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +32,12 @@ export class TenantsService {
   getMoa(id:any){
     return this.http.get(`${this.baseUrl}getMOA/${id}`)
   }
-  
+
+  updateSignature(body:any){
+    return this.http.post(`${this.baseUrl}updateSignature`,body)
+  }
+
+
   getLandlordName(id:any){
     return this.http.get(`${this.baseUrl}getLandlordName/${id}`)
   }

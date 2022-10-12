@@ -25,8 +25,9 @@
 </div>
 
 
+
 <!-- The button to open modal -->
-<label for="my-modal-5" (click)="getNewTenant()" class="btn modal-button">Moa</label>
+<label for="my-modal-5" (click)="getNewTenant()" class="btn modal-button"><i class="bi bi-file-earmark"></i></label>
 
 
 <!-- Put this part before </body> tag -->
@@ -34,17 +35,13 @@
 <div class="modal" >
   <div class="modal-box w-11/12 max-w-5xl" >
     <h2 class="card-title">Rental Agreement</h2><br>
-    <label for="date">On the {{moa_data.agreestartdate}} </label>
-    <p></p>
-   <p>Agreement between {{moa_data.firstname}} {{moa_data.lastname}} Owner(s), and {{landlordName.firstname}} {{landlordName.lastname}}
-<p>, Tenant(s), for dwelling located at {{moa_data.p_name}} Location.
-   </p>
-   <p> Tenant(s) agree to rent this dwelling on a month-to-month basis for R {{moa_data.amount}}</p>
-   per month, payable on the {{moa_data.paystartdate}}day of the calender month.
-   Therefore and in consideration of the mutual promises and agreements 
-   contained herein, the Tenant agrees to memorandum the premises from the Landlord under the following.
+    <p>On the {{moa_data[0].agreestartdate}}, Agreement between {{moa_data[0].firstname}} {{moa_data[0].lastname}} Owner(s),</p>
+    <p>and {{landlordName[0].firstname}} {{landlordName[0].lastname}} , Tenant(s), for dwelling located at {{moa_data[0].p_name}} Location.</p>  
+   <p> Tenant(s) agree to rent this dwelling on a month-to-month basis for R {{moa_data[0].amount}}per month,</p> 
+   <p>payable on the {{moa_data[0].paystartdate}}day of the calender month.Therefore and in consideration of the mutual promises and agreements<p> 
+  <p> contained herein, the Tenant agrees to memorandum the premises from the Landlord under the following.</p><br>
    
-   <p>TENANTS AGREE TO THE FOLLOWING:</p><br>
+   <p><b>TENANTS AGREE TO THE FOLLOWING:</b></p><br>
    <p>
     To keep the yards clean. Not to repair motor vehicles in the premises 
     To pay rent on time and by cash 
@@ -54,15 +51,15 @@
 
    <p>Tenants hereby acknoledge that they have read this Agreement, understand it agree to it and have been given a copy.</p><br>
    
-   <p>Tenant: sign here: </p><br>
+   <p>Sign here:</p><br>
    
    <!-- <canvas height="80" id="canvas" ></canvas> -->
    <canvas id="canvas"  width="300px">
     
 
-    <input type="text" placeholder="Type here" class="input w-full max-w-xs" />
+   <input type="text" placeholder="Type here" class="input w-full max-w-xs" />
    </canvas><br>
-   <p>    <button type="submit" (click)="drawClear()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-red-800">Clear signature</button></p>
+   <p><button type="submit" (click)="drawClear()" style="background-color:red">Clear signature</button></p>
    <div class="form-group flex justify-end">
 
     <label for="my-modal-5" class="btn" class =" text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Close</label>
@@ -70,6 +67,7 @@
 </div>
 </div>
 </div>
+
 
 <div class="emptyRoom"  >
     <div class="flex justify-center">

@@ -68,22 +68,27 @@ export class MyroomComponent implements OnInit {
       electricity: ['', Validators.required],
     });
 
+
     //get MOA, the landlord name
-    this.service.getMoa(5).subscribe({next:moa =>{
+    this.service.getMoa(5).subscribe((moa)=>{
+
      this.moa_data = moa
 
-     
-      console.table(moa)
+     console.table(this.moa_data)
+      
       this.landId =this.moa_data[0].landlord_id
-     
       this.service.getLandlordName(this.landId).subscribe((name)=>{
-        console.log(name)
-        this.landlordName = name
-      })
+      this.landlordName = name
+      console.log(this.landlordName)
+    })
+   
+    })
 
+   
 
-    }})
-
+   
+   
+   
 
 
 // get the rentees (deleteee)
@@ -100,6 +105,9 @@ export class MyroomComponent implements OnInit {
       })
 
   }
+
+
+  
 // saving the id (to the signature column)
   save(id:any){
 
@@ -110,11 +118,13 @@ export class MyroomComponent implements OnInit {
 
       const moaData ={
         moa:this.moa_id,
-        signature:base64
+        signature:base64,
+        id:5
       }
 
-      console.log(moaData)
+      this.service.updateSignature(moaData).subscribe(()=>{
 
+      })
      }
 
   drawClear(){
