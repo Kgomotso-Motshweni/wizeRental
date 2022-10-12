@@ -179,9 +179,15 @@ export class MyroomComponent implements OnInit {
     this.__loader.stop();
   }
 
-  getRoomById(){
-    
-  }
+  // getRoomById(){
+  //   this.service.getProperties().subscribe({
+  //     next: (data: any) => {
+  //       this.__loader.start();
+  //       this.getRoomById = data;
+  //       this.__loader.stop();
+  //     }
+  //   })
+  // }
 
 
 }

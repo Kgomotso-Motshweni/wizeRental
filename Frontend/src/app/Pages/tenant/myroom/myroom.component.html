@@ -28,7 +28,7 @@
 
 
 
-<div *ngIf="emptyRoom == 0" class=" container justify-center " style="margin-top:5vh">
+<div *ngIf="emptyRoom != 0" class=" container justify-center " style="margin-top:5vh">
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
         <div class="card decoration-white shadow-xl text-primary-content">
             <div class="card-body">
@@ -38,20 +38,29 @@
     </div>
 </div>
 
-<div *ngIf="emptyRoom !=0" class=" justify-center " style="margin-top:5vh">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of property">
+<div *ngIf="emptyRoom ==0" class=" justify-center " style="margin-top:5vh">
+    <!-- <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of property"> -->
+        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6"> 
         <div class="card decoration-white shadow-xl text-primary-content" >
 
-            <div class="card-body">
+            <div class="card-body justify-center">
                 <figure><img class="img" src="assets/images/bedroom2.jpeg" alt="room" /></figure>
                 <br>
-               <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
+               <!-- <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
                  <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
                  <p>PropertyType: {{i.p_propertytype}}</p> 
                  <p>R      {{i.rent}}</p> 
-                 <p>Status:    {{i.paymentstatus}}</p>
+                 <p>Status:    {{i.paymentstatus}}</p> -->
+                 <div class="content justify-center">
+                   <p>Address: yghvv</p>   
+                 <p>ghjkbknjl</p>     
+                 <p>PropertyType: fdxghj</p> 
+                 <p>R      rsdtfyg</p> 
+                 <p>Status:   srdtfgyuhji/p>
+                 
                  <br> 
                  <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>
+                </div>
             </div>
         </div>
     </div>

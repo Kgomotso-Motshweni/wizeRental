@@ -27,7 +27,10 @@ textarea.input {
 .is-invalid, p-multiSelect{
     border-color: red;
 }
-
+.content{
+    justify-content: center;
+    padding-right: 2px;
+}
 
 label {
     float: left;
