@@ -78,7 +78,8 @@ export class MyroomComponent implements OnInit {
     this.service.getMoa(this.id).subscribe({
       next:data => {
         this.mymoa = data  
-        this.mymoa = this.mymoa[0]    
+        this.mymoa = this.mymoa[0]
+        this.__loader.stop();    
       }
     })
   }
@@ -93,6 +94,7 @@ export class MyroomComponent implements OnInit {
 
   // saving the id (to the signature column)
   save(id:any){
+    this.__loader.start();
     this.moa_id = id;
     const base64 = this.canvas.toDataURL('image/png',0.5);
     const moaData ={
@@ -104,11 +106,14 @@ export class MyroomComponent implements OnInit {
     this.service.updateSignature(moaData).subscribe({
       next:data => {
         this.SignMOA = false;
+        this.__loader.stop();
         this.messageService.add({
           severity:'success', summary: 'Success', detail: "Moa Signed", life: 3000
         });
+       
       },
       error:err=>{
+        this.__loader.stop();
         this.messageService.add({
            severity:'error', summary: 'Error', detail: err.error.message, life: 3000
         });
@@ -146,7 +151,7 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    this.__loader.start();
+
     console.log(this.Form.value.message)
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
