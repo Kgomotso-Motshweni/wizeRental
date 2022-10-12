@@ -18,6 +18,7 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent,},
   {path:'tenant', component:TenantComponent},
   {path:'', redirectTo:"/", pathMatch:"full"},
+  {path: 'LandingComponent' ,component:LandingComponent}
 ];
 
 @NgModule({

@@ -3,21 +3,26 @@
 
 
 <!-- Landing page picture -->
-<div class="card1 bg-base-100 shadow-xl col-12 justify-content-center ml-4 "   style="width: 98%;">
-    <figure><img src="../../../../assets/images/istockphoto.jpeg" height="50" class="img-fluid w-100" alt="Shoes"/></figure>
-    <div class="card-body">
-      <p>WizeRentals is here to find you a 
-        accommodation in a region you want at the
-        price you can afford
-      </p>
+<div class="bac">
+    <img src="../../../assets/images/maximillian-conacher-sPpe2D7VbpM-unsplash.jpg" class="topp" alt="Snow">
+    <div class="bottom-left">
+        <i href="#down" class="pi pi-arrow-down bc curs" onClick="document.getElementById('down').scrollIntoView();" style="font-size: 5rem"></i>
+    </div>
+    <div class="name">
+    <img class="logo" src="../../../../assets/images/unknown.png">
+    <div class="bottom-right">Wize rentals is here to find you <br>a 
+      accommodation in a <br> region you want at the
+      price you can afford
+    </div>
     </div>
 </div>
 
-
+<span id="down"></span>
 <!-- toggle btn, search and filter -->
 <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
     
     <!-- Toggle button -->
+    
     <div class="badge badge-primary badge-outline ml-2 mt-5" style="width:99%;">What do you need?</div>
         <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
             <button class="btn1 " routerLink="/login" style="width:50%;" aria-activedescendant="page">To Rent</button>
@@ -25,7 +30,7 @@
         </div>
     <br>
     <div class="flex search col-xl-12">
-        <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
+        <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 85%;"/>
             <div class="space1">
             </div>
         <br>
@@ -46,7 +51,7 @@
 
 
 
-<div class=" prop ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
+<div  class=" prop ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
     <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4 gap-2 justify-center" style="width: 100%;">
         <div *ngFor="let i of tenantProperty| filter:searchItem ; let m = index">
             <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >

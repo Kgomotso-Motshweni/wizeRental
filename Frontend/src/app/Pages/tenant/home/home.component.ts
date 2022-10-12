@@ -108,7 +108,4 @@ filterChange(appliedfilters: any)
 }
 
 
-
-
-
 }
