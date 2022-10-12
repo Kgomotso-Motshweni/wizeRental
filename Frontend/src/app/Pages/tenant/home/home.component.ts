@@ -32,8 +32,8 @@ export class HomeComponent implements OnInit {
     this.__loader.start();
     this.getProperty();
     this.FilterTown();
-    this.FilterProperty()
-    this.Filtername()
+    this.FilterProperty();
+    this.Filtername();
 
   }
   
