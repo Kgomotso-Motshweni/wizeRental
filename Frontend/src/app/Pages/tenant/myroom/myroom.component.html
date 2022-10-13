@@ -25,13 +25,59 @@
     </div>
 </div>
 
-<!-- Use this after getting the status on backend -->
 
-<!-- <div class="emptyRoom">
+<!-- The button to open modal -->
+<label for="my-modal-4" class="btn modal-button"><i class="bi bi-file-earmark"></i></label>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+    <label class="modal-box lg:w-2/4 xl:2/4 relative" for="">
+        <label for="my-modal-4" class="btn btn-sm btn-circle  absolute right-2 top-2">✕</label>
+        <h4 class="grid card-title justify-center">Rental Agreement <br> {{mymoa.agreementtype}}</h4>
+        <div class="container-fluid">
+            <p><b>TENANTS AGREE TO THE FOLLOWING:</b></p>
+            <p>Date: {{mymoa.create_time | date: 'dd MMM YYYY'}}</p>
+            <p>Agreement between <input type="text" class="agreement sm:24 md:24"  disabled value="{{mymoa.firstname}} {{mymoa.lastname}}"> Owner(s), and <input type="text" class="agreement" disabled value="{{mymoa.full_name}}" >, Tenant(s) for dwelling
+                for dwelling located at <input type="text" class="agreement w-80" disabled value="{{mymoa.p_address}}, {{mymoa.p_city}}, {{mymoa.p_town}} {{mymoa.p_zip_code}}"> Location.</p><br>
+
+            <p>Tenant(s) agree to rent this dwelling on a <input type="text" class="agreement" disabled value="{{mymoa.agreementtype}}" > basis for R <input type="text" class="agreement" disabled value="{{mymoa.rent}}" > payable between this dates
+                <input type="text" class="agreement" disabled value="{{mymoa.paystartdate | date: 'dd MMM YYYY'}}" > and <input type="text" class="agreement" disabled  value="{{mymoa.payenddate | date: 'dd MMM YYYY'}}" > day of the calender month. </p><br>
+                
+            <p>Only <input type="text" class="agreement" disabled value="{{mymoa.full_name}}" > persons is to live in this dwelling. Therefore, and in consideration of the mutual promises and agreements 
+                contained herein, the tenant agrees to memorandum the premises from the landlord under the following: </p>
+            <ul>
+                <li>1. To keep the yards clean.</li>
+                <li>2. Not to repair motor vehicles in the premises.</li>
+                <li>3. To pay rent on time and by cash .</li>
+                <li>4. To pay for repairs of all damage, they or thir guests have caused.</li>
+                <li>5. Have no visitors stay for no more than 3 weeks.</li>
+            </ul>
+            <p>Tenants hereby acknowledge that they have read this Agreement, understand it agree to it and have been given a copy.</p><br>
+
+            <p>Sign here:</p><br>
+            <canvas id="canvas"  width="300px">
+                <input type="text" placeholder="Type here" class="input w-full max-w-xs" />
+            </canvas>
+            <div class="flex form-group justify-start "> 
+                <button type="button" (click)="drawClear()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Clear signature</button>
+            </div>
+
+            <div class="flex form-group justify-end mb-2"> 
+                <div class="grid gap-6 md:grid-cols-3 grid-cols-2">
+                    <label type="btn" for="my-modal-4" class="text-white ml-2 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Close</label>
+                    <label type="btn" for="my-modal-4" (click)="save(mymoa.moa)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</label>
+                </div> 
+            </div>
+        </div> 
+    </label>
+</label>
+
+<div class="emptyRoom"  >
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl">
-                <div class="card-body">
+                <div class="card-body" >
                     <h2 class="card-title">My Room</h2>
                     <div>
                         <h5>Once you have been Accepted you will see your room details here</h5>
@@ -45,24 +91,22 @@
 <div class="emptyRoom">
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
-            <div class="card empty w-full shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">My Room</h2>
+            <div class="card empty w-full shadow-xl"*ngFor="let i of property">
+                <div class="card-body"  >
                     <div>
-                       <p>Address: 39 Ripley Road</p>  
-                         <p>Brixton Johannesburg</p>    
-                         <p>0001</p> 
-                         <p>PropertyType: Bachelor</p> 
-                         <p>Price: R2500</p> 
-                         <p>Status: Accepted</p> 
+                       <p>{{i.p_address}}</p>  
+                         <p>{{i.p_city}}</p> 
+                         <p>{{i.p_town}}</p>   
+                         <p>{{i.p_zip_code}}</p>  
+                         <p>{{i.p_propertytype}}</p> 
+                         <p>{{i.paymentstatus}}</p> 
                          <p>Sign memorandum </p>     
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div> -->
-
+</div>
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>
@@ -71,9 +115,10 @@
 
 <p-dialog [(visible)]="dialogMessage" [style]="{width: '450px'}" header="Log Issues" [modal]="true" styleClass="p-fluid">
    <form [formGroup]="Form">
+   
         <div class="form-group mb-6">
             <label for="issue1"> Water </label><br>
-            <input type="checkbox" formControlName="issues" formid="issue1" name="issue1" value="Water">
+            <input type="checkbox" class="inputs" formControlName="issues" formid="issue1" name="issue1" value="Water">
             <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
                 <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
@@ -81,7 +126,7 @@
 
         <div class="form-group mb-6">
             <label for="issue2"> Electricity </label><br>
-            <input type="checkbox" formControlName="issues" id="issue2" name="issue2" value="Electricity"
+            <input type="checkbox"  class="inputs" formControlName="issues" id="issue2" name="issue2" value="Electricity"
             [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
     
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
@@ -91,7 +136,7 @@
 
         <div class="form-group mb-6">
             <label for="issue3"> Wifi</label><br>
-            <input type="checkbox" formControlName="issues" id="issue3" name="issue3" value="Wifi"
+            <input type="checkbox"  class="inputs" formControlName="issues" id="issue3" name="issue3" value="Wifi"
             [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
@@ -101,7 +146,7 @@
 
         <div class="form-group mb-6">
             <label for="issue4"> Appliance</label><br>
-            <input type="checkbox" formControlName="issues" id="issue4" name="issue4" value="Appliance"
+            <input type="checkbox"  class="inputs" formControlName="issues" id="issue4" name="issue4" value="Appliance"
             [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
@@ -124,8 +169,10 @@
             <button type="submit" (click)="hideDialog()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Cancel</button>
             <button type="submit" (click)="sendNotification()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</button>
         </div>
-      
+ 
     </form>
 </p-dialog> 
+
+
 
 

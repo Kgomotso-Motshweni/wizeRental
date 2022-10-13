@@ -116,5 +116,6 @@ CREATE TABLE MOA(
     payStartDate TIMESTAMPTZ DEFAULT NOW(),
     payendDate TIMESTAMPTZ DEFAULT NOW(),
     agreementType VARCHAR(100),
+	create_time TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (rentee_id) REFERENCES public.rentees (rentee_id)
 );

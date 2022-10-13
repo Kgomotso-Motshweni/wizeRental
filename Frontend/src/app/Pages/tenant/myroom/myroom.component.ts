@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
+import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import{ fabric } from 'fabric';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
@@ -14,18 +16,30 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   providers: [MessageService, ConfirmationService]
 })
 export class MyroomComponent implements OnInit {
-  
+
   id:number = 0;
   token:any;
   totalNumber: number = 0;
   myNotification: any 
   dialogMessage: boolean = false;
+  SignMOA:boolean = false;
+  visibleSidebar2:boolean = false
   submitted: boolean = false;
+  mymoa:any;
+  data:any;
+  property:any;
+  propertyID: any;
   selectedValues: string[] = [];
-  visibleSidebar2:boolean = false;
+  canvas:any;
+  moa_data:any
+  landId:any
+  landlordName :any;
+  moa_id: any;
+
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
+    private service:TenantsService,
     private router:Router,
     private formBuilder: FormBuilder,
     private __loader: NgxUiLoaderService) { }
@@ -33,7 +47,9 @@ export class MyroomComponent implements OnInit {
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
+      moa: new FormControl(''),
       electricity: new FormControl('')
+
     });
 
     
@@ -42,12 +58,71 @@ export class MyroomComponent implements OnInit {
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
     this.getNotifications();
+    this.getMoaData();
 
     this.Form = this.formBuilder.group({
       message: ['', Validators.required],
       issues: ['', Validators.required],
       electricity: ['', Validators.required],
     });
+
+ 
+    //for drawing the signature
+    this.canvas = new fabric.Canvas('canvas',{
+      isDrawingMode:true
+    })
+  }
+
+  //Get Moa Details
+  getMoaData(){
+    this.service.getMoa(this.id).subscribe({
+      next:data => {
+        this.mymoa = data  
+        this.mymoa = this.mymoa[0]
+        this.__loader.stop();    
+      }
+    })
+  }
+
+  sign(){
+    this.SignMOA = true;
+  }
+
+  hidesign(){
+    this.SignMOA = false;
+  }
+
+  // saving the id (to the signature column)
+  save(id:any){
+    this.__loader.start();
+    this.moa_id = id;
+    const base64 = this.canvas.toDataURL('image/png',0.5);
+    const moaData ={
+      moa:this.moa_id,
+      signature:base64,
+      id:this.id 
+    }
+    
+    this.service.updateSignature(moaData).subscribe({
+      next:data => {
+        this.SignMOA = false;
+        this.__loader.stop();
+        this.messageService.add({
+          severity:'success', summary: 'Success', detail: "Moa Signed", life: 3000
+        });
+       
+      },
+      error:err=>{
+        this.__loader.stop();
+        this.messageService.add({
+           severity:'error', summary: 'Error', detail: err.error.message, life: 3000
+        });
+      }
+    })
+  }
+
+  drawClear(){
+    this.canvas.clear();
   }
 
   get f():{ [key: string]: AbstractControl }{
@@ -58,8 +133,7 @@ export class MyroomComponent implements OnInit {
     return this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
-        this.totalNumber = this.myNotification.length
-        this.__loader.stop();
+        this.totalNumber = this.myNotification.length      
       }
     })
   }
@@ -77,7 +151,7 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    this.__loader.start();
+
     console.log(this.Form.value.message)
     console.log(this.Form.value.issues)
     console.log(this.Form.value.electricity)
@@ -85,3 +159,8 @@ export class MyroomComponent implements OnInit {
     this.__loader.stop();
   }
 }
+  
+ 
+
+
+
