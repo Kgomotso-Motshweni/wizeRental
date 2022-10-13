@@ -73,7 +73,13 @@ const sendToSpecificUser = async(req, res ) => {
 const landlordReceive = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
-        client.query(`SELECT * FROM TenantToLandlordNortifications WHERE landlord_id = $1 ORDER BY created_at DESC`,[id],(error, results) => {
+        client.query(
+            `SELECT t.landlord_id, t.tenant_id, t.notif_type,t.message, t.created_at, p.p_name,r.full_name
+            FROM tenanttolandlordnortifications t
+            INNER JOIN rentees r ON t.tenant_id = r.tenant_id
+            INNER JOIN landlordproperty p ON p.property_id = r.property_id
+            WHERE t.landlord_id = $1`
+                    ,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to log issues to a specific landlord"
@@ -92,12 +98,12 @@ const landlordReceive = async(req, res ) => {
 const tenantReceive = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
-        client.query(`SELECT l.landlord_id, l.tenant_id, l.subject,l.notif_type,l.message,l.created_at, p.p_name,r.full_name
-        FROM landlordtotenantnortifications l
-        JOIN rentees r ON l.tenant_id = r.tenant_id
+        client.query(`SELECT t.landlord_id, t.tenant_id, t.notif_type,t.message, t.created_at, p.p_name,r.full_name
+        FROM tenanttolandlordnortifications t
+        JOIN rentees r ON t.tenant_id = r.tenant_id
         JOIN landlordproperty p ON p.property_id = r.property_id
-        WHERE l.tenant_id = $1
-        `,[id],(error, results) => {
+        WHERE t.tenant_id = 1`
+                ,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to send message to a specific tenant(s)"

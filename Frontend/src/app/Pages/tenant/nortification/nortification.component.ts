@@ -21,9 +21,12 @@ export class NortificationComponent implements OnInit {
     // gets the token and parses the id of the person logged in so that they can be able to get notifications
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     this.id = this.token.regData[0].userid
+    console.log(this.id);
+    
     this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
+        console.log(data)
         this.totalNumber = this.myNotification.length
       }
     })
