@@ -2,33 +2,9 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-<div class="container ">
-    <div class="navbar bg-base-100"> 
-        <div class="flex-1  ">
-            <label for="my-drawer-3"  class="btn btn-ghost btn-circle hidden">
-                <i class="pi pi-align-left " style="font-size: 1rem"></i>
-            </label>
-        </div>
-    
-        <div class="end-part flex-none justify-end">
-            <div class="user mt-3 mr-4">
-                <button type="btn" (click)="logIssues()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">My Issues</button>            
-            </div>
-
-            <button class="btn ml-4 btn-ghost btn-circle">
-                <a (click)="visibleSidebar2 = true" (click)="getNotifications()" >
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
-                </a> 
-            </button>  
-        </div>
-    </div>
-</div>
-
-
-<div class="emptyRoom" *ngIf="this.totalNumber ==0" >
-    <div class="flex justify-center">
-        <div class="grid sm:grid-cols-1 ">
+<div class="container emptyRoom" *ngIf="this.emptyRoom == 0" >
+    <div class="flex  justify-content-center">
+        <div class="grid grid-cols-1 ">
             <div class="card empty w-full shadow-xl">
                 <div class="card-body" >
                     <h2 class="card-title">My Room</h2>
@@ -36,21 +12,71 @@
                         <h5>Once you have been Accepted you will see your room details here</h5>
                     </div>
                 </div>
-<div *ngIf="emptyRoom === 0" class=" container justify-center " style="margin-top:5vh">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
-        <div class="card decoration-white shadow-xl text-primary-content">
+            </div>
+        </div>        
+    </div>
+</div>
+
+
+<div class="myRoom" *ngIf="this.emptyRoom != 0" >
+    <div class="flex justify-center">
+        <div class="container ">
+            <div class="navbar bg-base-100"> 
+                <div class="flex-1  ">
+                    <label for="my-drawer-3"  class="btn btn-ghost btn-circle hidden">
+                        <i class="pi pi-align-left " style="font-size: 1rem"></i>
+                    </label>
+                </div>
+            
+                <div class="end-part flex-none justify-end">
+                    <div class="user mt-3 mr-4">
+                        <button type="btn" (click)="logIssues()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">My Issues</button>            
+                    </div>
+        
+                    <button class="btn ml-4 btn-ghost btn-circle">
+                        <a (click)="visibleSidebar2 = true" (click)="getNotifications()" >
+                            <i class="fa-regular fa-bell"></i>
+                            <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
+                        </a> 
+                    </button>  
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <div class="container roomDetails mt-4">
+        <div class="card lg:card-side bg-base-100 shadow-xl" *ngFor="let i of property">
+            <figure><img class="img" src="https://placeimg.com/200/280/arch"  alt="room" /></figure>
             <div class="card-body">
-                <h5 style="text-align: centre;">Once you have been accepted you will see your room details here!!!!</h5>
+                <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
+                <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
+                <p>PropertyType: {{i.p_propertytype}}</p> 
+                <p>Rent Amount: R {{i.p_price}}</p> 
+                <p>Status:  {{stats}}</p>
+                <div class="signs"  *ngIf="condition == true">
+                    <!-- The button to open modal -->
+                    <label for="my-modal-4" ><a >Sign lease form<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a></label>
+                </div>
+        
+                <div class="signs"  *ngIf="condition == true">
+                    <!-- The button to open modal -->
+                    <a (click)="captureScreen()">Download the memorandum<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- 
-<div class="emptyRoom" *ngIf="this.totalNumber !=0">
-    <!-- The button to open modal
-<label for="my-modal-4" class="btn modal-button"><i class="bi bi-file-earmark"></i></label>
 
-<!-- Put this part before </body> tag 
+
+    <footer class="grid content-end footer footer-center border-t-4 p-3  text-base-content ">
+        <div>
+          <p>Copyright © 2022 All Rights Reserved | <br>
+            Developed for WizeReantalz</p>
+        </div>
+    </footer>
+</div>
+
+
+<!-- Put this part before </body> tag -->
 <input type="checkbox" id="my-modal-4" class="modal-toggle" />
 <label for="my-modal-4" class="modal cursor-pointer">
     <label class="modal-box lg:w-2/4 xl:2/4 relative" for="">
@@ -94,6 +120,7 @@
     </label>
 </label>
 
+<!-- 
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl"*ngFor="let i of property">
@@ -108,25 +135,8 @@
                          <p>Sign memorandum </p>     
                     </div>
                 </div>
-<div *ngIf="emptyRoom !==0" class=" justify-center " style="margin-top:5vh">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of property">
-        <div class="card decoration-white shadow-xl text-primary-content" >
 
-            <div class="card-body">
-                <figure><img class="img" src="assets/images/bedroom2.jpeg" alt="room" /></figure>
-                <br>
-               <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
-                 <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
-                 <p>PropertyType: {{i.p_propertytype}}</p> 
-                 <p>R      {{i.p_price}}</p> 
-                 <p>Status:    {{i.paymentstatus}}</p>
-                 <br> 
-                 <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>
-            </div>
-        </div>
-    </div>
-</div>
-
+ -->
 
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
@@ -194,7 +204,7 @@
         </div>
     </form>
 </p-dialog> 
- -->
+
 
 
 

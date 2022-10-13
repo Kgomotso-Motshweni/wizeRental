@@ -50,6 +50,7 @@ const routes: Routes = [
     HomeComponent,
     SinglePropertyComponent,
     NortificationComponent,
+
   ],
   imports: [
     Ng2SearchPipeModule,

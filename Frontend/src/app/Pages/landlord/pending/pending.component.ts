@@ -26,7 +26,9 @@ export class PendingComponent implements OnInit {
   token:any = '';
   id:number = 0;
   number:number = 0;
+  roomNumber:number = 0;
   image:any;
+  newRoomsAvailable:number = 0;
   Form = new FormGroup({
     address: new FormControl(''),
     town: new FormControl(''),
@@ -83,9 +85,11 @@ export class PendingComponent implements OnInit {
    getPending(user:number){
     this.dash.getPendTenants(user).subscribe({
       next:data  => {
-          this.pending = data;
+          this.pending = data;          
           this.image = this.pending[0].id_doc
-          //get the length of the data 
+          this.roomNumber = this.pending[0].p_room
+          this.newRoomsAvailable =this.roomNumber - 1;
+          
           this.number = this.pending.length;
           this.__loader.stop();
         }
@@ -164,10 +168,10 @@ export class PendingComponent implements OnInit {
     this.submitted = true
     this.__loader.start();
     //Validate if the modal is empty do not submit
-    if(!this.pendingClients.unit || !this.pendingClients.amount || !this.pendingClients.agreementStart 
-      || !this.pendingClients.agreementEnd || !this.pendingClients.paymentStart || !this.pendingClients.paymentEnd || !this.pendingClients.PaymentType){
-        return 
-    }
+    // if(!this.pendingClients.unit || !this.pendingClients.amount || !this.pendingClients.agreementStart 
+    //   || !this.pendingClients.agreementEnd || !this.pendingClients.paymentStart || !this.pendingClients.paymentEnd || !this.pendingClients.PaymentType){
+    //     return 
+    // }
       let user = {
         tenant_id: this.pendingClients.tenant_id,
         property_id: this.pendingClients.property_id,
@@ -175,19 +179,19 @@ export class PendingComponent implements OnInit {
         unit: this.pendingClients.unit,
         rent: this.pendingClients.amount,
         paymentstatus: false,
-        moa_status: "signed",
+        moa_status: "notsigned",
         agreeStartDate: this.pendingClients.agreementStart,
         agreeEndDate: this.pendingClients.agreementEnd,
         payStartDate: this.pendingClients.paymentStart,
         payendDate: this.pendingClients.paymentEnd,
         agreementType: this.pendingClients.PaymentType
       }
-     
+      
       this.land.createMOA(user).subscribe({
         next:data => {
-          
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";
+          this.land.UpdateRooms(this.newRoomsAvailable, this.id).subscribe()
           this.router.navigate(['/landlord/pending'])
           this.__loader.stop();
           this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})
@@ -199,7 +203,6 @@ export class PendingComponent implements OnInit {
       })
     }
 }
-
 
 
 

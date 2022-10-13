@@ -4,7 +4,7 @@ const getPendingTenants = async(req, res ) => {
     const id = parseInt(req.params.userid);
     try{
         client.query(`SELECT a.applicant_id, a.tenant_id, a.property_id, a.full_name, a.email, a.phone_num, a.age, a.id_doc, a.occupation, a.view_date, a.num_tenants, a.num_pets, a.ped_desc, a.smoke, a.app_create_time,
-            l.p_address, p_city, l.p_town, l.p_zip_code, l.p_name
+            l.p_address, p_city, l.p_town, l.p_zip_code, l.p_name, l.p_price, l.p_room
             FROM applicationform a
             INNER JOIN landlordproperty l ON a.property_id = l.property_id
             INNER JOIN users u ON l.landlord_id = u.userid
@@ -40,9 +40,20 @@ const getOnePendingTenants = async(req, res ) => {
         });
     } 
 }
-
+const updateAmount = async(req, res ) => {
+    const id = parseInt(req.params.id);
+    try {
+     
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+        error: "Database error while creating post!", //Database connection error
+        });
+    }
+}
 
 module.exports = {
     getPendingTenants,
-    getOnePendingTenants
+    getOnePendingTenants,
+    updateAmount
   }

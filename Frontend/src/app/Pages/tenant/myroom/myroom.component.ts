@@ -18,23 +18,9 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 
 export class MyroomComponent implements OnInit {
- name:any = "search";
- propertytype: any;
- properties:any;
- property:any;
- searchItem:any;
-
- tenantProperty:any
-
- 
- 
- condition: boolean = false;
- tenantAddress:any;
- form!: FormGroup;
- filterItem:any;
- getRoomImages:any;
- emptyRoom: number = 0;
- 
+  name:any = "search";
+  property:any;
+  emptyRoom: number = 0;
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -49,18 +35,16 @@ export class MyroomComponent implements OnInit {
   selectedValues: string[] = [];
   canvas:any;
   moa_data:any
-  landId:any
+  landId:number = 0;
   landlordName :any;
   moa_id: any;
-
+  stats:any
+  condition:boolean = false;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
     private service:TenantsService,
-    private router:Router,
     private formBuilder: FormBuilder,
-    private services:LandingPageService,
-    private activeRoute:ActivatedRoute,
     private __loader: NgxUiLoaderService,
     
   ) { }
@@ -101,6 +85,7 @@ export class MyroomComponent implements OnInit {
     this.canvas = new fabric.Canvas('canvas',{
       isDrawingMode:true
     })
+    this.getMyRoom();
   }
 
   onCheckboxChange(e:any){
@@ -165,26 +150,23 @@ export class MyroomComponent implements OnInit {
   drawClear(){
     this.canvas.clear();
   }
-// get the rentees
-      // this.service.getPropertyByID(this.propertyID).subscribe({
-      //   next:data => {
-      //     this.property = data;
-      //     this.emptyRoom = this.property.length
-      //     console.log(data) 
-      //   }
-      // 
-      
-      
-      
+        
   getMyRoom(){
     this.service.getRoom(this.id).subscribe({
       next: (data: any) => {
         this.property = data;
+        this.condition = this.property[0].paymentstatus;
+        this.stats = this.service.status(this.property[0].paymentstatus)
+        this.landId = this.property[0].landlord_id
         this.emptyRoom = this.property.length
         this.__loader.stop();
+      },
+      error: err => {
+        this.condition = false;
       }
     })
   }
+  
 
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
@@ -194,7 +176,6 @@ export class MyroomComponent implements OnInit {
     return this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
-        console.log(data);
         this.totalNumber = this.myNotification.length      
       }
     })
@@ -211,13 +192,16 @@ export class MyroomComponent implements OnInit {
     this.dialogMessage = false;
   }
 
+  captureScreen(){
+    
+  }
+
   sendNotification(){
     this.submitted = true;
+    console.log( this.landId);
     console.log(this.id);
     console.log(this.Form.value.message)
     console.log(this.selectedValues)
-
-
     this.__loader.stop();
   }
 }

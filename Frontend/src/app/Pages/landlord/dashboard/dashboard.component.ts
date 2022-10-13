@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
       this.dash.getProperties(this.id).subscribe((properties) => {
         this.my_properties = properties;
         for (let x = 0; x < this.my_properties.length; x++) {  
-          this.numroomsA = +this.numroomsA + +this.my_properties[x].p_room;
+          this.numroomsA = this.numroomsA  +this.my_properties[x].p_room;
         }
         this.__loader.stop();
       })  

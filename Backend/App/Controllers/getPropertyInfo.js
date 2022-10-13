@@ -17,12 +17,10 @@ const getProperty= async (req, res) => {
     }
 };
 
-
-
 const getRoomById= async (req, res) => {
   const id = parseInt(req.params.id)
   try {
-      await client.query(  `SELECT p.p_address, p.p_city, p.p_town, p.p_propertytype, p.p_price, r.paymentstatus 
+      await client.query(`SELECT p.p_address, p.landlord_id, p.p_city, p.p_town, p.p_zip_code, p.p_propertytype, r.rent, r.paymentstatus 
       FROM landlordproperty p 
       INNER JOIN rentees r on p.property_id = r.property_id 
       INNER JOIN users u ON r.tenant_id = u.userid 

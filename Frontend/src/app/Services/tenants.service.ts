@@ -52,5 +52,13 @@ export class TenantsService {
   getRoom(id:any){
     return this.http.get(`${this.baseUrl}getRoom/${id}`)
   }
-
+  
+  status(stats:any){
+    if (stats) {
+      return 'Accepted'
+    } else {
+      return 'rejected'
+    }
+    
+  }
 }

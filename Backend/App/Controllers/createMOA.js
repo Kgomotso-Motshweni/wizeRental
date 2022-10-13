@@ -12,8 +12,6 @@ const CreateMOA = async(req, res ) => {
         //Insert moa details using rentees_id returned from the above 
         await client.query(`INSERT INTO MOA (rentee_id, amount, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType)
             VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ])
-
-        await client.query(`Select * from rentees`) 
         
         //Delete the pending tenant from pending table 
         await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error, results) => {
