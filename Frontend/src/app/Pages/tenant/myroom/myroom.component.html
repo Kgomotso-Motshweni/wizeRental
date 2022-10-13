@@ -26,7 +26,25 @@
 </div>
 
 
-<!-- The button to open modal -->
+
+
+<div class="emptyRoom" *ngIf="this.totalNumber ==0" >
+    <div class="flex justify-center">
+        <div class="grid sm:grid-cols-1 ">
+            <div class="card empty w-full shadow-xl">
+                <div class="card-body" >
+                    <h2 class="card-title">My Room</h2>
+                    <div>
+                        <h5>Once you have been Accepted you will see your room details here</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="emptyRoom" *ngIf="this.totalNumber !=0">
+    <!-- The button to open modal -->
 <label for="my-modal-4" class="btn modal-button"><i class="bi bi-file-earmark"></i></label>
 
 <!-- Put this part before </body> tag -->
@@ -73,22 +91,6 @@
     </label>
 </label>
 
-<div class="emptyRoom"  >
-    <div class="flex justify-center">
-        <div class="grid sm:grid-cols-1 ">
-            <div class="card empty w-full shadow-xl">
-                <div class="card-body" >
-                    <h2 class="card-title">My Room</h2>
-                    <div>
-                        <h5>Once you have been Accepted you will see your room details here</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="emptyRoom">
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl"*ngFor="let i of property">
@@ -115,44 +117,45 @@
 
 <p-dialog [(visible)]="dialogMessage" [style]="{width: '450px'}" header="Log Issues" [modal]="true" styleClass="p-fluid">
    <form [formGroup]="Form">
-   
         <div class="form-group mb-6">
-            <label for="issue1"> Water </label><br>
-            <input type="checkbox" class="inputs" formControlName="issues" formid="issue1" name="issue1" value="Water">
+            <label for="issue4"> Water</label><br>
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4" value="Water" name="water"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }"   (change)="onCheckboxChange($event)">
+            
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
+            </div>
+        </div>  
+
+        <div class="form-group mb-6">
+            <label for="issue4"> Electricity</label><br>
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4"  value="Electricity"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }" (change)="onCheckboxChange($event)">
+            
             <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
                 <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
         </div>
 
         <div class="form-group mb-6">
-            <label for="issue2"> Electricity </label><br>
-            <input type="checkbox"  class="inputs" formControlName="issues" id="issue2" name="issue2" value="Electricity"
-            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
-    
-            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-                <div *ngIf="f['message'].errors['required']">message is required</div>
-            </div>
-        </div>
-
-        <div class="form-group mb-6">
-            <label for="issue3"> Wifi</label><br>
-            <input type="checkbox"  class="inputs" formControlName="issues" id="issue3" name="issue3" value="Wifi"
-            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+            <label for="issue4"> WIFI</label><br>
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4"  value="WIFI"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }" (change)="onCheckboxChange($event)">
             
-            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-                <div *ngIf="f['message'].errors['required']">message is required</div>
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
         </div>
 
         <div class="form-group mb-6">
             <label for="issue4"> Appliance</label><br>
-            <input type="checkbox"  class="inputs" formControlName="issues" id="issue4" name="issue4" value="Appliance"
-            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4" value="Appliance"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }" (change)="onCheckboxChange($event)">
             
-            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-                <div *ngIf="f['message'].errors['required']">message is required</div>
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
-        </div>
+        </div>  
 
         <div class="form-group mb-6"> 
             <label class="input-group ">Other:</label>
@@ -169,7 +172,6 @@
             <button type="submit" (click)="hideDialog()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Cancel</button>
             <button type="submit" (click)="sendNotification()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</button>
         </div>
- 
     </form>
 </p-dialog> 
 

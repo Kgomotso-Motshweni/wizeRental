@@ -52,7 +52,6 @@ export class MyroomComponent implements OnInit {
 
     });
 
-    
   ngOnInit(): void {
     this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
@@ -61,8 +60,8 @@ export class MyroomComponent implements OnInit {
     this.getMoaData();
 
     this.Form = this.formBuilder.group({
-      message: ['', Validators.required],
       issues: ['', Validators.required],
+      message: ['', Validators.required],
       electricity: ['', Validators.required],
     });
 
@@ -71,6 +70,17 @@ export class MyroomComponent implements OnInit {
     this.canvas = new fabric.Canvas('canvas',{
       isDrawingMode:true
     })
+  }
+
+  onCheckboxChange(e:any){
+    let loged = e.target.value;
+    if (e.target.checked) {
+      this.selectedValues.push(loged)
+    }else{
+      const index = this.selectedValues.indexOf(loged) 
+      this.selectedValues.splice(index,1)
+    }
+    
   }
 
   //Get Moa Details
@@ -133,6 +143,7 @@ export class MyroomComponent implements OnInit {
     return this.notif.tenantReceive(this.id).subscribe({
       next:data => {
         this.myNotification = data
+        console.log(data);
         this.totalNumber = this.myNotification.length      
       }
     })
@@ -151,10 +162,10 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-
+    console.log(this.id);
     console.log(this.Form.value.message)
-    console.log(this.Form.value.issues)
-    console.log(this.Form.value.electricity)
+    console.log(this.selectedValues)
+
 
     this.__loader.stop();
   }

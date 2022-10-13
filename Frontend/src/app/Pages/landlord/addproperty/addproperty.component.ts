@@ -155,11 +155,6 @@ export class AddpropertyComponent implements OnInit {
   roomsImages(event:any) {  
     //get the images from html and target the file you just uploaded   
     const image = (event.target as any ).files[0];
-
-    
-
-console.log(this.gallery.some(element => element.name == image.name));
-
       
     if (!this.gallery.some(element => element.name == image.name)) {
       this.gallery.push(image)
