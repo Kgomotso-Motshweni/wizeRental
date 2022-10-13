@@ -55,10 +55,11 @@ export class TenantsService {
   
   status(stats:any){
     if (stats) {
-      return 'Accepted'
-    } else {
-      return 'rejected'
+      return 1
+    } else  if (stats)  {
+      return 0
+    }else {
+      return 2
     }
-    
   }
 }

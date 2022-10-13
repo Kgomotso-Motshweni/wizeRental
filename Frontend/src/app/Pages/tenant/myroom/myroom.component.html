@@ -52,13 +52,13 @@
                 <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
                 <p>PropertyType: {{i.p_propertytype}}</p> 
                 <p>Rent Amount: R {{i.p_price}}</p> 
-                <p>Status:  {{stats}}</p>
-                <div class="signs"  *ngIf="condition == true">
+                <p>Status:  {{i.status}}</p>
+                <div class="signs" *ngIf="condition == 'accepted'">
                     <!-- The button to open modal -->
                     <label for="my-modal-4" ><a >Sign lease form<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a></label>
                 </div>
-        
-                <div class="signs"  *ngIf="condition == true">
+
+                <div class="signs">
                     <!-- The button to open modal -->
                     <a (click)="captureScreen()">Download the memorandum<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a>
                 </div>

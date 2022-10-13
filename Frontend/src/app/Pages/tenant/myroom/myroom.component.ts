@@ -39,7 +39,7 @@ export class MyroomComponent implements OnInit {
   landlordName :any;
   moa_id: any;
   stats:any
-  condition:boolean = false;
+  condition:any;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
@@ -86,7 +86,31 @@ export class MyroomComponent implements OnInit {
       isDrawingMode:true
     })
     this.getMyRoom();
+    
   }
+  
+  getMyRoom(){
+    this.service.getRoom(this.id).subscribe({
+      next: (data: any) => {
+        this.property = data;
+        if(this.property[0].status == 'accepted'){
+          this.condition = 'accepted'
+        }else if(this.property[0].status == 'pending'){
+          this.condition = 'pending'
+        }else {
+          this.condition = 'rejected'
+        }
+        console.log(this.condition);
+        this.landId = this.property[0].landlord_id
+        this.emptyRoom = this.property.length
+        this.__loader.stop();
+      },
+      error: err => {
+        this.condition = 'rejected';
+      }
+    })
+  }
+  
 
   onCheckboxChange(e:any){
     let loged = e.target.value;
@@ -151,22 +175,7 @@ export class MyroomComponent implements OnInit {
     this.canvas.clear();
   }
         
-  getMyRoom(){
-    this.service.getRoom(this.id).subscribe({
-      next: (data: any) => {
-        this.property = data;
-        this.condition = this.property[0].paymentstatus;
-        this.stats = this.service.status(this.property[0].paymentstatus)
-        this.landId = this.property[0].landlord_id
-        this.emptyRoom = this.property.length
-        this.__loader.stop();
-      },
-      error: err => {
-        this.condition = false;
-      }
-    })
-  }
-  
+ 
 
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
