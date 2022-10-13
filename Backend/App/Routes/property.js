@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 const landing = require("../Controllers/getPropertyInfo")
 
 router.get('/getproperty', landing.getProperty);

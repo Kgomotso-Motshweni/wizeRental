@@ -10,6 +10,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TenantsService {
+  getRoomById(propertyID: any) {
+    throw new Error('Method not implemented.');
+  }
+  getTenantRoom() {
+    throw new Error('Method not implemented.');
+  }
+  getProperties() {
+    throw new Error('Method not implemented.');
+  }
+  tenantReceive(id: number) {
+    throw new Error('Method not implemented.');
+  }
 
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private router: Router) { }
@@ -37,6 +49,8 @@ export class TenantsService {
     return this.http.post(`${this.baseUrl}updateSignature`,body)
   }
 
-
+  getRoom(id:any){
+    return this.http.get(`${this.baseUrl}getRoom/${id}`)
+  }
 
 }

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api'; 
+import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{ fabric } from 'fabric';
+import { LandingPageService } from 'src/app/Services/landing-page.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
@@ -15,8 +16,25 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./myroom.component.scss'],
   providers: [MessageService, ConfirmationService]
 })
-export class MyroomComponent implements OnInit {
 
+export class MyroomComponent implements OnInit {
+ name:any = "search";
+ propertytype: any;
+ properties:any;
+ property:any;
+ searchItem:any;
+
+ tenantProperty:any
+
+ 
+ 
+ condition: boolean = false;
+ tenantAddress:any;
+ form!: FormGroup;
+ filterItem:any;
+ getRoomImages:any;
+ emptyRoom: number = 0;
+ 
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -27,7 +45,6 @@ export class MyroomComponent implements OnInit {
   submitted: boolean = false;
   mymoa:any;
   data:any;
-  property:any;
   propertyID: any;
   selectedValues: string[] = [];
   canvas:any;
@@ -42,14 +59,24 @@ export class MyroomComponent implements OnInit {
     private service:TenantsService,
     private router:Router,
     private formBuilder: FormBuilder,
-    private __loader: NgxUiLoaderService) { }
+    private services:LandingPageService,
+    private activeRoute:ActivatedRoute,
+    private __loader: NgxUiLoaderService,
+    
+  ) { }
 
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
       moa: new FormControl(''),
-      electricity: new FormControl('')
-
+      electricity: new FormControl(''),
+      accName: new FormControl(''),
+      address: new FormControl(''),
+      rooms: new FormControl(''),
+      propertyType: new FormControl(''),
+      price: new FormControl(''),
+      status: new FormControl('')
+    
     });
 
   ngOnInit(): void {
@@ -63,6 +90,10 @@ export class MyroomComponent implements OnInit {
       issues: ['', Validators.required],
       message: ['', Validators.required],
       electricity: ['', Validators.required],
+      // address:['', Validators.required],
+      // propertytype: ['', Validators.required],
+      // price: ['', Validators.required],
+      // status: ['', Validators.required]
     });
 
  
@@ -133,6 +164,26 @@ export class MyroomComponent implements OnInit {
 
   drawClear(){
     this.canvas.clear();
+  }
+// get the rentees
+      // this.service.getPropertyByID(this.propertyID).subscribe({
+      //   next:data => {
+      //     this.property = data;
+      //     this.emptyRoom = this.property.length
+      //     console.log(data) 
+      //   }
+      // 
+      
+      
+      
+  getMyRoom(){
+    this.service.getRoom(this.id).subscribe({
+      next: (data: any) => {
+        this.property = data;
+        this.emptyRoom = this.property.length
+        this.__loader.stop();
+      }
+    })
   }
 
   get f():{ [key: string]: AbstractControl }{

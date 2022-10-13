@@ -26,8 +26,6 @@
 </div>
 
 
-
-
 <div class="emptyRoom" *ngIf="this.totalNumber ==0" >
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
@@ -38,16 +36,21 @@
                         <h5>Once you have been Accepted you will see your room details here</h5>
                     </div>
                 </div>
+<div *ngIf="emptyRoom === 0" class=" container justify-center " style="margin-top:5vh">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" >
+        <div class="card decoration-white shadow-xl text-primary-content">
+            <div class="card-body">
+                <h5 style="text-align: centre;">Once you have been accepted you will see your room details here!!!!</h5>
             </div>
         </div>
     </div>
 </div>
-
+<!-- 
 <div class="emptyRoom" *ngIf="this.totalNumber !=0">
-    <!-- The button to open modal -->
+    <!-- The button to open modal
 <label for="my-modal-4" class="btn modal-button"><i class="bi bi-file-earmark"></i></label>
 
-<!-- Put this part before </body> tag -->
+<!-- Put this part before </body> tag 
 <input type="checkbox" id="my-modal-4" class="modal-toggle" />
 <label for="my-modal-4" class="modal cursor-pointer">
     <label class="modal-box lg:w-2/4 xl:2/4 relative" for="">
@@ -105,10 +108,26 @@
                          <p>Sign memorandum </p>     
                     </div>
                 </div>
+<div *ngIf="emptyRoom !==0" class=" justify-center " style="margin-top:5vh">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6" *ngFor="let i of property">
+        <div class="card decoration-white shadow-xl text-primary-content" >
+
+            <div class="card-body">
+                <figure><img class="img" src="assets/images/bedroom2.jpeg" alt="room" /></figure>
+                <br>
+               <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
+                 <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
+                 <p>PropertyType: {{i.p_propertytype}}</p> 
+                 <p>R      {{i.p_price}}</p> 
+                 <p>Status:    {{i.paymentstatus}}</p>
+                 <br> 
+                 <p routerLink="/profile" class="text-primary">Sign lease form <i class="pi pi-book"></i></p>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>
@@ -158,12 +177,13 @@
         </div>  
 
         <div class="form-group mb-6"> 
-            <label class="input-group ">Other:</label>
+            <label class="input-group ">Other/specify:</label>
             <textarea type="text" formControlName="message"
                 class="input bg-gray-50 input-bordered w-full email"
                 [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             </textarea>        
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                
                 <div *ngIf="f['message'].errors['required']">message is required</div>
             </div>
         </div>
@@ -174,7 +194,7 @@
         </div>
     </form>
 </p-dialog> 
-
+ -->
 
 
 
