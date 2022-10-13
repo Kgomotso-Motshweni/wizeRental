@@ -21,15 +21,4 @@ export class LandingPageService {
     return this.http.get(`${this.baseUrl}getRoomsImages/${id}`)
   }
 
-  getFilterDataTown(){
-    return this.http.get(`${this.baseUrl}filterTown`)
-  }
-
-  getFilterDataName(){
-    return this.http.get(`${this.baseUrl}filterName`)
-  }
-
-  getFilterDataProperty(){
-    return this.http.get(`${this.baseUrl}filterProperty`)
-  }
 }

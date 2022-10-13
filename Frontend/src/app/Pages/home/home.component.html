@@ -20,23 +20,17 @@
         <button class="btn1 " routerLink="/login" style="width:50%;" aria-activedescendant="page">To Rent</button>
         <button class="btn2 " routerLink="/login" style="width:50%;">To Advertise</button>
     </div>
-    <br>
+
     <div class="flex search col-xl-12">
         <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
         <div class="space1"></div>
-
-         <label for="my-modal" routerLink="/models" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
     </div>
 </div>
-<!--till here-->
-
-<!-- filter -->
-
 
 <!-- <div class="flex prop pt-5justify-center md:prop-cols-1 rounded"  > -->
 <div class="container-fluid prop ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center" style="width: 100%;">
-        <div *ngFor="let i of tenantProperty| filter:searchItem  | filter:name | filter:category ; let m = index">
+        <div *ngFor="let i of tenantProperty| filter:searchItem ; let m = index">
             <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >
             <figure><img class="img rounded-left" routerLink='/view-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>
             <div class="card-body">
