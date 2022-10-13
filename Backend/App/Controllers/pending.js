@@ -40,20 +40,9 @@ const getOnePendingTenants = async(req, res ) => {
         });
     } 
 }
-const updateAmount = async(req, res ) => {
-    const id = parseInt(req.params.id);
-    try {
-     
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-        error: "Database error while creating post!", //Database connection error
-        });
-    }
-}
+
 
 module.exports = {
     getPendingTenants,
-    getOnePendingTenants,
-    updateAmount
+    getOnePendingTenants
   }

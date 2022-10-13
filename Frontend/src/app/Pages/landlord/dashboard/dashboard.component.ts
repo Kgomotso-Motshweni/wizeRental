@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.dash.rentees(this.id).subscribe((rentee: any) => {
       
       this.rentees = rentee;
+        console.log(rentee);
         
       for (let x = 0; x < this.rentees.length; x++) {
         //signed tenants revenue
@@ -68,11 +69,16 @@ export class DashboardComponent implements OnInit {
       //Room available
       this.dash.getProperties(this.id).subscribe((properties) => {
         this.my_properties = properties;
+        console.log(properties);
+        
         for (let x = 0; x < this.my_properties.length; x++) {  
           this.numroomsA = this.numroomsA  +this.my_properties[x].p_room;
         }
         this.__loader.stop();
-      })  
+      })
+      
+      //Room Occupied
+
     })
    
   } 

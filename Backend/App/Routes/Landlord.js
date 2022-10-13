@@ -34,10 +34,10 @@ router.delete('/deleteProperty/:property_id', landlord.deleteMyProperty);
 //View Pending tenants 
 router.get('/getPending/:userid', pending.getPendingTenants);
 router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
-router.patch('/updateRooms/:id', pending.updateAmount);
 
 //Create MOA for a tenant
 router.post('/acceptNewTenant', moa.CreateMOA)
+router.patch('/updateRooms/:property_id', moa.updateRoomsAvailable) //Update rooms available
 
 router.get('/getRoom/:id', room.getRoomById); //Tenant room details
 
