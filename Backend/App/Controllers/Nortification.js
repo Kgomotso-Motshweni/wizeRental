@@ -73,7 +73,7 @@ const sendToSpecificUser = async(req, res ) => {
 const landlordReceive = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
-        client.query(`SELECT * FROM TenantToLandlordNortifications WHERE landlord_id = $1 ORDER BY created_at DESC`,[id],(error, results) => {
+        client.query(`SELECT * FROM TenantToLandlordNortifications WHERE landlord_id = $1 ORDER BY created_at c`,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to log issues to a specific landlord"
