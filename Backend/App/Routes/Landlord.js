@@ -10,7 +10,7 @@ const get_property = require("../Controllers/get_property");
 const delete_rentee = require("../Controllers/delete_rentee");
 const update_payment = require("../Controllers/update_payment");
 const moa = require("../Controllers/createMOA")
-
+const room = require('../Controllers/getPropertyInfo')
 //Add Property Details
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
 router.post('/add_rooms/:property_id', upload.array("image", 5), landlord.addRoomImages);
@@ -36,8 +36,9 @@ router.get('/getPending/:userid', pending.getPendingTenants);
 router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 
 //Create MOA for a tenant
-router.post('/acceptNewTenant', moa.CreateMOA);
+router.post('/acceptNewTenant', moa.CreateMOA)
+router.patch('/updateRooms/:property_id', moa.updateRoomsAvailable) //Update rooms available
 
-
+router.get('/getRoom/:id', room.getRoomById); //Tenant room details
 
 module.exports = router;

@@ -17,6 +17,30 @@ const getProperty= async (req, res) => {
     }
 };
 
+const getRoomById= async (req, res) => {
+  const id = parseInt(req.params.id)
+  try {
+      await client.query(`SELECT p.p_address, p.landlord_id, p.p_city, p.p_town, p.p_zip_code, p.p_propertytype, r.rent, r.status, r.moa_status
+      FROM landlordproperty p 
+      INNER JOIN rentees r on p.property_id = r.property_id 
+      INNER JOIN users u ON r.tenant_id = u.userid 
+      WHERE u.userid = $1`,[id], (err,result) => {
+          if (err) {
+              return res.status(500).json({
+                message: "Database error",
+              });
+          }
+          return res.status(200).send(result.rows)
+      });
+  } catch (err) {
+    res.status(500).json({
+      error: "Database error while creating post!", //Database connection error
+    });
+  }
+};
+
+
+
 
 const getPropertyByID= async (req, res) => {
     const id = parseInt(req.params.id)
@@ -35,6 +59,8 @@ const getPropertyByID= async (req, res) => {
       });
     }
 };
+
+
 
 const getRoomsImages= async (req, res) => {
   const id = parseInt(req.params.id)
@@ -61,5 +87,6 @@ const getRoomsImages= async (req, res) => {
 module.exports = {
     getProperty,
     getPropertyByID,
-    getRoomsImages
+    getRoomsImages,
+    getRoomById
   }

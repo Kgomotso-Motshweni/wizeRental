@@ -59,6 +59,8 @@ export class TenantsComponent implements OnInit {
       this.dash.rentees(this.id).subscribe((rentee:any)=>{
   
         this.rentees = rentee;
+        console.log(rentee);
+        
         //console.log("Initial tenants",rentee)
         for (let x = 0; x < this.rentees.length; x++) {
           //signed tenants revenue
@@ -221,6 +223,7 @@ export class TenantsComponent implements OnInit {
   }
 //update payment using toggle
   updatePayment(index:any,status:any){
+    
     this.rente_id = this.rentees[index].rentee_id
     const body = {
       "rentee_id":this.rente_id,

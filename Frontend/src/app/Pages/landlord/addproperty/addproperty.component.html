@@ -18,11 +18,11 @@
                     </div>
 
                     <div class="form-group ">
-                        <input type="text" formControlName="city" placeholder="City"
+                        <input type="text" formControlName="city" placeholder="Suburb Name"
                             class="input bg-gray-50 input-bordered w-full email "
                             [ngClass]="{ 'is-invalid':submitted && f['city'].errors }" />
                         <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
-                            <div *ngIf="f['city'].errors['required']">City is required</div>
+                            <div *ngIf="f['city'].errors['required']">suburb is required</div>
                         </div>           
                     </div>
 
@@ -31,7 +31,7 @@
                             class="input bg-gray-50 input-bordered w-full email "
                             [ngClass]="{ 'is-invalid':submitted && f['town'].errors }" />
                         <div *ngIf="submitted && f['town'].errors" class="invalid-feedback">
-                            <div *ngIf="f['town'].errors['required']">Town is required</div>
+                            <div *ngIf="f['town'].errors['required']">City/Town is required</div>
                         </div>           
                     </div>
 

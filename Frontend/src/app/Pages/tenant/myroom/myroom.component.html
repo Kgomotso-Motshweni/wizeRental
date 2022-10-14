@@ -2,32 +2,81 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-<div class="container ">
-    <div class="navbar bg-base-100"> 
-        <div class="flex-1  ">
-            <label for="my-drawer-3"  class="btn btn-ghost btn-circle hidden">
-                <i class="pi pi-align-left " style="font-size: 1rem"></i>
-            </label>
-        </div>
-    
-        <div class="end-part flex-none justify-end">
-            <div class="user mt-3 mr-4">
-                <button type="btn" (click)="logIssues()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">My Issues</button>            
+<div class="container emptyRoom" *ngIf="this.emptyRoom == 0" >
+    <div class="flex  justify-content-center">
+        <div class="grid grid-cols-1 ">
+            <div class="card empty w-full shadow-xl">
+                <div class="card-body" >
+                    <h2 class="card-title">My Room</h2>
+                    <div>
+                        <h5>Once you have been Accepted you will see your room details here</h5>
+                    </div>
+                </div>
             </div>
-
-            <button class="btn ml-4 btn-ghost btn-circle">
-                <a (click)="visibleSidebar2 = true" (click)="getNotifications()" >
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
-                </a> 
-            </button>  
-        </div>
+        </div>        
     </div>
 </div>
 
 
-<!-- The button to open modal -->
-<label for="my-modal-4" class="btn modal-button"><i class="bi bi-file-earmark"></i></label>
+<div class="myRoom" *ngIf="this.emptyRoom != 0" >
+    <div class="flex justify-center">
+        <div class="container ">
+            <div class="navbar bg-base-100"> 
+                <div class="flex-1  ">
+                    <label for="my-drawer-3"  class="btn btn-ghost btn-circle hidden">
+                        <i class="pi pi-align-left " style="font-size: 1rem"></i>
+                    </label>
+                </div>
+            
+                <div class="end-part flex-none justify-end">
+                    <div class="user mt-3 mr-4">
+                        <button type="btn" (click)="logIssues()" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">My Issues</button>            
+                    </div>
+        
+                    <button class="btn ml-4 btn-ghost btn-circle">
+                        <a (click)="visibleSidebar2 = true" (click)="getNotifications()" >
+                            <i class="fa-regular fa-bell"></i>
+                            <span class="badge badge-xs badge-primary indicator-item">{{totalNumber}}</span>
+                        </a> 
+                    </button>  
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <div class="container roomDetails mt-4">
+        <div class="card lg:card-side bg-base-100 shadow-xl" *ngFor="let i of property">
+            <figure><img class="img" src="https://placeimg.com/200/280/arch"  alt="room" /></figure>
+            <div class="card-body">
+                <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
+                <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
+                <p>PropertyType: {{i.p_propertytype}}</p> 
+                <p>Rent Amount: R {{i.rent}}</p> 
+                <p>Status:  {{i.status}}</p>
+                <div class="signs" *ngIf="condition == 'accepted'">
+                    <div *ngIf="signed == 'notsigned'; else elseBlock" >
+                        <!-- The button to open modal -->
+                        <label for="my-modal-4" ><a style="cursor: pointer;">Sign lease form<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a></label>                    
+                    </div>
+                    <ng-template  #elseBlock>
+                        <div class="signs">
+                            <a (click)="captureScreen()">Download the memorandum<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a>
+                        </div> 
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="grid content-end footer footer-center border-t-4 p-3  text-base-content ">
+        <div>
+          <p>Copyright © 2022 All Rights Reserved | <br>
+            Developed for WizeReantalz</p>
+        </div>
+    </footer>
+</div>
+
 
 <!-- Put this part before </body> tag 
 <input type="checkbox" id="my-modal-4" class="modal-toggle" />
@@ -73,22 +122,7 @@
     </label>
 </label>-->
 
-<div class="emptyRoom"  >
-    <div class="flex justify-center">
-        <div class="grid sm:grid-cols-1 ">
-            <div class="card empty w-full shadow-xl">
-                <div class="card-body" >
-                    <h2 class="card-title">My Room</h2>
-                    <div>
-                        <h5>Once you have been Accepted you will see your room details here</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="emptyRoom">
+<!-- 
     <div class="flex justify-center">
         <div class="grid sm:grid-cols-1 ">
             <div class="card empty w-full shadow-xl"*ngFor="let i of property">
@@ -103,10 +137,9 @@
                          <p>Sign memorandum </p>     
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+ -->
+
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>
@@ -115,52 +148,54 @@
 
 <p-dialog [(visible)]="dialogMessage" [style]="{width: '450px'}" header="Log Issues" [modal]="true" styleClass="p-fluid">
    <form [formGroup]="Form">
-   
         <div class="form-group mb-6">
-            <label for="issue1"> Water </label><br>
-            <input type="checkbox" class="inputs" formControlName="issues" formid="issue1" name="issue1" value="Water">
+            <label for="issue4"> Water</label><br>
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4" value="Water" name="water"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }"   (change)="onCheckboxChange($event)">
+            
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
+            </div>
+        </div>  
+
+        <div class="form-group mb-6">
+            <label for="issue4"> Electricity</label><br>
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4"  value="Electricity"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }" (change)="onCheckboxChange($event)">
+            
             <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
                 <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
         </div>
 
         <div class="form-group mb-6">
-            <label for="issue2"> Electricity </label><br>
-            <input type="checkbox"  class="inputs" formControlName="issues" id="issue2" name="issue2" value="Electricity"
-            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
-    
-            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-                <div *ngIf="f['message'].errors['required']">message is required</div>
-            </div>
-        </div>
-
-        <div class="form-group mb-6">
-            <label for="issue3"> Wifi</label><br>
-            <input type="checkbox"  class="inputs" formControlName="issues" id="issue3" name="issue3" value="Wifi"
-            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+            <label for="issue4"> WIFI</label><br>
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4"  value="WIFI"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }" (change)="onCheckboxChange($event)">
             
-            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-                <div *ngIf="f['message'].errors['required']">message is required</div>
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
         </div>
 
         <div class="form-group mb-6">
             <label for="issue4"> Appliance</label><br>
-            <input type="checkbox"  class="inputs" formControlName="issues" id="issue4" name="issue4" value="Appliance"
-            [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
+            <input type="checkbox" class="inputs" formControlName="issues" id="issue4" value="Appliance"
+            [ngClass]="{ 'is-invalid':submitted && f['issues'].errors }" (change)="onCheckboxChange($event)">
             
-            <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-                <div *ngIf="f['message'].errors['required']">message is required</div>
+            <div *ngIf="submitted && f['issues'].errors" class="invalid-feedback">
+                <div *ngIf="f['issues'].errors['required']">message is required</div>
             </div>
-        </div>
+        </div>  
 
         <div class="form-group mb-6"> 
-            <label class="input-group ">Other:</label>
+            <label class="input-group ">Other/specify:</label>
             <textarea type="text" formControlName="message"
                 class="input bg-gray-50 input-bordered w-full email"
                 [ngClass]="{ 'is-invalid':submitted && f['message'].errors }" >
             </textarea>        
             <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                
                 <div *ngIf="f['message'].errors['required']">message is required</div>
             </div>
         </div>
@@ -169,7 +204,6 @@
             <button type="submit" (click)="hideDialog()" class="text-white btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Cancel</button>
             <button type="submit" (click)="sendNotification()" class="ml-5 text-white w-44 btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</button>
         </div>
- 
     </form>
 </p-dialog> 
 

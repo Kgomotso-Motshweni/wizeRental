@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { TenantsService } from 'src/app/Services/tenants.service';
 import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api'; 
+import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{ fabric } from 'fabric';
+import { LandingPageService } from 'src/app/Services/landing-page.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
@@ -15,8 +16,11 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./myroom.component.scss'],
   providers: [MessageService, ConfirmationService]
 })
-export class MyroomComponent implements OnInit {
 
+export class MyroomComponent implements OnInit {
+  name:any = "search";
+  property:any;
+  emptyRoom: number = 0;
   id:number = 0;
   token:any;
   totalNumber: number = 0;
@@ -27,32 +31,39 @@ export class MyroomComponent implements OnInit {
   submitted: boolean = false;
   mymoa:any;
   data:any;
-  property:any;
   propertyID: any;
   selectedValues: string[] = [];
   canvas:any;
   moa_data:any
-  landId:any
+  landId:number = 0;
   landlordName :any;
   moa_id: any;
-
+  stats:any
+  signed:any
+  condition:any;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
     private service:TenantsService,
-    private router:Router,
     private formBuilder: FormBuilder,
-    private __loader: NgxUiLoaderService) { }
+    private __loader: NgxUiLoaderService,
+    private router:Router,
+  ) { }
 
     Form = new FormGroup({
       message: new FormControl(''),
       issues: new FormControl(''),
       moa: new FormControl(''),
-      electricity: new FormControl('')
-
+      electricity: new FormControl(''),
+      accName: new FormControl(''),
+      address: new FormControl(''),
+      rooms: new FormControl(''),
+      propertyType: new FormControl(''),
+      price: new FormControl(''),
+      status: new FormControl('')
+    
     });
 
-    
   ngOnInit(): void {
     this.__loader.start();
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
@@ -61,9 +72,13 @@ export class MyroomComponent implements OnInit {
     this.getMoaData();
 
     this.Form = this.formBuilder.group({
-      message: ['', Validators.required],
       issues: ['', Validators.required],
+      message: ['', Validators.required],
       electricity: ['', Validators.required],
+      // address:['', Validators.required],
+      // propertytype: ['', Validators.required],
+      // price: ['', Validators.required],
+      // status: ['', Validators.required]
     });
 
  
@@ -71,6 +86,44 @@ export class MyroomComponent implements OnInit {
     this.canvas = new fabric.Canvas('canvas',{
       isDrawingMode:true
     })
+    this.getMyRoom();
+    
+  }
+  
+  getMyRoom(){
+    this.service.getRoom(this.id).subscribe({
+      next: (data: any) => {
+        this.property = data;
+        this.signed = this.property[0].moa_status
+        console.log(data);
+        
+        if(this.property[0].status == 'accepted'){
+          this.condition = 'accepted'
+        }else if(this.property[0].status == 'pending'){
+          this.condition = 'pending'
+        }else {
+          this.condition = 'rejected'
+        }
+        this.landId = this.property[0].landlord_id
+        this.emptyRoom = this.property.length
+        this.__loader.stop();
+      },
+      error: err => {
+        this.condition = 'rejected';
+      }
+    })
+  }
+  
+
+  onCheckboxChange(e:any){
+    let loged = e.target.value;
+    if (e.target.checked) {
+      this.selectedValues.push(loged)
+    }else{
+      const index = this.selectedValues.indexOf(loged) 
+      this.selectedValues.splice(index,1)
+    }
+    
   }
 
   //Get Moa Details
@@ -107,6 +160,8 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.SignMOA = false;
         this.__loader.stop();
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+        this.router.onSameUrlNavigation = "reload";
         this.messageService.add({
           severity:'success', summary: 'Success', detail: "Moa Signed", life: 3000
         });
@@ -124,6 +179,8 @@ export class MyroomComponent implements OnInit {
   drawClear(){
     this.canvas.clear();
   }
+        
+ 
 
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
@@ -149,13 +206,16 @@ export class MyroomComponent implements OnInit {
     this.dialogMessage = false;
   }
 
+  captureScreen(){
+    
+  }
+
   sendNotification(){
     this.submitted = true;
-
+    console.log( this.landId);
+    console.log(this.id);
     console.log(this.Form.value.message)
-    console.log(this.Form.value.issues)
-    console.log(this.Form.value.electricity)
-
+    console.log(this.selectedValues)
     this.__loader.stop();
   }
 }

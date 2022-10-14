@@ -20,6 +20,7 @@ export class DashboardService {
    tenants(address:any){
     return this.http.get(`${this.baseUrl}getTenants/${address}`)
   }
+  
   rentees(id:any){
     return this.http.get(`${this.baseUrl}getRentees/${id}`)
   }
