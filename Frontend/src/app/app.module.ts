@@ -19,8 +19,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule} from 'primeng/dialog';
 import { ToggleButtonModule} from 'primeng/togglebutton';
-import {DropdownModule} from 'primeng/dropdown';
-
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
@@ -47,6 +45,8 @@ import { GenericListFilterModule } from 'generic-list-filter';// <-- import the 
   imports: [
     GenericListFilterModule,
     ConfirmDialogModule,
+    GenericListFilterModule,
+    NgxUiLoaderModule,
     MessagesModule,
     InputNumberModule,
     LandlordModule,
@@ -60,7 +60,6 @@ import { GenericListFilterModule } from 'generic-list-filter';// <-- import the 
     Ng2SearchPipeModule,
     FormsModule,
     ToastModule,
-    DropdownModule,
     DialogModule,
     ToggleButtonModule,
     //loader
