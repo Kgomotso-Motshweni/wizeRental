@@ -169,6 +169,34 @@ export class PendingComponent implements OnInit {
 
   }
 
+rejectTenant(){
+  this.submitted = true
+
+  let user = {
+    tenant_id: this.pendingClients.tenant_id,
+    property_id: this.pendingClients.property_id,
+    full_name: this.pendingClients.full_name,
+    unit: this.pendingClients.unit,
+    rent: this.pendingClients.amount,
+    paymentstatus: false,
+    moa_status: "notsigned",
+    status: "rejected"
+  }
+  
+  this.__loader.start();
+  this.land.reject(user).subscribe({
+    next:data => {
+
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+
+      this.router.navigate(['/landlord/pending'])
+      this.__loader.stop();
+      this.messageService.add({severity:'error', summary: 'Error', detail: "New Tenant Rejected", life: 3000})
+    }
+  })
+}
+
   onSubmit(){
     this.submitted = true
     
@@ -185,6 +213,7 @@ export class PendingComponent implements OnInit {
         rent: this.pendingClients.amount,
         paymentstatus: false,
         moa_status: "notsigned",
+        status: "accepted",
         agreeStartDate: this.pendingClients.agreementStart,
         agreeEndDate: this.pendingClients.agreementEnd,
         payStartDate: this.pendingClients.paymentStart,

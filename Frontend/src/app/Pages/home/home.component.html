@@ -51,6 +51,8 @@
     <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 gap-8 justify-center" style="width: 100%;">
         <div *ngFor="let i of tenantProperty| filter:searchItem ; let m = index">
             <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >
+                <span *ngIf="i.p_room > 0" class="hovertext bg-green-500">Available  </span>
+                <span *ngIf="i.p_room < 1" class="hovertext bg-red-500">Unavailable  </span>
                 <figure><img class="img" routerLink='/view-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>
                 <div class="card-body">
                     <h6 class="acc">{{i.p_name}} accommodations</h6>

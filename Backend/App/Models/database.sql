@@ -7,6 +7,7 @@ CREATE TABLE users(
     email VARCHAR(100) UNIQUE NOT NULL,
     cellno VARCHAR(15) NOT NULL,
     password VARCHAR(255) NOT NULL,
+	imageurl TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -95,16 +96,19 @@ CREATE TABLE Rentees(
 	full_name VARCHAR(255),
 	unit VARCHAR(10),
 	rent DECIMAL(8,2),
-	moaStart TIMESTAMPTZ DEFAULT NOW(),
-	moaEnd TIMESTAMPTZ DEFAULT NOW(),
-	rent_paid  DECIMAL(8,2),
 	paymentstatus BOOLEAN,
-	moa_status VARCHAR(250),
 	create_time TIMESTAMPTZ DEFAULT NOW(),
 	r_update_time TIMESTAMPTZ DEFAULT NOW(),
+	moa_status VARCHAR(250),
+	status VARCHAR(10),
 	FOREIGN KEY (tenant_id) REFERENCES public.users (userid)
 	FOREIGN KEY(property_id) REFERENCES landlordProperty(property_id) 
 );
+
+DROP TABLE IF EXISTS SoftDelete CASCADE;
+CREATE TABLE SoftDelete AS 
+TABLE rentees 
+WITH NO DATA;
 
 DROP TABLE IF EXISTS MOA CASCADE;
 CREATE TABLE MOA(
@@ -116,6 +120,7 @@ CREATE TABLE MOA(
     payStartDate TIMESTAMPTZ DEFAULT NOW(),
     payendDate TIMESTAMPTZ DEFAULT NOW(),
     agreementType VARCHAR(100),
+	signature TEXT,
 	create_time TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (rentee_id) REFERENCES public.rentees (rentee_id)
 );

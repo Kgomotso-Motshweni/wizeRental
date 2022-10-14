@@ -114,6 +114,7 @@ export class TenantsComponent implements OnInit {
             //Route back to the current page,  this helps in refreshing data
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
+            
             this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
         
             this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})

@@ -1,12 +1,12 @@
 const client = require("../Config/db.config");
 
 const CreateMOA = async(req, res ) => {
-    const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType } = req.body
+    const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status,status, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType,  } = req.body
 
     try{
         //Insert user pending tenant into rentees table
-        const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status ) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status ])
+        const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status,status ) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ])
         const user = data.rows[0].rentee_id;
 
         //Insert moa details using rentees_id returned from the above 
@@ -32,6 +32,28 @@ const CreateMOA = async(req, res ) => {
     } 
 }
 
+const rejectRenant = async (req, res) => {
+    const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status,status } = req.body
+
+    try{
+        //Insert user pending tenant into rentees table
+        const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ], (error) => {
+        if(error){
+            return res.status(400).json({
+                message: "Unable to reject tenant"
+            });  
+        }
+        return res.status(400).json({
+            message: "tenant rejected"
+        });
+    })
+    }catch (err) {
+        res.status(500).json({
+            error: "Database error when viewing pending tenants", //Database connection error
+        });
+    } 
+}
 const getMOA= async (req, res) => {
     try {
         const id = parseInt(req.params.id)
@@ -133,5 +155,6 @@ module.exports = {
     getMOA,
     updateSignature,
     updateRoomsAvailable,
-    getSingedMOA
+    getSingedMOA,
+    rejectRenant
 }
