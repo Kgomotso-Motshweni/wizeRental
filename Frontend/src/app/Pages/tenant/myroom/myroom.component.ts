@@ -27,23 +27,24 @@ export class MyroomComponent implements OnInit {
   myNotification: any 
   dialogMessage: boolean = false;
   SignMOA:boolean = false;
-  visibleSidebar2:boolean = false
+  visibleSidebar2:boolean = false;
   submitted: boolean = false;
   mymoa:any;
   data:any;
   propertyID: any;
-  selectedValues: string[] = [];
   canvas:any;
-  moa_data:any
+  moa_data:any;
   landId:number = 0;
   landlordName :any;
   moa_id: any;
-  stats:any
-  signed:any
+  stats:any;
+  signed:any;
+  messages:any;
   condition:any;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
+    private notification:NortificationsService,
     private service:TenantsService,
     private formBuilder: FormBuilder,
     private __loader: NgxUiLoaderService,
@@ -115,17 +116,6 @@ export class MyroomComponent implements OnInit {
   }
   
 
-  onCheckboxChange(e:any){
-    let loged = e.target.value;
-    if (e.target.checked) {
-      this.selectedValues.push(loged)
-    }else{
-      const index = this.selectedValues.indexOf(loged) 
-      this.selectedValues.splice(index,1)
-    }
-    
-  }
-
   //Get Moa Details
   getMoaData(){
     this.service.getMoa(this.id).subscribe({
@@ -159,11 +149,12 @@ export class MyroomComponent implements OnInit {
     this.service.updateSignature(moaData).subscribe({
       next:data => {
         this.SignMOA = false;
+        this.messages = data
         this.__loader.stop();
         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
         this.router.onSameUrlNavigation = "reload";
         this.messageService.add({
-          severity:'success', summary: 'Success', detail: "Moa Signed", life: 3000
+          severity:'success', summary: 'Success', detail: this.messages.message, life: 3000
         });
        
       },
@@ -212,10 +203,25 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    console.log( this.landId);
-    console.log(this.id);
-    console.log(this.Form.value.message)
-    console.log(this.selectedValues)
+    if (this.Form.invalid) {
+      return
+    }
+    
+    let info ={
+      nortType: this.Form.value.issues,
+      recipient: this.landId,
+      message: this.Form.value.message,
+    }
+    this.notification.tenantSend(info, this.id).subscribe({
+      next:data => {
+        this.messages = data;
+        this.dialogMessage = false;
+        this.messageService.add({severity:'success', summary: 'Successful', detail:  this.messages.message, life: 3000});
+      },
+      error: err => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: err.error.message, life: 3000});
+      }
+    })
     this.__loader.stop();
   }
 }
