@@ -65,10 +65,10 @@ const updateSignature= async (req, res) => {
         WHERE moa = $1`,[moa,signature],(err) => {
             if (err) {
                 return res.status(401).json({
-                  message: "Database error",
+                  message: "Unable to sign the moa",
                 });
             }
-            return res.status(200).json({message:'succesfully'})
+            return res.status(200).json({message:'Moa Singed'})
         });
 
         await client.query(`update rentees set moa_status = 'signed', r_update_time = now()
