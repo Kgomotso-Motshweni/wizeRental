@@ -71,7 +71,7 @@ const updateSignature= async (req, res) => {
             return res.status(200).json({message:'succesfully'})
         });
 
-        await client.query(`update rentees set moa_status = 'Signed', r_update_time = now()
+        await client.query(`update rentees set moa_status = 'signed', r_update_time = now()
         Where tenant_id = $1`,[id]);    
 
     } catch (err) {

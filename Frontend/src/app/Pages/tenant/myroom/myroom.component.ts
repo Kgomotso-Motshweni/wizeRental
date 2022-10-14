@@ -39,6 +39,7 @@ export class MyroomComponent implements OnInit {
   landlordName :any;
   moa_id: any;
   stats:any
+  signed:any
   condition:any;
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
@@ -46,7 +47,7 @@ export class MyroomComponent implements OnInit {
     private service:TenantsService,
     private formBuilder: FormBuilder,
     private __loader: NgxUiLoaderService,
-    
+    private router:Router,
   ) { }
 
     Form = new FormGroup({
@@ -93,6 +94,9 @@ export class MyroomComponent implements OnInit {
     this.service.getRoom(this.id).subscribe({
       next: (data: any) => {
         this.property = data;
+        this.signed = this.property[0].moa_status
+        console.log(data);
+        
         if(this.property[0].status == 'accepted'){
           this.condition = 'accepted'
         }else if(this.property[0].status == 'pending'){
@@ -100,7 +104,6 @@ export class MyroomComponent implements OnInit {
         }else {
           this.condition = 'rejected'
         }
-        console.log(this.condition);
         this.landId = this.property[0].landlord_id
         this.emptyRoom = this.property.length
         this.__loader.stop();
@@ -157,6 +160,8 @@ export class MyroomComponent implements OnInit {
       next:data => {
         this.SignMOA = false;
         this.__loader.stop();
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+        this.router.onSameUrlNavigation = "reload";
         this.messageService.add({
           severity:'success', summary: 'Success', detail: "Moa Signed", life: 3000
         });
