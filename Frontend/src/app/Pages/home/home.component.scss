@@ -14,31 +14,24 @@
 .curs{
     cursor: pointer;
 }
-.topp{
-     
-
-}
-
 
 @media screen and (min-width: 1000px) {
     .bac img{
         width: 100%;
         height: 98vh;
+        filter: blur(2px);
+        -webkit-filter: blur(2px);
     } 
 }
-  .logo{
-    position: absolute;
-    top: 30%;
-    left: 70%;
-    width: 200px;
-    height: 150px;
-  }
-  #down {
+.bac{
+    width: 100vw;
+}
+
+#down {
     margin-top: 100%;
     padding-bottom: 25%;
-   } 
-  
-  .bottom-left {
+}   
+.bottom-left {
     position: absolute;
     bottom: 8%;
     left: 5%;
@@ -87,16 +80,11 @@ textarea.input {
     height: auto;
     display: inline-block;
 }
-
-
 .buttons{
     background-color: #E3E3E7;
     cursor: pointer;
     width: auto;
     height: 50px;
-    
-    
-    // justify-content: center;
 }
 .btn1{
     width: 50%;
@@ -114,7 +102,6 @@ textarea.input {
     border-style: solid;
     border-width: 1px;
     border-radius: 10px
-
 }
 .btn2{
     width: 50%;
@@ -135,13 +122,11 @@ textarea.input {
     color: white;
     border-radius: 25px;
 }
-
 .btn{
     width: 160px;
     color: white;
 }
 
-// card sizes
 
 .card{
     height: 465px;
@@ -162,12 +147,9 @@ textarea.input {
     justify-content: center;
     margin-top: -3%;
 }
-
 .card-body{
     height: 0%;
 }
-
-
 .fa-filter{
     font-size: 2.5em;
     color: #55ADEA;
