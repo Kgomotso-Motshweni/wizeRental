@@ -1,7 +1,5 @@
 @media screen and (min-width: 769px){
-    figure img{
-        width: 50vw;
-    }
+
 }
 .card{
     border: none;
@@ -10,15 +8,12 @@
 }
 .view{
    margin-top: 4%;
-}
-.img{
-    border-radius: 8px;
-
-}
-figure .roomImages{
    
 }
-
+figure .img{
+    width: 50vw;
+    height: 80%;
+}
 .icons{
     text-align: center;
     justify-content: center;
