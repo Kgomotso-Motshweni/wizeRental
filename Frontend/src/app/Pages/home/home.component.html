@@ -1,20 +1,20 @@
 <!-- Navbar -->
 <app-nav-bar></app-nav-bar>
 
-
 <!-- Landing page picture -->
-<div class="bac">
+<div class="bac" style="margin-top: 4%;">
     <img src="../../../assets/images/maximillian-conacher-sPpe2D7VbpM-unsplash.jpg" class="topp" alt="Snow">
     <div class="bottom-left">
         <i href="#down" class="pi pi-arrow-down bc curs" onClick="document.getElementById('down').scrollIntoView();" style="font-size: 5rem"></i>
     </div>
-    <div class="name">
+    <!-- <div class="name">
     <img class="logo" src="../../../../assets/images/unknown.png">
     <div class="bottom-right">Wize rentals is here to find you <br>a 
       accommodation in a <br> region you want at the
       price you can afford
-    </div>
-    </div>
+    </div> 
+    </div>-->
+
 </div>
 
 <span id="down"></span>
@@ -51,8 +51,8 @@
 
 
 
-<div  class=" prop ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
-    <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4 gap-2 justify-center" style="width: 100%;">
+<div  class=" grid justify-center ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
+    <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 gap-8 justify-center" style="width: 100%;">
         <div *ngFor="let i of tenantProperty| filter:searchItem ; let m = index">
             <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >
                 <figure><img class="img" routerLink='/view-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>

@@ -14,12 +14,18 @@
 .curs{
     cursor: pointer;
 }
-  .topp{
-      width: 100%;
-      height: 710px;
-  }
+.topp{
+     
+
+}
 
 
+@media screen and (min-width: 1000px) {
+    .bac img{
+        width: 100%;
+        height: 98vh;
+    } 
+}
   .logo{
     position: absolute;
     top: 30%;
@@ -150,9 +156,7 @@ textarea.input {
 .card1{
     margin-top: -43px;
 }
-// .toggle{
-//     width: %;
-// }
+
 .icons{
     text-align: center;
     justify-content: center;
