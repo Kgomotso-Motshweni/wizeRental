@@ -20,6 +20,8 @@ export class Pending {
     p_town?:String;
     p_zip_code?:String;
     p_name?:String;
+    p_price?:any;
+    p_room?:number;
     paymentStart: any;
     agreementStart: any;
     paymentEnd: any;

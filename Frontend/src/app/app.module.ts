@@ -19,35 +19,33 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule} from 'primeng/dialog';
 import { ToggleButtonModule} from 'primeng/togglebutton';
-import {SelectButtonModule} from 'primeng/selectbutton';
+import {DropdownModule} from 'primeng/dropdown';
 
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
-import { EditorComponent } from './Models/editor/editor.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { LandingComponent } from './Pages/landing/landing.component';
 import { ViewPropertyComponent } from './Pages/view-property/view-property.component';
 
 //ngx loader
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { GenericListFilterModule } from 'generic-list-filter';// <-- import the module
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    EditorComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    LandingComponent,
     FooterComponent,
     ViewPropertyComponent,
   ],
   imports: [
+    GenericListFilterModule,
     ConfirmDialogModule,
     MessagesModule,
     InputNumberModule,
@@ -62,6 +60,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     Ng2SearchPipeModule,
     FormsModule,
     ToastModule,
+    DropdownModule,
     DialogModule,
     ToggleButtonModule,
     //loader

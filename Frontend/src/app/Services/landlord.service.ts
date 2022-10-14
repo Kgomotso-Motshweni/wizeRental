@@ -53,4 +53,8 @@ export class LandlordService {
   createMOA(users:any){
     return this.http.post(`${this.baseUrl}acceptNewTenant`, users)
   }
+
+  UpdateRooms(user:any, id:any){
+    return this.http.patch(`${this.baseUrl}updateRooms/${id}`, user);
+  }
 }

@@ -1,6 +1,5 @@
 <!-- Navbar -->
 <app-nav-bar></app-nav-bar>
-<!-- <p-selectButton [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-selectButton> -->
 
 <!-- Landing page picture -->
 <div class="card1 bg-base-100 shadow-xl col-12 justify-content-center ml-4 "   style="width: 98%;">
@@ -8,126 +7,54 @@
     <div class="card-body">
       <p>WizeRentals is here to find you a 
         accommodation in a region you want at the
-        price you can afford
+        price you can afford!!!
       </p>
     </div>
-  </div>
+</div>
 
 
 <div class="container-fluid m-1 col-sm-12 col-xl-2 col-md-6 gap-10" style="width:100%;" >
-
     <!-- Toggle button -->
     <div class="badge badge-primary badge-outline ml-2 mt-5" style="width:99%;">What do you need?</div>
     <div class="buttons shadow-md m-1 col-md-12 justify-content-center pt-1" style="width:99%;">
         <button class="btn1 " routerLink="/login" style="width:50%;" aria-activedescendant="page">To Rent</button>
         <button class="btn2 " routerLink="/login" style="width:50%;">To Advertise</button>
-     </div>
+    </div>
 
-    <br>
-  <div class="flex search col-xl-12">
-    <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
-        <div class="space1">
-        </div>
-    <br>
-    <label for="my-modal" (click)="filter()" class="btn modal-button btn-primary" (change)="filter"   style="width: 25%;">Filter by</label>
-</div>
-</div>
-<!--till here-->
-
-<!-- filter -->
-<div  *ngIf="condition" class="filter  mx-auto bg-light shadow pt-3 pl-1 filter-cols-10">
-    <div class="grid grid-cols-10 m-5 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-2  gap-3 justify-center" >
-        <div class="flex">
-        <h5 class="this pt-4">filter</h5>
-        <input type="text" placeholder= "Enter location" name="name" [(ngModel)]="name" class="input input-bordered ml-2" style="width: 50%;"/>
-        </div>
-        <div class="flex">
-            <h5 class="this pt-4">filter</h5>
-        <input type="text" placeholder= "Enter property type" name="category" [(ngModel)]="category" class="input input-bordered ml-2" style="width: 50%;"/>
-        </div>
-        <div class="flex">
-            <h5 class="this pt-4">filter</h5>
-        <input type="text" placeholder= "Enter property type" name="category" [(ngModel)]="category" class="input input-bordered ml-2" style="width: 50%;"/>
-        </div>
-        <div class="flex">
-            <h5 class="this pt-4">filter</h5>
-        <input type="text" placeholder= "Enter property type" name="category" [(ngModel)]="category" class="input input-bordered ml-2" style="width: 50%;"/>
-        </div>
-        <br>
-        <br>
+    <div class="flex search col-xl-12">
+        <input type="text" placeholder= "Search address,city,location" name="searchItem" [(ngModel)]="searchItem" class="input input-bordered" style="width: 75%;"/>
+        <div class="space1"></div>
     </div>
 </div>
 
-<!-- Property Cards  -->
-<!-- <div class="container-fluid" style="margin-top:20px;">
-    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-      
-        <div class="card rounded-3 w-96 bg-base-100 shadow-xl " *ngFor="let i of tenantProperty| filter:searchItem  | filter:name | filter:category ; let m = index">
-            <figure><img  routerLink='/view-property/{{i.property_id}}' src='{{i.house_image}}' alt="Shoes" /></figure>
+<!-- <div class="flex prop pt-5justify-center md:prop-cols-1 rounded"  > -->
+<div class="container-fluid prop ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center" style="width: 100%;">
+        <div *ngFor="let i of tenantProperty| filter:searchItem ; let m = index">
+            <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >
+            <figure><img class="img rounded-left" routerLink='/view-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>
             <div class="card-body">
-                <h6>{{i.p_name}} accommodations</h6>
+                <h6 class="acc">{{i.p_name}} accommodations</h6>
                 <h4>{{i.p_address}}, {{i.p_city}}</h4>
                 <h4>{{i.p_town}}<br>{{i.zip_code}}</h4>
                 <h4>R {{i.p_price}}/ Month</h4>
             </div>
-            <div class="card-footer py-4 justify-center">
+            <div class="card-footer py-4 ;justify-right">
                 <div class="flex icons flex-row">
                     <div class="flex flex-col basis-1/4">
-                        <i class="fa-solid fa-bed base ml-4">    {{i.p_bath}}</i>
+                        <i class="fa-solid fa-bed base ">{{i.p_bath}}</i>
                     </div>
                     <div class="flex flex-col basis-1/4">
-                        <i class="fa-solid fa-bath ml-4" >  {{i.p_bath}}</i>
+                        <i class="fa-solid fa-bath " >{{i.p_bath}}</i>
                     </div>
                     <div class="flex flex-col basis-1/4">
-                        <i class="fa-solid fa-car ml-4">{{i.p_bath}}</i>
+                        <i class="fa-solid fa-car ">{{i.p_bath}}</i>
                     </div>
                 </div>
-            </div>
+            </div>      
         </div>
     </div>
-</div> -->
-
-
-<!-- <div class="flex prop pt-5justify-center md:prop-cols-1 rounded"  > -->
-<div class="flex prop ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
-
-    <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 lg:grid-cols-4  gap-2 justify-center" style="width: 100%;">
-    <div *ngFor="let i of tenantProperty| filter:searchItem  | filter:name | filter:category ; let m = index">
-      
-    <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >
-      <!-- {{i.house_image}} -->
-      <figure><img class="img" routerLink='/view-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>
-      <div class="card-body">
-        <h6 class="acc">{{i.p_name}} accommodations</h6>
-        <h4>{{i.p_address}}, {{i.p_city}}</h4>
-        <h4>{{i.p_town}}<br>{{i.zip_code}}</h4>
-        <h4>R {{i.p_price}}/ Month</h4>
-       
-      </div>
-      <div class="card-footer py-4 ;justify-right">
-        <div class="flex icons flex-row">
-            <div class="flex flex-col basis-1/4">
-                <i class="fa-solid fa-bed base ">{{i.p_bath}}</i>
-            </div>
-            <div class="flex flex-col basis-1/4">
-                <i class="fa-solid fa-bath " >{{i.p_bath}}</i>
-            </div>
-            <div class="flex flex-col basis-1/4">
-                <i class="fa-solid fa-car ">{{i.p_bath}}</i>
-            </div>
-        </div>
-    </div>
-      
-    </div>
-    <br>
 </div>
-
-</div>
-  </div>
-
-
-
-
 
 <footer class="footer mt-7 footer-center p-4 border text-base-content ">
     <div>

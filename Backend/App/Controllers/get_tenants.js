@@ -84,7 +84,7 @@ const tenantsFromSpecifiAddress = async(req, res) => {
         });
     }
   }
-  
+
   module.exports = {
     getLandlordRes,
     tenantsFromSpecifiAddress,

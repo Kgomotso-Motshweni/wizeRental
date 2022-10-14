@@ -12,9 +12,8 @@ const CreateMOA = async(req, res ) => {
         //Insert moa details using rentees_id returned from the above 
         await client.query(`INSERT INTO MOA (rentee_id, amount, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType)
             VALUES ($1, $2, $3, $4, $5, $6, $7 )`,[user,rent, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType ])
+     
 
-        await client.query(`Select * from rentees`) 
-        
         //Delete the pending tenant from pending table 
         await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error, results) => {
             if(error){
@@ -61,7 +60,6 @@ const getMOA= async (req, res) => {
 // Update the signature and update the "signed" in the rentees table
 const updateSignature= async (req, res) => {
     try {
-
         const {moa,signature,id} = req.body
         await client.query(`Update moa set signature = $2
         WHERE moa = $1`,[moa,signature],(err) => {
@@ -73,7 +71,7 @@ const updateSignature= async (req, res) => {
             return res.status(200).json({message:'succesfully'})
         });
 
-        await client.query(`update rentees set moa_status = 'Signed', r_update_time = now()
+        await client.query(`update rentees set moa_status = 'signed', r_update_time = now()
         Where tenant_id = $1`,[id]);    
 
     } catch (err) {
@@ -81,13 +79,34 @@ const updateSignature= async (req, res) => {
         error: "Database error while getting the Moa", //Database connection error
       });
     }
-
-
 };
 
+const updateRoomsAvailable = async(req, res ) => {
+    const property_id = parseInt(req.params.property_id)
+    const {roomsAvailable} = req.body
+    try {
+        //update room amount
+        await client.query(`UPDATE landlordProperty set p_room = $2 WHERE property_id = $1`,
+            [property_id, roomsAvailable],(err,results) => {
+            if (err) {
+                //If payments are not available is not available
+                return res.status(500).json({
+                    message: "Unable to update rooms available",
+               });
+            }
+            return res.status(200).json(results.rows) //Return a status 200 if there is no error
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+        error: "Database error while creating post!", //Database connection error
+        });
+    }
+}
 
 module.exports = {
     CreateMOA,
     getMOA,
-    updateSignature
+    updateSignature,
+    updateRoomsAvailable
 }
