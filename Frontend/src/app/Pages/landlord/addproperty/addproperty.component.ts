@@ -174,8 +174,6 @@ export class AddpropertyComponent implements OnInit {
 
   }
 
-
-
   // Submits the form  
   OnSubmit(){
     this.submitted = true;
