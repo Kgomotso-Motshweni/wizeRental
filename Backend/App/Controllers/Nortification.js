@@ -98,11 +98,7 @@ const landlordReceive = async(req, res ) => {
 const tenantReceive = async(req, res ) => {
     const id = parseInt(req.params.id);
     try{
-        client.query(`SELECT t.landlord_id, t.tenant_id, t.notif_type,t.message, t.created_at, p.p_name,r.full_name
-        FROM tenanttolandlordnortifications t
-        JOIN rentees r ON t.tenant_id = r.tenant_id
-        JOIN landlordproperty p ON p.property_id = r.property_id
-        WHERE t.tenant_id = 1`
+        client.query(`SELECT * FROM landlordtotenantnortifications WHERE landlord_id = $1 ORDER BY created_at DESC`
                 ,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
