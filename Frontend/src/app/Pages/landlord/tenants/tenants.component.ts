@@ -94,7 +94,6 @@ export class TenantsComponent implements OnInit {
         this.__loader.stop();
       })
     }
-
   }
 
   /*

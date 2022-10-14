@@ -32,10 +32,11 @@ export class HomeComponent implements OnInit {
   getProperty(){
     this.service.getProperties().subscribe({
       next: (data: any) => {
-          this.tenantProperty = data;
-          this.copyData = this.tenantProperty
-          this.__loader.stop();
-        }
-      })
+        this.tenantProperty = data;
+        console.log(data);
+        this.copyData = this.tenantProperty
+        this.__loader.stop();
+      }
+    })
   }
 }
