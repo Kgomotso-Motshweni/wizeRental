@@ -48,8 +48,7 @@
         <div class="card lg:card-side bg-base-100 shadow-xl" *ngFor="let i of property">
             <figure><img class="img" src="https://placeimg.com/200/280/arch"  alt="room" /></figure>
             <div class="card-body">
-                <p>Address: {{i.p_address}}, {{i.p_city}}</p>   
-                <p>{{i.p_town}}, {{i.p_zip_code}}</p>     
+                <p>Address: {{i.p_address}}, {{i.p_city}}</p>      
                 <p>PropertyType: {{i.p_propertytype}}</p> 
                 <p>Rent Amount: R {{i.rent}}</p> 
                 <p>Status:  {{i.status}}</p>
@@ -58,9 +57,9 @@
                         <!-- The button to open modal -->
                         <label for="my-modal-4" ><a style="cursor: pointer;">Sign lease form<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a></label>                    
                     </div>
-                    <ng-template  #elseBlock>
+                    <ng-template #elseBlock>
                         <div class="signs">
-                            <a (click)="captureScreen()">Download the memorandum<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a>
+                            <a style="cursor: pointer; color: blue;" (click)="captureScreen()">Download the memorandum<i class="fa-solid fa-file-pen" style="margin-left: 8px;"></i></a>
                         </div> 
                     </ng-template>
                 </div>
@@ -68,16 +67,16 @@
         </div>
     </div>
 
-    <footer class="grid content-end footer footer-center border-t-4 p-3  text-base-content ">
+    <!-- <footer class="grid content-end footer footer-center border-t-4 p-3  text-base-content ">
         <div>
           <p>Copyright © 2022 All Rights Reserved | <br>
             Developed for WizeReantalz</p>
         </div>
-    </footer>
+    </footer> -->
 </div>
 
 
-<!-- Put this part before </body> tag 
+<!-- Put this part before </body> tag -->
 <input type="checkbox" id="my-modal-4" class="modal-toggle" />
 <label for="my-modal-4" class="modal cursor-pointer">
     <label class="modal-box lg:w-2/4 xl:2/4 relative" for="">
@@ -119,8 +118,7 @@
             </div>
         </div> 
     </label>
-</label>-->
-
+</label>
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>
     <app-nortification></app-nortification>
@@ -167,4 +165,47 @@
 
 
 
+<div class="">
+    <div id="contentToConvert"  >
+        <div class="container logo">
+            <img src="../../../../assets/images/unknown.png" alt="Tracking System logo" class="center">
+            <h4 class="grid card-title justify-center">Rental Agreement <br> {{mymoa.agreementtype}}</h4>
+        </div>
+        <div class="container ">
+            <h6 class="mb-6"><b>TENANTS AGREE TO THE FOLLOWING:</b></h6>
+            <p class="mb-6">Date: {{mymoa.create_time | date: 'dd MMM YYYY'}}</p>
+            <p>Agreement between <input type="text" class="agreement sm:24 md:24"  disabled value="{{mymoa.firstname}} {{mymoa.lastname}}"> Owner(s), and <input type="text" class="agreement" disabled value="{{mymoa.full_name}}" >, Tenant(s) for dwelling
+                for dwelling located at <input type="text" class="agreement w-80" disabled value="{{mymoa.p_address}}, {{mymoa.p_city}}, {{mymoa.p_town}} {{mymoa.p_zip_code}}"> Location.</p><br>
 
+            <p>Tenant(s) agree to rent this dwelling on a <input type="text" class="agreement" disabled value="{{mymoa.agreementtype}}" > basis for R <input type="text" class="agreement" disabled value="{{mymoa.rent}}" > payable between this dates
+                <input type="text" class="agreement" disabled value="{{mymoa.paystartdate | date: 'dd MMM YYYY'}}" > and <input type="text" class="agreement" disabled  value="{{mymoa.payenddate | date: 'dd MMM YYYY'}}" > day of the calender month. </p><br>
+                
+            <p class="mb-4">Only <input type="text" class="agreement" disabled value="{{mymoa.full_name}}" > persons is to live in this dwelling. Therefore, and in consideration of the mutual promises and agreements 
+                contained herein, the tenant agrees to memorandum the premises from the landlord under the following: </p>
+            <ul class="mb-6">
+                <li class="mb-2">1. To keep the yards clean.</li>
+                <li class="mb-2">2. Not to repair motor vehicles in the premises.</li>
+                <li class="mb-2">3. To pay rent on time and by cash .</li>
+                <li class="mb-2">4. To pay for repairs of all damage, they or thir guests have caused.</li>
+                <li class="mb-2">5. Have no visitors stay for no more than 3 weeks.</li>
+            </ul>
+            <p >Tenants hereby acknowledge that they have read this Agreement, understand it agree to it and have been given a copy.</p><br>
+
+            <p>Sign here:</p><br>
+            <div class="flex">
+                <div id="downloadCanvas"  width="300px">
+                    <img src="{{mymoa.signature}}"  />
+                    <div class="divider"></div>
+                    <p class="Signature">Signature</p>
+                </div>
+            
+                <div class="agreementDate">
+                    <input type="text" class="agreements"  disabled value="{{mymoa.r_update_time | date: 'dd MMMM YYYY'}}" >
+                    <div class="divider second"></div>
+                    <p class="dateSigned">Date Signed</p>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>

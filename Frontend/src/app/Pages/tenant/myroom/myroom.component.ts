@@ -9,6 +9,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import{ fabric } from 'fabric';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import jspdf  from "jspdf";
+import html2canvas from "html2canvas";
 
 @Component({
   selector: 'app-myroom',
@@ -18,7 +20,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 
 export class MyroomComponent implements OnInit {
-  name:any = "search";
+
   property:any;
   emptyRoom: number = 0;
   id:number = 0;
@@ -30,17 +32,14 @@ export class MyroomComponent implements OnInit {
   visibleSidebar2:boolean = false;
   submitted: boolean = false;
   mymoa:any;
-  data:any;
-  propertyID: any;
   canvas:any;
-  moa_data:any;
   landId:number = 0;
-  landlordName :any;
   moa_id: any;
-  stats:any;
   signed:any;
   messages:any;
   condition:any;
+  download: boolean = false;
+
   constructor(private notif:NortificationsService,
     private messageService: MessageService,  
     private auth:AuthenticationService,
@@ -76,10 +75,6 @@ export class MyroomComponent implements OnInit {
       issues: ['', Validators.required],
       message: ['', Validators.required],
       electricity: ['', Validators.required],
-      // address:['', Validators.required],
-      // propertytype: ['', Validators.required],
-      // price: ['', Validators.required],
-      // status: ['', Validators.required]
     });
 
  
@@ -88,7 +83,6 @@ export class MyroomComponent implements OnInit {
       isDrawingMode:true
     })
     this.getMyRoom();
-    
   }
   
   getMyRoom(){
@@ -120,7 +114,9 @@ export class MyroomComponent implements OnInit {
   getMoaData(){
     this.service.getMoa(this.id).subscribe({
       next:data => {
-        this.mymoa = data  
+        this.mymoa = data 
+        console.log(data);
+         
         this.mymoa = this.mymoa[0]
         this.__loader.stop();    
       }
@@ -167,16 +163,17 @@ export class MyroomComponent implements OnInit {
     })
   }
 
+  //Clear signature without submitting
   drawClear(){
     this.canvas.clear();
   }
         
  
-
   get f():{ [key: string]: AbstractControl }{
     return this.Form.controls;//it traps errors in the form
   }
 
+  //get Length Size of the Notifications
   getNotifications(){
     return this.notif.tenantReceive(this.id).subscribe({
       next:data => {
@@ -197,21 +194,23 @@ export class MyroomComponent implements OnInit {
     this.dialogMessage = false;
   }
 
-  captureScreen(){
-    
-  }
+  
 
   sendNotification(){
     this.submitted = true;
-    if (this.Form.invalid) {
+    if (!this.Form.value.issues || !this.Form.value.message) {
+      console.log("inputs needed");
+      
       return
     }
-    
+
     let info ={
       nortType: this.Form.value.issues,
       recipient: this.landId,
       message: this.Form.value.message,
     }
+    console.log(info);
+    
     this.notification.tenantSend(info, this.id).subscribe({
       next:data => {
         this.messages = data;
@@ -223,6 +222,27 @@ export class MyroomComponent implements OnInit {
       }
     })
     this.__loader.stop();
+  }
+
+  //Download MOA
+  public captureScreen() {
+    this.download =true
+    var data = document.getElementById("contentToConvert");
+    html2canvas(data!, {
+      useCORS: true,
+      // foreignObjectRendering: true,
+      allowTaint: true
+      }).then(canvas => {
+      // Few necessary setting options
+      var fileWidth = 180;
+      var fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const contentDataURL = canvas.toDataURL("image/png");
+
+      let pdf = new jspdf("p", "mm", "a4"); // A4 size page of PDF
+      var position = 10;
+      pdf.addImage(contentDataURL, "PNG", 10, position, fileWidth, fileHeight);
+      pdf.save("Lease Agreement.pdf"); // Generated PDF
+    });
   }
 }
   
