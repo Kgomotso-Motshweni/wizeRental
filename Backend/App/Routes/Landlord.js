@@ -41,7 +41,7 @@ router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 router.post('/acceptNewTenant', moa.CreateMOA)
 router.post('/rejetctNewTenant', moa.rejectRenant)
 router.patch('/updateRooms/:property_id', moa.updateRoomsAvailable) //Update rooms available
-
+router.patch('/increaseRooms/:property_id', moa.increaseRooms)
 
 router.get('/getRoom/:id', room.getRoomById); //Tenant room details
 

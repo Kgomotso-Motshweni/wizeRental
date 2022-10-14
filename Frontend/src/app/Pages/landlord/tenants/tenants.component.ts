@@ -40,7 +40,6 @@ export class TenantsComponent implements OnInit {
   mymoa:any;
   tenant_id:number = 0;
   moa:any;
-
   Form = new FormGroup({
     usertype: new FormControl(''),
   });
@@ -101,37 +100,47 @@ export class TenantsComponent implements OnInit {
   then use primeNG component for confrm delete and a dialog to confirm first before you can delete a 
   specific tenant
   */
-  deleteUser(details:Payment){
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to remove this: ' + details.full_name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.dash.deleteRentee(details).subscribe({
-          next:data =>{
-        
-            this.message = data
-            //Route back to the current page,  this helps in refreshing data
-            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
+  async deleteUser(details:Payment){
+    console.log(details);
+    //this.new =  details.p_room + 1;
+    let newRoms={
+      newAmount: details.p_room
+    }
+    
+    await this.dash.updateRoom(newRoms,details.property_id).subscribe();
+
+    // this.confirmationService.confirm({
+    //   message: 'Are you sure you want to remove this: ' + details.full_name + '?',
+    //   header: 'Confirm',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: () => {
+    //     this.dash.deleteRentee(details).subscribe({
+    //       next:data =>{
             
-            this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
+    //         this.message = data
+            
+    //         //update room number as tenant is deleted increase room number 
+           
+    //         //Route back to the current page,  this helps in refreshing data
+    //         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+    //         this.router.onSameUrlNavigation = "reload";
+    //         this.router.navigate(['/landlord/tenant'], {relativeTo: this.route})
         
-            this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
-          },error: err => {
-            //show the message if unable to add new data
-            this.message = err.error.message;
+    //         this.messageService.add({severity:'success', summary: 'Successful', detail: this.message.message, life: 3000})
+    //       },error: err => {
+    //         //show the message if unable to add new data
+    //         this.message = err.error.message;
          
-            this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000})  
-          }
-        });
-       },
-      reject: () => {
+    //         this.messageService.add({severity:'error', summary: 'Error', detail: this.message, life: 3000})  
+    //       }
+    //     });
+    //    },
+    //   reject: () => {
         
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
+    //     this.messageService.add({severity:'error', summary: 'Error', detail: 'You cancelled tenant delete', life: 3000})
       
-      }
-    })
+    //   }
+    // })
   }
 
   //Get all Landlord property addresses  

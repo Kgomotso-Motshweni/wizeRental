@@ -107,6 +107,9 @@ const updateRoomsAvailable = async(req, res ) => {
     const {roomsAvailable} = req.body
     try {
         //update room amount
+        console.log(roomsAvailable);
+        let newrooms = roomsAvailable - 1
+        console.log(newrooms);
         await client.query(`UPDATE landlordProperty set p_room = $2 WHERE property_id = $1`,
             [property_id, roomsAvailable],(err,results) => {
             if (err) {
@@ -125,6 +128,30 @@ const updateRoomsAvailable = async(req, res ) => {
     }
 }
 
+const increaseRooms = async (req, res) => {
+    const property_id = parseInt(req.params.property_id)
+    const {newAmount} = req.body
+    try {
+        //update room amount
+        let newrooms = newAmount + 1
+
+        await client.query(`UPDATE landlordProperty set p_room = $2 WHERE property_id = $1`,
+            [property_id, newrooms],(err,results) => {
+            if (err) {
+                //If payments are not available is not available
+                return res.status(500).json({
+                    message: "Unable to update rooms available",
+               });
+            }
+            return res.status(200).json(results.rows) //Return a status 200 if there is no error
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+        error: "Database error while creating post!", //Database connection error
+        });
+    }
+}
 
 const getSingedMOA= async (req, res) => {
     try {
@@ -156,5 +183,6 @@ module.exports = {
     updateSignature,
     updateRoomsAvailable,
     getSingedMOA,
-    rejectRenant
+    rejectRenant,
+    increaseRooms
 }

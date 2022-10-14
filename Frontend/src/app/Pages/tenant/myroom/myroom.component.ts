@@ -114,8 +114,6 @@ export class MyroomComponent implements OnInit {
     this.service.getMoa(this.id).subscribe({
       next:data => {
         this.moa = data 
-        console.log(data);
-
         this.__loader.stop();    
       }
     })
