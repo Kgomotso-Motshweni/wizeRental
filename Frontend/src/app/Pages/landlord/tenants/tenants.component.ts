@@ -7,6 +7,9 @@ import { FormControl, FormGroup, } from '@angular/forms';
 import { ConfirmationService, MessageService} from 'primeng/api';
 import { LandlordService } from 'src/app/Services/landlord.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { TenantsService } from 'src/app/Services/tenants.service';
+import jspdf  from "jspdf";
+import html2canvas from "html2canvas";
 
 @Component({
   selector: 'app-tenants',
@@ -33,6 +36,10 @@ export class TenantsComponent implements OnInit {
   code:any;
   attempts : number = 0;
   rente_id: any;
+  download: boolean = false;
+  mymoa:any;
+  tenant_id:number = 0;
+  moa:any;
 
   Form = new FormGroup({
     usertype: new FormControl(''),
@@ -43,7 +50,8 @@ export class TenantsComponent implements OnInit {
 
   constructor(private dash:DashboardService, private router:Router, private route: ActivatedRoute,
     private confirmationService: ConfirmationService, private messageService: MessageService,
-    private auth:AuthenticationService,private land:LandlordService, private __loader: NgxUiLoaderService) { }
+    private auth:AuthenticationService,private land:LandlordService, private __loader: NgxUiLoaderService,
+    private service:TenantsService,) { }
 
   ngOnInit(): void {
     /* Returns a decode token that has user information 
@@ -59,7 +67,7 @@ export class TenantsComponent implements OnInit {
       this.dash.rentees(this.id).subscribe((rentee:any)=>{
   
         this.rentees = rentee;
-        console.log(rentee);
+        //console.log(rentee);
         
         //console.log("Initial tenants",rentee)
         for (let x = 0; x < this.rentees.length; x++) {
@@ -86,7 +94,6 @@ export class TenantsComponent implements OnInit {
         this.__loader.stop();
       })
     }
-
   }
 
   /*
@@ -237,4 +244,38 @@ export class TenantsComponent implements OnInit {
       
     })
   }
+  
+  downloadMOA(details:any){
+    this.tenant_id = details.tenant_id
+    console.log(this.tenant_id);
+    this.service.getMoa(this.tenant_id).subscribe({
+      next:data => {
+        this.mymoa = data          
+        // this.mymoa = this.mymoa[0]
+        // this.moa = this.mymoa[0]
+        this.__loader.stop();    
+      }
+    })
+  }
+
+    //Download MOA
+  public captureScreen() {
+      this.download =true
+      var data = document.getElementById("contentToConvert");
+      html2canvas(data!, {
+        useCORS: true,
+        // foreignObjectRendering: true,
+        allowTaint: true
+        }).then(canvas => {
+        // Few necessary setting options
+        var fileWidth = 180;
+        var fileHeight = (canvas.height * fileWidth) / canvas.width;
+        const contentDataURL = canvas.toDataURL("image/png");
+  
+        let pdf = new jspdf("p", "mm", "a4"); // A4 size page of PDF
+        var position = 10;
+        pdf.addImage(contentDataURL, "PNG", 10, position, fileWidth, fileHeight);
+        pdf.save("Lease Agreement.pdf"); // Generated PDF
+      });
+    }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
 import { TenantsService } from 'src/app/Services/tenants.service';
@@ -7,7 +7,6 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{ fabric } from 'fabric';
-import { LandingPageService } from 'src/app/Services/landing-page.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import jspdf  from "jspdf";
 import html2canvas from "html2canvas";
@@ -31,7 +30,7 @@ export class MyroomComponent implements OnInit {
   SignMOA:boolean = false;
   visibleSidebar2:boolean = false;
   submitted: boolean = false;
-  mymoa:any;
+  moa:any;
   canvas:any;
   landId:number = 0;
   moa_id: any;
@@ -114,10 +113,9 @@ export class MyroomComponent implements OnInit {
   getMoaData(){
     this.service.getMoa(this.id).subscribe({
       next:data => {
-        this.mymoa = data 
+        this.moa = data 
         console.log(data);
-         
-        this.mymoa = this.mymoa[0]
+
         this.__loader.stop();    
       }
     })

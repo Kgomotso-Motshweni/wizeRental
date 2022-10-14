@@ -1,23 +1,21 @@
 @media screen and (min-width: 769px){
-    figure img{
-        width: 50vw;
-    }
-    // .headers{
-    //     margin-left: ;
-    // }
+
 }
 .card{
     border: none;
     box-shadow: none;
-}
 
-.img{
-    border-radius: 8px;
+}
+.view{
+   margin-top: 4%;
    
+}
+figure .img{
+    width: 50vw;
+    height: 80%;
 }
 .icons{
     text-align: center;
     justify-content: center;
     margin-top: -3%;
-
 }

@@ -29,13 +29,15 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule} from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
+import { GenericListFilterModule } from 'generic-list-filter';
+
 
 const routes: Routes = [
   {path:'tenant', component: TenantComponent, canActivate:[AuthGuard],
   children:[
     {path:'', component: HomeComponent},
     {path:'profile/:userid', component: ProfileComponent},
-    {path: 'viewproperty/:id', component: SinglePropertyComponent},
+    {path: 'single-property/:id', component: SinglePropertyComponent},
     {path:'myroom', component: MyroomComponent},
     {path:'', redirectTo:'/tenant/', pathMatch:'full'},
 
@@ -55,6 +57,7 @@ const routes: Routes = [
   imports: [
     Ng2SearchPipeModule,
     BadgeModule,
+    GenericListFilterModule,
     //loader
     NgxUiLoaderModule.forRoot({
 			overlayColor: "rgba(0,0,0,0.85)",

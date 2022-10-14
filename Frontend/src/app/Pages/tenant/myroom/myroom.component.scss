@@ -88,6 +88,7 @@ footer{
     text-align: center;
     display:block;
 } 
+
 .logo{
     margin-bottom: 5%;
 }
@@ -101,8 +102,17 @@ footer{
     margin-top: -1%;
     color: black;
 }
+img{
+    height: 150px;
+    width: 300px;
+}
+.agreements{
+    height: 150px;
+    width: 300px;
+    margin-top: 6%;
+}
+
 .agreementDate{
-    margin-top: 8%;
     margin-left: 10%;
 }
 .agreements{
@@ -110,6 +120,4 @@ footer{
     background-color: inherit;
     outline: 0;
 }
-.dateSigned{
-    margin-top: 20%;
-}
+
