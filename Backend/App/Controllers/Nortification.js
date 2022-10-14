@@ -79,7 +79,7 @@ const landlordReceive = async(req, res ) => {
             INNER JOIN rentees r ON t.tenant_id = r.tenant_id
             INNER JOIN landlordproperty p ON p.property_id = r.property_id
             WHERE t.landlord_id = $1`
-                    ,[id],(error, results) => {
+        ,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
                         message: "Unable to log issues to a specific landlord"
