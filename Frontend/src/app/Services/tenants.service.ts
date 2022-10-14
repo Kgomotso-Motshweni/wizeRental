@@ -41,8 +41,14 @@ export class TenantsService {
     return this.http.patch(`${this.baseUrl}update/${id}`, user)
   }
 
+  //Get Unsigned MOA
   getMoa(id:any){
     return this.http.get(`${this.baseUrl}getMOA/${id}`)
+  }
+
+  //Get Signed MOA
+  getSingedMOA(id:any){
+    return this.http.get(`getSignedMOA`)
   }
 
   updateSignature(body:any){
@@ -52,6 +58,8 @@ export class TenantsService {
   getRoom(id:any){
     return this.http.get(`${this.baseUrl}getRoom/${id}`)
   }
+
+
   
   status(stats:any){
     if (stats) {

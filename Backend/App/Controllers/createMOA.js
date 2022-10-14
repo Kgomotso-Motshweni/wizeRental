@@ -35,7 +35,7 @@ const CreateMOA = async(req, res ) => {
 const getMOA= async (req, res) => {
     try {
         const id = parseInt(req.params.id)
-        await client.query(`select u.firstname, u.lastname, l.p_name, l.p_address, l.p_city, l.p_town, l.p_zip_code,r.full_name, r.r_update_time, r.rent, m.moa,m.create_time, m.payStartDate, m.payendDate, m.agreementType 
+        await client.query(`select u.firstname, u.lastname, l.p_name, l.p_address, l.p_city, l.p_town, l.p_zip_code,r.full_name, r.r_update_time, r.rent, m.moa,m.create_time, m.payStartDate, m.payendDate, m.agreementType, m.signature
         from users u
         INNER JOIN landlordProperty l ON u.userid = l.landlord_id
         INNER JOIN Rentees r ON l.property_id = r.property_id
@@ -54,7 +54,6 @@ const getMOA= async (req, res) => {
       });
     }
 };
-
 
 
 // Update the signature and update the "signed" in the rentees table
@@ -104,9 +103,35 @@ const updateRoomsAvailable = async(req, res ) => {
     }
 }
 
+
+const getSingedMOA= async (req, res) => {
+    try {
+        const id = parseInt(req.params.id)
+        await client.query(`
+        select u.firstname, u.lastname, l.p_name, l.p_address, l.p_city, l.p_town, l.p_zip_code,r.full_name, r.r_update_time, r.rent, m.moa,m.create_time, m.payStartDate, m.payendDate, m.agreementType, m.signature 
+        from users u
+        INNER JOIN landlordProperty l ON u.userid = l.landlord_id
+        INNER JOIN Rentees r ON l.property_id = r.property_id
+        INNER JOIN MOA m ON r.rentee_id = m.rentee_id
+        WHERE r.tenant_id = $1`,[id],(err,result) => {
+            if (err) {
+                return res.status(500).json({
+                  message: "Database error",
+                });
+            }
+            return res.status(200).send(result.rows)
+        });
+    } catch (err) {
+      res.status(500).json({
+        error: "Database error while getting the Moa", //Database connection error
+      });
+    }
+};
+
 module.exports = {
     CreateMOA,
     getMOA,
     updateSignature,
-    updateRoomsAvailable
+    updateRoomsAvailable,
+    getSingedMOA
 }
