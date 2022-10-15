@@ -31,6 +31,7 @@ export class SinglePropertyComponent implements OnInit {
    
   });
 
+  disable:boolean = false;
   dob: Date = new Date();
   appForm: Pending = new Pending
   formData = new FormData();
@@ -66,7 +67,7 @@ export class SinglePropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.__loader.start();
+ 
     this.token = this.auth.getDecodedAccessToken(localStorage.getItem('access_token'))
     let userid = this.token.regData[0].userid
     this.id = userid;
@@ -103,10 +104,20 @@ export class SinglePropertyComponent implements OnInit {
  
 // get the property details by property id
   getPropertyByID(){
+    this.__loader.start();
     this.service.getPropertiesByID(this.propertyID).subscribe({
       next: (data: any) => {
         this.property = data;
-        this.data = this.property[0]
+        this.data = this.property[0]  
+        if (this.data.p_room > 0) {
+          this.disable = false
+          
+        } else {
+          this.disable = true
+          this.messageService.add({
+            severity:'error', summary: 'Error', detail: "Only apply to available properties", life: 6000
+          });
+        }    
         this.getRoomImages(this.data.property_id)
       }
     })
@@ -114,6 +125,7 @@ export class SinglePropertyComponent implements OnInit {
 
    // getting images for the enterior part of the accomodation
   getRoomImages(userID:number){
+
     this.service.getRoomsImages(userID).subscribe({
       next: (data: any) => {
         this.tenantProperty = data;

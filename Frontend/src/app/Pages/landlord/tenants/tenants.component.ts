@@ -73,7 +73,7 @@ export class TenantsComponent implements OnInit {
       this.dash.rentees(this.id).subscribe((rentee:any)=>{
   
         this.rentees = rentee;
-        //console.log(rentee);
+        console.log(rentee);
         
         //console.log("Initial tenants",rentee)
         for (let x = 0; x < this.rentees.length; x++) {
@@ -107,6 +107,7 @@ export class TenantsComponent implements OnInit {
   then use primeNG component for confrm delete and a dialog to confirm first before you can delete a 
   specific tenant
   */
+
   async deleteUser(details:Payment){
     console.log(details);
     //this.new =  details.p_room + 1;
@@ -174,7 +175,7 @@ export class TenantsComponent implements OnInit {
       }
  
       this.land.rentees(userData).subscribe((rentee:any)=>{
-        //console.log(rentee)
+        console.log(rentee)
         this.rentees = rentee;
 
         for (let x = 0; x < this.rentees.length; x++) {
@@ -202,15 +203,12 @@ export class TenantsComponent implements OnInit {
      
       })
     }else{
-
       let userData = {
         id: this.id,
         p_name: this.Form.value.usertype
       }
-
-   
       this.land.rentees(userData).subscribe((rentee:any)=>{
-      // console.log(rentee)
+      console.log(rentee)
 
         this.rentees = rentee;
         this.totAmnt  = 0;

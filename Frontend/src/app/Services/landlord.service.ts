@@ -63,4 +63,8 @@ export class LandlordService {
   UpdateRooms(user:any, id:any){
     return this.http.patch(`${this.baseUrl}updateRooms/${id}`, user);
   }
+
+  getRoomsNumber(totalRooms:number){
+  
+  }
 }

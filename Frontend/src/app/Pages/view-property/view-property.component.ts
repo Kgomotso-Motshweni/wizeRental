@@ -25,8 +25,6 @@ export class ViewPropertyComponent implements OnInit {
     private __loader: NgxUiLoaderService
   ) { }
 
-
-
   ngOnInit(): void {
     this.propertyID =  this.activeRoute.snapshot.params['id'] //getting the current snapshot of this route at a particular moment in time.  
     this.getPropertyByID()

@@ -96,7 +96,6 @@ export class MyroomComponent implements OnInit {
       next: (data: any) => {
         this.property = data;
         this.signed = this.property[0].moa_status
-        console.log(data);
         
         if(this.property[0].status == 'accepted'){
           this.condition = 'accepted'
@@ -201,9 +200,7 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    if (!this.Form.value.issues || !this.Form.value.message) {
-      console.log("inputs needed");
-      
+    if (!this.Form.value.issues || !this.Form.value.message) {   
       return
     }
 
