@@ -91,6 +91,8 @@ footer{
 
 .logo{
     margin-bottom: 5%;
+    text-decoration: underline;
+    display: inline;
 }
 .p{
     font-size: medium;
@@ -121,3 +123,6 @@ img{
     outline: 0;
 }
 
+.p{
+    text-decoration: underline;
+}
