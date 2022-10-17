@@ -78,7 +78,8 @@ const landlordReceive = async(req, res ) => {
             FROM tenanttolandlordnortifications t
             INNER JOIN rentees r ON t.tenant_id = r.tenant_id
             INNER JOIN landlordproperty p ON p.property_id = r.property_id
-            WHERE t.landlord_id = $1`
+            WHERE t.landlord_id = $1 
+            ORDER BY create_time DESC;`
         ,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
@@ -103,6 +104,7 @@ const tenantReceive = async(req, res ) => {
         JOIN rentees r ON l.tenant_id = r.tenant_id
         JOIN landlordproperty p ON p.property_id = r.property_id
         WHERE l.tenant_id = $1
+        ORDER BY created_at DESC
         `,[id],(error, results) => {
                 if(error){
                     return res.status(400).json({
