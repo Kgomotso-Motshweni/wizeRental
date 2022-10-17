@@ -1,21 +1,38 @@
 <!-- Navbar -->
 <app-nav-bar></app-nav-bar>
-
+<div style="margin-top: 4%;">
+    <div class="card landing bg-base-100 shadow-xl image-full">
+        <figure><img src="../../../assets/images/maximillian-conacher-sPpe2D7VbpM-unsplash.jpg" alt="Shoes" /></figure>
+        <div class="bottom-left">
+            <i href="#down" class="pi pi-arrow-down bc floating" style="cursor:pointer;" onClick="document.getElementById('down').scrollIntoView();" style="font-size: 5rem"></i>
+        </div>
+        <div class="card-body ">
+            <div class="flex justify-end ">
+                <img class="logo" src="../../../../assets/images/unknown.png" style="width:300px;">
+            </div>
+            <div class="flex justify-end bottom-right">WizeRentalz is here to help find you <br> 
+                accommodation in a <br> region you want at the
+                price you can afford
+              </div> 
+          </div>
+    </div>
+</div>
 <!-- Landing page picture -->
+<!--
 <div class="bac" style="margin-top: 4%;">
     <img src="../../../assets/images/maximillian-conacher-sPpe2D7VbpM-unsplash.jpg" class="topp" alt="Snow">
     <div class="bottom-left">
         <i href="#down" class="pi pi-arrow-down bc curs" onClick="document.getElementById('down').scrollIntoView();" style="font-size: 5rem"></i>
     </div>
-    <!-- <div class="name">
+     <div class="name">
     <img class="logo" src="../../../../assets/images/unknown.png">
-    <div class="bottom-right">Wize rentals is here to find you <br>a 
+    <div class="bottom-right">WizeRentalz is here. to find you <br>a 
       accommodation in a <br> region you want at the
       price you can afford
     </div> 
-    </div>-->
+    </div>
 
-</div>
+</div>-->
 
 <span id="down"></span>
 <!-- toggle btn, search and filter -->
@@ -34,6 +51,8 @@
             <div class="space1">
             </div>
         <br>
+
+        <!-- filter modal-->
         <div class="filter">
             <app-filter
                 [list]="filterList" 
@@ -45,12 +64,12 @@
 </div>
 <!--till here-->
 
-<!-- filter modal-->
-
 <div  class=" grid justify-center ml-2 pt-5 justify-center md:prop-cols-1 rounded"  >
     <div class="grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 gap-8 justify-center" style="width: 100%;">
         <div *ngFor="let i of tenantProperty| filter:searchItem ; let m = index">
             <div class="card w-96 bg-base-100 shadow-xl col-xl-10 col-md-10 col-sm-10" >
+                <span *ngIf="i.p_room > 0" class="hovertext bg-green-500">Available  </span>
+                <span *ngIf="i.p_room < 1" class="hovertext bg-red-500">Unavailable  </span>
                 <figure><img class="img" routerLink='/view-property/{{i.property_id}}' src="{{i.house_image}}" alt="Shoes" /></figure>
                 <div class="card-body">
                     <h6 class="acc">{{i.p_name}} accommodations</h6>

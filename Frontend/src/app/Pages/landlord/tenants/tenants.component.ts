@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild,OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from 'src/app/Services/dashboard.service';
 import { Payment } from '../../../Interfaces/payment';
@@ -8,8 +8,12 @@ import { ConfirmationService, MessageService} from 'primeng/api';
 import { LandlordService } from 'src/app/Services/landlord.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { TenantsService } from 'src/app/Services/tenants.service';
-import jspdf  from "jspdf";
-import html2canvas from "html2canvas";
+
+import * as pdfMake from "pdfmake/build/pdfmake";  
+import * as pdfFonts from "pdfmake/build/vfs_fonts";  
+declare var require: any;
+const htmlToPdfmake = require("html-to-pdfmake");
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-tenants',
@@ -17,6 +21,9 @@ import html2canvas from "html2canvas";
   styleUrls: ['./tenants.component.scss']
 })
 export class TenantsComponent implements OnInit {
+  //Download MOA
+  @ViewChild('pdfTable')
+  pdfTable!: ElementRef;
 
   countTenants : number =0;
   rentees: Array<Payment> = [];
@@ -40,7 +47,6 @@ export class TenantsComponent implements OnInit {
   mymoa:any;
   tenant_id:number = 0;
   moa:any;
-
   Form = new FormGroup({
     usertype: new FormControl(''),
   });
@@ -67,7 +73,7 @@ export class TenantsComponent implements OnInit {
       this.dash.rentees(this.id).subscribe((rentee:any)=>{
   
         this.rentees = rentee;
-        //console.log(rentee);
+        console.log(rentee);
         
         //console.log("Initial tenants",rentee)
         for (let x = 0; x < this.rentees.length; x++) {
@@ -101,7 +107,15 @@ export class TenantsComponent implements OnInit {
   then use primeNG component for confrm delete and a dialog to confirm first before you can delete a 
   specific tenant
   */
-  deleteUser(details:Payment){
+
+  async deleteUser(details:Payment){
+    console.log(details);
+    //this.new =  details.p_room + 1;
+    let newRoms={
+      newAmount: details.p_room
+    }
+
+    await this.dash.updateRoom(newRoms,details.property_id).subscribe();
     this.confirmationService.confirm({
       message: 'Are you sure you want to remove this: ' + details.full_name + '?',
       header: 'Confirm',
@@ -109,8 +123,11 @@ export class TenantsComponent implements OnInit {
       accept: () => {
         this.dash.deleteRentee(details).subscribe({
           next:data =>{
-        
+            
             this.message = data
+            
+            //update room number as tenant is deleted increase room number 
+           
             //Route back to the current page,  this helps in refreshing data
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
@@ -158,7 +175,7 @@ export class TenantsComponent implements OnInit {
       }
  
       this.land.rentees(userData).subscribe((rentee:any)=>{
-        //console.log(rentee)
+        console.log(rentee)
         this.rentees = rentee;
 
         for (let x = 0; x < this.rentees.length; x++) {
@@ -186,15 +203,12 @@ export class TenantsComponent implements OnInit {
      
       })
     }else{
-
       let userData = {
         id: this.id,
         p_name: this.Form.value.usertype
       }
-
-   
       this.land.rentees(userData).subscribe((rentee:any)=>{
-      // console.log(rentee)
+      console.log(rentee)
 
         this.rentees = rentee;
         this.totAmnt  = 0;
@@ -245,37 +259,28 @@ export class TenantsComponent implements OnInit {
     })
   }
   
-  downloadMOA(details:any){
+  public captureScreen(details:any){
     this.tenant_id = details.tenant_id
     console.log(this.tenant_id);
     this.service.getMoa(this.tenant_id).subscribe({
       next:data => {
-        this.mymoa = data          
-        // this.mymoa = this.mymoa[0]
-        // this.moa = this.mymoa[0]
+        this.mymoa = data 
+        const pdfTable = this.pdfTable.nativeElement;
+        var html = htmlToPdfmake(pdfTable.innerHTML);
+        const documentDefinition = { content: html };
+        pdfMake.createPdf(documentDefinition).download();   
+
         this.__loader.stop();    
       }
     })
   }
 
-    //Download MOA
-  public captureScreen() {
-      this.download =true
-      var data = document.getElementById("contentToConvert");
-      html2canvas(data!, {
-        useCORS: true,
-        // foreignObjectRendering: true,
-        allowTaint: true
-        }).then(canvas => {
-        // Few necessary setting options
-        var fileWidth = 180;
-        var fileHeight = (canvas.height * fileWidth) / canvas.width;
-        const contentDataURL = canvas.toDataURL("image/png");
-  
-        let pdf = new jspdf("p", "mm", "a4"); // A4 size page of PDF
-        var position = 10;
-        pdf.addImage(contentDataURL, "PNG", 10, position, fileWidth, fileHeight);
-        pdf.save("Lease Agreement.pdf"); // Generated PDF
-      });
-    }
+
+  //Donwload MOA
+  public qcaptureScreen() {
+    const pdfTable = this.pdfTable.nativeElement;
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).download();   
+  }
 }

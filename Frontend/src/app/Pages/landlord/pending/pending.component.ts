@@ -87,13 +87,8 @@ export class PendingComponent implements OnInit {
       next:data  => {
         this.pending = data;          
         this.image = this.pending[0].id_doc
-          
-          //update rooms availble for that property being applied too
-        this.roomNumber = this.pending[0].p_room
-        console.log( this.roomNumber);
-          
-        this.newRoomsAvailable =this.roomNumber - 1;
-        console.log(this.newRoomsAvailable );
+    
+        //console.log(this.newRoomsAvailable );
           
         this.number = this.pending.length;
          
@@ -169,7 +164,35 @@ export class PendingComponent implements OnInit {
 
   }
 
-  onSubmit(){
+rejectTenant(){
+  this.submitted = true
+
+  let user = {
+    tenant_id: this.pendingClients.tenant_id,
+    property_id: this.pendingClients.property_id,
+    full_name: this.pendingClients.full_name,
+    unit: this.pendingClients.unit,
+    rent: this.pendingClients.amount,
+    paymentstatus: false,
+    moa_status: "notsigned",
+    status: "rejected"
+  }
+  
+  this.__loader.start();
+  this.land.reject(user).subscribe({
+    next:data => {
+
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+
+      this.router.navigate(['/landlord/pending'])
+      this.__loader.stop();
+      this.messageService.add({severity:'error', summary: 'Error', detail: "New Tenant Rejected", life: 3000})
+    }
+  })
+}
+
+  async onSubmit(){
     this.submitted = true
     
     //Validate if the modal is empty do not submit
@@ -185,6 +208,7 @@ export class PendingComponent implements OnInit {
         rent: this.pendingClients.amount,
         paymentstatus: false,
         moa_status: "notsigned",
+        status: "accepted",
         agreeStartDate: this.pendingClients.agreementStart,
         agreeEndDate: this.pendingClients.agreementEnd,
         payStartDate: this.pendingClients.paymentStart,
@@ -193,18 +217,16 @@ export class PendingComponent implements OnInit {
       }
       
       let roomsNumber = {
-        roomsAvailable: this.newRoomsAvailable
+        roomsAvailable: this.pendingClients.p_room
       }
       this.__loader.start();
+       //subscribe to update rooms amount
+      await this.land.UpdateRooms(roomsNumber, this.pendingClients.property_id).subscribe()
       this.land.createMOA(user).subscribe({
         next:data => {
 
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";
-
-          //subscribe to update rooms amount
-          this.land.UpdateRooms(roomsNumber, this.pendingClients.property_id).subscribe()
-          
           this.router.navigate(['/landlord/pending'])
           this.__loader.stop();
           this.messageService.add({severity:'success', summary: 'Successful', detail: "Successfuly Accepted", life: 3000})

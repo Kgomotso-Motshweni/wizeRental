@@ -11,6 +11,7 @@ const delete_rentee = require("../Controllers/delete_rentee");
 const update_payment = require("../Controllers/update_payment");
 const moa = require("../Controllers/createMOA")
 const room = require('../Controllers/getPropertyInfo')
+const softDelete = require('../Controllers/softDelete')
 //Add Property Details
 router.post('/add_property/:id', multiplePictures,landlord.addProperty);
 router.post('/add_rooms/:property_id', upload.array("image", 5), landlord.addRoomImages);
@@ -22,6 +23,7 @@ router.get('/getproperties/:id',get_property);
 
 //Delete, update and get Rentees
 router.delete('/deleteRentee/:id',delete_rentee)
+router.post('/softDelete/:id', softDelete)
 router.get('/getRentees/:id',get_rentees)
 router.put('/updatePayment',update_payment)
 router.get('/getLandAddress/:id',get_tenants.getLandlordRes);
@@ -37,7 +39,9 @@ router.get('/getOnePending/:applicant_id', pending.getOnePendingTenants);
 
 //Create MOA for a tenant
 router.post('/acceptNewTenant', moa.CreateMOA)
+router.post('/rejetctNewTenant', moa.rejectRenant)
 router.patch('/updateRooms/:property_id', moa.updateRoomsAvailable) //Update rooms available
+router.patch('/increaseRooms/:property_id', moa.increaseRooms)
 
 router.get('/getRoom/:id', room.getRoomById); //Tenant room details
 

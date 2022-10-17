@@ -54,9 +54,17 @@ export class LandlordService {
     return this.http.post(`${this.baseUrl}acceptNewTenant`, users)
   }
 
+  //Reject Tenant
+  reject(users:any){
+    return this.http.post(`${this.baseUrl}rejetctNewTenant`, users)
+  }
 
 
   UpdateRooms(user:any, id:any){
     return this.http.patch(`${this.baseUrl}updateRooms/${id}`, user);
+  }
+
+  getRoomsNumber(totalRooms:number){
+  
   }
 }

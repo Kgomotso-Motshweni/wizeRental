@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { NortificationsService } from 'src/app/Services/nortifications.service';
@@ -8,8 +8,13 @@ import { MessageService } from 'primeng/api';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{ fabric } from 'fabric';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import jspdf  from "jspdf";
-import html2canvas from "html2canvas";
+
+import * as pdfMake from "pdfmake/build/pdfmake";  
+import * as pdfFonts from "pdfmake/build/vfs_fonts";  
+declare var require: any;
+const htmlToPdfmake = require("html-to-pdfmake");
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+//import html2canvas from "html2canvas";
 
 @Component({
   selector: 'app-myroom',
@@ -19,6 +24,9 @@ import html2canvas from "html2canvas";
 })
 
 export class MyroomComponent implements OnInit {
+  //Download MOA
+  @ViewChild('pdfTable')
+  pdfTable!: ElementRef;
 
   property:any;
   emptyRoom: number = 0;
@@ -69,7 +77,6 @@ export class MyroomComponent implements OnInit {
     this.id = this.token.regData[0].userid
     this.getNotifications();
     this.getMoaData();
-
     this.Form = this.formBuilder.group({
       issues: ['', Validators.required],
       message: ['', Validators.required],
@@ -89,7 +96,6 @@ export class MyroomComponent implements OnInit {
       next: (data: any) => {
         this.property = data;
         this.signed = this.property[0].moa_status
-        console.log(data);
         
         if(this.property[0].status == 'accepted'){
           this.condition = 'accepted'
@@ -114,8 +120,6 @@ export class MyroomComponent implements OnInit {
     this.service.getMoa(this.id).subscribe({
       next:data => {
         this.moa = data 
-        console.log(data);
-
         this.__loader.stop();    
       }
     })
@@ -196,9 +200,7 @@ export class MyroomComponent implements OnInit {
 
   sendNotification(){
     this.submitted = true;
-    if (!this.Form.value.issues || !this.Form.value.message) {
-      console.log("inputs needed");
-      
+    if (!this.Form.value.issues || !this.Form.value.message) {   
       return
     }
 
@@ -207,8 +209,7 @@ export class MyroomComponent implements OnInit {
       recipient: this.landId,
       message: this.Form.value.message,
     }
-    console.log(info);
-    
+  
     this.notification.tenantSend(info, this.id).subscribe({
       next:data => {
         this.messages = data;
@@ -222,26 +223,15 @@ export class MyroomComponent implements OnInit {
     this.__loader.stop();
   }
 
-  //Download MOA
-  public captureScreen() {
-    this.download =true
-    var data = document.getElementById("contentToConvert");
-    html2canvas(data!, {
-      useCORS: true,
-      // foreignObjectRendering: true,
-      allowTaint: true
-      }).then(canvas => {
-      // Few necessary setting options
-      var fileWidth = 180;
-      var fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const contentDataURL = canvas.toDataURL("image/png");
 
-      let pdf = new jspdf("p", "mm", "a4"); // A4 size page of PDF
-      var position = 10;
-      pdf.addImage(contentDataURL, "PNG", 10, position, fileWidth, fileHeight);
-      pdf.save("Lease Agreement.pdf"); // Generated PDF
-    });
+  //Donwload MOA
+  public captureScreen() {
+    const pdfTable = this.pdfTable.nativeElement;
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).download();   
   }
+
 }
   
  

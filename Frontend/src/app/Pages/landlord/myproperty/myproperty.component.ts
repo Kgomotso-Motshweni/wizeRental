@@ -17,6 +17,7 @@ export class MypropertyComponent implements OnInit {
   myData:any;
   token:any = '';
   id: number = 0;
+  count: number =0;
   number:number = 0;
 
   constructor(
@@ -38,8 +39,14 @@ export class MypropertyComponent implements OnInit {
   getProperty(id:any){
     return this.land.getMyProperty(id).subscribe({
       next:data => {
-       
+        console.log(data);
+        
         this.myData = data
+        this.myData.forEach((element:any) => {
+          this.count = this.count + element.p_room
+        });
+        this.land.getRoomsNumber(this.count)
+        
         this.number = this.myData.length
         this.__loader.stop();
       }

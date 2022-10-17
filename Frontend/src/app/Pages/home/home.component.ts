@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LandingPageService } from 'src/app/Services/landing-page.service';
+import { TenantsService } from 'src/app/Services/tenants.service';
 
 @Component({
   selector: 'app-home',
@@ -10,13 +11,12 @@ import { LandingPageService } from 'src/app/Services/landing-page.service';
 export class HomeComponent implements OnInit {
 
   searchItem:any;
-  tenantProperty:any  
+  tenantProperty:any;
   stateOptions: any;
-
-  // filter
-  name:any
-  town:any
-  accommodationType:any
+  condition:any;
+  name:any;
+  town:any;
+  accommodationType:any;
   copyData:any;
   filterproperty:any;
   filtertown:any;
@@ -25,9 +25,10 @@ export class HomeComponent implements OnInit {
   property: Array<any> = [];
   nameList: Array<any> = [];
   filteringDataList:Array<any>=[]
+  stats:any
 
-
-  constructor(private service: LandingPageService, private __loader: NgxUiLoaderService) { }
+  constructor(private service: LandingPageService, private __loader: NgxUiLoaderService,
+    private tenant:TenantsService) { }
 
 
   // function for getting all the properties 
@@ -37,17 +38,22 @@ export class HomeComponent implements OnInit {
     this.FilterTown();
     this.FilterProperty()
     this.Filtername()
-
-
   }
 
   getProperty(){
     this.service.getProperties().subscribe({
       next: (data: any) => {
-          this.tenantProperty = data;
-           //Making a duplicate
+        this.tenantProperty = data;
+          //Making a duplicate
+          this.tenantProperty.forEach((element:any) => {
+          this.stats = element.p_room;
+       
+          console.log(this.stats);
+          
+        });
+        console.log(this.condition); 
         this.copyData = this.tenantProperty
-          this.__loader.stop();
+        this.__loader.stop();
         }
       })
   }

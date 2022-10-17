@@ -1,12 +1,12 @@
 const client = require("../Config/db.config");
 
 const CreateMOA = async(req, res ) => {
-    const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType } = req.body
+    const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status,status, agreeStartDate, agreeEndDate, payStartDate, payendDate, agreementType,  } = req.body
 
     try{
         //Insert user pending tenant into rentees table
-        const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status ) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status ])
+        const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status,status ) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ])
         const user = data.rows[0].rentee_id;
 
         //Insert moa details using rentees_id returned from the above 
@@ -32,6 +32,28 @@ const CreateMOA = async(req, res ) => {
     } 
 }
 
+const rejectRenant = async (req, res) => {
+    const {tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status,status } = req.body
+
+    try{
+        //Insert user pending tenant into rentees table
+        const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ], (error) => {
+        if(error){
+            return res.status(400).json({
+                message: "Unable to reject tenant"
+            });  
+        }
+        return res.status(400).json({
+            message: "tenant rejected"
+        });
+    })
+    }catch (err) {
+        res.status(500).json({
+            error: "Database error when viewing pending tenants", //Database connection error
+        });
+    } 
+}
 const getMOA= async (req, res) => {
     try {
         const id = parseInt(req.params.id)
@@ -85,6 +107,9 @@ const updateRoomsAvailable = async(req, res ) => {
     const {roomsAvailable} = req.body
     try {
         //update room amount
+        console.log(roomsAvailable);
+        let newrooms = roomsAvailable - 1
+        console.log(newrooms);
         await client.query(`UPDATE landlordProperty set p_room = $2 WHERE property_id = $1`,
             [property_id, roomsAvailable],(err,results) => {
             if (err) {
@@ -103,6 +128,30 @@ const updateRoomsAvailable = async(req, res ) => {
     }
 }
 
+const increaseRooms = async (req, res) => {
+    const property_id = parseInt(req.params.property_id)
+    const {newAmount} = req.body
+    try {
+        //update room amount
+        let newrooms = newAmount + 1
+
+        await client.query(`UPDATE landlordProperty set p_room = $2 WHERE property_id = $1`,
+            [property_id, newrooms],(err,results) => {
+            if (err) {
+                //If payments are not available is not available
+                return res.status(500).json({
+                    message: "Unable to update rooms available",
+               });
+            }
+            return res.status(200).json(results.rows) //Return a status 200 if there is no error
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+        error: "Database error while creating post!", //Database connection error
+        });
+    }
+}
 
 const getSingedMOA= async (req, res) => {
     try {
@@ -133,5 +182,7 @@ module.exports = {
     getMOA,
     updateSignature,
     updateRoomsAvailable,
-    getSingedMOA
+    getSingedMOA,
+    rejectRenant,
+    increaseRooms
 }

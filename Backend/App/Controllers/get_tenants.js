@@ -28,14 +28,15 @@ const tenantsFromSpecifiAddress = async(req, res) => {
     const {id, p_name} = req.body
     try{
       //Return All Tenants per specific accommodation
-      client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status,p.p_room, r.create_time,r.rent, r.r_update_time, p.p_room
+      client.query(`SELECT r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status, sum(p.p_room) as p_room, r.create_time,r.rent, r.r_update_time, p.p_room
         FROM rentees r
         INNER JOIN MOA a ON a.rentee_id = r.rentee_id
         INNER JOIN landlordProperty p ON r.property_id = p.property_id
         INNER JOIN users u ON p.landlord_id = u.userid
         WHERE r.moa_status = 'signed'
         AND u.userid = $1
-        AND p.p_name = $2`, [id, p_name ],(error, results) => {
+        AND p.p_name = $2
+        group by(r.rentee_id, r.tenant_id, r.property_id, r.full_name, p.p_address, r.unit,  a.agreeStartDate, a.agreeEndDate, r.paymentstatus, r.moa_status, r.create_time,r.rent, r.r_update_time, p.p_room)`, [id, p_name ],(error, results) => {
         if(error){
           return res.status(400).json({
             message: "Unable to retrieve all rentees "
