@@ -138,7 +138,7 @@ export class SinglePropertyComponent implements OnInit {
   // submit when the details are true/when form is not blank
   onSubmit():void{
     this.submitted = true;
-    this.__loader.start();
+
     if(this.Form.invalid){
       return
     }
@@ -165,14 +165,14 @@ export class SinglePropertyComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
         this.router.onSameUrlNavigation = "reload";
         this.displayApplicationForm = false;
-        this.__loader.stop();
+
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
         });
 
       },
       error: (err) =>{
-        this.__loader.stop();
+   
         this.messageService.add({
           key: 'tc', severity:'error', summary: 'Error', detail: "Application Failed", life: 3000
         }); 
