@@ -95,6 +95,7 @@ const landlordReceive = async(req, res ) => {
     }
 }
 
+
 //TENANT RECEIVE NOTIFICATION FROM LANDLORD 
 const tenantReceive = async(req, res ) => {
     const id = parseInt(req.params.id);
