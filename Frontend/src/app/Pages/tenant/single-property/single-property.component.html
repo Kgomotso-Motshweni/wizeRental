@@ -4,13 +4,16 @@
 <div style="margin-bottom:10%;"></div>
 <!-- view property pictures and deatils -->
 <div class="container mt-20 " >
-    <div class="card lg:card-side bg-base-100 shadow-xl" *ngFor="let data of property " >
+    <div class="card lg:card-side bg-base-100 shadow-xl" *ngFor="let i of property " >
         <figure><img class="img" [src]="data.house_image" alt="Shoes"/></figure>
         <div class="card-body">
             <div class="flex flex-row headers">
-                <h3 class="card-title">Accommodation infomations</h3>
+                <h3 class="card-title">{{i.p_name}} </h3>
             </div>
-            <h3 class="card-title">R {{data.p_price}} /Month</h3>
+            <div class="flex">
+                <h3 class="card-title">R {{i.p_price}} /Month</h3>  
+                <label (click)="imagesPreview(i)" style="text-align: center; margin-left: 20%; font-size: larger; cursor: pointer;" for="my-modal-4"><i class="fa-regular fa-file-pdf " ></i></label>
+            </div>
             <h6>{{data.p_address}}</h6>
             <h6>{{data.p_city}} {{data.p_town}}, {{data.p_zip_code}}</h6>
             <br>
@@ -180,3 +183,10 @@
         </div>
     </form>
 </p-dialog>
+
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <figure><img class="img" [src]="previewTitleDeep" alt="Shoes"/></figure>
+</label>
+</label>

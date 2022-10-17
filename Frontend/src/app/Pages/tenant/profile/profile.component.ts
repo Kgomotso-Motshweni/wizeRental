@@ -84,6 +84,8 @@ export class ProfileComponent implements OnInit {
     this.formData.append('cellno', this.tenantInfor.cellno)
     this.formData.append('image', this.file)
 
+    console.log(this.tenantInfor.cellno);
+    
     let id = this.tenantInfor.userid;
 
     //Update user profile information
@@ -93,9 +95,8 @@ export class ProfileComponent implements OnInit {
         this.message = data
 
         //Reload the Page
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;         
-        this.router.onSameUrlNavigation = 'reload'; 
-    
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+        this.router.onSameUrlNavigation = "reload";
 
         //Show Successful Message ifn there is no error
         this.messageService.add({

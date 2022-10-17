@@ -97,11 +97,13 @@
                     <li>5. Have no visitors stay for no more than 3 weeks.</li>
                 </ul>
                 <p>Tenants hereby acknowledge that they have read this Agreement, understand it agree to it and have been given a copy.</p><br>
-
+            </div>
+        </div> 
                 <p>Sign here:</p><br>
                 <canvas id="canvas"  width="300px">
                     <input type="text" placeholder="Type here" class="input w-full max-w-xs" />
                 </canvas>
+                
                 <div class="flex form-group justify-start "> 
                     <button type="button" (click)="drawClear()" class="text-white btn-error focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Clear signature</button>
                 </div>
@@ -109,13 +111,16 @@
                 <div class="flex form-group justify-end mb-2"> 
                     <div class="grid gap-6 md:grid-cols-3 grid-cols-2">
                         <label type="btn" for="my-modal-4" class="text-white ml-2 btn-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Close</label>
-                        <label type="btn" for="my-modal-4" (click)="save(mymoa.moa)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</label>
+                        <label type="btn" for="my-modal-4" (click)="save(moa)" class="text-white btn-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:btn-primary dark:hover:btn-primary dark:focus:ring-blue-800">Send</label>
                     </div> 
                 </div>
-            </div>
-        </div> 
+      
+       
     </label>
 </label>
+
+
+
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" >
     <h1>Notifications from Landlord</h1>

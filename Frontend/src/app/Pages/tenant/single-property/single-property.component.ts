@@ -31,6 +31,7 @@ export class SinglePropertyComponent implements OnInit {
    
   });
 
+  previewTitleDeep:any;
   disable:boolean = false;
   dob: Date = new Date();
   appForm: Pending = new Pending
@@ -164,11 +165,11 @@ export class SinglePropertyComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
         this.router.onSameUrlNavigation = "reload";
         this.displayApplicationForm = false;
-        
+        this.__loader.stop();
         this.messageService.add({
           key: 'tc', severity:'success', summary: 'Success', detail: "Application Successful", life: 3000
         });
-        this.__loader.stop();
+
       },
       error: (err) =>{
         this.__loader.stop();
@@ -194,5 +195,10 @@ export class SinglePropertyComponent implements OnInit {
   hideDialog() {
     this.displayApplicationForm = false;
     this.submitted = false;
+  }
+
+  imagesPreview(e:any){
+    console.log(e);
+    this.previewTitleDeep = e.house_image
   }
 }

@@ -14,6 +14,7 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 declare var require: any;
 const htmlToPdfmake = require("html-to-pdfmake");
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 //import html2canvas from "html2canvas";
 
 @Component({
@@ -136,7 +137,7 @@ export class MyroomComponent implements OnInit {
   // saving the id (to the signature column)
   save(id:any){
     this.__loader.start();
-    this.moa_id = id;
+    this.moa_id = id[0].moa;
     const base64 = this.canvas.toDataURL('image/png',0.5);
     const moaData ={
       moa:this.moa_id,
@@ -151,6 +152,7 @@ export class MyroomComponent implements OnInit {
         this.__loader.stop();
         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
         this.router.onSameUrlNavigation = "reload";
+        this.router.navigate(['/tenant/myroom'])
         this.messageService.add({
           severity:'success', summary: 'Success', detail: this.messages.message, life: 3000
         });

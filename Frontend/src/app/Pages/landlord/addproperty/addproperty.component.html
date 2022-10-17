@@ -55,7 +55,7 @@
                     <option value="Studio">Studio</option>
                 </select>
                 <div *ngIf="submitted && f['options'].errors" class="invalid-feedback">
-                    <div *ngIf="f['options'].errors['required']">User type is required</div>
+                    <div *ngIf="f['options'].errors['required']">Property type is required</div>
                 </div>
             </div>
                     
@@ -148,7 +148,7 @@
                 <label class="input-group">House*</label>
                 <input (change)="houseImage($event)"  formControlName="houseImage" [ngClass]="{ 'is-invalid':submitted && f['houseImage'].errors}"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Property Advertising Picture Image Only and png,jpeg or jpg file supported only">
                 <div *ngIf="submitted && f['houseImage'].errors" class="invalid-feedback">
-                    <div *ngIf="f['houseImage'].errors['required']">property Advertising image required</div>
+                    <div *ngIf="f['houseImage'].errors['required']">property image required</div>
                 </div>
             </div>
 
@@ -181,11 +181,11 @@
                     <input (change)="roomsImages($event)"  class="block p-2 shadow-m input-bordered w-full text-lg max-w-s text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" placeholder="Upload inside property pictures only 2">
                 </div>
                 <div class="body">
-                    <h1 >Image upload rules : </h1>
-                    <li>Maximum of 5 picture</li>
+                    <h1>Image upload rules : </h1>
+                    <li>Maximum of 5 pictures</li>
                     <li>Once you have choosen 5 pictures the upload button will disapear</li>
                     <li>Acceptable image format JPG and PNG</li>
-                    <li>Maximum image file size 10mb.</li>
+                    <li>Maximum image file size: 10mb.</li>
                     <li>No Duplicate images</li>
                 </div>
             </div>

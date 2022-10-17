@@ -88,7 +88,6 @@ export class PendingComponent implements OnInit {
         this.pending = data;          
         this.image = this.pending[0].id_doc
     
-        //console.log(this.newRoomsAvailable );
           
         this.number = this.pending.length;
          
@@ -181,7 +180,8 @@ rejectTenant(){
   this.__loader.start();
   this.land.reject(user).subscribe({
     next:data => {
-
+      console.log(data);
+      
       this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
       this.router.onSameUrlNavigation = "reload";
 
@@ -224,7 +224,8 @@ rejectTenant(){
       await this.land.UpdateRooms(roomsNumber, this.pendingClients.property_id).subscribe()
       this.land.createMOA(user).subscribe({
         next:data => {
-
+          console.log(data);
+          
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";
           this.router.navigate(['/landlord/pending'])

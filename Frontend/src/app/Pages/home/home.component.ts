@@ -24,8 +24,9 @@ export class HomeComponent implements OnInit {
   townList: Array<any> = [];
   property: Array<any> = [];
   nameList: Array<any> = [];
-  filteringDataList:Array<any>=[]
-  stats:any
+  price:any;
+  filteringDataList:Array<any>=[];
+  stats:any;
 
   constructor(private service: LandingPageService, private __loader: NgxUiLoaderService,
     private tenant:TenantsService) { }
@@ -47,11 +48,8 @@ export class HomeComponent implements OnInit {
           //Making a duplicate
           this.tenantProperty.forEach((element:any) => {
           this.stats = element.p_room;
-       
-          console.log(this.stats);
-          
         });
-        console.log(this.condition); 
+
         this.copyData = this.tenantProperty
         this.__loader.stop();
         }
@@ -98,7 +96,9 @@ export class HomeComponent implements OnInit {
   filterList = {
     town: this.townList,
     property_Name: this.nameList,
-    property_Type: this.property
+    property_Type: this.property,
+    price_Range: ['0 - 1500', '1600 - 2500', '2600 - 5000', '5100 +']
+   // price_Range: ['0 - 1000', '1100 - 3000', '3100 - 5000', '5100 +']
   }; 
 
     //put this function in your ts file.
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
       this.town = appliedfilters.appliedFilterValues.town
       this.name = appliedfilters.appliedFilterValues.property_Name
       this.accommodationType =  appliedfilters.appliedFilterValues.property_Type
-  
+      this.price = appliedfilters.appliedFilterValues.price_Range
       if(this.town){
         this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_town == this.town)
       }
@@ -121,6 +121,23 @@ export class HomeComponent implements OnInit {
       if(this.accommodationType){
         this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_propertytype == this.accommodationType)
       }
+
+      if(this.price == '0 - 1500'){        
+        console.log(this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price <= '1500.00'))
+      }
+
+      if(this.price == '1600 - 2500'){        
+       this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price >= '1600.00' && item.p_price <= '2500.00')
+      }
+
+      if(this.price == '2600 - 5000'){        
+        this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price >= '2600.00' && item.p_price <= '5000.00')
+      }
+
+      if(this.price == '5100 +'){        
+       this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price >= '5100.00')
+      }
+
     }
   }
   

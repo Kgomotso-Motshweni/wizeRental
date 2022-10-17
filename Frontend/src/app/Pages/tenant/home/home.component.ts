@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   property: Array<any> = [];
   nameList: Array<any> = [];
   filteringDataList:Array<any>=[]
-
+  price:any;
   constructor(private service: LandingPageService, private __loader: NgxUiLoaderService) { }
 
   // loader and calling the getproperty function.
@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
     this.service.getProperties().subscribe({
       next: (data: any) => {
           this.tenantProperty = data;
+          console.log(this.tenantProperty);
+          
           this.copyData = this.tenantProperty
           this.__loader.stop();
         }
@@ -83,7 +85,8 @@ export class HomeComponent implements OnInit {
   filterList = {
     town: this.townList,
     property_Name: this.nameList,
-    property_Type: this.property
+    property_Type: this.property,
+    price_Range: ['0 - 1500', '1600 - 2500', '2600 - 5000', '5100 +']
   }; 
 //put this function in your ts file.
 filterChange(appliedfilters: any) 
@@ -104,6 +107,22 @@ filterChange(appliedfilters: any)
   
   if(this.accommodationType){
     this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_propertytype == this.accommodationType)
+  }
+
+  if(this.price == '0 - 1500'){        
+    this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price <= '1500.00')
+  }
+
+  if(this.price == '1600 - 2500'){        
+    this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price >= '1600.00' && item.p_price <= '2500.00')
+  }
+
+  if(this.price == '2600 - 5000'){        
+    this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price >= '2600.00' && item.p_price <= '5000.00')
+  }
+
+  if(this.price == '5100 +'){        
+    this.tenantProperty = this.tenantProperty.filter((item:any) => item.p_price >= '5100.00')
   }
 }
 

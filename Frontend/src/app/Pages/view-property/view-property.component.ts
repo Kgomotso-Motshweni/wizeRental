@@ -16,7 +16,7 @@ export class ViewPropertyComponent implements OnInit {
   propertyID: any;
   tenantProperty:any
   disable:boolean = false;
-
+  previewTitleDeep:any;
   constructor(
     private router:Router,
     private messageService: MessageService,
@@ -35,7 +35,9 @@ export class ViewPropertyComponent implements OnInit {
     this.__loader.start();
     this.service.getPropertiesByID(this.propertyID).subscribe({
       next: (data: any) => {
-        this.property = data;      
+        this.property = data;  
+        console.log(data);
+            
         this.data = this.property[0]  
         if (this.data.p_room > 0) {
           this.disable = false
@@ -58,5 +60,10 @@ export class ViewPropertyComponent implements OnInit {
         this.__loader.stop();
       }
     })
+  }
+
+  imagesPreview(e:any){
+    console.log(e);
+    this.previewTitleDeep = e.house_image
   }
 }

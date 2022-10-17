@@ -38,15 +38,18 @@ const rejectRenant = async (req, res) => {
     try{
         //Insert user pending tenant into rentees table
         const data = await client.query(`INSERT INTO rentees (tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ], (error) => {
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING rentee_id`,[tenant_id, property_id, full_name, unit, rent, paymentstatus, moa_status, status ])
+        
+        await client.query(`DELETE FROM applicationform WHERE full_name=$1`,[full_name], (error) => {
         if(error){
             return res.status(400).json({
                 message: "Unable to reject tenant"
             });  
         }
+    
         return res.status(400).json({
             message: "tenant rejected"
-        });
+        });   
     })
     }catch (err) {
         res.status(500).json({
